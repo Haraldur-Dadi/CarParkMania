@@ -11,7 +11,6 @@ public class Tutorial_GM : GameManager {
 
     public override void Start() {
         base.Start();
-        stageIndex = 0;
 
         tutDispAtIndex = 0;
     }

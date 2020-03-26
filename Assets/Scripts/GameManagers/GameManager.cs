@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
     public static GameManager instance;
+    public SceneFader sceneFader;
+    public SaveManager saveManager;
 
-    public int stageIndex;
-    public int levelBuildIndex;
-    public int lastLevelInStageIndex;
+    public int levelIndex;
 
     public bool finished;
     public bool paused;
@@ -33,8 +33,6 @@ public class GameManager : MonoBehaviour {
             Destroy(this);
         }
 
-        levelBuildIndex = SceneManager.GetActiveScene().buildIndex;
-
         /* Get UI elements required for class at start up and adds onClick to buttons */
         gameBoard = GameObject.Find("Board");
         topUI = GameObject.Find("TopUI");
@@ -47,33 +45,30 @@ public class GameManager : MonoBehaviour {
         homeBtn.onClick.AddListener(delegate { GoToLevelSelector(); });
         settingsBtn.onClick.AddListener(delegate { ToggleSettings(); });
         resetButton.onClick.AddListener(delegate { RetryLevel(); });
-
-        LoadLevel();
     }
 
     public virtual void Start() {
+        sceneFader = SceneFader.Instance;
+        saveManager = SaveManager.Instance;
+
         /* Sets required information for class at start up */
         finished = true;
         paused = true;
 
+        LoadLevel();
         ToggleSettings();
         ToggleLevelCompleteUI();
     }
 
     public void LoadLevel() {
-        GameObject level_board = level_boards[PlayerPrefs.GetInt("boardToLoad", 0)];
+        levelIndex = PlayerPrefs.GetInt("boardToLoad", 0);
+        GameObject level_board = level_boards[levelIndex];
         Instantiate(level_board, gameBoard.transform);
     }
 
     public virtual void LevelComplete() {
-        if (PlayerPrefs.GetInt("LevelReached", 1) < levelBuildIndex) {
-            PlayerPrefs.SetInt("LevelReached", levelBuildIndex);
-        }
-
-        if (PlayerPrefs.GetInt("StageCompleted", 1) == stageIndex) {
-            if (PlayerPrefs.GetInt("LevelReached", 1) == lastLevelInStageIndex) {
-                PlayerPrefs.SetInt("StageCompleted", stageIndex + 1);
-            }
+        if (PlayerPrefs.GetInt("LevelReached", 0) < levelIndex) {
+            saveManager.SaveData("LevelReached", levelIndex);
         }
 
         ToggleLevelCompleteUI();
@@ -87,7 +82,7 @@ public class GameManager : MonoBehaviour {
 
     public void GoToLevelSelector() {
         /* Sends player to home screen */
-        SceneManager.LoadScene(1);
+        sceneFader.FadeToBuildIndex(0);
     }
 
     public virtual void ToggleSettings() {
@@ -112,16 +107,10 @@ public class GameManager : MonoBehaviour {
     }
 
     public void RetryLevel() {
-        SceneManager.LoadScene(levelBuildIndex);
+        sceneFader.FadeToBuildIndex(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LoadNextLevel() {
-        if (stageIndex != lastLevelInStageIndex) {
-            SceneManager.LoadScene(levelBuildIndex);
-            PlayerPrefs.SetInt("boardToLoad", PlayerPrefs.GetInt("boardToLoad", 0) + 1);
-        } else {
-            SceneManager.LoadScene(levelBuildIndex + 1);
-            PlayerPrefs.SetInt("boardToLoad", 0);
-        }
+        saveManager.SaveData("boardToLoad", levelIndex + 1);
     }
 }

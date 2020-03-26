@@ -26,7 +26,7 @@ public class Shop : MonoBehaviour {
 
     private void Start() {
         carTypes = CarTypes.instance;
-        DisplayShop();
+        shopUI.SetActive(false);
     }
 
     public void DisplayShop() {
