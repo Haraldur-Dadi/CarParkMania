@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
 
@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour {
     public GameObject topUI;
     public GameObject settingsUi;
     public GameObject levelCompleteUi;
+    public TextMeshProUGUI levelTxt;
+    public TextMeshProUGUI difficultyTxt;
 
     public virtual void Awake() {
         if (!instance) {
@@ -43,6 +45,8 @@ public class GameManager : MonoBehaviour {
         settingsUi = GameObject.Find("SettingsUI").gameObject;
         levelCompleteUi = GameObject.Find("LevelCompleteUI").gameObject;
         resetButton = GameObject.Find("ResetButton").GetComponent<Button>();
+        levelTxt = GameObject.Find("Level").GetComponent<TextMeshProUGUI>();
+        difficultyTxt = GameObject.Find("Difficulty").GetComponent<TextMeshProUGUI>();
 
         homeBtn.onClick.AddListener(delegate { GoToLevelSelector(); });
         settingsBtn.onClick.AddListener(delegate { ToggleSettings(); });
@@ -65,6 +69,11 @@ public class GameManager : MonoBehaviour {
 
     public void LoadLevel() {
         levelIndex = PlayerPrefs.GetInt("boardToLoad", 0);
+        levelTxt.text = levelIndex.ToString();
+        if (levelIndex < 25) {
+            difficultyTxt.text = "Beginner";
+        }
+
         GameObject level_board = level_boards[levelIndex];
         Instantiate(level_board, gameBoard.transform);
     }
