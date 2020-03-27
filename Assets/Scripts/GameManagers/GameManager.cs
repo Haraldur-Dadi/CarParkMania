@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour {
     public Button resetButton;
 
     public GameObject gameBoard;
+    public GameObject tmpBoard;
     public GameObject[] level_boards;
 
     public GameObject topUI;
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour {
         /* Sets required information for class at start up */
         finished = true;
         paused = true;
+        tmpBoard = null;
 
         LoadLevel();
         ToggleSettings();
@@ -67,8 +70,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public virtual void LevelComplete() {
-        if (PlayerPrefs.GetInt("LevelReached", 0) < levelIndex) {
-            saveManager.SaveData("LevelReached", levelIndex);
+        if (PlayerPrefs.GetInt("LevelReached", 0) <= levelIndex) {
+            saveManager.SaveData("LevelReached", levelIndex + 1);
         }
 
         ToggleLevelCompleteUI();
@@ -112,5 +115,6 @@ public class GameManager : MonoBehaviour {
 
     public void LoadNextLevel() {
         saveManager.SaveData("boardToLoad", levelIndex + 1);
+        RetryLevel();
     }
 }

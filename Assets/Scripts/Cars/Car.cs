@@ -10,9 +10,6 @@ public class Car : MonoBehaviour {
     public float snapValue;
     public float maxValAxis;
 
-    public bool canMoveUp;
-    public bool canMoveDown;
-
     public GameObject carInWay;
     public SpriteRenderer carImg;
 
@@ -33,24 +30,5 @@ public class Car : MonoBehaviour {
         } else {
             boxCol2D.isTrigger = false;
         }
-
-        AllowMovement();
-    }
-
-    public void AllowMovement() {
-        canMoveUp = true;
-        canMoveDown = true;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision) {
-            if (collision.CompareTag("Car")) {
-                carInWay = collision.gameObject;
-            }
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision) {
-        carInWay = null;
     }
 }

@@ -8,8 +8,8 @@
 
         length = 3;
 
-        snapValue = 1f;
-        maxValAxis = 2f;
+        snapValue = 1.1f;
+        maxValAxis = 1.65f;
     }
 
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,10 +12,9 @@ public class CarMovement : MonoBehaviour {
 
     public Car carToMove;
     public bool carMoveOnYAxis;
+    public float snapValue;
 
     public Button undoBtn;
-
-    public Animator notificationPopUpAnim;
 
     public List<UndoTuple> undoList;
 
@@ -27,66 +25,41 @@ public class CarMovement : MonoBehaviour {
         undoBtn.onClick.AddListener(delegate { UndoMove(); });
         undoList = new List<UndoTuple>();
 
-        notificationPopUpAnim = GameObject.Find("NotificationPanel").GetComponent<Animator>();
+        snapValue = 1.1f;
 
         AbleToUndo();
     }
 
     bool CarInWay() {
         /* Bool, checks if pathway to posToMoveCar is blocked by another car */
-        Vector2 colOrPos = carToMove.boxCol2D.offset;
+        bool carInWay = false;
+        Vector2 raycastPos = posToMoveCar;
 
-        // Check if there is a Car object on the point
-        if (carMoveOnYAxis) {
-            if (posToMoveCar.x > posOfCar.x) {
-                carToMove.boxCol2D.offset += new Vector2(carToMove.snapValue / 3, 0);
+        if (carToMove.transform.rotation.z == 0 || carToMove.transform.rotation.z == 180) {
+            if (posToMoveCar.y > carToMove.transform.position.y) {
+                raycastPos.y += snapValue;
             } else {
-                carToMove.boxCol2D.offset -= new Vector2(carToMove.snapValue / 3, 0);
+                raycastPos.y -= snapValue;
             }
         } else {
-            if (posToMoveCar.y > posOfCar.y) {
-                carToMove.boxCol2D.offset += new Vector2(0, carToMove.snapValue / 3);
+            if (posToMoveCar.x > carToMove.transform.position.x) {
+                raycastPos.x += snapValue;
             } else {
-                carToMove.boxCol2D.offset -= new Vector2(0, carToMove.snapValue / 3);
+                raycastPos.x -= snapValue;
             }
         }
 
-        GameObject carInWay = carToMove.carInWay;
-        carToMove.boxCol2D.offset = colOrPos;
+        RaycastHit2D[] hits = Physics2D.LinecastAll(raycastPos, carToMove.transform.position);
 
-        if (carInWay) {
-            // If car in the way is "above" (higher axis value), then we can't move "up"
-            // Else car is below (lower axis value), then we can't move the car "down"
-            if (carInWay.transform.position.y > carToMove.transform.position.y | carInWay.transform.position.x > carToMove.transform.position.x) {
-                carToMove.canMoveUp = false;
-                carToMove.canMoveDown = true;
-            } else {
-                carToMove.canMoveUp = true;
-                carToMove.canMoveDown = false;
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    bool CanMoveCar() {
-        // If car can't move "up" or "down"
-        // - "up" check if axis value is greater than car values, return false
-        // - "down" check if axis value is lower then car values, return fale
-        if (!carToMove.canMoveUp) {
-            if (posToMoveCar.y > posOfCar.y | posToMoveCar.x > posOfCar.x) {
-                return false;
-            }
-        } else if (!carToMove.canMoveDown) {
-            if (posToMoveCar.y < posOfCar.y | posToMoveCar.x < posOfCar.x) {
-                return false;
+        if (hits.Length > 0) {
+            foreach (RaycastHit2D hit in hits) {
+                Car car = hit.transform.GetComponent<Car>();
+                if (car != carToMove && car != null) {
+                    carInWay = true;
+                }
             }
         }
-
-        // Passed all test, path is clear
-        return true;
+        return carInWay;
     }
 
     Car RaycastAtPosition(Vector2 posToCheck) {
@@ -123,7 +96,7 @@ public class CarMovement : MonoBehaviour {
                         if (carToMove) {
                             // Get position for where to move the car
                             Vector2 touchPosMoved = Camera.main.ScreenToWorldPoint(touch.position);
-                            touchPosMoved = SnapPosToGrid(touchPosMoved, carToMove.snapValue, carToMove.maxValAxis);
+                            touchPosMoved = SnapPosToGrid(touchPosMoved, carToMove.maxValAxis);
                             // If the snapPos of touchPos is not current position of car check if car in the way
                             if (touchPosMoved != posOfCar) {
                                 posToMoveCar = touchPosMoved;
@@ -142,67 +115,52 @@ public class CarMovement : MonoBehaviour {
         }
     }
 
-    public Vector2 SnapPosToGrid(Vector2 snapPos, float snapValue, float maxValAxis) {
+    public Vector2 SnapPosToGrid(Vector2 snapPos, float maxValAxis) {
         /* Create grid like movement on board by rounding and clamping to within the boards border */
 
-        if (carToMove.transform.rotation.z == 0) {
-            // Round positions y axis and clamp it within range of board
-            snapPos.y = Mathf.Clamp(Mathf.Round(snapPos.y / snapValue) * snapValue, -maxValAxis, maxValAxis);
+        // Car is facing up/down and is moving on y-axis
+        if (carToMove.transform.rotation.z == 0 || carToMove.transform.rotation.z == 180) {
             snapPos.x = carToMove.transform.position.x;
-
-            if (carToMove.length == 3) {
-                if (snapPos.y == 0) {
-                    snapPos.y = carToMove.transform.position.y;
-                } else {
-                    snapPos.y = SnapMoveAxis3Long(snapPos.y);
-                }
-            }
-
-            carMoveOnYAxis = true;
-        } else {
-            // Round positions x axis and clamp it within range of board
-            snapPos.x = Mathf.Round(snapPos.x / snapValue) * snapValue;
-            snapPos.y = carToMove.transform.position.y;
-
-            if (carToMove.length == 0) {
-                snapPos.x = Mathf.Clamp(snapPos.x, -maxValAxis, 10);
+            // Check if the position is outside of the maximum allowed movement values of car
+            if (snapPos.y > maxValAxis) {
+                snapPos.y = maxValAxis;
+            } else if (snapPos.y < -maxValAxis) {
+                snapPos.y = -maxValAxis;
+            } else if (snapPos.y > carToMove.transform.position.y + (snapValue / 2)) {
+                snapPos.y = carToMove.transform.position.y + snapValue;
+            } else if (snapPos.y < carToMove.transform.position.y - (snapValue / 2)) {
+                snapPos.y = carToMove.transform.position.y - snapValue;
             } else {
-                snapPos.x = Mathf.Clamp(snapPos.x, -maxValAxis, maxValAxis);
+                snapPos.y = carToMove.transform.position.y;
             }
-
-            if (carToMove.length == 3) {
-                if (snapPos.x == 0) {
-                    snapPos.x = carToMove.transform.position.x;
-                } else {
-                    snapPos.x = SnapMoveAxis3Long(snapPos.x);
-                }
+            carMoveOnYAxis = true;
+        }
+        // Car is facing right/left and is moving on x-axis
+        else {
+            snapPos.y = carToMove.transform.position.y;
+            // Check if the position is outside of the maximum allowed movement values of car
+            if (snapPos.x > maxValAxis && carToMove.length != 0) {
+                snapPos.x = maxValAxis;
+            } else if (snapPos.x < -maxValAxis) {
+                snapPos.x = -maxValAxis;
+            } else if (snapPos.x > carToMove.transform.position.x + (snapValue / 2)) {
+                snapPos.x = carToMove.transform.position.x + snapValue;
+            } else if (snapPos.x < carToMove.transform.position.x - (snapValue / 2)) {
+                snapPos.x = carToMove.transform.position.x - snapValue;
+            } else {
+                snapPos.x = carToMove.transform.position.x;
             }
-
             carMoveOnYAxis = false;
         }
 
         return snapPos;
     }
 
-    public float SnapMoveAxis3Long(float fToSnap) {
-        if (fToSnap > 0) {
-            fToSnap = fToSnap - 0.45f;
-        } else {
-            fToSnap = fToSnap + 0.45f;
-        }
-
-        return fToSnap;
-    }
-
     public void MoveCar() {
-        // If we can move car move the car
-        if (CanMoveCar()) {
-            // If there is no car in the way check if we can move car
-            if (!CarInWay()) {
-                carToMove.transform.position = posToMoveCar;
-                posOfCar = posToMoveCar;
-                carToMove.AllowMovement();
-            }
+        // If there is no car in the way check if we can move car
+        if (!CarInWay()) {
+            carToMove.transform.position = posToMoveCar;
+            posOfCar = posToMoveCar;
         }
     }
 
