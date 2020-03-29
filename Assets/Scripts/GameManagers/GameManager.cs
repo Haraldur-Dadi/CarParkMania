@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour {
     public GameObject[] level_boards;
 
     public GameObject topUI;
-    public GameObject settingsUi;
     public GameObject levelCompleteUi;
     public TextMeshProUGUI levelTxt;
     public TextMeshProUGUI difficultyTxt;
@@ -42,14 +41,12 @@ public class GameManager : MonoBehaviour {
         topUI = GameObject.Find("TopUI");
         homeBtn = topUI.transform.Find("HomeBtn").GetComponent<Button>();
         settingsBtn = topUI.transform.Find("SettingsBtn").GetComponent<Button>();
-        settingsUi = GameObject.Find("SettingsUI").gameObject;
         levelCompleteUi = GameObject.Find("LevelCompleteUI").gameObject;
         resetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         levelTxt = GameObject.Find("Level").GetComponent<TextMeshProUGUI>();
         difficultyTxt = GameObject.Find("Difficulty").GetComponent<TextMeshProUGUI>();
 
         homeBtn.onClick.AddListener(delegate { GoToLevelSelector(); });
-        settingsBtn.onClick.AddListener(delegate { ToggleSettings(); });
         resetButton.onClick.AddListener(delegate { RetryLevel(); });
     }
 
@@ -63,7 +60,6 @@ public class GameManager : MonoBehaviour {
         tmpBoard = null;
 
         LoadLevel();
-        ToggleSettings();
         ToggleLevelCompleteUI();
     }
 
@@ -95,13 +91,6 @@ public class GameManager : MonoBehaviour {
     public void GoToLevelSelector() {
         /* Sends player to home screen */
         sceneFader.FadeToBuildIndex(0);
-    }
-
-    public virtual void ToggleSettings() {
-        /* Toggles settings ui, 
-           if ui active the game is paused */
-        settingsUi.SetActive(!settingsUi.activeSelf);
-        paused = !paused;
     }
 
     public void ToggleLevelCompleteUI() {
