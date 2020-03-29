@@ -19,8 +19,6 @@ public class LevelSelector : MonoBehaviour {
     public GameObject backBtn;
     public TextMeshProUGUI selectPanelName;
 
-    public string[] gameModeNames;
-
     public void Start() {
         sceneFader = SceneFader.Instance;
         saveManager = SaveManager.Instance;
@@ -113,6 +111,6 @@ public class LevelSelector : MonoBehaviour {
         homeBtn.SetActive(false);
         backBtn.SetActive(true);
 
-        selectPanelName.text = gameModeNames[gameModeNr];
+        selectPanelName.text = gameModes[gameModeNr].name;
     }
 }

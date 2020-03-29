@@ -9,7 +9,6 @@ public class InfoManager : MonoBehaviour {
     public TextMeshProUGUI casualMainTxt;
 
     private void Start() {
-        Debug.Log((float)3/100);
         casualMainTxt.text = ((float)PlayerPrefs.GetInt("LevelReached", 0) / standardTotalLevels)*100 + "%\n" + PlayerPrefs.GetInt("LevelReached", 0) + "/" + standardTotalLevels;
     }
 }
