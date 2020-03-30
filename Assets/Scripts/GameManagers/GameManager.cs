@@ -19,9 +19,9 @@ public class GameManager : MonoBehaviour {
     public Button resetButton;
 
     public GameObject gameBoard;
-    public GameObject[] level_boards_beginner;
-    public GameObject[] level_boards_intermediate;
-    public GameObject[] level_boards_advanced;
+    public GameObject[] level_boards_easy;
+    public GameObject[] level_boards_medium;
+    public GameObject[] level_boards_hard;
     public GameObject[] level_boards_expert;
 
     public GameObject levelCompleteUi;
@@ -53,17 +53,17 @@ public class GameManager : MonoBehaviour {
         GameObject level_board = null;
 
         if (levelIndex < 25) {
-            difficultyTxt.text = "Beginner";
-             level_board = level_boards_beginner[levelIndex];
+            difficultyTxt.text = "Easy";
+             level_board = level_boards_easy[levelIndex];
         } else if (25 <= levelIndex && levelIndex < 50) {
-            difficultyTxt.text = "Intermediate";
-            level_board = level_boards_intermediate[levelIndex-25];
+            difficultyTxt.text = "Medum";
+            level_board = level_boards_medium[levelIndex-25];
         } else if (50 <= levelIndex && levelIndex < 75) {
-            difficultyTxt.text = "Advanced";
-            level_board = level_boards_intermediate[levelIndex - 50];
+            difficultyTxt.text = "Hard";
+            level_board = level_boards_hard[levelIndex - 50];
         } else if (75 <= levelIndex) {
             difficultyTxt.text = "Expert";
-            level_board = level_boards_intermediate[levelIndex - 75];
+            level_board = level_boards_expert[levelIndex - 75];
         }
 
         Instantiate(level_board, gameBoard.transform);
