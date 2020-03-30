@@ -21,7 +21,6 @@ public class CarMovement : MonoBehaviour {
     private void Start() {
         gameManager = GameManager.instance;
 
-        undoBtn = GameObject.Find("UndoButton").GetComponent<Button>();
         undoBtn.onClick.AddListener(delegate { UndoMove(); });
         undoList = new List<UndoTuple>();
 

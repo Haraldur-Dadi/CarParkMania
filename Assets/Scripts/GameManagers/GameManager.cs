@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour {
     public bool finished;
 
     public Button homeBtn;
-    public Button settingsBtn;
     public Button retryBtn;
     public Button nextLevelBtn;
     public Button resetButton;
@@ -23,7 +22,6 @@ public class GameManager : MonoBehaviour {
     public GameObject tmpBoard;
     public GameObject[] level_boards;
 
-    public GameObject topUI;
     public GameObject levelCompleteUi;
     public TextMeshProUGUI levelTxt;
     public TextMeshProUGUI difficultyTxt;
@@ -35,16 +33,7 @@ public class GameManager : MonoBehaviour {
             Destroy(this);
         }
 
-        /* Get UI elements required for class at start up and adds onClick to buttons */
-        gameBoard = GameObject.Find("Board");
-        topUI = GameObject.Find("TopUI");
-        homeBtn = topUI.transform.Find("HomeBtn").GetComponent<Button>();
-        settingsBtn = topUI.transform.Find("SettingsBtn").GetComponent<Button>();
-        levelCompleteUi = GameObject.Find("LevelCompleteUI").gameObject;
-        resetButton = GameObject.Find("ResetButton").GetComponent<Button>();
-        levelTxt = GameObject.Find("Level").GetComponent<TextMeshProUGUI>();
-        difficultyTxt = GameObject.Find("Difficulty").GetComponent<TextMeshProUGUI>();
-
+        /* Adds onClick to buttons */
         homeBtn.onClick.AddListener(delegate { GoToLevelSelector(); });
         resetButton.onClick.AddListener(delegate { RetryLevel(); });
     }
@@ -63,7 +52,7 @@ public class GameManager : MonoBehaviour {
 
     public void LoadLevel() {
         levelIndex = PlayerPrefs.GetInt("boardToLoad", 0);
-        levelTxt.text = levelIndex.ToString();
+        levelTxt.text = (levelIndex + 1).ToString();
         if (levelIndex < 25) {
             difficultyTxt.text = "Beginner";
         }

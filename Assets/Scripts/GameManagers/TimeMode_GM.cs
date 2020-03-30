@@ -17,9 +17,6 @@ public class TimeMode_GM : GameManager {
     public override void Start() {
         base.Start();
 
-        clockTxt = topUI.transform.Find("Clock").GetComponentInChildren<TextMeshProUGUI>();
-        pausedImg = GameObject.Find("PausedImg").gameObject;
-
         min = 0;
         sec = -1;
 

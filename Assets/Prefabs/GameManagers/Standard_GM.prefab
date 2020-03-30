@@ -49,7 +49,6 @@ MonoBehaviour:
   levelIndex: 0
   finished: 0
   homeBtn: {fileID: 0}
-  settingsBtn: {fileID: 0}
   retryBtn: {fileID: 0}
   nextLevelBtn: {fileID: 0}
   resetButton: {fileID: 0}
@@ -59,7 +58,7 @@ MonoBehaviour:
   - {fileID: 4571049737941145950, guid: 320a393c7d168264ba6df00c5fd9a583, type: 3}
   - {fileID: 5273443111392577917, guid: 40a5fd06e4f600648addcd1f4f5a2330, type: 3}
   - {fileID: 3005024820055873097, guid: 636e6dfd04ed9b94596c723bb3874826, type: 3}
-  - {fileID: 8683301973456058860, guid: 81cb7a7d9278d104e96a1791d3bfef2a, type: 3}
+  - {fileID: 3526850583784628091, guid: 69cdf956ab5dbab48a54af925220e1a4, type: 3}
   - {fileID: 8821271227778209967, guid: 54bf53ef2fec91a4aad7f45e1eb7c3fb, type: 3}
   - {fileID: 5659180426989935683, guid: 893d2e9bf2184e148844a8ef7318fa72, type: 3}
   - {fileID: 7068805851930882847, guid: 3be2d32fb95ec124b9616d83ed7dab76, type: 3}
@@ -81,7 +80,6 @@ MonoBehaviour:
   - {fileID: 4039861031044918904, guid: 7e3ad962703e2d14f97c53f646be3fb0, type: 3}
   - {fileID: 4039861031044918904, guid: 57d35ec53a5fd1d49adf18f3a781e571, type: 3}
   - {fileID: 4039861031044918904, guid: db285f8ae0cea904e8a79d1131de4d9e, type: 3}
-  topUI: {fileID: 0}
   levelCompleteUi: {fileID: 0}
   levelTxt: {fileID: 0}
   difficultyTxt: {fileID: 0}
