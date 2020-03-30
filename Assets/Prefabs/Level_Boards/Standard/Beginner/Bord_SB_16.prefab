@@ -54,6 +54,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -176,11 +177,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8496324562777660310}
     m_Modifications:
-    - target: {fileID: 2176706405850181179, guid: 8adc80d28474fa842a4cd8bef37105ec,
-        type: 3}
-      propertyPath: m_Name
-      value: Car2Long (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 2176706405850181176, guid: 8adc80d28474fa842a4cd8bef37105ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -235,6 +231,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176706405850181179, guid: 8adc80d28474fa842a4cd8bef37105ec,
+        type: 3}
+      propertyPath: m_Name
+      value: Car2Long (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8adc80d28474fa842a4cd8bef37105ec, type: 3}
@@ -331,11 +332,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8496324562777660310}
     m_Modifications:
-    - target: {fileID: 2176706405850181179, guid: 8adc80d28474fa842a4cd8bef37105ec,
-        type: 3}
-      propertyPath: m_Name
-      value: Car2Long (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 2176706405850181176, guid: 8adc80d28474fa842a4cd8bef37105ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -391,6 +387,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 270
       objectReference: {fileID: 0}
+    - target: {fileID: 2176706405850181179, guid: 8adc80d28474fa842a4cd8bef37105ec,
+        type: 3}
+      propertyPath: m_Name
+      value: Car2Long (4)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8adc80d28474fa842a4cd8bef37105ec, type: 3}
 --- !u!4 &2859094961645425813 stripped
@@ -419,7 +420,7 @@ PrefabInstance:
     - target: {fileID: 5927686651352923486, guid: aece1de9537128643a1c511ce988f03e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 5927686651352923486, guid: aece1de9537128643a1c511ce988f03e,
         type: 3}
@@ -486,11 +487,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8496324562777660310}
     m_Modifications:
-    - target: {fileID: 2176706405850181179, guid: 8adc80d28474fa842a4cd8bef37105ec,
-        type: 3}
-      propertyPath: m_Name
-      value: Car2Long (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 2176706405850181176, guid: 8adc80d28474fa842a4cd8bef37105ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -546,6 +542,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2176706405850181179, guid: 8adc80d28474fa842a4cd8bef37105ec,
+        type: 3}
+      propertyPath: m_Name
+      value: Car2Long (2)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8adc80d28474fa842a4cd8bef37105ec, type: 3}
 --- !u!4 &5243002248373085126 stripped
@@ -561,11 +562,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8496324562777660310}
     m_Modifications:
-    - target: {fileID: 2176706405850181179, guid: 8adc80d28474fa842a4cd8bef37105ec,
-        type: 3}
-      propertyPath: m_Name
-      value: Car2Long (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 2176706405850181176, guid: 8adc80d28474fa842a4cd8bef37105ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -621,6 +617,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 270
       objectReference: {fileID: 0}
+    - target: {fileID: 2176706405850181179, guid: 8adc80d28474fa842a4cd8bef37105ec,
+        type: 3}
+      propertyPath: m_Name
+      value: Car2Long (3)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8adc80d28474fa842a4cd8bef37105ec, type: 3}
 --- !u!4 &8584228511547769721 stripped
@@ -636,11 +637,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8496324562777660310}
     m_Modifications:
-    - target: {fileID: 2176706405850181179, guid: 8adc80d28474fa842a4cd8bef37105ec,
-        type: 3}
-      propertyPath: m_Name
-      value: Car2Long
-      objectReference: {fileID: 0}
     - target: {fileID: 2176706405850181176, guid: 8adc80d28474fa842a4cd8bef37105ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -696,6 +692,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2176706405850181179, guid: 8adc80d28474fa842a4cd8bef37105ec,
+        type: 3}
+      propertyPath: m_Name
+      value: Car2Long
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8adc80d28474fa842a4cd8bef37105ec, type: 3}
 --- !u!4 &8496324563117779926 stripped
@@ -711,11 +712,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8496324562777660310}
     m_Modifications:
-    - target: {fileID: 2176706405850181179, guid: 495875ef97f30d043a8a339ad18bda35,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerCar
-      objectReference: {fileID: 0}
     - target: {fileID: 2176706405850181176, guid: 495875ef97f30d043a8a339ad18bda35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -770,6 +766,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176706405850181179, guid: 495875ef97f30d043a8a339ad18bda35,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerCar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 495875ef97f30d043a8a339ad18bda35, type: 3}
