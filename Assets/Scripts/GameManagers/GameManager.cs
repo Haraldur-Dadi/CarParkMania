@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour {
     public Button resetButton;
 
     public GameObject gameBoard;
-    public GameObject tmpBoard;
     public GameObject[] level_boards_beginner;
     public GameObject[] level_boards_intermediate;
     public GameObject[] level_boards_advanced;
@@ -35,10 +34,6 @@ public class GameManager : MonoBehaviour {
         } else {
             Destroy(this);
         }
-
-        /* Adds onClick to buttons */
-        homeBtn.onClick.AddListener(delegate { GoToLevelSelector(); });
-        resetButton.onClick.AddListener(delegate { RetryLevel(); });
     }
 
     public virtual void Start() {
@@ -47,7 +42,6 @@ public class GameManager : MonoBehaviour {
 
         /* Sets required information for class at start up */
         finished = false;
-        tmpBoard = null;
 
         LoadLevel();
         levelCompleteUi.SetActive(false);
@@ -56,11 +50,22 @@ public class GameManager : MonoBehaviour {
     public void LoadLevel() {
         levelIndex = PlayerPrefs.GetInt("boardToLoad", 0);
         levelTxt.text = (levelIndex + 1).ToString();
+        GameObject level_board = null;
+
         if (levelIndex < 25) {
             difficultyTxt.text = "Beginner";
+             level_board = level_boards_beginner[levelIndex];
+        } else if (25 <= levelIndex && levelIndex < 50) {
+            difficultyTxt.text = "Intermediate";
+            level_board = level_boards_intermediate[levelIndex-25];
+        } else if (50 <= levelIndex && levelIndex < 75) {
+            difficultyTxt.text = "Advanced";
+            level_board = level_boards_intermediate[levelIndex - 50];
+        } else if (75 <= levelIndex) {
+            difficultyTxt.text = "Expert";
+            level_board = level_boards_intermediate[levelIndex - 75];
         }
 
-        GameObject level_board = level_boards_beginner[levelIndex];
         Instantiate(level_board, gameBoard.transform);
     }
 
@@ -70,12 +75,6 @@ public class GameManager : MonoBehaviour {
         }
 
         ToggleLevelCompleteUI();
-
-        retryBtn = levelCompleteUi.transform.Find("RetryButton").GetComponent<Button>();
-        nextLevelBtn = levelCompleteUi.transform.Find("NextLevelButton").GetComponent<Button>();
-
-        retryBtn.onClick.AddListener(delegate { RetryLevel(); });
-        nextLevelBtn.onClick.AddListener(delegate { LoadNextLevel(); });
     }
 
     public void GoToLevelSelector() {
