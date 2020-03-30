@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -8,6 +9,7 @@ public class AudioManager : MonoBehaviour {
 
     public AudioSource musicAudioSource;
     public AudioSource sfxAudioSource;
+    public CrossSceneManager crossSceneManager;
 
     public float musicVol;
     public float sfxVol;
@@ -29,18 +31,31 @@ public class AudioManager : MonoBehaviour {
         sfxVol = PlayerPrefs.GetFloat("SfxVol", 1f);
         pitch = PlayerPrefs.GetInt("Pitch", 1);
 
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        crossSceneManager = CrossSceneManager.Instance;
         saveManager = SaveManager.Instance;
+
         AudioSource[] audioSources = GetComponents<AudioSource>();
         musicAudioSource = audioSources[0];
         sfxAudioSource = audioSources[1];
-        musicVolSlider = GameObject.Find("MusicVolSlider").GetComponent<Slider>();
-        musicVolTxt = GameObject.Find("MusicVolTxt").GetComponent<TextMeshProUGUI>();
-        pitch1 = GameObject.Find("Pitch1").GetComponent<Toggle>();
-        pitch2 = GameObject.Find("Pitch2").GetComponent<Toggle>();
-        pitch3 = GameObject.Find("Pitch3").GetComponent<Toggle>();
-        pitch4 = GameObject.Find("Pitch4").GetComponent<Toggle>();
-        sfxVolSlider = GameObject.Find("SfxVolSlider").GetComponent<Slider>();
-        sfxVolTxt = GameObject.Find("SfxVolTxt").GetComponent<TextMeshProUGUI>();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        Slider[] settingSliders = crossSceneManager.settingsUI.GetComponentsInChildren<Slider>();
+        TextMeshProUGUI[] settingsTMP = crossSceneManager.settingsUI.GetComponentsInChildren<TextMeshProUGUI>();
+        Toggle[] settingsToggler = crossSceneManager.settingsUI.GetComponentsInChildren<Toggle>();
+
+        musicVolSlider = settingSliders[0];
+        sfxVolSlider = settingSliders[1];
+
+        musicVolTxt = settingsTMP[2];
+        sfxVolTxt = settingsTMP[9];
+        
+        pitch1 = settingsToggler[0];
+        pitch2 = settingsToggler[1];
+        pitch3 = settingsToggler[2];
+        pitch4 = settingsToggler[3];
 
         musicVolSlider.onValueChanged.AddListener(delegate { ChangeMusicVol(musicVolSlider.value); });
         pitch1.onValueChanged.AddListener(delegate { ChangePitch(pitch1, 1); });
@@ -48,18 +63,12 @@ public class AudioManager : MonoBehaviour {
         pitch3.onValueChanged.AddListener(delegate { ChangePitch(pitch3, 3); });
         pitch4.onValueChanged.AddListener(delegate { ChangePitch(pitch4, 3); });
         sfxVolSlider.onValueChanged.AddListener(delegate { ChangeSfxVol(sfxVolSlider.value); });
-    }
 
-    private void Start() {
         musicVolTxt.text = musicVol * 100 + "%";
         musicVolSlider.value = musicVol;
         musicAudioSource.volume = musicVol;
         sfxAudioSource.volume = sfxVol;
         sfxVolSlider.value = sfxVol;
-
-        if (musicVol > 0f) {
-            musicAudioSource.Play();
-        }
 
         if (pitch == 1) {
             pitch1.isOn = true;
@@ -69,6 +78,13 @@ public class AudioManager : MonoBehaviour {
             pitch3.isOn = true;
         } else if (pitch == 4) {
             pitch4.isOn = true;
+        }
+        crossSceneManager.settingsUI.SetActive(false);
+    }
+
+    private void Start() {
+        if (musicVol > 0f) {
+            musicAudioSource.Play();
         }
     }
 

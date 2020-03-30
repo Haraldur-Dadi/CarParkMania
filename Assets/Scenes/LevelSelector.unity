@@ -20403,6 +20403,7 @@ MonoBehaviour:
   saveManager: {fileID: 0}
   musicAudioSource: {fileID: 0}
   sfxAudioSource: {fileID: 0}
+  crossSceneManager: {fileID: 0}
   musicVol: 0
   sfxVol: 0
   pitch: 0

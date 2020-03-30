@@ -54,11 +54,11 @@ public class GameManager : MonoBehaviour {
         saveManager = SaveManager.Instance;
 
         /* Sets required information for class at start up */
-        finished = true;
+        finished = false;
         tmpBoard = null;
 
         LoadLevel();
-        ToggleLevelCompleteUI();
+        levelCompleteUi.SetActive(false);
     }
 
     public void LoadLevel() {

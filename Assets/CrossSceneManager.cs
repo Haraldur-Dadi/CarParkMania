@@ -1,29 +1,29 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CrossSceneManager : MonoBehaviour {
 
-    public static CrossSceneManager instance;
+    public static CrossSceneManager Instance;
 
     public GameObject settingsUI;
 
     private void Awake() {
-        if (instance == null) {
-            instance = this;
+        if (Instance == null) {
+            Instance = this;
             DontDestroyOnLoad(gameObject);
-        } else if (instance != this) {
+        } else if (Instance != this) {
             Destroy(gameObject);
         }
 
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         settingsUI = GameObject.Find("SettingsUI");
 
         Button settingsBtn = GameObject.Find("SettingsBtn").GetComponent<Button>();
         settingsBtn.onClick.AddListener(delegate { ToggleSettings(); });
-
-    }
-
-    private void Start() {
-        settingsUI.SetActive(false);
     }
 
     public void ToggleSettings() {
