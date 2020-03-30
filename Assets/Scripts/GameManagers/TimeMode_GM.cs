@@ -35,42 +35,28 @@ public class TimeMode_GM : GameManager {
            If it reaches max limit you fail */
 
         while (!finished) {
-            if (!paused) {
-                sec += 1;
-                if (sec >= 60) {
-                    sec = 0;
-                    min += 1;
-                }
-
-                if (min == 60) {
-                    LevelFailed();
-                }
-
-                if (sec < 10 && min < 10) {
-                    clockTxt.text = string.Format("0{0}:0{1}", min, sec);
-                } else if (sec < 10) {
-                    clockTxt.text = string.Format("{0}:0{1}", min, sec);
-                } else if (min < 10) {
-                    clockTxt.text = string.Format("0{0}:{1}", min, sec);
-                } else {
-                    clockTxt.text = string.Format("{0}:{1}", min, sec);
-                }
-
-                yield return new WaitForSeconds(1);
+            sec += 1;
+            if (sec >= 60) {
+                sec = 0;
+                min += 1;
             }
-            yield return null;
-        }
-    }
 
-    public override void ToggleSettings() {
-        base.ToggleSettings();
+            if (min == 60) {
+                LevelFailed();
+            }
 
-        if (paused) {
-            pausedImg.SetActive(true);
-            clockTxt.gameObject.SetActive(false);
-        } else {
-            pausedImg.SetActive(false);
-            clockTxt.gameObject.SetActive(true);
+            if (sec < 10 && min < 10) {
+                clockTxt.text = string.Format("0{0}:0{1}", min, sec);
+            } else if (sec < 10) {
+                clockTxt.text = string.Format("{0}:0{1}", min, sec);
+            } else if (min < 10) {
+                clockTxt.text = string.Format("0{0}:{1}", min, sec);
+            } else {
+                clockTxt.text = string.Format("{0}:{1}", min, sec);
+            }
+
+            yield return new WaitForSeconds(1);
         }
+        yield return null;
     }
 }

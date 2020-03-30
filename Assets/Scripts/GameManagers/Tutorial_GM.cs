@@ -29,10 +29,4 @@ public class Tutorial_GM : GameManager {
             tutDisplays[tutDispAtIndex].SetActive(true);
         }
     }
-
-    public override void LevelComplete() {
-
-
-        base.LevelComplete();
-    }
 }
