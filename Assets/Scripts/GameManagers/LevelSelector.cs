@@ -59,7 +59,7 @@ public class LevelSelector : MonoBehaviour {
 
     public void SelecteLevel(int buildIndex, int level) {
         sceneFader.FadeToBuildIndex(buildIndex);
-        saveManager.SaveData("boardToLoad", level);
+        saveManager.SaveIntData("boardToLoad", level);
     }
 
     public IEnumerator HomeScreen() {

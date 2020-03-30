@@ -12,8 +12,13 @@ public class SaveManager : MonoBehaviour {
         }
     }
 
-    public void SaveData(string varName, int value) {
+    public void SaveIntData(string varName, int value) {
         PlayerPrefs.SetInt(varName, value);
+        //PlayerPrefs.Save();
+    }
+
+    public void SaveFloatData(string varName, float value) {
+        PlayerPrefs.SetFloat(varName, value);
         //PlayerPrefs.Save();
     }
 }

@@ -73,7 +73,7 @@ public class CarMovement : MonoBehaviour {
     }
 
     private void Update() {
-        if (!(gameManager.finished || gameManager.paused)) {
+        if (!gameManager.finished) {
             /* If touch on screen determine what to do */
             if (Input.touchCount > 0) {
                 Touch touch = Input.GetTouch(0);

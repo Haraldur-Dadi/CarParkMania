@@ -17,9 +17,12 @@ public class CrossSceneManager : MonoBehaviour {
 
         settingsUI = GameObject.Find("SettingsUI");
 
-        Button settingsBtn = GameObject.Find("settingsBtn").GetComponent<Button>();
+        Button settingsBtn = GameObject.Find("SettingsBtn").GetComponent<Button>();
         settingsBtn.onClick.AddListener(delegate { ToggleSettings(); });
 
+    }
+
+    private void Start() {
         settingsUI.SetActive(false);
     }
 

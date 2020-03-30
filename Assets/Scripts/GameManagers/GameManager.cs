@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour {
     public int levelIndex;
 
     public bool finished;
-    public bool paused;
 
     public Button homeBtn;
     public Button settingsBtn;
@@ -56,7 +55,6 @@ public class GameManager : MonoBehaviour {
 
         /* Sets required information for class at start up */
         finished = true;
-        paused = true;
         tmpBoard = null;
 
         LoadLevel();
@@ -76,7 +74,7 @@ public class GameManager : MonoBehaviour {
 
     public virtual void LevelComplete() {
         if (PlayerPrefs.GetInt("LevelReached", 0) <= levelIndex) {
-            saveManager.SaveData("LevelReached", levelIndex + 1);
+            saveManager.SaveIntData("LevelReached", levelIndex + 1);
         }
 
         ToggleLevelCompleteUI();
@@ -112,7 +110,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void LoadNextLevel() {
-        saveManager.SaveData("boardToLoad", levelIndex + 1);
+        saveManager.SaveIntData("boardToLoad", levelIndex + 1);
         RetryLevel();
     }
 }

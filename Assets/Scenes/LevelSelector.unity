@@ -9354,10 +9354,10 @@ RectTransform:
   m_Father: {fileID: 871977353}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1006073315
 MonoBehaviour:
@@ -9405,14 +9405,14 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 72
-  m_fontSizeBase: 72
+  m_fontSize: 96
+  m_fontSizeBase: 96
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_textAlignment: 257
+  m_fontStyle: 33
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -9422,7 +9422,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -15040,6 +15040,46 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2782979481046684439, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707010530156401194, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863662914261338092, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 775
+      objectReference: {fileID: 0}
+    - target: {fileID: 6275063742649012674, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8275740046591296862, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 8275740046591296862, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 8275740046591296862, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
+        type: 3}
+      propertyPath: m_text
+      value: 100%
+      objectReference: {fileID: 0}
+    - target: {fileID: 8275740046591296862, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6454ca8de1f9f314cbf5fe4502084e8a, type: 3}
 --- !u!224 &1455123980 stripped
@@ -15561,7 +15601,7 @@ GameObject:
   - component: {fileID: 1516447790}
   - component: {fileID: 1516447789}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: SettingsBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20117,6 +20157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e350b38e652132246b1b4cf871176995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsUI: {fileID: 0}
 --- !u!114 &1981764641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20237,9 +20278,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1446a23d0ae542142aeb8dd3bbd2d1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveManager: {fileID: 0}
   audioSource: {fileID: 0}
-  playMusic: 0
-  playSfx: 0
+  musicVol: 0
+  sfxVol: 0
+  pitch: 0
+  musicVolSlider: {fileID: 0}
+  musicVolTxt: {fileID: 0}
+  pitch1: {fileID: 0}
+  pitch2: {fileID: 0}
+  pitch3: {fileID: 0}
+  pitch4: {fileID: 0}
 --- !u!1 &1982063686
 GameObject:
   m_ObjectHideFlags: 0
