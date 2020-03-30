@@ -20,7 +20,10 @@ public class GameManager : MonoBehaviour {
 
     public GameObject gameBoard;
     public GameObject tmpBoard;
-    public GameObject[] level_boards;
+    public GameObject[] level_boards_beginner;
+    public GameObject[] level_boards_intermediate;
+    public GameObject[] level_boards_advanced;
+    public GameObject[] level_boards_expert;
 
     public GameObject levelCompleteUi;
     public TextMeshProUGUI levelTxt;
@@ -57,7 +60,7 @@ public class GameManager : MonoBehaviour {
             difficultyTxt.text = "Beginner";
         }
 
-        GameObject level_board = level_boards[levelIndex];
+        GameObject level_board = level_boards_beginner[levelIndex];
         Instantiate(level_board, gameBoard.transform);
     }
 
