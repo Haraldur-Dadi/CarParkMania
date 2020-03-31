@@ -682,6 +682,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Standard_GM
       objectReference: {fileID: 0}
+    - target: {fileID: 3210123896033951535, guid: 1540d0b5b14124e4c84672c33449c5a8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8521502784123396064, guid: 1540d0b5b14124e4c84672c33449c5a8,
         type: 3}
       propertyPath: homeBtn

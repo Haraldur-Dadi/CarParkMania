@@ -652,7 +652,7 @@ GameObject:
   - component: {fileID: 1864951066548972951}
   - component: {fileID: 788831850839645953}
   m_Layer: 0
-  m_Name: Bord_SB_04
+  m_Name: Bord_SE_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1024,14 +1024,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5280628145069039510}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 2.75, y: 0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3790509738203392972}
   m_Father: {fileID: 1864951066548972951}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!61 &7224872878623915307
 BoxCollider2D:
   m_ObjectHideFlags: 0
