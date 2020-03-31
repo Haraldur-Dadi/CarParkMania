@@ -32,26 +32,44 @@ public class LevelSelector : MonoBehaviour {
         for (int i = 0; i < casualLevelBtns.Length; i++) {
             if (i > casualLevelReached) {
                 casualLevelBtns[i].interactable = false;
-            }
+            } else {
+                if (i < casualLevelReached) {
+                    casualLevelBtns[i].gameObject.GetComponent<Image>().color = new Color(0.4029462f, 1, 0.2311321f);
+                } else {
+                    casualLevelBtns[i].gameObject.GetComponent<Image>().color = new Color(1, 0.9341092f, 0.2313725f);
+                }
 
-            int level = i;
-            casualLevelBtns[i].onClick.AddListener(() => SelecteLevel(1, level));
+                int level = i;
+                casualLevelBtns[i].onClick.AddListener(() => SelecteLevel(1, level));
+            }
         }
         for (int i = 0; i < challengeLevelBtns.Length; i++) {
             if (i > challengedLevelReached) {
                 challengeLevelBtns[i].interactable = false;
-            }
+            } else {
+                if (i < challengedLevelReached) {
+                    challengeLevelBtns[i].gameObject.GetComponent<Image>().color = new Color(0.4029462f, 1, 0.2311321f);
+                } else {
+                    challengeLevelBtns[i].gameObject.GetComponent<Image>().color = new Color(1, 0.9341092f, 0.2313725f);
+                }
 
-            int level = i;
-            challengeLevelBtns[i].onClick.AddListener(() => SelecteLevel(2, level));
+                int level = i;
+                challengeLevelBtns[i].onClick.AddListener(() => SelecteLevel(2, level));
+            }
         }
         for (int i = 0; i < timedLevelBtns.Length; i++) {
             if (i > timedLevelReached) {
                 timedLevelBtns[i].interactable = false;
-            }
+            } else {
+                if (i < timedLevelReached) {
+                    timedLevelBtns[i].gameObject.GetComponent<Image>().color = new Color(0.4029462f, 1, 0.2311321f);
+                } else {
+                    timedLevelBtns[i].gameObject.GetComponent<Image>().color = new Color(1, 0.9341092f, 0.2313725f);
+                }
 
-            int level = i;
-            timedLevelBtns[i].onClick.AddListener(() => SelecteLevel(3, level));
+                int level = i;
+                timedLevelBtns[i].onClick.AddListener(() => SelecteLevel(3, level));
+            }
         }
 
         UIStartState();
