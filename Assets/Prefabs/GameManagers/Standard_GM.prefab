@@ -53,37 +53,19 @@ MonoBehaviour:
   nextLevelBtn: {fileID: 0}
   resetButton: {fileID: 0}
   gameBoard: {fileID: 0}
-  tmpBoard: {fileID: 0}
-  level_boards_beginner:
+  level_boards_easy:
   - {fileID: 4571049737941145950, guid: 320a393c7d168264ba6df00c5fd9a583, type: 3}
-  - {fileID: 5273443111392577917, guid: 40a5fd06e4f600648addcd1f4f5a2330, type: 3}
+  - {fileID: 501970014833497623, guid: 7e314e49cbdfbc0499323914dc198e4a, type: 3}
   - {fileID: 3005024820055873097, guid: 636e6dfd04ed9b94596c723bb3874826, type: 3}
   - {fileID: 3526850583784628091, guid: 69cdf956ab5dbab48a54af925220e1a4, type: 3}
   - {fileID: 4304692628026874385, guid: a623aff87afa8fa4caf7026db2075aa5, type: 3}
-  - {fileID: 5659180426989935683, guid: 893d2e9bf2184e148844a8ef7318fa72, type: 3}
-  - {fileID: 7068805851930882847, guid: 3be2d32fb95ec124b9616d83ed7dab76, type: 3}
-  - {fileID: 2187342964430912633, guid: 80868d4a0a7131b48b1c7d44f79c0af2, type: 3}
-  - {fileID: 7869955207333284754, guid: 5bae819c6471e3f44a49ab783e88fe89, type: 3}
-  - {fileID: 6570884353241366008, guid: b2b0ab05a6e26494592e267bb8f2b537, type: 3}
-  - {fileID: 6697971636036539557, guid: 1c47a0cffd291a7449f46b07c1c97220, type: 3}
-  - {fileID: 6313868099801369462, guid: 70095ef12798a8f4b9e2827febfb44da, type: 3}
-  - {fileID: 2198798311691325489, guid: 9a5d757222b2b7947bfbb04c53e02b59, type: 3}
-  - {fileID: 7653716581949798341, guid: 70ee16b48d0164c4f9a93d2c27d49f8a, type: 3}
-  - {fileID: 7475226701881229657, guid: 7881b1fa6ad93194f86c0e5491e799f8, type: 3}
-  - {fileID: 8496324562777660308, guid: c0a9c340f7b49be48a034414ebd534a8, type: 3}
-  - {fileID: 4106542204652689306, guid: 7ac37d1ec612b8e43ab3ec670006de09, type: 3}
-  - {fileID: 4039861031044918904, guid: 3b9b38ee61b607c4daca790511e155ff, type: 3}
-  - {fileID: 4039861031044918904, guid: 30461f13162886547873595032bb599b, type: 3}
-  - {fileID: 4039861031044918904, guid: 00251022def633a4a9f33e7536cb02c2, type: 3}
-  - {fileID: 4039861031044918904, guid: 7080834e5415cda41a9624b570d20124, type: 3}
-  - {fileID: 4039861031044918904, guid: 2048daaed2a6ef948be3ae7a9ee626ca, type: 3}
-  - {fileID: 4039861031044918904, guid: 7e3ad962703e2d14f97c53f646be3fb0, type: 3}
-  - {fileID: 4039861031044918904, guid: 57d35ec53a5fd1d49adf18f3a781e571, type: 3}
-  - {fileID: 4039861031044918904, guid: db285f8ae0cea904e8a79d1131de4d9e, type: 3}
-  level_boards_intermediate:
-  - {fileID: 8683301973456058860, guid: 81cb7a7d9278d104e96a1791d3bfef2a, type: 3}
-  - {fileID: 8821271227778209967, guid: 54bf53ef2fec91a4aad7f45e1eb7c3fb, type: 3}
-  level_boards_advanced: []
+  - {fileID: 6027865315736306162, guid: f3ffebbe992a34f418090b3588193f48, type: 3}
+  - {fileID: 4511441488717854197, guid: 0394f3a6edad2a54c853aa40b90b626f, type: 3}
+  - {fileID: 2941683361724601060, guid: 0f854d95e8ce857499f718270b9fc823, type: 3}
+  - {fileID: 1839322683064138074, guid: 9fcd16e1d7b78c94387786c14046f8e2, type: 3}
+  - {fileID: 3140888662788990916, guid: 99d3f6fb3f860aa479d4dba1ce795071, type: 3}
+  level_boards_medium: []
+  level_boards_hard: []
   level_boards_expert: []
   levelCompleteUi: {fileID: 0}
   levelTxt: {fileID: 0}

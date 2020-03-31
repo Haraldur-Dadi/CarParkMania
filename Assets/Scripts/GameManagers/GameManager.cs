@@ -70,8 +70,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public virtual void LevelComplete() {
-        if (PlayerPrefs.GetInt("LevelReached", 0) <= levelIndex) {
-            saveManager.SaveIntData("LevelReached", levelIndex + 1);
+        if (PlayerPrefs.GetInt("CasualLevelReached", 0) <= levelIndex) {
+            saveManager.SaveIntData("CasualLevelReached", levelIndex + 1);
         }
 
         ToggleLevelCompleteUI();
