@@ -34,7 +34,7 @@ public class CarMovement : MonoBehaviour {
         bool carInWay = false;
         Vector2 raycastPos = posToMoveCar;
 
-        if (carToMove.transform.rotation.z == 0 || carToMove.transform.rotation.z == 180) {
+        if (carToMove.transform.eulerAngles.z == 0 || carToMove.transform.eulerAngles.z == 180) {
             if (posToMoveCar.y > carToMove.transform.position.y) {
                 raycastPos.y += snapValue;
             } else {
@@ -118,7 +118,7 @@ public class CarMovement : MonoBehaviour {
         /* Create grid like movement on board by rounding and clamping to within the boards border */
 
         // Car is facing up/down and is moving on y-axis
-        if (carToMove.transform.rotation.z == 0 || carToMove.transform.rotation.z == 180) {
+        if (carToMove.transform.eulerAngles.z == 0 || carToMove.transform.eulerAngles.z == 180) {
             snapPos.x = carToMove.transform.position.x;
             // Check if the position is outside of the maximum allowed movement values of car
             if (snapPos.y > maxValAxis) {
