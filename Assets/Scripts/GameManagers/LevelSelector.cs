@@ -13,9 +13,8 @@ public class LevelSelector : MonoBehaviour {
     public GameObject gameModesParent;
     public GameObject[] gameModes;
 
-    public Button[] casualLevelBtns; 
-    public Button[] challengeLevelBtns; 
-    public Button[] timedLevelBtns; 
+    public GameObject[] casualLevelDifficulties;
+    public Button[] casualLevelBtns;
 
     public GameObject homeBtn;
     public GameObject backBtn;
@@ -33,45 +32,20 @@ public class LevelSelector : MonoBehaviour {
             if (i > casualLevelReached) {
                 casualLevelBtns[i].interactable = false;
             } else {
+                int level = i;
+                casualLevelBtns[i].onClick.AddListener(() => SelecteLevel(1, level));
+
                 if (i < casualLevelReached) {
                     casualLevelBtns[i].gameObject.GetComponent<Image>().color = new Color(0.4029462f, 1, 0.2311321f);
                 } else {
                     casualLevelBtns[i].gameObject.GetComponent<Image>().color = new Color(1, 0.9341092f, 0.2313725f);
                 }
-
-                int level = i;
-                casualLevelBtns[i].onClick.AddListener(() => SelecteLevel(1, level));
             }
-        }
-        for (int i = 0; i < challengeLevelBtns.Length; i++) {
-            if (i > challengedLevelReached) {
-                challengeLevelBtns[i].interactable = false;
-            } else {
-                if (i < challengedLevelReached) {
-                    challengeLevelBtns[i].gameObject.GetComponent<Image>().color = new Color(0.4029462f, 1, 0.2311321f);
-                } else {
-                    challengeLevelBtns[i].gameObject.GetComponent<Image>().color = new Color(1, 0.9341092f, 0.2313725f);
-                }
 
-                int level = i;
-                challengeLevelBtns[i].onClick.AddListener(() => SelecteLevel(2, level));
-            }
-        }
-        for (int i = 0; i < timedLevelBtns.Length; i++) {
-            if (i > timedLevelReached) {
-                timedLevelBtns[i].interactable = false;
-            } else {
-                if (i < timedLevelReached) {
-                    timedLevelBtns[i].gameObject.GetComponent<Image>().color = new Color(0.4029462f, 1, 0.2311321f);
-                } else {
-                    timedLevelBtns[i].gameObject.GetComponent<Image>().color = new Color(1, 0.9341092f, 0.2313725f);
-                }
-
-                int level = i;
-                timedLevelBtns[i].onClick.AddListener(() => SelecteLevel(3, level));
-            }
+            casualLevelBtns[i].GetComponentInChildren<TextMeshProUGUI>().text = (i + 1).ToString();
         }
 
+        SelectDifficulty(0);
         UIStartState();
     }
 
@@ -93,6 +67,16 @@ public class LevelSelector : MonoBehaviour {
     public void SelectGameMode(int gameModeNr) {
         sceneFader.FadeBetweenObjects();
         StartCoroutine(SelectGameModeUI(gameModeNr));
+    }
+
+    public void SelectDifficulty(int difficulty) {
+        for (int i = 0; i < casualLevelDifficulties.Length; i++) {
+            if (i == difficulty) {
+                casualLevelDifficulties[i].SetActive(true);
+            } else {
+                casualLevelDifficulties[i].SetActive(false);
+            }
+        }
     }
 
     public void SelecteLevel(int buildIndex, int level) {
