@@ -13,7 +13,9 @@ public class LevelSelector : MonoBehaviour {
     public GameObject gameModesParent;
     public GameObject[] gameModes;
 
-    public Button[] levelBtns; 
+    public Button[] casualLevelBtns; 
+    public Button[] challengeLevelBtns; 
+    public Button[] timedLevelBtns; 
 
     public GameObject homeBtn;
     public GameObject backBtn;
@@ -23,15 +25,33 @@ public class LevelSelector : MonoBehaviour {
         sceneFader = SceneFader.Instance;
         saveManager = SaveManager.Instance;
 
-        int LevelReached = PlayerPrefs.GetInt("LevelReached", 0);
+        int casualLevelReached = PlayerPrefs.GetInt("CasualLevelReached", 0);
+        int challengedLevelReached = PlayerPrefs.GetInt("ChallengeLevelReached", 0);
+        int timedLevelReached = PlayerPrefs.GetInt("TimedLevelReached", 0);
 
-        for (int i = 0; i < levelBtns.Length; i++) {
-            if (i > LevelReached) {
-                levelBtns[i].interactable = false;
+        for (int i = 0; i < casualLevelBtns.Length; i++) {
+            if (i > casualLevelReached) {
+                casualLevelBtns[i].interactable = false;
             }
 
             int level = i;
-            levelBtns[i].onClick.AddListener(() => SelecteLevel(1, level));
+            casualLevelBtns[i].onClick.AddListener(() => SelecteLevel(1, level));
+        }
+        for (int i = 0; i < challengeLevelBtns.Length; i++) {
+            if (i > challengedLevelReached) {
+                challengeLevelBtns[i].interactable = false;
+            }
+
+            int level = i;
+            challengeLevelBtns[i].onClick.AddListener(() => SelecteLevel(2, level));
+        }
+        for (int i = 0; i < timedLevelBtns.Length; i++) {
+            if (i > timedLevelReached) {
+                timedLevelBtns[i].interactable = false;
+            }
+
+            int level = i;
+            timedLevelBtns[i].onClick.AddListener(() => SelecteLevel(3, level));
         }
 
         UIStartState();

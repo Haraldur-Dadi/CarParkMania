@@ -61,7 +61,7 @@ public class AudioManager : MonoBehaviour {
         pitch1.onValueChanged.AddListener(delegate { ChangePitch(pitch1, 1); });
         pitch2.onValueChanged.AddListener(delegate { ChangePitch(pitch2, 2); });
         pitch3.onValueChanged.AddListener(delegate { ChangePitch(pitch3, 3); });
-        pitch4.onValueChanged.AddListener(delegate { ChangePitch(pitch4, 3); });
+        pitch4.onValueChanged.AddListener(delegate { ChangePitch(pitch4, 4); });
         sfxVolSlider.onValueChanged.AddListener(delegate { ChangeSfxVol(sfxVolSlider.value); });
 
         musicVolTxt.text = musicVol * 100 + "%";

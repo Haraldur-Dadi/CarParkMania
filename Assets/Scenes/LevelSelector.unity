@@ -5596,8 +5596,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4284243178
-  m_fontColor: {r: 0.9176471, g: 0.36078432, b: 0.36078432, a: 1}
+    rgba: 4282401023
+  m_fontColor: {r: 1, g: 0.2509804, b: 0.2509804, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -20258,8 +20258,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4284243178
-  m_fontColor: {r: 0.9176471, g: 0.36078432, b: 0.36078432, a: 1}
+    rgba: 4282401023
+  m_fontColor: {r: 1, g: 0.2509804, b: 0.2509804, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -28825,36 +28825,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1884978446}
     m_Modifications:
-    - target: {fileID: 182667221336609171, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 724e20a9f685b95439238472b45488f2,
-        type: 3}
-    - target: {fileID: 246971361691494968, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.12156863
-      objectReference: {fileID: 0}
-    - target: {fileID: 246971361691494968, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.09803922
-      objectReference: {fileID: 0}
-    - target: {fileID: 246971361691494968, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.09803922
-      objectReference: {fileID: 0}
     - target: {fileID: 246971361691494970, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
         type: 3}
       propertyPath: m_Name
       value: SettingsUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 246971361691494970, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 246971361691494971, guid: 6454ca8de1f9f314cbf5fe4502084e8a,
         type: 3}
@@ -30530,7 +30504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.2509804, b: 0.2509804, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -33846,8 +33820,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4284243178
-  m_fontColor: {r: 0.9176471, g: 0.36078432, b: 0.36078432, a: 1}
+    rgba: 4282401023
+  m_fontColor: {r: 1, g: 0.2509804, b: 0.2509804, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -38452,32 +38426,9 @@ MonoBehaviour:
   - {fileID: 15848123}
   - {fileID: 1667565776}
   - {fileID: 1048383576}
-  levelBtns:
-  - {fileID: 1822860979}
-  - {fileID: 1549755690}
-  - {fileID: 169482719}
-  - {fileID: 42444219}
-  - {fileID: 2028333188}
-  - {fileID: 1249850706}
-  - {fileID: 1952437000}
-  - {fileID: 640424671}
-  - {fileID: 1096768678}
-  - {fileID: 1884004413}
-  - {fileID: 142839880}
-  - {fileID: 2116029250}
-  - {fileID: 800652750}
-  - {fileID: 808331512}
-  - {fileID: 796761834}
-  - {fileID: 1320422142}
-  - {fileID: 884338781}
-  - {fileID: 648093975}
-  - {fileID: 1140180127}
-  - {fileID: 1003865121}
-  - {fileID: 1123618982}
-  - {fileID: 29323445}
-  - {fileID: 1892919400}
-  - {fileID: 725917802}
-  - {fileID: 439019508}
+  casualLevelBtns: []
+  challengeLevelBtns: []
+  timedLevelBtns: []
   homeBtn: {fileID: 487044552}
   backBtn: {fileID: 2039891094}
   selectPanelName: {fileID: 1019605398}
@@ -38587,7 +38538,6 @@ MonoBehaviour:
   casualCompleted:
   - {fileID: 616546532}
   - {fileID: 1825622266}
-  - {fileID: 0}
   challengeCompleted:
   - {fileID: 871552400}
   - {fileID: 81249105}
