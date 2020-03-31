@@ -67,6 +67,7 @@ public class AudioManager : MonoBehaviour {
         musicVolTxt.text = musicVol * 100 + "%";
         musicVolSlider.value = musicVol;
         musicAudioSource.volume = musicVol;
+        sfxVolTxt.text = sfxVol * 100 + "%";
         sfxAudioSource.volume = sfxVol;
         sfxVolSlider.value = sfxVol;
 
