@@ -1,18 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Achivements : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class Achivements : MonoBehaviour {
+
+    public GameObject achivementsPanel;
+
+    private void Start() {
+        achivementsPanel.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void ToggleAchivementsPanel() {
+        achivementsPanel.SetActive(!achivementsPanel.activeSelf);
     }
 }

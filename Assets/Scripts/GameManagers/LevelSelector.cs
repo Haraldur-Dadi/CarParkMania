@@ -20,6 +20,9 @@ public class LevelSelector : MonoBehaviour {
     public GameObject backBtn;
     public TextMeshProUGUI selectPanelName;
 
+    public GameObject dailyChallangePanel;
+    public GameObject dailySpinPanel;
+
     public void Start() {
         sceneFader = SceneFader.Instance;
         saveManager = SaveManager.Instance;
@@ -52,6 +55,16 @@ public class LevelSelector : MonoBehaviour {
     public void UIStartState() {
         home.SetActive(true);
         levelSelector.SetActive(false);
+        dailyChallangePanel.SetActive(false);
+        dailySpinPanel.SetActive(false);
+    }
+
+    public void ToggleDailyChallange() {
+        dailyChallangePanel.SetActive(!dailyChallangePanel.activeSelf);
+    }
+
+    public void ToggleDailySpin() {
+        dailySpinPanel.SetActive(!dailySpinPanel.activeSelf);
     }
 
     public void BackHome() {
