@@ -16,8 +16,6 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     string rewardVideoID = "rewardedVideo";
     bool testMode = true;
 
-    public GameObject rewardBtn;
-
     public int allowAds;
     public Toggle allowAdsToggle;
     public Toggle denyAdsToggle;
@@ -29,9 +27,8 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
             Instance = this;
         }
 
-        goldManager = GoldManager.Instance;
-        saveManager = SaveManager.Instance;
-        crossSceneManager = CrossSceneManager.Instance;
+        saveManager = GetComponent<SaveManager>();
+        crossSceneManager = GetComponent<CrossSceneManager>();
 
         Advertisement.AddListener(this);
         Advertisement.Initialize(gameID, testMode);
@@ -41,6 +38,10 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if (scene.buildIndex == 0) {
+            goldManager = GoldManager.Instance;
+        }
+
         ShowBanner();
 
         Toggle[] settingsToggler = crossSceneManager.settingsUI.GetComponentsInChildren<Toggle>();
@@ -70,8 +71,10 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
 
             if (allowAds == 1) {
                 denyAdsToggle.isOn = false;
+                ShowBanner();
             } else {
                 allowAdsToggle.isOn = false;
+                HideBanner();
             }
 
             saveManager.SaveIntData("AllowAds", allow);
@@ -83,7 +86,9 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     }
 
     public void ShowBanner() {
-        StartCoroutine(ShowBannerWhenReady());
+        if (allowAds == 1) {
+            StartCoroutine(ShowBannerWhenReady());
+        }
     }
 
     public void ShowRewardVideo() {
@@ -108,27 +113,15 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     }
 
     public void OnUnityAdsReady(string placementId) {
-        // If the reward ad Placement is ready, activate the button: 
-        if (placementId == rewardVideoID) {
-            if (rewardBtn)
-                rewardBtn.SetActive(true);
-        }
     }
 
     public void OnUnityAdsDidStart(string placementId) {
-        // Optional actions to take when the end-users triggers an ad.
     }
 
     public void OnUnityAdsDidError(string message) {
-        // Log the error
     }
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult) {
-        if (placementId == rewardVideoID) {
-            if (rewardBtn)
-                rewardBtn.SetActive(false);
-        }
-
         // Reward the user for watching the ad if watched to completion.
         if (showResult == ShowResult.Finished) {
             goldManager.AddGold(25, true);
