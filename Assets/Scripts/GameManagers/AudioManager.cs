@@ -80,7 +80,6 @@ public class AudioManager : MonoBehaviour {
         } else if (pitch == 4) {
             pitch4.isOn = true;
         }
-        crossSceneManager.settingsUI.SetActive(false);
     }
 
     private void Start() {
@@ -98,29 +97,40 @@ public class AudioManager : MonoBehaviour {
     }
     
     public void ChangePitch(Toggle toggler, int pitch_in) {
-        if (toggler.isOn) {
-            if (pitch_in == 1) {
+        if (pitch_in == pitch) {
+            if (pitch == 1) {
+                pitch1.isOn = true;
+            } else if (pitch == 2) {
+                pitch2.isOn = true;
+            } else if (pitch == 3) {
+                pitch3.isOn = true;
+            } else if (pitch == 4) {
+                pitch4.isOn = true;
+            }
+        } else if (toggler.isOn) {
+            pitch = pitch_in;
+
+            if (pitch == 1) {
                 musicAudioSource.pitch = 1f;
                 pitch2.isOn = false;
                 pitch3.isOn = false;
                 pitch4.isOn = false;
-            } else if (pitch_in == 2) {
+            } else if (pitch == 2) {
                 musicAudioSource.pitch = 1.5f;
                 pitch1.isOn = false;
                 pitch3.isOn = false;
                 pitch4.isOn = false;
-            } else if (pitch_in == 3) {
+            } else if (pitch == 3) {
                 musicAudioSource.pitch = 1.25f;
                 pitch1.isOn = false;
                 pitch2.isOn = false;
                 pitch4.isOn = false;
-            } else if (pitch_in == 4) {
+            } else if (pitch == 4) {
                 musicAudioSource.pitch = -1f;
                 pitch1.isOn = false;
                 pitch2.isOn = false;
                 pitch3.isOn = false;
             }
-            pitch = pitch_in;
 
             saveManager.SaveIntData("Pitch", pitch);
         }

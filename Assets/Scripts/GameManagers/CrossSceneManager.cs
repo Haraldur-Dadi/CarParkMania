@@ -23,6 +23,7 @@ public class CrossSceneManager : MonoBehaviour {
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         settingsUI = GameObject.Find("SettingsUI");
+        settingsUI.SetActive(false);
 
         settingsBtn = GameObject.Find("SettingsBtn").GetComponent<Button>();
         settingsCloseBtn = settingsUI.GetComponentInChildren<Button>();
