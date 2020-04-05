@@ -13,10 +13,10 @@ public class GoldManager : MonoBehaviour {
     public GameObject adForGoldCon;
 
     private void Awake() {
-        if (Instance != null) {
-            Destroy(gameObject);
-        } else {
+        if (Instance == null) {
             Instance = this;
+        } else {
+            Destroy(gameObject);
         }
     }
 
@@ -24,12 +24,15 @@ public class GoldManager : MonoBehaviour {
         saveManager = SaveManager.Instance;
 
         gold = PlayerPrefs.GetInt("Gold", 0);
+        goldTxt.text = gold.ToString();
         adForGoldCon.SetActive(false);
     }
 
     public void AddGold(int goldToAdd, bool ad) {
         gold += goldToAdd;
         saveManager.SaveIntData("Gold", gold);
+
+        goldTxt.text = gold.ToString();
 
         if (ad)
             ToggleAdGoldConformation();
@@ -38,6 +41,8 @@ public class GoldManager : MonoBehaviour {
     public void SubtractGold(int goldToSub) {
         gold -= goldToSub;
         saveManager.SaveIntData("Gold", gold);
+
+        goldTxt.text = gold.ToString();
     }
 
     public void ToggleAdGoldConformation() {
