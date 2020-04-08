@@ -12,8 +12,8 @@ public class Shop : MonoBehaviour {
     public TextMeshProUGUI carName;
     public Image carImg;
 
-    public GameObject showPrev;
-    public GameObject showNext;
+    public GameObject showPrevBtn;
+    public GameObject showNextBtn;
 
     public GameObject buyCarBtn;
     public GameObject equipCarBtn;
@@ -76,14 +76,14 @@ public class Shop : MonoBehaviour {
         // Display button based on what car looking at
         if (carId == 0) {
             // First car, no prev car
-            showPrev.SetActive(false);
+            showPrevBtn.SetActive(false);
         } else if (carId == 4) {
             // Last car, no next car
-            showNext.SetActive(false);
+            showNextBtn.SetActive(false);
         } else {
             // Somewhere in middle, prev and next car
-            showPrev.SetActive(true);
-            showNext.SetActive(true);
+            showPrevBtn.SetActive(true);
+            showNextBtn.SetActive(true);
         }
     }
 
