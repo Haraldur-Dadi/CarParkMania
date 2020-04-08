@@ -21,4 +21,9 @@ public class SaveManager : MonoBehaviour {
         PlayerPrefs.SetFloat(varName, value);
         //PlayerPrefs.Save();
     }
+
+    public void SaveStringData(string varName, string value) {
+        PlayerPrefs.SetString(varName, value);
+        //PlayerPrefs.Save();
+    }
 }
