@@ -24,6 +24,7 @@ public class LevelSelector : MonoBehaviour {
     public GameObject dailyChallangePanel;
     public GameObject dailySpinPanel;
     public GameObject achivementsPanel;
+    public GameObject shopPanel;
 
     public void Start() {
         sceneFader = SceneFader.Instance;
@@ -61,6 +62,7 @@ public class LevelSelector : MonoBehaviour {
         dailyChallangePanel.SetActive(false);
         dailySpinPanel.SetActive(false);
         achivementsPanel.SetActive(false);
+        shopPanel.SetActive(false);
     }
 
     public void ToggleAchivements() {
@@ -75,6 +77,11 @@ public class LevelSelector : MonoBehaviour {
 
     public void ToggleDailySpin() {
         dailySpinPanel.SetActive(!dailySpinPanel.activeSelf);
+        mainScreen.SetActive(!mainScreen.activeSelf);
+    }
+
+    public void ToggleShop() {
+        shopPanel.SetActive(!shopPanel.activeSelf);
         mainScreen.SetActive(!mainScreen.activeSelf);
     }
 

@@ -5,8 +5,6 @@ using TMPro;
 public class Shop : MonoBehaviour {
     public CarTypes carTypes;
 
-    public GameObject shopUI;
-
     public int carId;
 
     public TextMeshProUGUI carName;
@@ -26,16 +24,6 @@ public class Shop : MonoBehaviour {
 
     private void Start() {
         carTypes = CarTypes.instance;
-        shopUI.SetActive(false);
-    }
-
-    public void DisplayShop() {
-        shopUI.SetActive(!shopUI.activeSelf);
-
-        if (shopUI.activeSelf == true) {
-            carId = 0;
-            UpdateShopUI();
-        }
     }
 
     public void UpdateShopUI() {
