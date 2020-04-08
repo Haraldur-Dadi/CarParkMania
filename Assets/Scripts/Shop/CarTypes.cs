@@ -2,8 +2,13 @@
 using UnityEngine;
 
 public class CarTypes : MonoBehaviour {
-    #region instance
     public static CarTypes instance;
+
+    public Sprite[] carSprites;
+    public List<int> unlockableCars;
+    public List<string> unlockStrs;
+    public List<int> unlocked;
+
     private void Awake() {
         if (!instance) {
             instance = this;
@@ -12,12 +17,6 @@ public class CarTypes : MonoBehaviour {
             Destroy(this);
         }
     }
-    #endregion
-
-    public Sprite[] carSprites;
-    public List<int> unlockableCars;
-    public List<string> unlockStrs;
-    public List<int> unlocked;
 
     private void Start() {
         unlocked = new List<int>();
