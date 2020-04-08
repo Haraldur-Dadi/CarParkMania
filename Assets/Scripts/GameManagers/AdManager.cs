@@ -16,6 +16,8 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     string rewardVideoID = "rewardedVideo";
     bool testMode = true;
 
+    public GameObject rewardAdsBtn;
+
     public int allowAds;
     public Toggle allowAdsToggle;
     public Toggle denyAdsToggle;
@@ -40,6 +42,7 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         if (scene.buildIndex == 0) {
             goldManager = GoldManager.Instance;
+            rewardAdsBtn = GameObject.Find("WatchAdForMoney");
         }
 
         ShowBanner();
@@ -54,8 +57,10 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
 
         if (allowAds == 1) {
             allowAdsToggle.isOn = true;
+            rewardAdsBtn.SetActive(true);
         } else {
             denyAdsToggle.isOn = true;
+            rewardAdsBtn.SetActive(false);
         }
     }
 
@@ -71,9 +76,15 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
 
             if (allowAds == 1) {
                 denyAdsToggle.isOn = false;
+                if (rewardAdsBtn){
+                    rewardAdsBtn.SetActive(true);
+                }
                 ShowBanner();
             } else {
                 allowAdsToggle.isOn = false;
+                if (rewardAdsBtn){
+                    rewardAdsBtn.SetActive(false);
+                }
                 HideBanner();
             }
 
