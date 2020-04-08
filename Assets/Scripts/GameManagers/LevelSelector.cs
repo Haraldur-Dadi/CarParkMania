@@ -20,8 +20,10 @@ public class LevelSelector : MonoBehaviour {
     public GameObject backBtn;
     public TextMeshProUGUI selectPanelName;
 
+    public GameObject mainScreen;
     public GameObject dailyChallangePanel;
     public GameObject dailySpinPanel;
+    public GameObject achivementsPanel;
 
     public void Start() {
         sceneFader = SceneFader.Instance;
@@ -54,17 +56,26 @@ public class LevelSelector : MonoBehaviour {
 
     public void UIStartState() {
         home.SetActive(true);
+        mainScreen.SetActive(true);
         levelSelector.SetActive(false);
         dailyChallangePanel.SetActive(false);
         dailySpinPanel.SetActive(false);
+        achivementsPanel.SetActive(false);
+    }
+
+    public void ToggleAchivements() {
+        achivementsPanel.SetActive(!achivementsPanel.activeSelf);
+        mainScreen.SetActive(!mainScreen.activeSelf);
     }
 
     public void ToggleDailyChallange() {
         dailyChallangePanel.SetActive(!dailyChallangePanel.activeSelf);
+        mainScreen.SetActive(!mainScreen.activeSelf);
     }
 
     public void ToggleDailySpin() {
         dailySpinPanel.SetActive(!dailySpinPanel.activeSelf);
+        mainScreen.SetActive(!mainScreen.activeSelf);
     }
 
     public void BackHome() {
@@ -106,6 +117,7 @@ public class LevelSelector : MonoBehaviour {
         }
 
         home.SetActive(true);
+        mainScreen.SetActive(true);
         levelSelector.SetActive(false);
         gameModesParent.SetActive(false);
     }
@@ -119,6 +131,7 @@ public class LevelSelector : MonoBehaviour {
         }
 
         home.SetActive(false);
+        mainScreen.SetActive(false);
         levelSelector.SetActive(true);
         gameModesParent.SetActive(true);
 
