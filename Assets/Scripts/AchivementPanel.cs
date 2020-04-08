@@ -14,8 +14,6 @@ public class AchivementPanel : MonoBehaviour {
     public Slider progressBar;
     public TextMeshProUGUI progressTxt;
 
-    public GameObject completedImg;
-
     void Start() {
         string achivementName = "Achivement" + achivementID;
         currVal = PlayerPrefs.GetFloat(achivementName, 0f);
@@ -25,10 +23,8 @@ public class AchivementPanel : MonoBehaviour {
 
         if (progressBar.value == 1f) {
             progressTxt.text = "Completed";
-            completedImg.SetActive(true);
         } else {
             progressTxt.text = currVal + "/" + totalNeeded;        
-            completedImg.SetActive(false);
         }
     }
 }
