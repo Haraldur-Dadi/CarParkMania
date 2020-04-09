@@ -8,6 +8,7 @@ public class DailySpin : MonoBehaviour {
     
     SaveManager saveManager;
     GoldManager goldManager;
+    ItemDb itemDb;
 
     public bool canSpin;
 
@@ -18,22 +19,30 @@ public class DailySpin : MonoBehaviour {
     public GameObject winGoldPanel;
     public TextMeshProUGUI wonGoldAmountTxt;
     public GameObject winCarPanel;
+    public TextMeshProUGUI winCarName;
     public Button spinBtn;
 
     private int randomValue;
     private float timeInterval;
     private int finalAngle;
 
+    private Item winItem;
+    public string[] winCatagories;
+    public int[] winID;
     private int rewardAmount;
 
     void Start() {
         saveManager = SaveManager.Instance;
         goldManager = GoldManager.Instance;
+        itemDb = ItemDb.Instance;
 
-        DateTime currDate = DateTime.Now;
         //PlayerPrefs.SetString("LastDateSpun", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));
         PlayerPrefs.SetString("LastDateSpun", "1582-09-15");
-        DateTime lastSpinDate = DateTime.ParseExact(PlayerPrefs.GetString("LastDateSpun", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
+    }
+
+    public void OpenUI() {
+        DateTime currDate = DateTime.Today;
+        DateTime lastSpinDate = DateTime.ParseExact(PlayerPrefs.GetString("LastDateSpun", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
 
         if (currDate > lastSpinDate) {
             canSpin = true;
@@ -88,7 +97,11 @@ public class DailySpin : MonoBehaviour {
 
         switch (finalAngle) {
             case 0:
-                // Give Car!!!
+                // Give Car
+                int randomInt = winID[UnityEngine.Random.Range(0, winID.Length - 1)];
+                string randomCat = winCatagories[UnityEngine.Random.Range(0, winCatagories.Length - 1)]; 
+
+                winItem = itemDb.GetItem(randomCat, randomInt);
                 break;
             case 45:
                 // Add 10 gold
@@ -131,7 +144,8 @@ public class DailySpin : MonoBehaviour {
         } else {
             winGoldPanel.SetActive(false);
             winCarPanel.SetActive(true);
+            winCarName.name = winItem.name;
+            PlayerPrefs.SetInt(winItem.catagory + winItem.ID + "Unlocked", 1);
         }
-
     }
 }
