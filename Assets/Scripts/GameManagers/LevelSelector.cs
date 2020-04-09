@@ -25,10 +25,17 @@ public class LevelSelector : MonoBehaviour {
     public GameObject dailySpinPanel;
     public GameObject achivementsPanel;
     public GameObject shopPanel;
+    public GameObject aboutPanel;
+
+    public DailySpin dailySpin;
+    public About about;
 
     public void Start() {
         sceneFader = SceneFader.Instance;
         saveManager = SaveManager.Instance;
+
+        dailySpin = GetComponent<DailySpin>();
+        about = GetComponent<About>();
 
         int casualLevelReached = PlayerPrefs.GetInt("CasualLevelReached", 0);
         int challengedLevelReached = PlayerPrefs.GetInt("ChallengeLevelReached", 0);
@@ -63,6 +70,7 @@ public class LevelSelector : MonoBehaviour {
         dailySpinPanel.SetActive(false);
         achivementsPanel.SetActive(false);
         shopPanel.SetActive(false);
+        aboutPanel.SetActive(false);
     }
 
     public void ToggleAchivements() {
@@ -77,11 +85,18 @@ public class LevelSelector : MonoBehaviour {
 
     public void ToggleDailySpin() {
         dailySpinPanel.SetActive(!dailySpinPanel.activeSelf);
+        dailySpin.OpenUI();
         mainScreen.SetActive(!mainScreen.activeSelf);
     }
 
     public void ToggleShop() {
         shopPanel.SetActive(!shopPanel.activeSelf);
+        mainScreen.SetActive(!mainScreen.activeSelf);
+    }
+
+    public void ToggleAbout() {
+        aboutPanel.SetActive(!aboutPanel.activeSelf);
+        about.ResetTutImage();
         mainScreen.SetActive(!mainScreen.activeSelf);
     }
 
@@ -123,10 +138,7 @@ public class LevelSelector : MonoBehaviour {
             yield return 0;
         }
 
-        home.SetActive(true);
-        mainScreen.SetActive(true);
-        levelSelector.SetActive(false);
-        gameModesParent.SetActive(false);
+        UIStartState();
     }
 
     public IEnumerator GameModes() {
@@ -138,7 +150,6 @@ public class LevelSelector : MonoBehaviour {
         }
 
         home.SetActive(false);
-        mainScreen.SetActive(false);
         levelSelector.SetActive(true);
         gameModesParent.SetActive(true);
 
