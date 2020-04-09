@@ -11,7 +11,7 @@ public class AchivementPanel : MonoBehaviour {
 
     public float currVal;
     public float totalNeeded;
-    public Slider progressBar;
+    public Image progressBar;
     public TextMeshProUGUI progressTxt;
 
     void Start() {
@@ -19,9 +19,10 @@ public class AchivementPanel : MonoBehaviour {
         currVal = PlayerPrefs.GetFloat(achivementName, 0f);
 
         wtd.text = whatToDo;
-        progressBar.value = currVal / totalNeeded;
+        progressBar.fillAmount = currVal / totalNeeded;
 
-        if (progressBar.value == 1f) {
+        if (progressBar.fillAmount == 1f) {
+            progressBar.color = new Color32(42, 255, 0, 255);
             progressTxt.text = "Completed";
         } else {
             progressTxt.text = currVal + "/" + totalNeeded;        
