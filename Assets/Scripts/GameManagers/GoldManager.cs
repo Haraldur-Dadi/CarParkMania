@@ -12,7 +12,7 @@ public class GoldManager : MonoBehaviour {
     public GameObject icon;
     public GameObject adForGoldCon;
 
-    private void Awake() {
+    private void Awake () {
         if (Instance == null) {
             Instance = this;
         } else {
@@ -26,6 +26,13 @@ public class GoldManager : MonoBehaviour {
         gold = PlayerPrefs.GetInt("Gold", 0);
         goldTxt.text = gold.ToString();
         adForGoldCon.SetActive(false);
+    }
+
+    public bool CanBuy(int amount) {
+        if (amount <= gold) {
+            return true;
+        }
+        return false;
     }
 
     public void AddGold(int goldToAdd, bool ad) {
