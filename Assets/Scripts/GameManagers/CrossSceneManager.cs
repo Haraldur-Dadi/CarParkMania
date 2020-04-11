@@ -8,7 +8,6 @@ public class CrossSceneManager : MonoBehaviour {
 
     public GameObject settingsUI;
     public Button settingsBtn;
-    public Button settingsCloseBtn;
 
     private void Awake() {
         if (Instance == null) {
@@ -22,14 +21,10 @@ public class CrossSceneManager : MonoBehaviour {
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        settingsUI = GameObject.Find("SettingsUI");
-        settingsUI.SetActive(false);
-
         settingsBtn = GameObject.Find("SettingsBtn").GetComponent<Button>();
-        settingsCloseBtn = settingsUI.GetComponentInChildren<Button>();
-
         settingsBtn.onClick.AddListener(delegate { ToggleSettings(); });
-        settingsCloseBtn.onClick.AddListener(delegate { ToggleSettings(); });
+
+        settingsUI.SetActive(false);
     }
 
     public void ToggleSettings() {

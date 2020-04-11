@@ -372,6 +372,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1578501216, guid: 3380c73426a383640a106a98ade71a5b, type: 3}
+      propertyPath: canvasScaler
+      value: 
+      objectReference: {fileID: 1578501215}
     - target: {fileID: 1511136350274713590, guid: 3380c73426a383640a106a98ade71a5b,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -547,8 +551,45 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7400359}
+    - target: {fileID: 3407230620549009038, guid: 3380c73426a383640a106a98ade71a5b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463089549836826097, guid: 3380c73426a383640a106a98ade71a5b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543974611273911000, guid: 3380c73426a383640a106a98ade71a5b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887817476250433182, guid: 3380c73426a383640a106a98ade71a5b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8876595059986773366, guid: 3380c73426a383640a106a98ade71a5b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3380c73426a383640a106a98ade71a5b, type: 3}
+--- !u!114 &1578501215 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1511136351529321468, guid: 3380c73426a383640a106a98ade71a5b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1578501214}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1685007845 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1511136350274713585, guid: 3380c73426a383640a106a98ade71a5b,
