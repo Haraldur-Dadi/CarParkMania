@@ -10,10 +10,12 @@ public class CanvasScaling : MonoBehaviour {
 
         if (aspect >= 1.87) {
             // 19.5:9
+            Camera.main.orthographicSize = 8.25f;
             canvasScaler.matchWidthOrHeight = 1;
         }
         else if (aspect >= 1.74) {
             // 16:9
+            Camera.main.orthographicSize = 6.75f;
             canvasScaler.matchWidthOrHeight = 0;
         }
         else if (aspect >= 1.5) {
@@ -22,6 +24,7 @@ public class CanvasScaling : MonoBehaviour {
         }
         else {
             // 4:3
+            Camera.main.orthographicSize = 5.25f;
             canvasScaler.matchWidthOrHeight = 1f;
         }
     }
