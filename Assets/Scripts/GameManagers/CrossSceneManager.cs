@@ -12,12 +12,11 @@ public class CrossSceneManager : MonoBehaviour {
     private void Awake() {
         if (Instance == null) {
             Instance = this;
+            SceneManager.sceneLoaded += OnSceneLoaded;
             DontDestroyOnLoad(gameObject);
-        } else if (Instance != this) {
+        } else {
             Destroy(gameObject);
         }
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {

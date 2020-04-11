@@ -5,6 +5,8 @@ using TMPro;
 
 public class AudioManager : MonoBehaviour {
 
+    public static AudioManager Instance;
+
     public SaveManager saveManager;
 
     public AudioSource musicAudioSource;
@@ -27,18 +29,25 @@ public class AudioManager : MonoBehaviour {
     public TextMeshProUGUI sfxVolTxt;
 
     private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        } else {
+            return;
+        }
+
         musicVol = PlayerPrefs.GetFloat("MusicVol", 1f);
         sfxVol = PlayerPrefs.GetFloat("SfxVol", 1f);
         pitch = PlayerPrefs.GetInt("Pitch", 1);
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
-        crossSceneManager = CrossSceneManager.Instance;
-        saveManager = SaveManager.Instance;
+        crossSceneManager = GetComponent<CrossSceneManager>();
+        saveManager = GetComponent<SaveManager>();
 
         AudioSource[] audioSources = GetComponents<AudioSource>();
         musicAudioSource = audioSources[0];
         sfxAudioSource = audioSources[1];
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {

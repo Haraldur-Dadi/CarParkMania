@@ -7,6 +7,7 @@ using UnityEngine.Advertisements;
 public class AdManager : MonoBehaviour, IUnityAdsListener {
 
     public static AdManager Instance;
+
     public GoldManager goldManager;
     public SaveManager saveManager;
     public CrossSceneManager crossSceneManager;
@@ -23,10 +24,11 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     public Toggle denyAdsToggle;
 
     private void Awake() {
-        if (Instance != null) {
-            Destroy(gameObject);
-        } else {
+        if (Instance == null) {
             Instance = this;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        } else {
+            return;
         }
 
         saveManager = GetComponent<SaveManager>();
@@ -36,7 +38,6 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
         Advertisement.Initialize(gameID, testMode);
 
         allowAds = PlayerPrefs.GetInt("AllowAds", 1);
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {

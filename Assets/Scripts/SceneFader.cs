@@ -14,13 +14,10 @@ public class SceneFader : MonoBehaviour {
     public static SceneFader Instance;
 
     private void Awake() {
-        if (Instance != null) {
-            Destroy(gameObject);
-        } else {
+        if (Instance == null) {
             Instance = this;
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void Start() {
