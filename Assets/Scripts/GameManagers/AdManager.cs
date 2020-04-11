@@ -55,13 +55,7 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
         allowAdsToggle.onValueChanged.AddListener(delegate { AllowAds(allowAdsToggle, 1); });
         denyAdsToggle.onValueChanged.AddListener(delegate { AllowAds(denyAdsToggle, 0); });
 
-        if (allowAds == 1) {
-            allowAdsToggle.isOn = true;
-            rewardAdsBtn.SetActive(true);
-        } else {
-            denyAdsToggle.isOn = true;
-            rewardAdsBtn.SetActive(false);
-        }
+        ToggleAds();
     }
 
     public void AllowAds(Toggle toggler, int allow) {
@@ -73,22 +67,24 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
             }
         } else if (toggler.isOn) {
             allowAds = allow;
-
-            if (allowAds == 1) {
-                denyAdsToggle.isOn = false;
-                if (rewardAdsBtn){
-                    rewardAdsBtn.SetActive(true);
-                }
-                ShowBanner();
-            } else {
-                allowAdsToggle.isOn = false;
-                if (rewardAdsBtn){
-                    rewardAdsBtn.SetActive(false);
-                }
-                HideBanner();
-            }
-
+            ToggleAds();
             saveManager.SaveIntData("AllowAds", allow);
+        }
+    }
+
+    public void ToggleAds() {
+        if (allowAds == 1) {
+            denyAdsToggle.isOn = false;
+            if (rewardAdsBtn){
+                rewardAdsBtn.SetActive(true);
+            }
+            ShowBanner();
+        } else {
+            allowAdsToggle.isOn = false;
+            if (rewardAdsBtn){
+                rewardAdsBtn.SetActive(false);
+            }
+            HideBanner();
         }
     }
 
