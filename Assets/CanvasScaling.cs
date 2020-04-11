@@ -6,7 +6,6 @@ public class CanvasScaling : MonoBehaviour {
     public CanvasScaler canvasScaler;
 
     void Awake () {
-        canvasScaler = GetComponent<CanvasScaler>();
         float aspect = (float)Screen.height / (float)Screen.width; // Portrait
 
         if (aspect >= 1.87) {
