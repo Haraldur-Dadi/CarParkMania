@@ -9,7 +9,6 @@ public class GoldManager : MonoBehaviour {
     private int gold;
     public TextMeshProUGUI goldTxt;
 
-    public GameObject icon;
     public GameObject adForGoldCon;
 
     private void Awake () {
@@ -53,7 +52,6 @@ public class GoldManager : MonoBehaviour {
     }
 
     public void ToggleAdGoldConformation() {
-        icon.SetActive(!icon.activeSelf);
         adForGoldCon.SetActive(!adForGoldCon.activeSelf);
     }
 }
