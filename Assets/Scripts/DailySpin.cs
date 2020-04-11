@@ -87,8 +87,13 @@ public class DailySpin : MonoBehaviour {
             yield return new WaitForSeconds(timeInterval/2);
         }
 
-        if (Mathf.RoundToInt(wheel.transform.eulerAngles.z) % 45 != 0) {
-            wheel.transform.Rotate(0, 0, 22.5f);
+        if (Mathf.RoundToInt(wheel.transform.eulerAngles.z) % 45 == 0) {
+            wheel.transform.Rotate(0, 0, 11.25f);
+        }
+        yield return new WaitForSeconds(1);
+
+        while (Mathf.RoundToInt(wheel.transform.eulerAngles.z) % 45 != 0) {
+            wheel.transform.Rotate(0, 0, -11.25f);
         }
 
         finalAngle = Mathf.RoundToInt(wheel.transform.eulerAngles.z);
@@ -130,8 +135,6 @@ public class DailySpin : MonoBehaviour {
             case 315:
                 // Add 10 gold
                 rewardAmount = 10;
-                break;
-            case 360:
                 break;
         }
         winPanel.SetActive(true);
