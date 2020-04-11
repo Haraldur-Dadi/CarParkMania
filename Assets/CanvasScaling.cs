@@ -10,7 +10,7 @@ public class CanvasScaling : MonoBehaviour {
 
         if (aspect >= 1.87) {
             // 19.5:9
-            canvasScaler.matchWidthOrHeight = 0.25f;
+            canvasScaler.matchWidthOrHeight = 1;
         }
         else if (aspect >= 1.74) {
             // 16:9
@@ -22,7 +22,7 @@ public class CanvasScaling : MonoBehaviour {
         }
         else {
             // 4:3
-            canvasScaler.matchWidthOrHeight = .9f;
+            canvasScaler.matchWidthOrHeight = 1f;
         }
     }
 }
