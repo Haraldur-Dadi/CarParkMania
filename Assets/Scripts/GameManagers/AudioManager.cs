@@ -46,8 +46,6 @@ public class AudioManager : MonoBehaviour {
         AudioSource[] audioSources = GetComponents<AudioSource>();
         musicAudioSource = audioSources[0];
         sfxAudioSource = audioSources[1];
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
