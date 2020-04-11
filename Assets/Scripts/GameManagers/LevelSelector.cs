@@ -156,7 +156,7 @@ public class LevelSelector : MonoBehaviour {
         homeBtn.SetActive(true);
         backBtn.SetActive(false);
 
-        selectPanelName.text = "Game Modes";
+        selectPanelName.text = "Modes";
 
         foreach (GameObject item in gameModes) {
             item.SetActive(false);
