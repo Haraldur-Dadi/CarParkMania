@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
         if (!instance) {
             instance = this;
         } else {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 
@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour {
         sceneFader = SceneFader.Instance;
         saveManager = SaveManager.Instance;
 
-        /* Sets required information for class at start up */
         finished = false;
 
         LoadLevel();
@@ -54,7 +53,7 @@ public class GameManager : MonoBehaviour {
 
         if (levelIndex < 25) {
             difficultyTxt.text = "Easy";
-             level_board = level_boards_easy[levelIndex];
+            level_board = level_boards_easy[levelIndex];
         } else if (25 <= levelIndex && levelIndex < 50) {
             difficultyTxt.text = "Medum";
             level_board = level_boards_medium[levelIndex-25];

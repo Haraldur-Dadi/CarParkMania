@@ -5,8 +5,8 @@ using TMPro;
 public class TimeMode_GM : GameManager {
 
     // Timed gamemode, moves don't count
-    // 3 stars, 2 stars, 1 star
-    // TBD.
+    // 3 stars, 2 stars, 1 star, level failed
+    // depending on time
 
     public TextMeshProUGUI clockTxt;
     public GameObject pausedImg;
@@ -14,23 +14,26 @@ public class TimeMode_GM : GameManager {
     public int min;
     public int sec;
 
+    public GameObject levelFailed;
+
     public override void Start() {
         base.Start();
-
-        min = 0;
-        sec = -1;
 
         StartCoroutine("Timer");
     }
 
-    public void LevelFailed() {
+    public void GameOver() {
         finished = true;
+        levelFailed.SetActive(true);
     }
 
     IEnumerator Timer() {
-        /* Timer, times how long it takes for you to complete level.
+        /* Times how long it takes for you to complete level.
            If it reaches max limit you fail */
-
+        
+        min = 0;
+        sec = -1;
+        
         while (!finished) {
             sec += 1;
             if (sec >= 60) {
@@ -39,7 +42,7 @@ public class TimeMode_GM : GameManager {
             }
 
             if (min == 60) {
-                LevelFailed();
+                GameOver();
             }
 
             if (sec < 10 && min < 10) {
