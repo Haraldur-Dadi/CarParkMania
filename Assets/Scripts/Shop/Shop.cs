@@ -24,14 +24,17 @@ public class Shop : MonoBehaviour {
     public GameObject unlock;
 
     private void Awake() {
-        PlayerPrefs.SetInt("PlayerCar0Unlocked", 1);
-        PlayerPrefs.SetInt("PlayerCarEquipped", 0);
-        
-        PlayerPrefs.SetInt("2LongCar0Unlocked", 1);
-        PlayerPrefs.SetInt("2LongCarEquipped", 0);
+        // Set data for first time load
+        if (PlayerPrefs.HasKey("PlayerCar0Unlocked")) {
+            PlayerPrefs.SetInt("PlayerCar0Unlocked", 1);
+            PlayerPrefs.SetInt("PlayerCarEquipped", 0);
+            
+            PlayerPrefs.SetInt("2LongCar0Unlocked", 1);
+            PlayerPrefs.SetInt("2LongCarEquipped", 0);
 
-        PlayerPrefs.SetInt("3LongCar0Unlocked", 1);
-        PlayerPrefs.SetInt("3LongCarEquipped", 0);
+            PlayerPrefs.SetInt("3LongCar0Unlocked", 1);
+            PlayerPrefs.SetInt("3LongCarEquipped", 0);
+        }
     }
 
     private void Start() {
