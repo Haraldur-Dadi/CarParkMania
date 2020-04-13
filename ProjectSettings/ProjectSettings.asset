@@ -166,7 +166,7 @@ PlayerSettings:
     Standalone: com.Company.ProductName
     iPhone: com.HaraldurDadiThorvaldsson.CarParkMania
   buildNumber:
-    iPhone: 3
+    iPhone: 4
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0
@@ -236,7 +236,7 @@ PlayerSettings:
   iOSLaunchScreeniPadFillPct: 100
   iOSLaunchScreeniPadSize: 100
   iOSLaunchScreeniPadCustomXibPath: 
-  iOSUseLaunchScreenStoryboard: 1
+  iOSUseLaunchScreenStoryboard: 0
   iOSLaunchScreenCustomStoryboardPath: 
   iOSDeviceRequirements: []
   iOSURLSchemes: []
@@ -245,7 +245,7 @@ PlayerSettings:
   metalEditorSupport: 1
   metalAPIValidation: 1
   iOSRenderExtraFrameOnPause: 0
-  appleDeveloperTeamID: HaraldurDadiThorvaldsson
+  appleDeveloperTeamID: Haraldur Dadi Thorvaldsson
   iOSManualSigningProvisioningProfileID: 
   tvOSManualSigningProvisioningProfileID: 
   iOSManualSigningProvisioningProfileType: 0
