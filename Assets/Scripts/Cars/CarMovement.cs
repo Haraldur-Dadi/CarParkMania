@@ -20,12 +20,9 @@ public class CarMovement : MonoBehaviour {
 
     private void Start() {
         gameManager = GameManager.instance;
-
-        undoBtn.onClick.AddListener(delegate { UndoMove(); });
-        undoList = new List<UndoTuple>();
-
         snapValue = 1.1f;
 
+        undoList = new List<UndoTuple>();
         AbleToUndo();
     }
 
