@@ -5,9 +5,6 @@ public class InfoManager : MonoBehaviour {
 
     private int standardTotalLevels = 100;
 
-    // Achivements
-    public TextMeshProUGUI totalAchivementsCompletedTxt;
-
     // Level Selector
     public TextMeshProUGUI totalCompleted;
     public TextMeshProUGUI[] casualCompleted;
@@ -15,8 +12,6 @@ public class InfoManager : MonoBehaviour {
     public TextMeshProUGUI[] timedCompleted;
 
     private void Start() {
-        totalAchivementsCompletedTxt.text = "Completed: " + PlayerPrefs.GetInt("AchivementsCompleted", 0) + "/10";
-
         totalCompleted.text = "Total: " + PlayerPrefs.GetInt("TotalLevelsComplete", 0) + "/" + standardTotalLevels*3;
         casualCompleted[0].text = ((float)PlayerPrefs.GetInt("CasualLevelReached", 0) / standardTotalLevels) * 100 + "%";
         casualCompleted[1].text = PlayerPrefs.GetInt("CasualLevelReached", 0) + "/" + standardTotalLevels;

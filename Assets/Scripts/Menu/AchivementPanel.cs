@@ -5,6 +5,8 @@ using TMPro;
 public class AchivementPanel : MonoBehaviour {
 
     public int achivementID;
+    public bool completed;
+    public bool canCollect;
 
     public string whatToDo;
     public TextMeshProUGUI wtd;
@@ -14,17 +16,24 @@ public class AchivementPanel : MonoBehaviour {
     public Image progressBar;
     public TextMeshProUGUI progressTxt;
 
-    void Start() {
-        string achivementName = "Achivement" + achivementID;
-        currVal = PlayerPrefs.GetFloat(achivementName, 0f);
+    public void UpdateUI() {
+        currVal = Mathf.Clamp(PlayerPrefs.GetFloat("Achivement" + achivementID, 0f), 0, totalNeeded);
 
         wtd.text = whatToDo;
         progressBar.fillAmount = currVal / totalNeeded;
 
         if (progressBar.fillAmount == 1f) {
+            if (PlayerPrefs.GetInt("Achivement" + achivementID + "Collected", 0) == 1) {
+                canCollect = false;
+            } else {
+                canCollect = true;
+            }
+
+            completed = true;
             progressBar.color = new Color32(42, 255, 0, 255);
-            progressTxt.text = "Completed";
+            progressTxt.text = "";
         } else {
+            completed = false;
             progressTxt.text = currVal + "/" + totalNeeded;        
         }
     }
