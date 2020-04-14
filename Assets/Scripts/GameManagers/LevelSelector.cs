@@ -34,9 +34,6 @@ public class LevelSelector : MonoBehaviour {
         sceneFader = SceneFader.Instance;
         saveManager = SaveManager.Instance;
 
-        dailySpin = GetComponent<DailySpin>();
-        about = GetComponent<About>();
-
         int casualLevelReached = PlayerPrefs.GetInt("CasualLevelReached", 0);
         int challengedLevelReached = PlayerPrefs.GetInt("ChallengeLevelReached", 0);
         int timedLevelReached = PlayerPrefs.GetInt("TimedLevelReached", 0);
