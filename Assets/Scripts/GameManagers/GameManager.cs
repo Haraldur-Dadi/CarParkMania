@@ -100,6 +100,11 @@ public class GameManager : MonoBehaviour {
             saveManager.IncreaseAchivementProgress(1);
         }
 
+        if (levelIndex < 25)
+            saveManager.IncreaseAchivementProgress(4);
+        saveManager.IncreaseAchivementProgress(5);
+        saveManager.IncreaseAchivementProgress(6);
+
         levelCompleteUi.SetActive(true);
     }
 

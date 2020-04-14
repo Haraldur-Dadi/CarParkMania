@@ -72,7 +72,7 @@ public class DailySpin : MonoBehaviour {
         spinBtn.interactable = false;
         DateTime currDate = DateTime.Now;
         saveManager.SaveStringData("LastDateSpun", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));
-        notification.SetTrigger("UnAvail");
+        saveManager.IncreaseAchivementProgress(3);
         StartCoroutine(Spin());
         StartCoroutine(Counter());
     }
