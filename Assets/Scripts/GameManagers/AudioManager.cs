@@ -14,6 +14,8 @@ public class AudioManager : MonoBehaviour {
     public AudioClip buySound;
     public AudioClip wheelSpinning;
     public AudioClip carSelected;
+    public AudioClip winSound;
+    public AudioClip gameOverSound;
 
     public float musicVol;
     public float sfxVol;
@@ -123,9 +125,25 @@ public class AudioManager : MonoBehaviour {
         StartCoroutine("FadeOutSfx");
     }
 
+    public void PlayWinSound() {
+        StopCoroutine("FadeOutSfx");
+        sfxAudioSource.Stop();
+        sfxAudioSource.volume = sfxVol;
+        sfxAudioSource.PlayOneShot(winSound);
+        StartCoroutine("FadeOutFinished");
+    }
+
+    public void PlayGameOverSound() {
+        StopCoroutine("FadeOutSfx");
+        sfxAudioSource.Stop();
+        sfxAudioSource.volume = sfxVol;
+        sfxAudioSource.PlayOneShot(gameOverSound);
+        StartCoroutine("FadeOutFinished");
+    }
+
     IEnumerator FadeOutSfx() {
         float currentTime = 0;
-        float duration = 0.25f;
+        float duration = 0.15f;
         float start = sfxAudioSource.volume;
 
         while (currentTime < duration) {
@@ -137,5 +155,10 @@ public class AudioManager : MonoBehaviour {
         sfxAudioSource.Stop();
         sfxAudioSource.clip = null;
         sfxAudioSource.volume = sfxVol;
+    }
+
+    IEnumerator FadeOutFinished() {
+        yield return new WaitForSeconds(1.5f);
+        StartCoroutine("FadeOutSfx");
     }
 }

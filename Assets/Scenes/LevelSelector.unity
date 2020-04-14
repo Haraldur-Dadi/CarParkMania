@@ -9641,7 +9641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &368865591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18772,7 +18772,7 @@ MonoBehaviour:
   achivementID: 4
   completed: 0
   canCollect: 0
-  whatToDo: Spin the daily wheel 5 times
+  whatToDo: 
   wtd: {fileID: 1125307290}
   currVal: 0
   totalNeeded: 5
@@ -18869,7 +18869,7 @@ MonoBehaviour:
   achivementID: 3
   completed: 0
   canCollect: 0
-  whatToDo: Complete all levels in casual
+  whatToDo: Spin the daily wheel 5 times
   wtd: {fileID: 2141354560}
   currVal: 0
   totalNeeded: 100
@@ -49335,7 +49335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1981764639
 Transform:
   m_ObjectHideFlags: 0
@@ -49378,6 +49378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a786b1a6ea963641ab993ec56fc6be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  achivementManager: {fileID: 0}
 --- !u!82 &1981764642
 AudioSource:
   m_ObjectHideFlags: 0
@@ -49493,6 +49494,8 @@ MonoBehaviour:
   buySound: {fileID: 8300000, guid: 263d02f353a7a7145a5bd50e2ea73096, type: 3}
   wheelSpinning: {fileID: 8300000, guid: e43c611f1204433478ae98ee1e2b1583, type: 3}
   carSelected: {fileID: 8300000, guid: 6edf21fca00711f42bb5c5c9f8f8d94c, type: 3}
+  winSound: {fileID: 8300000, guid: d59829145b0f78045a55152fb8ae3cb9, type: 3}
+  gameOverSound: {fileID: 8300000, guid: b4360c0b13a872242b37eb2ba368047c, type: 3}
   musicVol: 0
   sfxVol: 0
   pitch: 0
@@ -56163,7 +56166,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -58136,7 +58139,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -58423,7 +58426,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -59584,7 +59587,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

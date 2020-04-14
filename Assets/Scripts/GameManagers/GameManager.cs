@@ -91,11 +91,13 @@ public class GameManager : MonoBehaviour {
 
     public virtual void LevelComplete() {
         AudioManager.Instance.StopCarSelected();
+        AudioManager.Instance.PlayWinSound();
         finished = true;
         
         if (PlayerPrefs.GetInt("CasualLevelReached", 0) <= levelIndex) {
             saveManager.SaveIntData("CasualLevelReached", levelIndex + 1);
             saveManager.IncreaseAchivementProgress(0);
+            saveManager.IncreaseAchivementProgress(1);
         }
 
         levelCompleteUi.SetActive(true);

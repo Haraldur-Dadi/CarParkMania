@@ -23,6 +23,9 @@ public class TimeMode_GM : GameManager {
     }
 
     public void GameOver() {
+        AudioManager.Instance.StopCarSelected();
+        AudioManager.Instance.PlayGameOverSound();
+        
         finished = true;
         levelFailed.SetActive(true);
     }

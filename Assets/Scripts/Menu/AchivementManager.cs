@@ -3,6 +3,8 @@ using TMPro;
 
 public class AchivementManager : MonoBehaviour {
 
+    public static AchivementManager Instance;
+
     public SaveManager saveManager;
     public GoldManager goldManager;
 
@@ -12,7 +14,15 @@ public class AchivementManager : MonoBehaviour {
     public int achivemntLeftToCollect;
     public Animator notification;
 
-    private void Start() {
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+        } else {
+            Destroy(gameObject);
+        }
+    }
+
+    public void UpdateAchivements() {
         int completed = 0;
         foreach (AchivementPanel achivement in achivements) {
             achivement.UpdateUI();
