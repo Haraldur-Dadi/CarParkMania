@@ -1571,6 +1571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneFader: {fileID: 0}
   saveManager: {fileID: 0}
+  itemDb: {fileID: 0}
   levelIndex: 0
   finished: 0
   homeBtn: {fileID: 1511136350925006398}
