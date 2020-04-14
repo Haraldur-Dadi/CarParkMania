@@ -12,6 +12,7 @@ public class GoldManager : MonoBehaviour {
     public GameObject adForGoldCon;
     public Animator goldAnim;
     public Animator goldTxtAnim;
+    public TextMeshProUGUI goldTxtAnimTxt;
 
     private void Awake () {
         if (Instance == null) {
@@ -41,6 +42,8 @@ public class GoldManager : MonoBehaviour {
         saveManager.SaveIntData("Gold", gold);
 
         goldTxt.text = gold.ToString();
+        goldTxtAnim.SetTrigger("recive");
+        goldTxtAnimTxt.text = "+" + goldToAdd;
 
         if (ad)
             ToggleAdGoldConformation();
@@ -53,6 +56,7 @@ public class GoldManager : MonoBehaviour {
         goldTxt.text = gold.ToString();
         goldAnim.SetTrigger("Buy");
         goldTxtAnim.SetTrigger("Buy");
+        goldTxtAnimTxt.text = "-" + goldToSub;
     }
 
     public void ToggleAdGoldConformation() {
