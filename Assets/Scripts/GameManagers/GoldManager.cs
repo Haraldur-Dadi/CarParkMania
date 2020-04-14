@@ -42,7 +42,7 @@ public class GoldManager : MonoBehaviour {
         saveManager.SaveIntData("Gold", gold);
 
         goldTxt.text = gold.ToString();
-        goldTxtAnim.SetTrigger("recive");
+        goldTxtAnim.SetTrigger("Receive");
         goldTxtAnimTxt.text = "+" + goldToAdd;
 
         if (ad)
