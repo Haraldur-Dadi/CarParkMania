@@ -24,8 +24,8 @@ public class Shop : MonoBehaviour {
     public GameObject unlock;
 
     private void Awake() {
-        // Set data for first time load
-        if (PlayerPrefs.HasKey("PlayerCar0Unlocked")) {
+        // Set data for first time load        
+        if (!PlayerPrefs.HasKey("PlayerCar0Unlocked")) {
             PlayerPrefs.SetInt("PlayerCar0Unlocked", 1);
             PlayerPrefs.SetInt("PlayerCarEquipped", 0);
             
