@@ -11,7 +11,6 @@ public class CarMovement : MonoBehaviour {
     public Vector2 posToMoveCar; // Vector position, used to determine where to move the car
 
     public Car carToMove;
-    public bool carMoveOnYAxis;
     public float snapValue;
 
     public Button undoBtn;
@@ -82,7 +81,6 @@ public class CarMovement : MonoBehaviour {
 
                         // If the player touched a car, set variable carToMove and get position of Car
                         if (carToMove) {
-                            carToMove.ActiveCar(true);
                             startPosOfCar = carToMove.transform.position;
                             posOfCar = startPosOfCar;
                         }
@@ -129,7 +127,6 @@ public class CarMovement : MonoBehaviour {
             } else {
                 snapPos.y = carToMove.transform.position.y;
             }
-            carMoveOnYAxis = true;
         }
         // Car is facing right/left and is moving on x-axis
         else {
@@ -146,7 +143,6 @@ public class CarMovement : MonoBehaviour {
             } else {
                 snapPos.x = carToMove.transform.position.x;
             }
-            carMoveOnYAxis = false;
         }
 
         return snapPos;
@@ -166,7 +162,6 @@ public class CarMovement : MonoBehaviour {
             UndoTuple tuple = new UndoTuple(carToMove, startPosOfCar);
             undoList.Add(tuple);
 
-            carToMove.ActiveCar(false);
             carToMove = null;
             gameManager.IncreaseMoves(1);
 
