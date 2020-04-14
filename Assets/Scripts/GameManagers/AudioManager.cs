@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -19,10 +18,11 @@ public class AudioManager : MonoBehaviour {
     public Slider musicVolSlider;
     public TextMeshProUGUI musicVolTxt;
 
-    public GameObject pitch1;
-    public GameObject pitch2;
-    public GameObject pitch3;
-    public GameObject pitch4;
+    public Button pitch1;
+    public Button pitch2;
+    public Button pitch3;
+    public Button pitch4;
+    public Button lastPitch;
 
     public Slider sfxVolSlider;
     public TextMeshProUGUI sfxVolTxt;
@@ -41,6 +41,9 @@ public class AudioManager : MonoBehaviour {
         ChangePitch(PlayerPrefs.GetInt("Pitch", 1));
         musicAudioSource.Play();
 
+        musicVolSlider.value = musicVol;
+        sfxVolSlider.value = sfxVol;
+
         musicVolSlider.onValueChanged.AddListener(delegate { ChangeMusicVol(musicVolSlider.value); });
         sfxVolSlider.onValueChanged.AddListener(delegate { ChangeSfxVol(sfxVolSlider.value); });
     }
@@ -55,31 +58,25 @@ public class AudioManager : MonoBehaviour {
     
     public void ChangePitch(int pitch_in) {
         pitch = pitch_in;
+        if (lastPitch)
+            lastPitch.interactable = true;
 
         if (pitch == 1) {
             musicAudioSource.pitch = 1f;
-            pitch1.SetActive(true);
-            pitch2.SetActive(false);
-            pitch3.SetActive(false);
-            pitch4.SetActive(false);
+            pitch1.interactable = false;
+            lastPitch = pitch1;
         } else if (pitch == 2) {
             musicAudioSource.pitch = 1.5f;
-            pitch1.SetActive(false);
-            pitch2.SetActive(true);
-            pitch3.SetActive(false);
-            pitch4.SetActive(false);
+            pitch2.interactable = false;
+            lastPitch = pitch2;
         } else if (pitch == 3) {
             musicAudioSource.pitch = 1.25f;
-            pitch1.SetActive(false);
-            pitch2.SetActive(false);
-            pitch3.SetActive(true);
-            pitch4.SetActive(false);
+            pitch3.interactable = false;
+            lastPitch = pitch3;
         } else if (pitch == 4) {
             musicAudioSource.pitch = -1f;
-            pitch1.SetActive(false);
-            pitch2.SetActive(false);
-            pitch3.SetActive(false);
-            pitch4.SetActive(true);
+            pitch4.interactable = false;
+            lastPitch = pitch4;
         }
 
         saveManager.SaveIntData("Pitch", pitch);
