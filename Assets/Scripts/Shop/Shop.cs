@@ -143,6 +143,7 @@ public class Shop : MonoBehaviour {
     public void BuyItem() {
         // Change from shop ui to equip ui and save that player has unlocked the item
         saveManager.SaveIntData(selectedItem.catagory + selectedItem.ID + "Unlocked", 1);
+        saveManager.IncreaseAchivementProgress(2);
         goldManager.SubtractGold(selectedItem.cost);
         ShowEquip();
         AudioManager.Instance.PlayBuySound();

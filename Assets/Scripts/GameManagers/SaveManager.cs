@@ -28,7 +28,5 @@ public class SaveManager : MonoBehaviour {
     public void IncreaseAchivementProgress(int achivementID) {
         float currAmount = PlayerPrefs.GetFloat("Achivement" + achivementID, 0);
         SaveFloatData("Achivement" + achivementID, currAmount + 1);
-
-        //Debug.Log(achivementID + "_" + currAmount);
     }
 }
