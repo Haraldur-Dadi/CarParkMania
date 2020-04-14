@@ -28,5 +28,6 @@ public class CrossSceneManager : MonoBehaviour {
 
     public void ToggleSettings() {
         settingsUI.SetActive(!settingsUI.activeSelf);
+        AudioManager.Instance.PlayButtonClick();
     }
 }

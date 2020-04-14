@@ -24,7 +24,7 @@ public class Shop : MonoBehaviour {
     public GameObject unlock;
 
     private void Awake() {
-        // Set data for first time load        
+        // Set data for first time load
         if (!PlayerPrefs.HasKey("PlayerCar0Unlocked")) {
             PlayerPrefs.SetInt("PlayerCar0Unlocked", 1);
             PlayerPrefs.SetInt("PlayerCarEquipped", 0);
@@ -93,18 +93,21 @@ public class Shop : MonoBehaviour {
         selectedCatagoryBtn.interactable = false;
         selectedItem = itemDb.GetItem(cat, 0);
         UpdateShopUI();
+        AudioManager.Instance.PlayButtonClick();
     }
 
     public void ShowNextItem() {
         // Switches to next item (item with 1 higher ID)
         selectedItem = itemDb.GetItem(selectedItem.catagory, selectedItem.ID + 1);
         UpdateShopUI();
+        AudioManager.Instance.PlayButtonClick();
     }
 
     public void ShowPrevItem() {
         // Switches to prev item (item with 1 lower ID)
         selectedItem = itemDb.GetItem(selectedItem.catagory, selectedItem.ID - 1);
         UpdateShopUI();
+        AudioManager.Instance.PlayButtonClick();
     }
 
     public void ShowStandard(bool buyItem) {
@@ -142,11 +145,13 @@ public class Shop : MonoBehaviour {
         saveManager.SaveIntData(selectedItem.catagory + selectedItem.ID + "Unlocked", 1);
         goldManager.SubtractGold(selectedItem.cost);
         ShowEquip();
+        AudioManager.Instance.PlayButtonClick();
     }
 
     public void EquipItem() {
         // Change equippedCar id 
         PlayerPrefs.SetInt(selectedItem.catagory + "Equipped", selectedItem.ID);
         UpdateShopUI();
+        AudioManager.Instance.PlayButtonClick();
     }
 }

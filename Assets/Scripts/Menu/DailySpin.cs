@@ -65,6 +65,7 @@ public class DailySpin : MonoBehaviour {
     }
 
     public void SpinWheel() {
+        AudioManager.Instance.PlayButtonClick();
         spinBtn.interactable = false;
         DateTime currDate = DateTime.Now;
         saveManager.SaveStringData("LastDateSpun", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));

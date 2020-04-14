@@ -58,8 +58,10 @@ public class AudioManager : MonoBehaviour {
     
     public void ChangePitch(int pitch_in) {
         pitch = pitch_in;
-        if (lastPitch)
+        if (lastPitch) {
             lastPitch.interactable = true;
+            PlayButtonClick();
+        }
 
         if (pitch == 1) {
             musicAudioSource.pitch = 1f;

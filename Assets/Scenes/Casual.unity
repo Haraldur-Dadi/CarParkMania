@@ -295,7 +295,6 @@ MonoBehaviour:
   posOfCar: {x: 0, y: 0}
   posToMoveCar: {x: 0, y: 0}
   carToMove: {fileID: 0}
-  carMoveOnYAxis: 0
   snapValue: 0
   undoBtn: {fileID: 1511136351181599663}
 --- !u!1 &1294884939

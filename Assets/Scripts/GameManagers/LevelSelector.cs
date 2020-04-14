@@ -55,7 +55,6 @@ public class LevelSelector : MonoBehaviour {
             casualLevelBtns[i].GetComponentInChildren<TextMeshProUGUI>().text = (i + 1).ToString();
         }
 
-        SelectDifficulty(0);
         UIStartState();
     }
 
@@ -70,46 +69,58 @@ public class LevelSelector : MonoBehaviour {
         aboutPanel.SetActive(false);
     }
 
+    public void PlayToggleSfx() {
+        AudioManager.Instance.PlayButtonClick();
+    }
+
     public void ToggleAchivements() {
         achivementsPanel.SetActive(!achivementsPanel.activeSelf);
         mainScreen.SetActive(!mainScreen.activeSelf);
+        PlayToggleSfx();
     }
 
     public void ToggleDailyChallange() {
         dailyChallangePanel.SetActive(!dailyChallangePanel.activeSelf);
         mainScreen.SetActive(!mainScreen.activeSelf);
+        PlayToggleSfx();
     }
 
     public void ToggleDailySpin() {
         dailySpinPanel.SetActive(!dailySpinPanel.activeSelf);
         dailySpin.OpenUI();
         mainScreen.SetActive(!mainScreen.activeSelf);
+        PlayToggleSfx();
     }
 
     public void ToggleShop() {
         shopPanel.SetActive(!shopPanel.activeSelf);
         mainScreen.SetActive(!mainScreen.activeSelf);
+        PlayToggleSfx();
     }
 
     public void ToggleAbout() {
         aboutPanel.SetActive(!aboutPanel.activeSelf);
         about.ResetTutImage();
         mainScreen.SetActive(!mainScreen.activeSelf);
+        PlayToggleSfx();
     }
 
     public void BackHome() {
         sceneFader.FadeBetweenObjects();
         StartCoroutine(HomeScreen());
+        PlayToggleSfx();
     }
 
     public void OpenGameModes() {
         sceneFader.FadeBetweenObjects();
         StartCoroutine(GameModes());
+        PlayToggleSfx();
     }
 
     public void SelectGameMode(int gameModeNr) {
         sceneFader.FadeBetweenObjects();
         StartCoroutine(SelectGameModeUI(gameModeNr));
+        SelectDifficulty(0);
     }
 
     public void SelectDifficulty(int difficulty) {
@@ -120,11 +131,13 @@ public class LevelSelector : MonoBehaviour {
                 casualLevelDifficulties[i].SetActive(false);
             }
         }
+        PlayToggleSfx();
     }
 
     public void SelecteLevel(int buildIndex, int level) {
         sceneFader.FadeToBuildIndex(buildIndex);
         saveManager.SaveIntData("boardToLoad", level);
+        PlayToggleSfx();
     }
 
     public IEnumerator HomeScreen() {

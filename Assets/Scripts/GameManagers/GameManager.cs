@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour {
 
     public void GoToLevelSelector() {
         /* Sends player to home screen */
+        AudioManager.Instance.PlayButtonClick();
         sceneFader.FadeToBuildIndex(0);
     }
 
@@ -118,10 +119,12 @@ public class GameManager : MonoBehaviour {
 
     public void RetryLevel() {
         sceneFader.FadeToBuildIndex(SceneManager.GetActiveScene().buildIndex);
+        AudioManager.Instance.PlayButtonClick();
     }
 
     public void LoadNextLevel() {
         saveManager.SaveIntData("boardToLoad", levelIndex + 1);
-        RetryLevel();
+        sceneFader.FadeToBuildIndex(SceneManager.GetActiveScene().buildIndex);
+        AudioManager.Instance.PlayButtonClick();
     }
 }

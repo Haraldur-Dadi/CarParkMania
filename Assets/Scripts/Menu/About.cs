@@ -24,6 +24,7 @@ public class About : MonoBehaviour {
     }
 
     public void ShowNextTutImage() {
+        AudioManager.Instance.PlayButtonClick();
         tutorialImages[tutImgIndex].SetActive(false);
 
         tutImgIndex += 1;
@@ -33,6 +34,7 @@ public class About : MonoBehaviour {
     }
 
     public void ShowPrevTutImage() {
+        AudioManager.Instance.PlayButtonClick();
         tutorialImages[tutImgIndex].SetActive(false);
 
         tutImgIndex -= 1;

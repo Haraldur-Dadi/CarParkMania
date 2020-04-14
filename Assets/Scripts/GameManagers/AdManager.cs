@@ -39,10 +39,14 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
             rewardAdsBtn = GameObject.Find("WatchAdForMoney");
         }
 
-        AllowAds(PlayerPrefs.GetInt("AllowAds", 1));
+        allowAds = PlayerPrefs.GetInt("AllowAds", 1);
+        AllowAds(allowAds);
     }
 
     public void AllowAds(int allow) {
+        if (allow != allowAds)
+            AudioManager.Instance.PlayButtonClick();
+
         allowAds = allow;
         
         if (allow == 1) {

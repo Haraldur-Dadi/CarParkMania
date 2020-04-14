@@ -194,6 +194,7 @@ public class CarMovement : MonoBehaviour {
         carToMove = null;
 
         gameManager.DecreaseMoves(1);
+        AudioManager.Instance.PlayButtonClick();
     }
 }
 
