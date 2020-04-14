@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -12,6 +13,7 @@ public class AudioManager : MonoBehaviour {
     public AudioClip buttonClick;
     public AudioClip buySound;
     public AudioClip wheelSpinning;
+    public AudioClip carSelected;
 
     public float musicVol;
     public float sfxVol;
@@ -108,5 +110,32 @@ public class AudioManager : MonoBehaviour {
     }
     public void StopWheelSpinning() {
         sfxAudioSource.Stop();
+    }
+
+    public void PlayCarSelected() {
+        StopCoroutine("FadeOutSfx");
+        sfxAudioSource.volume = sfxVol;
+        sfxAudioSource.clip = carSelected;
+        sfxAudioSource.Play();
+    }
+
+    public void StopCarSelected() {
+        StartCoroutine("FadeOutSfx");
+    }
+
+    IEnumerator FadeOutSfx() {
+        float currentTime = 0;
+        float duration = 0.25f;
+        float start = sfxAudioSource.volume;
+
+        while (currentTime < duration) {
+            currentTime += Time.deltaTime;
+            sfxAudioSource.volume = Mathf.Lerp(start, 0, currentTime / duration);
+            yield return null;
+        }
+
+        sfxAudioSource.Stop();
+        sfxAudioSource.clip = null;
+        sfxAudioSource.volume = sfxVol;
     }
 }

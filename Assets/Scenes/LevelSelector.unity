@@ -50834,8 +50834,8 @@ MonoBehaviour:
   sfxAudioSource: {fileID: 1981764644}
   buttonClick: {fileID: 8300000, guid: 2a1a4184c82e4284da104309ce1de85f, type: 3}
   buySound: {fileID: 8300000, guid: 263d02f353a7a7145a5bd50e2ea73096, type: 3}
-  wheelSpinning: {fileID: 8300000, guid: 94deec9a0481c8949a474d5404989119, type: 3}
-  fullWheelSpinning: {fileID: 8300000, guid: e43c611f1204433478ae98ee1e2b1583, type: 3}
+  wheelSpinning: {fileID: 8300000, guid: e43c611f1204433478ae98ee1e2b1583, type: 3}
+  carSelected: {fileID: 8300000, guid: 6edf21fca00711f42bb5c5c9f8f8d94c, type: 3}
   musicVol: 0
   sfxVol: 0
   pitch: 0
