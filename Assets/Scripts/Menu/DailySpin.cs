@@ -10,8 +10,6 @@ public class DailySpin : MonoBehaviour {
     GoldManager goldManager;
     ItemDb itemDb;
 
-    public bool canSpin;
-
     public GameObject wheel;
     public GameObject unableToSpinPanel;
     public TextMeshProUGUI countdown;
@@ -31,37 +29,42 @@ public class DailySpin : MonoBehaviour {
     public int[] winID;
     private int rewardAmount;
 
+    private bool open;
+    public Animator notification;
+
     void Start() {
         saveManager = SaveManager.Instance;
         goldManager = GoldManager.Instance;
         itemDb = ItemDb.Instance;
 
-        //PlayerPrefs.SetString("LastDateSpun", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));
-        PlayerPrefs.SetString("LastDateSpun", "1582-09-15");
+        if (!PlayerPrefs.HasKey("LastDateSpun"))
+            PlayerPrefs.SetString("LastDateSpun", "1582-09-15");
+        
+        StartCoroutine(Counter());
+    }
+
+    private bool canSpin() {
+        DateTime currDate = DateTime.Today;
+        DateTime lastSpinDate = DateTime.ParseExact(PlayerPrefs.GetString("LastDateSpun", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+        
+        if (currDate > lastSpinDate) {
+            notification.SetTrigger("Avail");
+            return true;
+        }
+        return false;
     }
 
     public void OpenUI() {
-        DateTime currDate = DateTime.Today;
-        DateTime lastSpinDate = DateTime.ParseExact(PlayerPrefs.GetString("LastDateSpun", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
-
-        if (currDate > lastSpinDate) {
-            canSpin = true;
+        if (canSpin()) {
             spinBtn.gameObject.SetActive(true);
             spinBtn.interactable = true;
             unableToSpinPanel.SetActive(false);
         } else {
-            canSpin = false;
             spinBtn.gameObject.SetActive(false);
             unableToSpinPanel.SetActive(true);
         }
-        winPanel.SetActive(false);
-    }
 
-    private void Update() {
-        if (!canSpin) {
-            TimeSpan timeUntilMidnight = DateTime.Today.AddDays(1).Subtract(DateTime.Now);
-            countdown.text = timeUntilMidnight.Hours.ToString().PadLeft(2, '0') + ":" + timeUntilMidnight.Minutes.ToString().PadLeft(2, '0') + ":" + timeUntilMidnight.Seconds.ToString().PadLeft(2, '0');
-        }
+        winPanel.SetActive(false);
     }
 
     public void SpinWheel() {
@@ -69,7 +72,9 @@ public class DailySpin : MonoBehaviour {
         spinBtn.interactable = false;
         DateTime currDate = DateTime.Now;
         saveManager.SaveStringData("LastDateSpun", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));
+        notification.SetTrigger("UnAvail");
         StartCoroutine(Spin());
+        StartCoroutine(Counter());
     }
 
     IEnumerator Spin() {
@@ -150,6 +155,16 @@ public class DailySpin : MonoBehaviour {
             winCarPanel.SetActive(true);
             winCarName.name = winItem.name;
             PlayerPrefs.SetInt(winItem.catagory + winItem.ID + "Unlocked", 1);
+        }
+    }
+
+    IEnumerator Counter() {
+        while (!canSpin()) {
+            Debug.Log(1);
+            TimeSpan timeUntilMidnight = DateTime.Today.AddDays(1).Subtract(DateTime.Now);
+            countdown.text = timeUntilMidnight.Hours.ToString().PadLeft(2, '0') + ":" + timeUntilMidnight.Minutes.ToString().PadLeft(2, '0') + ":" + timeUntilMidnight.Seconds.ToString().PadLeft(2, '0');
+
+            yield return new WaitForSeconds(1);
         }
     }
 }
