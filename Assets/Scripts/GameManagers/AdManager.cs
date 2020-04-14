@@ -10,7 +10,6 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
 
     public GoldManager goldManager;
     public SaveManager saveManager;
-    public CrossSceneManager crossSceneManager;
 
     string gameID = "3535681";
     string bannerPlacementID = "MainMenu";
@@ -20,24 +19,18 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     public GameObject rewardAdsBtn;
 
     public int allowAds;
-    public Toggle allowAdsToggle;
-    public Toggle denyAdsToggle;
+    public Button allowAdsBtn;
+    public Button denyAdsBtn;
 
     private void Awake() {
         if (Instance == null) {
             Instance = this;
+            Advertisement.AddListener(this);
+            Advertisement.Initialize(gameID, testMode);
             SceneManager.sceneLoaded += OnSceneLoaded;
         } else {
             return;
         }
-
-        saveManager = GetComponent<SaveManager>();
-        crossSceneManager = GetComponent<CrossSceneManager>();
-
-        Advertisement.AddListener(this);
-        Advertisement.Initialize(gameID, testMode);
-
-        allowAds = PlayerPrefs.GetInt("AllowAds", 1);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
@@ -46,47 +39,31 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
             rewardAdsBtn = GameObject.Find("WatchAdForMoney");
         }
 
-        ShowBanner();
-
-        Toggle[] settingsToggler = crossSceneManager.settingsUI.GetComponentsInChildren<Toggle>();
-
-        allowAdsToggle = settingsToggler[4];
-        denyAdsToggle = settingsToggler[5];
-
-        allowAdsToggle.onValueChanged.AddListener(delegate { AllowAds(allowAdsToggle, 1); });
-        denyAdsToggle.onValueChanged.AddListener(delegate { AllowAds(denyAdsToggle, 0); });
-
-        ToggleAds();
+        AllowAds(PlayerPrefs.GetInt("AllowAds", 1));
     }
 
-    public void AllowAds(Toggle toggler, int allow) {
-        if (allow == allowAds) {
-            if (allowAds == 1) {
-                allowAdsToggle.isOn = true;
-            } else {
-                denyAdsToggle.isOn = true;
-            }
-        } else if (toggler.isOn) {
-            allowAds = allow;
-            ToggleAds();
-            saveManager.SaveIntData("AllowAds", allow);
-        }
-    }
-
-    public void ToggleAds() {
-        if (allowAds == 1) {
-            denyAdsToggle.isOn = false;
-            if (rewardAdsBtn){
+    public void AllowAds(int allow) {
+        allowAds = allow;
+        
+        if (allow == 1) {
+            allowAdsBtn.interactable = false;
+            denyAdsBtn.interactable = true;
+            
+            if (rewardAdsBtn)
                 rewardAdsBtn.SetActive(true);
-            }
+
             ShowBanner();
         } else {
-            allowAdsToggle.isOn = false;
-            if (rewardAdsBtn){
+            allowAdsBtn.interactable = true;
+            denyAdsBtn.interactable = false;
+
+            if (rewardAdsBtn)
                 rewardAdsBtn.SetActive(false);
-            }
+            
             HideBanner();
         }
+        
+        saveManager.SaveIntData("AllowAds", allow);
     }
 
     public void HideBanner() {
@@ -94,9 +71,8 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     }
 
     public void ShowBanner() {
-        if (allowAds == 1) {
+        if (allowAds == 1)
             StartCoroutine(ShowBannerWhenReady());
-        }
     }
 
     public void ShowRewardVideo() {
