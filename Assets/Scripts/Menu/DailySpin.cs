@@ -37,7 +37,7 @@ public class DailySpin : MonoBehaviour {
         goldManager = GoldManager.Instance;
         itemDb = ItemDb.Instance;
 
-        if (!PlayerPrefs.HasKey("LastDateSpun"))
+        //if (!PlayerPrefs.HasKey("LastDateSpun"))
             PlayerPrefs.SetString("LastDateSpun", "1582-09-15");
         
         StartCoroutine(Counter());
@@ -81,6 +81,7 @@ public class DailySpin : MonoBehaviour {
         randomValue = UnityEngine.Random.Range(30, 40);
         timeInterval = 0.1f;
 
+        AudioManager.Instance.PlayWheelSpinning();
         for (int i = 0; i < randomValue; i++) {
             wheel.transform.Rotate(0, 0, 11.25f);
             if (i > Mathf.RoundToInt(randomValue * 0.65f)) {
@@ -96,6 +97,8 @@ public class DailySpin : MonoBehaviour {
         if (Mathf.RoundToInt(wheel.transform.eulerAngles.z) % 45 == 0) {
             wheel.transform.Rotate(0, 0, 11.25f);
         }
+        AudioManager.Instance.StopWheelSpinning();
+
         yield return new WaitForSeconds(1);
 
         while (Mathf.RoundToInt(wheel.transform.eulerAngles.z) % 45 != 0) {
@@ -150,6 +153,7 @@ public class DailySpin : MonoBehaviour {
             wonGoldAmountTxt.text = rewardAmount.ToString();
             winGoldPanel.SetActive(true);
             winCarPanel.SetActive(false);
+            AudioManager.Instance.PlayBuySound();
         } else {
             winGoldPanel.SetActive(false);
             winCarPanel.SetActive(true);
@@ -160,7 +164,6 @@ public class DailySpin : MonoBehaviour {
 
     IEnumerator Counter() {
         while (!canSpin()) {
-            Debug.Log(1);
             TimeSpan timeUntilMidnight = DateTime.Today.AddDays(1).Subtract(DateTime.Now);
             countdown.text = timeUntilMidnight.Hours.ToString().PadLeft(2, '0') + ":" + timeUntilMidnight.Minutes.ToString().PadLeft(2, '0') + ":" + timeUntilMidnight.Seconds.ToString().PadLeft(2, '0');
 

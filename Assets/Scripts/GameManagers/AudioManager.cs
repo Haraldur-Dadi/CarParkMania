@@ -10,6 +10,8 @@ public class AudioManager : MonoBehaviour {
     public AudioSource musicAudioSource;
     public AudioSource sfxAudioSource;
     public AudioClip buttonClick;
+    public AudioClip buySound;
+    public AudioClip wheelSpinning;
 
     public float musicVol;
     public float sfxVol;
@@ -94,5 +96,17 @@ public class AudioManager : MonoBehaviour {
 
     public void PlayButtonClick() {
         sfxAudioSource.PlayOneShot(buttonClick);
+    }
+    
+    public void PlayBuySound() {
+        sfxAudioSource.PlayOneShot(buySound);
+    }
+
+    public void PlayWheelSpinning() {
+        sfxAudioSource.clip = wheelSpinning;
+        sfxAudioSource.Play();
+    }
+    public void StopWheelSpinning() {
+        sfxAudioSource.Stop();
     }
 }

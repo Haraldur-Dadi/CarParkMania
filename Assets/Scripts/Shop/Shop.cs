@@ -145,7 +145,7 @@ public class Shop : MonoBehaviour {
         saveManager.SaveIntData(selectedItem.catagory + selectedItem.ID + "Unlocked", 1);
         goldManager.SubtractGold(selectedItem.cost);
         ShowEquip();
-        AudioManager.Instance.PlayButtonClick();
+        AudioManager.Instance.PlayBuySound();
     }
 
     public void EquipItem() {
