@@ -20,8 +20,10 @@ public class LevelSelector : MonoBehaviour {
     public GameObject backBtn;
     public TextMeshProUGUI selectPanelName;
 
+    public GameObject panelHeader;
+    public TextMeshProUGUI uiName;
     public GameObject mainScreen;
-    public GameObject dailyChallangePanel;
+    public GameObject dailyChallengePanel;
     public GameObject dailySpinPanel;
     public GameObject achivementsPanel;
     public GameObject shopPanel;
@@ -35,8 +37,6 @@ public class LevelSelector : MonoBehaviour {
         saveManager = SaveManager.Instance;
 
         int casualLevelReached = PlayerPrefs.GetInt("CasualLevelReached", 0);
-        int challengedLevelReached = PlayerPrefs.GetInt("ChallengeLevelReached", 0);
-        int timedLevelReached = PlayerPrefs.GetInt("TimedLevelReached", 0);
 
         for (int i = 0; i < casualLevelBtns.Length; i++) {
             if (i > casualLevelReached) {
@@ -61,66 +61,36 @@ public class LevelSelector : MonoBehaviour {
     public void UIStartState() {
         home.SetActive(true);
         mainScreen.SetActive(true);
+        panelHeader.SetActive(false);
         levelSelector.SetActive(false);
-        dailyChallangePanel.SetActive(false);
+        dailyChallengePanel.SetActive(false);
         dailySpinPanel.SetActive(false);
         achivementsPanel.SetActive(false);
         shopPanel.SetActive(false);
         aboutPanel.SetActive(false);
     }
 
-    public void PlayToggleSfx() {
+    public void ToggleUiPanel(string panelName) {
+        sceneFader.FadeBetweenObjects();
+        StartCoroutine(TogglePanels(panelName));
         AudioManager.Instance.PlayButtonClick();
     }
-
-    public void ToggleAchivements() {
-        achivementsPanel.SetActive(!achivementsPanel.activeSelf);
-        mainScreen.SetActive(!mainScreen.activeSelf);
-        PlayToggleSfx();
-    }
-
-    public void ToggleDailyChallange() {
-        dailyChallangePanel.SetActive(!dailyChallangePanel.activeSelf);
-        mainScreen.SetActive(!mainScreen.activeSelf);
-        PlayToggleSfx();
-    }
-
-    public void ToggleDailySpin() {
-        dailySpinPanel.SetActive(!dailySpinPanel.activeSelf);
-        dailySpin.OpenUI();
-        mainScreen.SetActive(!mainScreen.activeSelf);
-        PlayToggleSfx();
-    }
-
-    public void ToggleShop() {
-        shopPanel.SetActive(!shopPanel.activeSelf);
-        mainScreen.SetActive(!mainScreen.activeSelf);
-        PlayToggleSfx();
-    }
-
-    public void ToggleAbout() {
-        aboutPanel.SetActive(!aboutPanel.activeSelf);
-        about.ResetTutImage();
-        mainScreen.SetActive(!mainScreen.activeSelf);
-        PlayToggleSfx();
-    }
-
+    
     public void BackHome() {
         sceneFader.FadeBetweenObjects();
         StartCoroutine(HomeScreen());
-        PlayToggleSfx();
+        AudioManager.Instance.PlayButtonClick();
     }
 
     public void OpenGameModes() {
         sceneFader.FadeBetweenObjects();
         StartCoroutine(GameModes());
-        PlayToggleSfx();
+        AudioManager.Instance.PlayButtonClick();
     }
 
     public void SelectGameMode(int gameModeNr) {
         sceneFader.FadeBetweenObjects();
         StartCoroutine(SelectGameModeUI(gameModeNr));
-        SelectDifficulty(0);
     }
 
     public void SelectDifficulty(int difficulty) {
@@ -131,13 +101,40 @@ public class LevelSelector : MonoBehaviour {
                 casualLevelDifficulties[i].SetActive(false);
             }
         }
-        PlayToggleSfx();
+        AudioManager.Instance.PlayButtonClick();
     }
 
     public void SelecteLevel(int buildIndex, int level) {
-        sceneFader.FadeToBuildIndex(buildIndex);
         saveManager.SaveIntData("boardToLoad", level);
-        PlayToggleSfx();
+        AudioManager.Instance.PlayButtonClick();
+        sceneFader.FadeToBuildIndex(buildIndex);
+    }
+
+    public IEnumerator TogglePanels(string panelName) {
+        float t = 0f;
+
+        while (t < 0.5f) {
+            t += Time.deltaTime;
+            yield return 0;
+        }
+        mainScreen.SetActive(!mainScreen.activeSelf);
+        panelHeader.SetActive(!panelHeader.activeSelf);
+        
+        uiName.text = panelName;
+
+        if (panelName == "Achivements") {
+            achivementsPanel.SetActive(!achivementsPanel.activeSelf);
+        } else if (panelName == "Challenge") {
+            dailyChallengePanel.SetActive(!dailyChallengePanel.activeSelf);
+        } else if (panelName == "Spin") {
+            dailySpinPanel.SetActive(!dailySpinPanel.activeSelf);
+            dailySpin.OpenUI();
+        } else if (panelName == "Shop") {
+            shopPanel.SetActive(!shopPanel.activeSelf);
+        } else if (panelName == "About") {
+            aboutPanel.SetActive(!aboutPanel.activeSelf);
+            about.ResetTutImage();
+        }
     }
 
     public IEnumerator HomeScreen() {
@@ -188,5 +185,6 @@ public class LevelSelector : MonoBehaviour {
         backBtn.SetActive(true);
 
         selectPanelName.text = gameModes[gameModeNr].name;
+        SelectDifficulty(0);
     }
 }
