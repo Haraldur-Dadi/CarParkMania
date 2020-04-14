@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance;
     public SceneFader sceneFader;
     public SaveManager saveManager;
+    public ItemDb itemDb;
 
     public int levelIndex;
 
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour {
     public virtual void Start() {
         sceneFader = SceneFader.Instance;
         saveManager = SaveManager.Instance;
+        itemDb = ItemDb.Instance;
 
         finished = false;
 
@@ -66,6 +68,25 @@ public class GameManager : MonoBehaviour {
         }
 
         Instantiate(level_board, gameBoard.transform);
+
+        ChangeCarSprites();
+    }
+
+    public void ChangeCarSprites() {
+        // Switches sprites of car to the one player has equipped
+        GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
+
+        foreach (GameObject car in cars) {
+            Car carObj = car.GetComponent<Car>();
+
+            if (carObj.length == 0) {
+                carObj.carImg.sprite = itemDb.GetItem("PlayerCar", PlayerPrefs.GetInt("PlayerCarEquipped", 0)).sprite;
+            } else if (carObj.length == 2) {
+                carObj.carImg.sprite = itemDb.GetItem("2LongCar", PlayerPrefs.GetInt("2LongCarEquipped", 0)).sprite;
+            } else if (carObj.length == 3) {
+                carObj.carImg.sprite = itemDb.GetItem("3LongCar", PlayerPrefs.GetInt("3LongCarEquipped", 0)).sprite;
+            }
+        }
     }
 
     public virtual void LevelComplete() {
