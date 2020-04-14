@@ -90,23 +90,21 @@ public class GameManager : MonoBehaviour {
     }
 
     public virtual void LevelComplete() {
+        AudioManager.Instance.StopCarSelected();
+        finished = true;
+        
         if (PlayerPrefs.GetInt("CasualLevelReached", 0) <= levelIndex) {
             saveManager.SaveIntData("CasualLevelReached", levelIndex + 1);
+            saveManager.IncreaseAchivementProgress(0);
         }
 
-        ToggleLevelCompleteUI();
+        levelCompleteUi.SetActive(true);
     }
 
     public void GoToLevelSelector() {
         /* Sends player to home screen */
         AudioManager.Instance.PlayButtonClick();
         sceneFader.FadeToBuildIndex(0);
-    }
-
-    public void ToggleLevelCompleteUI() {
-        /* Toggles level complete ui */
-        levelCompleteUi.SetActive(!levelCompleteUi.activeSelf);
-        finished = !finished;
     }
 
     public virtual void IncreaseMoves(int amount) {
