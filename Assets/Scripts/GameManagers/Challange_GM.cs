@@ -6,16 +6,9 @@ public class Challange_GM : GameManager {
     public TextMeshProUGUI movesTxt;
     public int moves;
 
-    public override void Awake() {
-        base.Awake();
-
-        movesTxt = GameObject.Find("MovesTxt").GetComponent<TextMeshProUGUI>();
-
-    }
-
     public override void Start() {
         base.Start();
-
+        movesTxt = GameObject.Find("MovesTxt").GetComponent<TextMeshProUGUI>();
         movesTxt.text = "Moves: 0";
     }
 

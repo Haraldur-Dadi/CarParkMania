@@ -178,6 +178,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 345970771}
     m_Modifications:
+    - target: {fileID: 317862555192456568, guid: c9f6610ab6d688041a45838bcd6737d4,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 6543399369741747882}
     - target: {fileID: 317862555192456571, guid: c9f6610ab6d688041a45838bcd6737d4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -290,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 380384dec38d78442b39039fa65c47e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 6543399369741747882}
   startPosOfCar: {x: 0, y: 0}
   posOfCar: {x: 0, y: 0}
   posToMoveCar: {x: 0, y: 0}

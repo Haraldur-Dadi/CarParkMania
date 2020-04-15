@@ -18,7 +18,6 @@ public class CarMovement : MonoBehaviour {
     public List<UndoTuple> undoList;
 
     private void Start() {
-        gameManager = GameManager.instance;
         snapValue = 1.1f;
 
         undoList = new List<UndoTuple>();

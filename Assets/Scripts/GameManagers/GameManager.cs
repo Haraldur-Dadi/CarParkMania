@@ -5,7 +5,6 @@ using TMPro;
 
 public class GameManager : MonoBehaviour {
 
-    public static GameManager instance;
     public SceneFader sceneFader;
     public SaveManager saveManager;
     public ItemDb itemDb;
@@ -28,14 +27,6 @@ public class GameManager : MonoBehaviour {
     public GameObject levelCompleteUi;
     public TextMeshProUGUI levelTxt;
     public TextMeshProUGUI difficultyTxt;
-
-    public virtual void Awake() {
-        if (!instance) {
-            instance = this;
-        } else {
-            Destroy(gameObject);
-        }
-    }
 
     public virtual void Start() {
         sceneFader = SceneFader.Instance;
