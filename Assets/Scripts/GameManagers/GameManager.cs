@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -27,32 +28,35 @@ public class GameManager : MonoBehaviour {
         sceneFader = SceneFader.Instance;
         saveManager = SaveManager.Instance;
         itemDb = ItemDb.Instance;
-
-        finished = false;
+        
         level_board = null;
-
         LoadLevel();
-        levelCompleteUi.SetActive(false);
     }
 
     public virtual void LoadLevel() {
-        levelIndex = PlayerPrefs.GetInt("boardToLoad", 0);
+        if (level_board != null)
+            Destroy(level_board);
 
+        finished = false;
+        levelCompleteUi.SetActive(false);
+
+        levelIndex = PlayerPrefs.GetInt("boardToLoad", 0);
+        GameObject boardToInst = null;
         if (levelIndex < level_boards_easy.Length) {
             difficultyTxt.text = "Easy";
-            level_board = level_boards_easy[levelIndex];
+            boardToInst = level_boards_easy[levelIndex];
         } else if (level_boards_easy.Length <= levelIndex && levelIndex < level_boards_medium.Length) {
             difficultyTxt.text = "Medium";
-            level_board = level_boards_medium[levelIndex-25];
+            boardToInst = level_boards_medium[levelIndex-25];
         } else if (level_boards_medium.Length <= levelIndex && levelIndex < level_boards_hard.Length) {
             difficultyTxt.text = "Hard";
-            level_board = level_boards_hard[levelIndex - 50];
+            boardToInst = level_boards_hard[levelIndex - 50];
         } else if (level_boards_hard.Length <= levelIndex) {
             difficultyTxt.text = "Expert";
-            level_board = level_boards_expert[levelIndex - 75];
+            boardToInst = level_boards_expert[levelIndex - 75];
         }
 
-        Instantiate(level_board, gameBoard.transform);
+        level_board = Instantiate(boardToInst, gameBoard.transform);
         ChangeCarSprites();
     }
 
@@ -74,7 +78,6 @@ public class GameManager : MonoBehaviour {
     }
 
     public virtual void LevelComplete() {
-        AudioManager.Instance.StopCarSelected();
         AudioManager.Instance.PlayWinSound();
         finished = true;
 
@@ -101,13 +104,25 @@ public class GameManager : MonoBehaviour {
     }
 
     public void RetryLevel() {
-        sceneFader.FadeToBuildIndex(SceneManager.GetActiveScene().buildIndex);
-        AudioManager.Instance.PlayButtonClick();
+        StartCoroutine(PreLoadLevel());
     }
 
     public void LoadNextLevel() {
         saveManager.SaveIntData("boardToLoad", levelIndex + 1);
-        sceneFader.FadeToBuildIndex(SceneManager.GetActiveScene().buildIndex);
+        StartCoroutine(PreLoadLevel());
+    }
+
+    public IEnumerator PreLoadLevel() {
         AudioManager.Instance.PlayButtonClick();
+        sceneFader.FadeBetweenObjects();
+
+        float t = 0f;
+
+        while (t < 0.5f) {
+            t += Time.deltaTime;
+            yield return 0;
+        }
+
+        LoadLevel();
     }
 }

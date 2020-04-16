@@ -233,7 +233,7 @@ PrefabInstance:
         type: 3}
       propertyPath: gameManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1020077670}
     - target: {fileID: 317862555192456571, guid: c9f6610ab6d688041a45838bcd6737d4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -677,7 +677,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1020077670}
         m_MethodName: RetryLevel
         m_Mode: 1
         m_Arguments:
@@ -972,7 +972,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1020077670}
         m_MethodName: GoToLevelSelector
         m_Mode: 1
         m_Arguments:
@@ -1366,7 +1366,7 @@ PrefabInstance:
     - target: {fileID: 793517295, guid: 4ada8a1e3db4b08459bbc6f1e6d597b8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1020077670}
     - target: {fileID: 793517295, guid: 4ada8a1e3db4b08459bbc6f1e6d597b8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadNextLevel
