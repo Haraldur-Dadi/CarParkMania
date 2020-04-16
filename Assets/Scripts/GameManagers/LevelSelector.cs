@@ -78,14 +78,14 @@ public class LevelSelector : MonoBehaviour {
     
     public void BackHome() {
         sceneFader.FadeBetweenObjects();
-        StartCoroutine(HomeScreen());
         AudioManager.Instance.PlayButtonClick();
+        StartCoroutine(HomeScreen());
     }
 
     public void OpenGameModes() {
         sceneFader.FadeBetweenObjects();
-        StartCoroutine(GameModes());
         AudioManager.Instance.PlayButtonClick();
+        StartCoroutine(GameModes());
     }
 
     public void SelectGameMode(int gameModeNr) {
