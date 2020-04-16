@@ -29,7 +29,6 @@ public class DailySpin : MonoBehaviour {
     public int[] winID;
     private int rewardAmount;
 
-    private bool open;
     public Animator notification;
 
     void Start() {
@@ -37,7 +36,7 @@ public class DailySpin : MonoBehaviour {
         goldManager = GoldManager.Instance;
         itemDb = ItemDb.Instance;
 
-        //if (!PlayerPrefs.HasKey("LastDateSpun"))
+        if (!PlayerPrefs.HasKey("LastDateSpun"))
             PlayerPrefs.SetString("LastDateSpun", "1582-09-15");
         
         StartCoroutine(Counter());
@@ -169,5 +168,6 @@ public class DailySpin : MonoBehaviour {
 
             yield return new WaitForSeconds(1);
         }
+        OpenUI();
     }
 }
