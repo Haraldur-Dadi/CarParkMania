@@ -80,7 +80,6 @@ public class CarMovement : MonoBehaviour {
 
                         // If the player touched a car, set variable carToMove and get position of Car
                         if (carToMove) {
-                            AudioManager.Instance.PlayCarSelected();
                             startPosOfCar = carToMove.transform.position;
                             posOfCar = startPosOfCar;
                         }
@@ -159,8 +158,7 @@ public class CarMovement : MonoBehaviour {
     public void EndMove() {
         // If we have a carToMove, deactivate it and set variable to null
         if (carToMove) {
-            AudioManager.Instance.StopCarSelected();
-
+            AudioManager.Instance.PlayCarMoved();
             UndoTuple tuple = new UndoTuple(carToMove, startPosOfCar);
             undoList.Add(tuple);
 

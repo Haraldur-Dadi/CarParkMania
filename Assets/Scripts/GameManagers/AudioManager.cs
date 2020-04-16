@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour {
     public AudioClip buttonClick;
     public AudioClip buySound;
     public AudioClip wheelSpinning;
-    public AudioClip carSelected;
+    public AudioClip carMoved;
     public AudioClip winSound;
     public AudioClip gameOverSound;
 
@@ -114,36 +114,22 @@ public class AudioManager : MonoBehaviour {
         sfxAudioSource.Stop();
     }
 
-    public void PlayCarSelected() {
-        StopCoroutine("FadeOutSfx");
-        sfxAudioSource.volume = sfxVol;
-        sfxAudioSource.clip = carSelected;
-        sfxAudioSource.Play();
-    }
-
-    public void StopCarSelected() {
-        StartCoroutine("FadeOutSfx");
+    public void PlayCarMoved() {
+        sfxAudioSource.PlayOneShot(carMoved);
     }
 
     public void PlayWinSound() {
-        StopCoroutine("FadeOutSfx");
-        sfxAudioSource.Stop();
-        sfxAudioSource.volume = sfxVol;
         sfxAudioSource.PlayOneShot(winSound);
-        StartCoroutine("FadeOutFinished");
+        StartCoroutine("FadeOutSfx");
     }
 
     public void PlayGameOverSound() {
-        StopCoroutine("FadeOutSfx");
-        sfxAudioSource.Stop();
-        sfxAudioSource.volume = sfxVol;
         sfxAudioSource.PlayOneShot(gameOverSound);
-        StartCoroutine("FadeOutFinished");
     }
 
     IEnumerator FadeOutSfx() {
         float currentTime = 0;
-        float duration = 0.15f;
+        float duration = 1;
         float start = sfxAudioSource.volume;
 
         while (currentTime < duration) {
@@ -155,10 +141,5 @@ public class AudioManager : MonoBehaviour {
         sfxAudioSource.Stop();
         sfxAudioSource.clip = null;
         sfxAudioSource.volume = sfxVol;
-    }
-
-    IEnumerator FadeOutFinished() {
-        yield return new WaitForSeconds(1.5f);
-        StartCoroutine("FadeOutSfx");
     }
 }
