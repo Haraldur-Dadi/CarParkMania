@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -13,12 +12,8 @@ public class GameManager : MonoBehaviour {
 
     public bool finished;
 
-    public Button homeBtn;
-    public Button retryBtn;
-    public Button nextLevelBtn;
-    public Button resetButton;
-
     public GameObject gameBoard;
+    public GameObject level_board;
     public GameObject[] level_boards_easy;
     public GameObject[] level_boards_medium;
     public GameObject[] level_boards_hard;
@@ -34,37 +29,35 @@ public class GameManager : MonoBehaviour {
         itemDb = ItemDb.Instance;
 
         finished = false;
+        level_board = null;
 
         LoadLevel();
         levelCompleteUi.SetActive(false);
     }
 
-    public void LoadLevel() {
+    public virtual void LoadLevel() {
         levelIndex = PlayerPrefs.GetInt("boardToLoad", 0);
-        levelTxt.text = (levelIndex + 1).ToString();
-        GameObject level_board = null;
 
-        if (levelIndex < 25) {
+        if (levelIndex < level_boards_easy.Length) {
             difficultyTxt.text = "Easy";
             level_board = level_boards_easy[levelIndex];
-        } else if (25 <= levelIndex && levelIndex < 50) {
-            difficultyTxt.text = "Medum";
+        } else if (level_boards_easy.Length <= levelIndex && levelIndex < level_boards_medium.Length) {
+            difficultyTxt.text = "Medium";
             level_board = level_boards_medium[levelIndex-25];
-        } else if (50 <= levelIndex && levelIndex < 75) {
+        } else if (level_boards_medium.Length <= levelIndex && levelIndex < level_boards_hard.Length) {
             difficultyTxt.text = "Hard";
             level_board = level_boards_hard[levelIndex - 50];
-        } else if (75 <= levelIndex) {
+        } else if (level_boards_hard.Length <= levelIndex) {
             difficultyTxt.text = "Expert";
             level_board = level_boards_expert[levelIndex - 75];
         }
 
         Instantiate(level_board, gameBoard.transform);
-
         ChangeCarSprites();
     }
 
     public void ChangeCarSprites() {
-        // Switches sprites of car to the one player has equipped
+        // Switches sprites of cars to match equipped
         GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
 
         foreach (GameObject car in cars) {
@@ -84,14 +77,8 @@ public class GameManager : MonoBehaviour {
         AudioManager.Instance.StopCarSelected();
         AudioManager.Instance.PlayWinSound();
         finished = true;
-        
-        if (PlayerPrefs.GetInt("CasualLevelReached", 0) <= levelIndex) {
-            saveManager.SaveIntData("CasualLevelReached", levelIndex + 1);
-            saveManager.IncreaseAchivementProgress(0);
-            saveManager.IncreaseAchivementProgress(1);
-        }
 
-        if (levelIndex < 25)
+        if (levelIndex < level_boards_easy.Length)
             saveManager.IncreaseAchivementProgress(4);
         saveManager.IncreaseAchivementProgress(5);
         saveManager.IncreaseAchivementProgress(6);
