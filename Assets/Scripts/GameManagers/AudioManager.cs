@@ -129,7 +129,7 @@ public class AudioManager : MonoBehaviour {
 
     IEnumerator FadeOutSfx() {
         float currentTime = 0;
-        float duration = 1;
+        float duration = 2;
         float start = sfxAudioSource.volume;
 
         while (currentTime < duration) {
