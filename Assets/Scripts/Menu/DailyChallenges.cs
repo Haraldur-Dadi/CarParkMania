@@ -27,31 +27,33 @@ public class DailyChallenges : MonoBehaviour {
         weekday = (int) DateTime.Now.DayOfWeek;
 
         if (!PlayerPrefs.HasKey("LastChallengeCompletedDate"))
-            PlayerPrefs.SetString("LastChallengeCompletedDate", "1582-09-15");
+            saveManager.SaveStringData("LastChallengeCompletedDate", "1582-09-15");
+        
+        NewDayReset();
 
-        HasCompleted();
-
-        if (CanComplete()) {
+        if (!HasCompleted()) {
+            notification.SetTrigger("Avail");
             claimScreen.SetActive(false);
-        } else {
-            if (PlayerPrefs.GetInt("HasClaimed", 0) == 1)
-                claimBtn.SetActive(false);
+        } else if (PlayerPrefs.GetInt("HasClaimed", 0) == 1) {
+            claimBtn.SetActive(false);
         }
     }
 
-    private bool CanComplete() {
+    private void NewDayReset() {
         DateTime currDate = DateTime.Today;
         DateTime lastSpinDate = DateTime.ParseExact(PlayerPrefs.GetString("LastChallengeCompletedDate", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
         
         if (currDate > lastSpinDate) {
             saveManager.SaveIntData("HasClaimed", 0);
-            notification.SetTrigger("Avail");
-            return true;
+            saveManager.SaveIntData("DailyChallenge1Completed", 0);
+            saveManager.SaveIntData("DailyChallenge2Completed", 0);
+            saveManager.SaveIntData("DailyChallenge3Completed", 0);
+            saveManager.SaveIntData("DailyChallenge4Completed", 0);
+            saveManager.SaveStringData("LastChallengeCompletedDate", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));
         }
-        return false;
     }
 
-    private void HasCompleted() {
+    private bool HasCompleted() {
         // Check if player has finished all challenges
         bool completed = true;
 
@@ -79,10 +81,7 @@ public class DailyChallenges : MonoBehaviour {
             completed = false;
         }
 
-        if (completed) {
-            DateTime currDate = DateTime.Today;
-            saveManager.SaveStringData("LastChallengeCompletedDate", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));
-        }
+        return completed;
     }
 
     public void LoadChallengeLevel(int difficulty) {
@@ -94,6 +93,7 @@ public class DailyChallenges : MonoBehaviour {
     public void ClaimReward() {
         goldManager.AddGold(25, false);
         saveManager.SaveIntData("HasClaimed", 1);
+        saveManager.IncreaseAchivementProgress(7);
         claimBtn.SetActive(false);
     }
 }

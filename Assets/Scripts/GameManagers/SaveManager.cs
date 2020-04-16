@@ -20,7 +20,6 @@ public class SaveManager : MonoBehaviour {
         }
     }
 
-
     public void SaveIntData(string varName, int value) {
         PlayerPrefs.SetInt(varName, value);
         //PlayerPrefs.Save();
