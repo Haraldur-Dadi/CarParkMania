@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour {
     public ItemDb itemDb;
 
     public int levelIndex;
-
+    public int boardLength;
+    
     public bool finished;
 
     public GameObject gameBoard;
@@ -28,8 +29,9 @@ public class GameManager : MonoBehaviour {
         sceneFader = SceneFader.Instance;
         saveManager = SaveManager.Instance;
         itemDb = ItemDb.Instance;
-        
+
         level_board = null;
+        boardLength = level_boards_easy.Length;
         LoadLevel();
     }
 
@@ -42,18 +44,18 @@ public class GameManager : MonoBehaviour {
 
         levelIndex = PlayerPrefs.GetInt("boardToLoad", 0);
         GameObject boardToInst = null;
-        if (levelIndex < level_boards_easy.Length) {
+        if (levelIndex < boardLength) {
             difficultyTxt.text = "Easy";
             boardToInst = level_boards_easy[levelIndex];
-        } else if (level_boards_easy.Length <= levelIndex && levelIndex < level_boards_medium.Length) {
+        } else if (boardLength <= levelIndex && levelIndex < (boardLength * 2)) {
             difficultyTxt.text = "Medium";
-            boardToInst = level_boards_medium[levelIndex-25];
-        } else if (level_boards_medium.Length <= levelIndex && levelIndex < level_boards_hard.Length) {
+            boardToInst = level_boards_medium[levelIndex - level_boards_easy.Length];
+        } else if ((boardLength * 2) <= levelIndex && levelIndex < (boardLength * 3)) {
             difficultyTxt.text = "Hard";
-            boardToInst = level_boards_hard[levelIndex - 50];
-        } else if (level_boards_hard.Length <= levelIndex) {
+            boardToInst = level_boards_hard[levelIndex - (level_boards_easy.Length * 2)];
+        } else if ((boardLength * 3) <= levelIndex) {
             difficultyTxt.text = "Expert";
-            boardToInst = level_boards_expert[levelIndex - 75];
+            boardToInst = level_boards_expert[levelIndex - (level_boards_easy.Length * 3)];
         }
 
         level_board = Instantiate(boardToInst, gameBoard.transform);
