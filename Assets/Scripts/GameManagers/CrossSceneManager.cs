@@ -9,6 +9,10 @@ public class CrossSceneManager : MonoBehaviour {
     public GameObject settingsUI;
     public Button settingsBtn;
 
+    public string panelName;
+    public int gameModeNr;
+    public int difficulty;
+
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -22,12 +26,10 @@ public class CrossSceneManager : MonoBehaviour {
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         settingsBtn = GameObject.Find("SettingsBtn").GetComponent<Button>();
         settingsBtn.onClick.AddListener(delegate { ToggleSettings(); });
-
         settingsUI.SetActive(false);
     }
 
     public void ToggleSettings() {
         settingsUI.SetActive(!settingsUI.activeSelf);
-        AudioManager.Instance.PlayButtonClick();
     }
 }

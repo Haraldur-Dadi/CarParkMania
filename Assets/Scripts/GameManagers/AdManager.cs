@@ -44,9 +44,6 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     }
 
     public void AllowAds(int allow) {
-        if (allow != allowAds)
-            AudioManager.Instance.PlayButtonClick();
-
         allowAds = allow;
         
         if (allow == 1) {

@@ -5,6 +5,7 @@ using TMPro;
 
 public class LevelSelector : MonoBehaviour {
 
+    public CrossSceneManager crossSceneManager;
     public SceneFader sceneFader;
     public SaveManager saveManager;
 
@@ -33,6 +34,7 @@ public class LevelSelector : MonoBehaviour {
     public About about;
 
     public void Start() {
+        crossSceneManager = CrossSceneManager.Instance;
         sceneFader = SceneFader.Instance;
         saveManager = SaveManager.Instance;
 
@@ -73,18 +75,15 @@ public class LevelSelector : MonoBehaviour {
     public void ToggleUiPanel(string panelName) {
         sceneFader.FadeBetweenObjects();
         StartCoroutine(TogglePanels(panelName));
-        AudioManager.Instance.PlayButtonClick();
     }
     
     public void BackHome() {
         sceneFader.FadeBetweenObjects();
-        AudioManager.Instance.PlayButtonClick();
         StartCoroutine(HomeScreen());
     }
 
     public void OpenGameModes() {
         sceneFader.FadeBetweenObjects();
-        AudioManager.Instance.PlayButtonClick();
         StartCoroutine(GameModes());
     }
 
@@ -101,13 +100,15 @@ public class LevelSelector : MonoBehaviour {
                 casualLevelDifficulties[i].SetActive(false);
             }
         }
-        AudioManager.Instance.PlayButtonClick();
     }
 
     public void SelecteLevel(int buildIndex, int level) {
         saveManager.SaveIntData("boardToLoad", level);
-        AudioManager.Instance.PlayButtonClick();
         sceneFader.FadeToBuildIndex(buildIndex);
+    }
+
+    public void PlayButtonClick() {
+        AudioManager.Instance.PlayButtonClick();
     }
 
     public IEnumerator TogglePanels(string panelName) {
@@ -135,6 +136,7 @@ public class LevelSelector : MonoBehaviour {
             aboutPanel.SetActive(!aboutPanel.activeSelf);
             about.ResetTutImage();
         }
+        CrossSceneManager.Instance.panelName = panelName;
     }
 
     public IEnumerator HomeScreen() {

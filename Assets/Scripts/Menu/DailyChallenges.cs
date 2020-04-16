@@ -86,7 +86,6 @@ public class DailyChallenges : MonoBehaviour {
 
     public void LoadChallengeLevel(int difficulty) {
         saveManager.SaveIntData("boardToLoad", (7 * (difficulty - 1)) + (weekday - 1));
-        AudioManager.Instance.PlayButtonClick();
         sceneFader.FadeToBuildIndex(2);
     }
 
