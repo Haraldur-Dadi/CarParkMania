@@ -8,8 +8,8 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
 
     public static AdManager Instance;
 
-    public GoldManager goldManager;
     public SaveManager saveManager;
+    public GoldManager goldManager;
 
     string gameID = "3535681";
     string bannerPlacementID = "MainMenu";
