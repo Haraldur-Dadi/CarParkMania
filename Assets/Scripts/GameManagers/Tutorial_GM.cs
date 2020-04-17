@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Tutorial_GM : GameManager {
+public class Tutorial_GM : MonoBehaviour {
 
     // How To Play, what is goal
     // Displays instructions to player
@@ -9,14 +9,11 @@ public class Tutorial_GM : GameManager {
     public int tutDispAtIndex;
     public GameObject[] tutDisplays;
 
-    public override void Start() {
-        base.Start();
-
+    public void Start() {
         tutDispAtIndex = 0;
     }
 
     public void ShowNextTutDisplay() {
-
         // If we have other displays to display
         if (tutDispAtIndex < tutDisplays.Length) {
 
