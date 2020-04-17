@@ -145,5 +145,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   length: 3
   maxValAxis: 1.65
-  boxCol2D: {fileID: 5927686651352923457}
   carImg: {fileID: 1857446207234335191}
