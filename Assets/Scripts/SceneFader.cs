@@ -20,15 +20,12 @@ public class SceneFader : MonoBehaviour {
         }
     }
 
-    private void Start() {
-        adManager = AdManager.Instance;
-    }
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         StartCoroutine(FadeIn());
     }
 
     public void FadeBetweenObjects() {
+        CrossSceneManager.Instance.TmpPreventClicks();
         StartCoroutine(FadeBetweenObjInScene());
     }
 
