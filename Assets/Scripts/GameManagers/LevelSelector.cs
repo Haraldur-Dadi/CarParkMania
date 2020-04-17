@@ -9,6 +9,9 @@ public class LevelSelector : MonoBehaviour {
     public SceneFader sceneFader;
     public SaveManager saveManager;
 
+    public CanvasGroup canvasGroup;
+    private bool startUI;
+
     public GameObject home;
     public GameObject levelSelector;
     public GameObject gameModesParent;
@@ -46,6 +49,7 @@ public class LevelSelector : MonoBehaviour {
             } else {
                 int level = i;
                 casualLevelBtns[i].onClick.AddListener(() => SelecteLevel(1, level));
+                casualLevelBtns[i].onClick.AddListener(() => TmpPreventClicks());
 
                 if (i < casualLevelReached) {
                     casualLevelBtns[i].gameObject.GetComponent<Image>().color = new Color(0.4029462f, 1, 0.2311321f);
@@ -57,6 +61,7 @@ public class LevelSelector : MonoBehaviour {
             casualLevelBtns[i].GetComponentInChildren<TextMeshProUGUI>().text = (i + 1).ToString();
         }
 
+        startUI = true;
         UIStartState();
     }
 
@@ -70,26 +75,40 @@ public class LevelSelector : MonoBehaviour {
         achivementsPanel.SetActive(false);
         shopPanel.SetActive(false);
         aboutPanel.SetActive(false);
+
+        string panelName = crossSceneManager.panelName;
+        int gameModeNr = crossSceneManager.gameModeNr;
+        int difficulty = crossSceneManager.difficulty;
+
+        if (panelName != "") {
+            ToggleUiPanel(panelName);
+        } else if (gameModeNr != -1) {
+            OpenGameModes();
+            SelectGameMode(gameModeNr);
+            SelectDifficulty(difficulty);
+        }
+        startUI = false;
     }
 
     public void ToggleUiPanel(string panelName) {
-        sceneFader.FadeBetweenObjects();
+        if (!startUI)
+            sceneFader.FadeBetweenObjects();
         StartCoroutine(TogglePanels(panelName));
-    }
-    
-    public void BackHome() {
-        sceneFader.FadeBetweenObjects();
-        StartCoroutine(HomeScreen());
+        crossSceneManager.panelName = panelName;
     }
 
+
     public void OpenGameModes() {
-        sceneFader.FadeBetweenObjects();
+        if (!startUI)
+            sceneFader.FadeBetweenObjects();
         StartCoroutine(GameModes());
     }
 
     public void SelectGameMode(int gameModeNr) {
-        sceneFader.FadeBetweenObjects();
+        if (!startUI)
+            sceneFader.FadeBetweenObjects();
         StartCoroutine(SelectGameModeUI(gameModeNr));
+        crossSceneManager.gameModeNr = gameModeNr;
     }
 
     public void SelectDifficulty(int difficulty) {
@@ -100,11 +119,25 @@ public class LevelSelector : MonoBehaviour {
                 casualLevelDifficulties[i].SetActive(false);
             }
         }
+        crossSceneManager.difficulty = difficulty;
     }
 
     public void SelecteLevel(int buildIndex, int level) {
+        TmpPreventClicks();
         saveManager.SaveIntData("boardToLoad", level);
         sceneFader.FadeToBuildIndex(buildIndex);
+    }
+
+    public void BackHome() {
+        sceneFader.FadeBetweenObjects();
+        StartCoroutine(HomeScreen());
+        crossSceneManager.panelName = "";
+        crossSceneManager.gameModeNr = -1;
+        crossSceneManager.difficulty = -1;
+    }
+
+    public void TmpPreventClicks() {
+        CrossSceneManager.Instance.TmpPreventClicks();
     }
 
     public void PlayButtonClick() {
@@ -112,12 +145,10 @@ public class LevelSelector : MonoBehaviour {
     }
 
     public IEnumerator TogglePanels(string panelName) {
-        float t = 0f;
-
-        while (t < 0.5f) {
-            t += Time.deltaTime;
-            yield return 0;
+        if (!startUI) {
+            yield return new WaitForSeconds(0.5f);
         }
+
         mainScreen.SetActive(!mainScreen.activeSelf);
         panelHeader.SetActive(!panelHeader.activeSelf);
         
@@ -136,26 +167,11 @@ public class LevelSelector : MonoBehaviour {
             aboutPanel.SetActive(!aboutPanel.activeSelf);
             about.ResetTutImage();
         }
-        CrossSceneManager.Instance.panelName = panelName;
-    }
-
-    public IEnumerator HomeScreen() {
-        float t = 0f;
-
-        while (t < 0.5f) {
-            t += Time.deltaTime;
-            yield return 0;
-        }
-
-        UIStartState();
     }
 
     public IEnumerator GameModes() {
-        float t = 0f;
-
-        while (t < 0.5f) {
-            t += Time.deltaTime;
-            yield return 0;
+        if (!startUI) {
+            yield return new WaitForSeconds(0.5f);
         }
 
         home.SetActive(false);
@@ -173,11 +189,8 @@ public class LevelSelector : MonoBehaviour {
     }
 
     public IEnumerator SelectGameModeUI(int gameModeNr) {
-        float t = 0f;
-
-        while (t < 0.5f) {
-            t += Time.deltaTime;
-            yield return 0;
+        if (!startUI) {
+            yield return new WaitForSeconds(0.5f);
         }
 
         gameModesParent.SetActive(false);
@@ -188,5 +201,10 @@ public class LevelSelector : MonoBehaviour {
 
         selectPanelName.text = gameModes[gameModeNr].name;
         SelectDifficulty(0);
+    }
+
+    public IEnumerator HomeScreen() {
+        yield return new WaitForSeconds(0.5f);
+        UIStartState();
     }
 }
