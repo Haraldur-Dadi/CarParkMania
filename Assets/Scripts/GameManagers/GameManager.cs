@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public virtual void LoadLevel() {
+        CrossSceneManager.Instance.TmpPreventClicks();
         if (level_board != null)
             Destroy(level_board);
 
@@ -47,15 +48,19 @@ public class GameManager : MonoBehaviour {
         if (levelIndex < boardLength) {
             difficultyTxt.text = "Easy";
             boardToInst = level_boards_easy[levelIndex];
+            CrossSceneManager.Instance.difficulty = 0;
         } else if (boardLength <= levelIndex && levelIndex < (boardLength * 2)) {
             difficultyTxt.text = "Medium";
             boardToInst = level_boards_medium[levelIndex - level_boards_easy.Length];
+            CrossSceneManager.Instance.difficulty = 1;
         } else if ((boardLength * 2) <= levelIndex && levelIndex < (boardLength * 3)) {
             difficultyTxt.text = "Hard";
             boardToInst = level_boards_hard[levelIndex - (level_boards_easy.Length * 2)];
+            CrossSceneManager.Instance.difficulty = 2;
         } else if ((boardLength * 3) <= levelIndex) {
             difficultyTxt.text = "Expert";
             boardToInst = level_boards_expert[levelIndex - (level_boards_easy.Length * 3)];
+            CrossSceneManager.Instance.difficulty = 3;
         }
 
         level_board = Instantiate(boardToInst, gameBoard.transform);
@@ -93,7 +98,7 @@ public class GameManager : MonoBehaviour {
 
     public void GoToLevelSelector() {
         /* Sends player to home screen */
-        AudioManager.Instance.PlayButtonClick();
+        CrossSceneManager.Instance.TmpPreventClicks();
         sceneFader.FadeToBuildIndex(0);
     }
 
@@ -114,17 +119,14 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(PreLoadLevel());
     }
 
-    public IEnumerator PreLoadLevel() {
+    public void PlayButtonClick() {
         AudioManager.Instance.PlayButtonClick();
+    }
+
+    public IEnumerator PreLoadLevel() {
+        CrossSceneManager.Instance.TmpPreventClicks();
         sceneFader.FadeBetweenObjects();
-
-        float t = 0f;
-
-        while (t < 0.5f) {
-            t += Time.deltaTime;
-            yield return 0;
-        }
-
+        yield return new WaitForSeconds(0.5f);
         LoadLevel();
     }
 }

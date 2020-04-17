@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class DailyChallenge_GM : GameManager {
 
@@ -17,6 +18,12 @@ public class DailyChallenge_GM : GameManager {
         } else if ((boardLength * 3) <= levelIndex) {
             saveManager.SaveIntData("DailyChallenge4Completed", 1);
         }
+
+        StartCoroutine(DelayedLevelSelector());
     }
 
+    public IEnumerator DelayedLevelSelector() {
+        yield return new WaitForSeconds(2);
+        GoToLevelSelector();
+    }
 }
