@@ -12,12 +12,16 @@ public class InfoManager : MonoBehaviour {
     public TextMeshProUGUI[] timedCompleted;
 
     private void Start() {
-        totalCompleted.text = "Total: " + PlayerPrefs.GetInt("TotalLevelsComplete", 0) + "/" + standardTotalLevels*3;
-        casualCompleted[0].text = ((float)PlayerPrefs.GetInt("CasualLevelReached", 0) / standardTotalLevels) * 100 + "%";
-        casualCompleted[1].text = PlayerPrefs.GetInt("CasualLevelReached", 0) + "/" + standardTotalLevels;
-        challengeCompleted[0].text = ((float)PlayerPrefs.GetInt("ChallengeLevelReached", 0) / standardTotalLevels) * 100 + "%";
-        challengeCompleted[1].text = PlayerPrefs.GetInt("ChallengeLevelReached", 0) + "/" + standardTotalLevels;
-        timedCompleted[0].text = ((float)PlayerPrefs.GetInt("TimedLevelReached", 0) / standardTotalLevels) * 100 + "%";
-        timedCompleted[1].text = PlayerPrefs.GetInt("TimedLevelReached", 0) + "/" + standardTotalLevels;
+        int casualReached = PlayerPrefs.GetInt("CasualLevelReached", 0);
+        int challengeReached = PlayerPrefs.GetInt("ChallengeLevelReached", 0);
+        int timedReached = PlayerPrefs.GetInt("TimedLevelReached", 0);
+
+        totalCompleted.text = "Total: " + (casualReached + challengeReached + timedReached) + "/" + standardTotalLevels*3;
+        casualCompleted[0].text = ((float) casualReached / standardTotalLevels) * 100 + "%";
+        casualCompleted[1].text = casualReached + "/" + standardTotalLevels;
+        challengeCompleted[0].text = ((float) challengeReached / standardTotalLevels) * 100 + "%";
+        challengeCompleted[1].text = challengeReached + "/" + standardTotalLevels;
+        timedCompleted[0].text = ((float) timedReached / standardTotalLevels) * 100 + "%";
+        timedCompleted[1].text = timedReached + "/" + standardTotalLevels;
     }
 }
