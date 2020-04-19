@@ -109,11 +109,8 @@ public class DailySpin : MonoBehaviour {
 
         switch (finalAngle) {
             case 0:
-                // Give Car
-                int randomInt = winID[UnityEngine.Random.Range(0, winID.Length - 1)];
-                string randomCat = winCatagories[UnityEngine.Random.Range(0, winCatagories.Length - 1)]; 
-
-                winItem = itemDb.GetItem(randomCat, randomInt);
+                // Add 15 gold
+                rewardAmount = 15;
                 break;
             case 45:
                 // Add 10 gold
