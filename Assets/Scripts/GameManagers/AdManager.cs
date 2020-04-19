@@ -14,7 +14,6 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     string gameID = "3535681";
     string bannerPlacementID = "MainMenu";
     string rewardVideoID = "rewardedVideo";
-    bool testMode = true;
 
     public GameObject rewardAdsBtn;
 
@@ -26,7 +25,7 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
         if (Instance == null) {
             Instance = this;
             Advertisement.AddListener(this);
-            Advertisement.Initialize(gameID, testMode);
+            Advertisement.Initialize(gameID, false);
             SceneManager.sceneLoaded += OnSceneLoaded;
         } else {
             return;
