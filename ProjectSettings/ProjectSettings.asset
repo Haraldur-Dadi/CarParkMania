@@ -435,9 +435,9 @@ PlayerSettings:
   m_BuildTargetGroupLightmapSettings: []
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
-  actionOnDotNetUnhandledException: 1
+  actionOnDotNetUnhandledException: 0
   enableInternalProfiler: 0
-  logObjCUncaughtExceptions: 1
+  logObjCUncaughtExceptions: 0
   enableCrashReportAPI: 1
   cameraUsageDescription: 
   locationUsageDescription: 
