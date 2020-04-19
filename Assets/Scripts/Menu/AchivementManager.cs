@@ -11,9 +11,6 @@ public class AchivementManager : MonoBehaviour {
     public AchivementPanel[] achivements;
     public TextMeshProUGUI totalCompletedTxt;
 
-    public int achivemntLeftToCollect;
-    public Animator notification;
-
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -29,14 +26,7 @@ public class AchivementManager : MonoBehaviour {
 
             if (achivement.completed)
                 completed += 1;
-
-            if (achivement.canCollect) {
-                achivemntLeftToCollect += 1;
-            }
         }
-
-        if (achivemntLeftToCollect > 0)
-            notification.SetTrigger("Avail");
 
         totalCompletedTxt.text = "Completed: " + completed + "/10";
     }
