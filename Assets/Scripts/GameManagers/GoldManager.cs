@@ -60,7 +60,6 @@ public class GoldManager : MonoBehaviour {
     }
 
     public void ToggleAdGoldConformation() {
-        AudioManager.Instance.PlayButtonClick();
         adForGoldCon.SetActive(!adForGoldCon.activeSelf);
     }
 }
