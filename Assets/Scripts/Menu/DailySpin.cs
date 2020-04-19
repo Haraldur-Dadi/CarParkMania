@@ -106,8 +106,8 @@ public class DailySpin : MonoBehaviour {
 
         switch (finalAngle) {
             case 0:
-                // Add 15 gold
-                rewardAmount = 15;
+                // Add 35 gold
+                rewardAmount = 35;
                 break;
             case 45:
                 // Add 10 gold
