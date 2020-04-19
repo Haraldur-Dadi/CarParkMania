@@ -163,8 +163,6 @@ public class CarMovement : MonoBehaviour {
             undoList.Add(tuple);
 
             carToMove = null;
-            gameManager.IncreaseMoves(1);
-
             AbleToUndo();
         }
     }
@@ -186,15 +184,11 @@ public class CarMovement : MonoBehaviour {
 
         carToMove = undoList[index].car;
         posToMoveCar = undoList[index].movePos;
-
         carToMove.transform.position = posToMoveCar;
         
         undoList.RemoveAt(index);
-        AbleToUndo();
         carToMove = null;
-
-        gameManager.DecreaseMoves(1);
-        AudioManager.Instance.PlayButtonClick();
+        AbleToUndo();
     }
 }
 

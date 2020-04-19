@@ -5,6 +5,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour {
 
+    public static GameManager Instance;
     public SceneFader sceneFader;
     public SaveManager saveManager;
     public ItemDb itemDb;
@@ -24,6 +25,14 @@ public class GameManager : MonoBehaviour {
     public GameObject levelCompleteUi;
     public TextMeshProUGUI levelTxt;
     public TextMeshProUGUI difficultyTxt;
+
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+        } else {
+            Destroy(this);
+        }
+    }
 
     public virtual void Start() {
         sceneFader = SceneFader.Instance;
@@ -100,14 +109,6 @@ public class GameManager : MonoBehaviour {
         /* Sends player to home screen */
         CrossSceneManager.Instance.TmpPreventClicks();
         sceneFader.FadeToBuildIndex(0);
-    }
-
-    public virtual void IncreaseMoves(int amount) {
-        // Base method for Challenge Mode
-    }
-
-    public virtual void DecreaseMoves(int amount) {
-        // Base method for Challange Mode
     }
 
     public void RetryLevel() {

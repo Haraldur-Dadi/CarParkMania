@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CrossSceneManager : MonoBehaviour {
 
     public static CrossSceneManager Instance;
+    public GameManager gameManager;
 
     public CanvasGroup[] canvasGroups;
     public GameObject settingsUI;
@@ -29,6 +30,9 @@ public class CrossSceneManager : MonoBehaviour {
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if (scene.buildIndex != 0)
+            gameManager = GameManager.Instance;
+
         canvasGroups = GameObject.FindObjectsOfType<CanvasGroup>();
         settingsBtn = GameObject.Find("SettingsBtn").GetComponent<Button>();
         settingsBtn.onClick.AddListener(delegate { ToggleSettings(); });
@@ -37,6 +41,9 @@ public class CrossSceneManager : MonoBehaviour {
     }
 
     public void ToggleSettings() {
+        if (gameManager)
+            gameManager.finished = !gameManager.finished;
+
         settingsUI.SetActive(!settingsUI.activeSelf);
     }
 
