@@ -50705,6 +50705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e350b38e652132246b1b4cf871176995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   canvasGroups: []
   settingsUI: {fileID: 246971363215570288}
   settingsBtn: {fileID: 0}
