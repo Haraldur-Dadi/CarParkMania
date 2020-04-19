@@ -24,9 +24,6 @@ public class DailySpin : MonoBehaviour {
     private float timeInterval;
     private int finalAngle;
 
-    private Item winItem;
-    public string[] winCatagories;
-    public int[] winID;
     private int rewardAmount;
 
     public Animator notification;
@@ -76,7 +73,7 @@ public class DailySpin : MonoBehaviour {
     }
 
     IEnumerator Spin() {
-        randomValue = UnityEngine.Random.Range(30, 40);
+        randomValue = UnityEngine.Random.Range(25, 35);
         timeInterval = 0.1f;
 
         AudioManager.Instance.PlayWheelSpinning();
@@ -149,11 +146,6 @@ public class DailySpin : MonoBehaviour {
             winGoldPanel.SetActive(true);
             winCarPanel.SetActive(false);
             AudioManager.Instance.PlayBuySound();
-        } else {
-            winGoldPanel.SetActive(false);
-            winCarPanel.SetActive(true);
-            winCarName.name = winItem.name;
-            PlayerPrefs.SetInt(winItem.catagory + winItem.ID + "Unlocked", 1);
         }
     }
 
