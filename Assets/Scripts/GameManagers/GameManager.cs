@@ -130,4 +130,14 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         LoadLevel();
     }
+    
+    public IEnumerator DelayedLevelSelector() {
+        yield return new WaitForSeconds(2);
+        GoToLevelSelector();
+    }
+
+    public IEnumerator CountdownNextLevel() {
+        yield return new WaitForSeconds(2);
+        StartCoroutine(PreLoadLevel());
+    }
 }

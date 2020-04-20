@@ -13,17 +13,15 @@ public class Casual_GM : GameManager {
 
         if (PlayerPrefs.GetInt("CasualLevelReached", 0) <= levelIndex) {
             saveManager.SaveIntData("CasualLevelReached", levelIndex + 1);
-
         }
         
         saveManager.IncreaseAchivementProgress(0);
         saveManager.IncreaseAchivementProgress(1);
         saveManager.SaveIntData("boardToLoad", levelIndex + 1);
-        StartCoroutine(CountdownNextLevel());
-    }
-
-    IEnumerator CountdownNextLevel() {
-        yield return new WaitForSeconds(2);
-        StartCoroutine(PreLoadLevel());
+        if (levelIndex + 1 <= 99) {
+            StartCoroutine(CountdownNextLevel());
+        } else {
+            StartCoroutine(DelayedLevelSelector());
+        }
     }
 }

@@ -21,9 +21,4 @@ public class DailyChallenge_GM : GameManager {
 
         StartCoroutine(DelayedLevelSelector());
     }
-
-    public IEnumerator DelayedLevelSelector() {
-        yield return new WaitForSeconds(2);
-        GoToLevelSelector();
-    }
 }

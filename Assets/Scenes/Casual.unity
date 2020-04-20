@@ -800,6 +800,11 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1020077670}
+    - target: {fileID: 317862555192456570, guid: c9f6610ab6d688041a45838bcd6737d4,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 317862555192456571, guid: c9f6610ab6d688041a45838bcd6737d4,
         type: 3}
       propertyPath: m_LocalPosition.x
