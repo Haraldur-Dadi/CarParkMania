@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 
 public class DailySpin : MonoBehaviour {
-    
     SaveManager saveManager;
     GoldManager goldManager;
     ItemDb itemDb;
@@ -20,6 +19,7 @@ public class DailySpin : MonoBehaviour {
     public TextMeshProUGUI winCarName;
     public Image winCarImg;
     public Button spinBtn;
+    public Button closeBtn;
 
     private int randomValue;
     private float timeInterval;
@@ -67,7 +67,6 @@ public class DailySpin : MonoBehaviour {
     public void OpenUI() {
         if (canSpin()) {
             spinBtn.gameObject.SetActive(true);
-            spinBtn.interactable = true;
             unableToSpinPanel.SetActive(false);
         } else {
             spinBtn.gameObject.SetActive(false);
@@ -89,6 +88,8 @@ public class DailySpin : MonoBehaviour {
     }
 
     IEnumerator Spin() {
+        closeBtn.interactable = false;
+
         randomValue = UnityEngine.Random.Range(25, 35);
         timeInterval = 0.1f;
 
@@ -176,6 +177,7 @@ public class DailySpin : MonoBehaviour {
             saveManager.SaveIntData(winItem.catagory + winItem.ID + "Unlocked", 1);
             AudioManager.Instance.PlayWinSound();
         }
+        closeBtn.interactable = true;
     }
 
     IEnumerator Counter() {
