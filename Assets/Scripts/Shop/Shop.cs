@@ -93,21 +93,18 @@ public class Shop : MonoBehaviour {
         selectedCatagoryBtn.interactable = false;
         selectedItem = itemDb.GetItem(cat, 0);
         UpdateShopUI();
-        AudioManager.Instance.PlayButtonClick();
     }
 
     public void ShowNextItem() {
         // Switches to next item (item with 1 higher ID)
         selectedItem = itemDb.GetItem(selectedItem.catagory, selectedItem.ID + 1);
         UpdateShopUI();
-        AudioManager.Instance.PlayButtonClick();
     }
 
     public void ShowPrevItem() {
         // Switches to prev item (item with 1 lower ID)
         selectedItem = itemDb.GetItem(selectedItem.catagory, selectedItem.ID - 1);
         UpdateShopUI();
-        AudioManager.Instance.PlayButtonClick();
     }
 
     public void ShowStandard(bool buyItem) {
@@ -153,6 +150,5 @@ public class Shop : MonoBehaviour {
         // Change equippedCar id 
         PlayerPrefs.SetInt(selectedItem.catagory + "Equipped", selectedItem.ID);
         UpdateShopUI();
-        AudioManager.Instance.PlayButtonClick();
     }
 }
