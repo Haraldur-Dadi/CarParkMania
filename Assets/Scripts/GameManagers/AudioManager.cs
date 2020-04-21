@@ -15,7 +15,6 @@ public class AudioManager : MonoBehaviour {
     public AudioClip wheelSpinning;
     public AudioClip carMoved;
     public AudioClip winSound;
-    public AudioClip gameOverSound;
 
     public float musicVol;
     public float sfxVol;
@@ -121,10 +120,6 @@ public class AudioManager : MonoBehaviour {
     public void PlayWinSound() {
         sfxAudioSource.PlayOneShot(winSound);
         StartCoroutine("FadeOutSfx");
-    }
-
-    public void PlayGameOverSound() {
-        sfxAudioSource.PlayOneShot(gameOverSound);
     }
 
     IEnumerator FadeOutSfx() {
