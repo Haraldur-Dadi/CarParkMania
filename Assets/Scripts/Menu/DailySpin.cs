@@ -40,9 +40,6 @@ public class DailySpin : MonoBehaviour {
         saveManager = SaveManager.Instance;
         goldManager = GoldManager.Instance;
         itemDb = ItemDb.Instance;
-
-        if (!PlayerPrefs.HasKey("LastDateSpun"))
-            PlayerPrefs.SetString("LastDateSpun", "1582-09-15");
         
         StartCoroutine(Counter());
     }
