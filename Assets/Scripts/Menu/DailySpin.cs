@@ -18,6 +18,7 @@ public class DailySpin : MonoBehaviour {
     public TextMeshProUGUI wonGoldAmountTxt;
     public GameObject winCarPanel;
     public TextMeshProUGUI winCarName;
+    public Image winCarImg;
     public Button spinBtn;
 
     private int randomValue;
@@ -25,6 +26,13 @@ public class DailySpin : MonoBehaviour {
     private int finalAngle;
 
     private int rewardAmount;
+    public bool canWinCar;
+    private Item winItem;
+    public string[] winCatagories;
+    public int[] winID;
+
+    public GameObject carToWinBoardImg;
+    public GameObject goldToWinBoardImg;
 
     public Animator notification;
 
@@ -43,6 +51,12 @@ public class DailySpin : MonoBehaviour {
         DateTime currDate = DateTime.Today;
         DateTime lastSpinDate = DateTime.ParseExact(PlayerPrefs.GetString("LastDateSpun", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
         
+        if (PlayerPrefs.GetInt("DailyCarsWon", 0) < winCatagories.Length) {
+            canWinCar = true;
+        } else {
+            canWinCar = false;
+        }
+
         if (currDate > lastSpinDate) {
             notification.SetTrigger("Avail");
             return true;
@@ -60,6 +74,8 @@ public class DailySpin : MonoBehaviour {
             unableToSpinPanel.SetActive(true);
         }
 
+        carToWinBoardImg.SetActive(canWinCar);
+        goldToWinBoardImg.SetActive(!canWinCar);
         winPanel.SetActive(false);
     }
 
@@ -101,13 +117,19 @@ public class DailySpin : MonoBehaviour {
         }
 
         finalAngle = Mathf.RoundToInt(wheel.transform.eulerAngles.z);
-        wheel.transform.Rotate(0, 0, 22.5f);
         spinBtn.gameObject.SetActive(false);
 
         switch (finalAngle) {
             case 0:
-                // Add 35 gold
-                rewardAmount = 35;
+                if (canWinCar) {
+                    // Give player new car skin
+                    int randomInt = UnityEngine.Random.Range(0, winCatagories.Length);
+                    winItem = itemDb.GetItem(winCatagories[randomInt], winID[randomInt]);
+                    saveManager.SaveIntData("DailyCarsWon", 1);
+                } else {
+                    // Add 35 gold
+                    rewardAmount = 35;
+                }
                 break;
             case 45:
                 // Add 10 gold
@@ -146,6 +168,13 @@ public class DailySpin : MonoBehaviour {
             winGoldPanel.SetActive(true);
             winCarPanel.SetActive(false);
             AudioManager.Instance.PlayBuySound();
+        } else {
+            winGoldPanel.SetActive(false);
+            winCarPanel.SetActive(true);
+            winCarName.text = winItem.name;
+            winCarImg.sprite = winItem.sprite;
+            saveManager.SaveIntData(winItem.catagory + winItem.ID + "Unlocked", 1);
+            AudioManager.Instance.PlayWinSound();
         }
     }
 
