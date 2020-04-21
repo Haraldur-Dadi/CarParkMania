@@ -49,7 +49,8 @@ public class ItemDb : MonoBehaviour {
         PlayerCars = new List<Item>() {
             new Item("Police Car", "PlayerCar", 0, false, 0),
             new Item("Fire Truck", "PlayerCar", 1, true, 25),
-            new Item("Ambulance", "PlayerCar", 2, true, 25)
+            new Item("Ambulance", "PlayerCar", 2, true, 25),
+            new Item("Police Motorcycle", "PlayerCar", 3, false, 0)
         };
         Cars2 = new List<Item>() {
             new Item("Standard", "2LongCar", 0, false, 0)
