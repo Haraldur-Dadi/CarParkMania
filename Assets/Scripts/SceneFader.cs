@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class SceneFader : MonoBehaviour {
 
-    public AdManager adManager;
-
     public Image img;
     public AnimationCurve curve;
 
@@ -42,11 +40,10 @@ public class SceneFader : MonoBehaviour {
             img.color = new Color(0f, 0f, 0f, a);
             yield return 0;
         }
-        adManager.ShowBanner();
+        AdManager.Instance.ShowBanner();
     }
 
     public IEnumerator FadeBetweenObjInScene() {
-        adManager.HideBanner();
         float t = 0f;
         while (t < 1f) {
             t += Time.deltaTime * 2;
@@ -62,11 +59,10 @@ public class SceneFader : MonoBehaviour {
             img.color = new Color(0f, 0f, 0f, a);
             yield return 0;
         }
-        adManager.ShowBanner();
     }
 
     public IEnumerator FadeOutBuildindex(int buildindex) {
-        adManager.HideBanner();
+        AdManager.Instance.HideBanner();
         float t = 0f;
         while (t < 1f) {
             t += Time.deltaTime * 2;
