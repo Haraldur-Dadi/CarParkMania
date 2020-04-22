@@ -9,7 +9,6 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     public static AdManager Instance;
 
     public SaveManager saveManager;
-    public GoldManager goldManager;
 
     string gameID = "3535681";
     string bannerPlacementID = "MainMenu";
@@ -25,7 +24,7 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
         if (Instance == null) {
             Instance = this;
             Advertisement.AddListener(this);
-            Advertisement.Initialize(gameID, false);
+            Advertisement.Initialize(gameID, true);
             SceneManager.sceneLoaded += OnSceneLoaded;
         } else {
             return;
@@ -34,7 +33,6 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         if (scene.buildIndex == 0) {
-            goldManager = GoldManager.Instance;
             rewardAdsBtn = GameObject.Find("WatchAdForMoney");
         }
 
@@ -108,7 +106,7 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult) {
         // Reward the user for watching the ad if watched to completion.
         if (showResult == ShowResult.Finished) {
-            goldManager.AddGold(25, true);
+            GoldManager.Instance.AddGold(25, true);
         }
 
         ShowBanner();
