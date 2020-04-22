@@ -6,6 +6,8 @@ public class SaveManager : MonoBehaviour {
     public static SaveManager Instance;
     public AchivementManager achivementManager;
 
+    public GameObject resetProgressWindow;
+
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -15,6 +17,7 @@ public class SaveManager : MonoBehaviour {
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         if(scene.buildIndex == 0) {
+            resetProgressWindow.SetActive(false);
             achivementManager = AchivementManager.Instance;
             achivementManager.UpdateAchivements();
         }
@@ -41,5 +44,14 @@ public class SaveManager : MonoBehaviour {
 
         if (achivementManager)
             achivementManager.UpdateAchivements();
+    }
+
+    public void ResetProgressPrompt() {
+        resetProgressWindow.SetActive(!resetProgressWindow.activeSelf);
+    }
+
+    public void ResetProgress() {
+        PlayerPrefs.DeleteAll();
+        SceneFader.Instance.FadeToBuildIndex(0);
     }
 }
