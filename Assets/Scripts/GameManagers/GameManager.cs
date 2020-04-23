@@ -84,11 +84,7 @@ public class GameManager : MonoBehaviour {
             Car carObj = car.GetComponent<Car>();
 
             if (carObj.length == 0) {
-                carObj.carImg.sprite = itemDb.GetItem("PlayerCar", PlayerPrefs.GetInt("PlayerCarEquipped", 0)).sprite;
-            } else if (carObj.length == 2) {
-                carObj.carImg.sprite = itemDb.GetItem("2LongCar", PlayerPrefs.GetInt("2LongCarEquipped", 0)).sprite;
-            } else if (carObj.length == 3) {
-                carObj.carImg.sprite = itemDb.GetItem("3LongCar", PlayerPrefs.GetInt("3LongCarEquipped", 0)).sprite;
+                carObj.carImg.sprite = itemDb.GetItem(PlayerPrefs.GetInt("PlayerCarEquipped", 0)).sprite;
             }
         }
     }
