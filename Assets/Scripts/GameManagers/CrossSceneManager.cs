@@ -26,7 +26,7 @@ public class CrossSceneManager : MonoBehaviour {
         }
         panelName = "";
         gameModeNr = -1;
-        difficulty = -1;
+        difficulty = 0;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
