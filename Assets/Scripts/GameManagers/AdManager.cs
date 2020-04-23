@@ -16,9 +16,15 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
 
     string rewardVideoID = "rewardedVideo";
 
-    public GameObject rewardAdsBtn;
+    public GameObject firstTimeAllowAdPrompt;
+    public GameObject adsAllowedPrompt;
+    public GameObject normalCanvas;
+
+    public GameObject[] rewardAdsBtn;
     public Button allowAdsBtn;
+    public Button allowAdsPromptBtn;
     public Button denyAdsBtn;
+    public Button denyAdsPromptBtn;
 
     private void Awake() {
         if (Instance == null) {
@@ -32,17 +38,39 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         if (scene.buildIndex == 0) {
-            rewardAdsBtn = GameObject.Find("WatchAdForMoney");
+            if (!PlayerPrefs.HasKey("FirstTimeAdPrompt")) {
+                normalCanvas = GameObject.Find("NormalCanvas");
+                ToggleFirstTimeAdPrompt(false);
+            } else {
+                firstTimeAllowAdPrompt.SetActive(false);
+            }
+
+            rewardAdsBtn = GameObject.FindGameObjectsWithTag("rewardAdBtn");
+        }
+    }
+
+    public void ToggleFirstTimeAdPrompt(bool completed) {
+        firstTimeAllowAdPrompt.SetActive(!completed);
+        normalCanvas.SetActive(completed);
+        
+        if (completed) {
+            SaveManager.Instance.SaveIntData("FirstTimeAdPrompt", 1);
         }
     }
 
     public void AllowAds(int allow) {
         if (allow == 1) {
             allowAdsBtn.interactable = false;
+            allowAdsPromptBtn.interactable = false;
             denyAdsBtn.interactable = true;
+            denyAdsPromptBtn.interactable = true;
+            adsAllowedPrompt.SetActive(true);
         } else {
             allowAdsBtn.interactable = true;
+            allowAdsPromptBtn.interactable = true;
             denyAdsBtn.interactable = false;
+            denyAdsPromptBtn.interactable = false;
+            adsAllowedPrompt.SetActive(false);
         }
         
         SaveManager.Instance.SaveIntData("AllowAds", allow);
@@ -58,8 +86,10 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
 
     public void OnUnityAdsReady(string placementId) {
         if (placementId == rewardVideoID) {
-            if (rewardAdsBtn) {
-                rewardAdsBtn.SetActive(true);
+            if (rewardAdsBtn.Length > 0) {
+                foreach (GameObject btn in rewardAdsBtn){
+                    btn.SetActive(true);
+                }
             }
         }
     }
@@ -74,7 +104,9 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
                 GoldManager.Instance.AddGold(25, true);
             }
 
-            rewardAdsBtn.SetActive(false);
+            foreach (GameObject btn in rewardAdsBtn){
+                btn.SetActive(false);
+            }
         }
     }
 }
