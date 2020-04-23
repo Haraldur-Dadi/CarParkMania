@@ -1,12 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GameModePanel : MonoBehaviour {
     public string gameModeName;
     public int gameModeScene;
-    public LevelButton[] levelButtons;
+    public LevelButton[] levelBtns;
+    public Button[] difficultyBtns;
+    public Scrollbar scrollbar;
     private int levelReached;
+
+    public int selectedDifficulty;
 
     private void Start() {
         levelReached = PlayerPrefs.GetInt(gameModeName + "LevelReached", 0);
@@ -14,19 +17,31 @@ public class GameModePanel : MonoBehaviour {
     }
 
     public void ChangeDifficulty(int difficulty) {
-        for (int i = 0; i < levelButtons.Length; i++) {
+        selectedDifficulty = difficulty;
+        if (scrollbar)
+            scrollbar.value = 1;
+        
+        for (int i = 0; i < levelBtns.Length; i++) {
             int iValue = i + (25 * difficulty);
             
             if (iValue > levelReached) {
-                levelButtons[i].Unavailable(iValue);
+                levelBtns[i].Unavailable(iValue);
             } else {
-                levelButtons[i].button.onClick.AddListener(() => SelectLevel(gameModeScene, iValue));
+                levelBtns[i].button.onClick.AddListener(() => SelectLevel(gameModeScene, iValue));
 
                 if (iValue < levelReached) {
-                    levelButtons[i].Finished(iValue);
+                    levelBtns[i].Finished(iValue);
                 } else {
-                    levelButtons[i].NextLevel(iValue);
+                    levelBtns[i].NextLevel(iValue);
                 }
+            }
+        }
+
+        for (int i = 0; i < difficultyBtns.Length; i++) {
+            if (i == difficulty) {
+                difficultyBtns[i].interactable = false;
+            } else {
+                difficultyBtns[i].interactable = true;
             }
         }
     }
