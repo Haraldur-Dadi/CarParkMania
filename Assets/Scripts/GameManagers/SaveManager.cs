@@ -16,7 +16,7 @@ public class SaveManager : MonoBehaviour {
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        if(scene.buildIndex == 0) {
+        if (scene.buildIndex == 0) {
             resetProgressWindow.SetActive(false);
             achivementManager = AchivementManager.Instance;
             achivementManager.UpdateAchivements();
