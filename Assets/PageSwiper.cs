@@ -5,86 +5,137 @@ using UnityEngine.EventSystems;
 
 public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
 
-    private Vector3 panelPos;
+    private Vector2 startPos;
+    private Vector2 panelPos;
+    private RectTransform rectTransform;
     public float swipeThreshold;
 
     public Shop shop;
+    public GameModePanel gameMode;
     public bool showNext;
 
     public CanvasGroup canvasGroup;
 
     private void Start() {
-        panelPos = transform.position;
-        swipeThreshold = 0.2f;
+        rectTransform = GetComponent<RectTransform>();
+        canvasGroup = GetComponent<CanvasGroup>();
+        startPos = rectTransform.position;
+        panelPos = startPos;
+        if (gameMode) {
+            swipeThreshold = 0.25f;
+        } else if (shop) {
+            swipeThreshold = 0.1f;
+        }
     }
 
     public void OnDrag(PointerEventData data) {
-        float difference = data.pressPosition.x - data.position.x;
+        float differenceX = data.pressPosition.x - data.position.x;
 
-        if (difference > 0) {
-            if (!shop.canShowNext)
-                return;
-        } else if (difference < 0) {
-            if (!shop.canShowPrev)
-                return;
+        if (differenceX > 0) {
+            if (shop)
+                if (!shop.canShowNext)
+                    return;
+        } else if (differenceX < 0) {
+            if (shop)
+                if (!shop.canShowPrev)
+                    return;
+        }
+        rectTransform.position = panelPos - new Vector2(differenceX, 0);
+        
+        if (gameMode) {
+            float differenceY = data.pressPosition.y - data.position.y;
+            rectTransform.position = panelPos - new Vector2(0, differenceY);
         }
 
-        float alphaValue = 1 - (Mathf.Abs(difference) / ((Screen.width + 212.5f)/2));
-        canvasGroup.alpha = Mathf.Clamp(alphaValue, 0, 1);
-        transform.position = panelPos - new Vector3(difference, 0, 0);
+        if (Mathf.Abs(differenceX / Screen.width) >= swipeThreshold)
+            canvasGroup.alpha = Mathf.Clamp(1 - (Mathf.Abs(differenceX) / (Screen.width/2)), .05f, 1f);
     }
 
     public void OnEndDrag(PointerEventData data) {
-        float threshold = (data.pressPosition.x - data.position.x) / Screen.width;
+        Vector2 newPos = panelPos;
+        float xThreshold = (data.pressPosition.x - data.position.x) / Screen.width;
 
-        if (Mathf.Abs(threshold) >= swipeThreshold) {
-            Vector3 newPos = panelPos;
-            if (threshold > 0) {
-                // Show next item
-                if (!shop.canShowNext)
-                    return;
+        if (gameMode) {
+            Vector2 yDifference = new Vector2(0, data.pressPosition.y - data.position.y);
+            newPos -= yDifference;
+        }
 
-                newPos += new Vector3(-Screen.width, 0, 0);
+        if (Mathf.Abs(xThreshold) >= swipeThreshold) {
+            if (xThreshold > 0) {
+                if (shop) {
+                    if (!shop.canShowNext)
+                        return;
+                } else if (gameMode) {
+                    if (CrossSceneManager.Instance.difficulty == 3) {
+                        ResetPanel(newPos);
+                        return;
+                    }
+                }
+
+                newPos += new Vector2(-Screen.width, 0);
                 showNext = true;
-            } else if (threshold < 0) {
-                // Show prev item
-                if (!shop.canShowPrev)
-                    return;
+            } else if (xThreshold < 0) {
+                if (shop) {
+                    if (!shop.canShowPrev)
+                        return;
+                } else if (gameMode) {
+                    if (CrossSceneManager.Instance.difficulty == 0) {
+                        ResetPanel(newPos);
+                        return;
+                    }
+                }
                 
-                newPos += new Vector3(Screen.width, 0, 0);
+                newPos += new Vector2(Screen.width, 0);
                 showNext = false;
             }
-            StartCoroutine(SmoothSwipe(newPos));
             StartCoroutine(ShowAnotherItem(newPos));
+            StartCoroutine(SmoothSwipe(newPos));
         } else {
-            canvasGroup.alpha = 1;
-            StartCoroutine(SmoothSwipe(panelPos));
+            ResetPanel(newPos);
         }
     }
 
-    IEnumerator SmoothSwipe(Vector3 endPos) {
+    public void ResetPanel(Vector2 newPos) {
+        canvasGroup.alpha = 1;
+        if (gameMode) {
+            newPos.y = Mathf.Clamp(newPos.y, startPos.y, startPos.y + (rectTransform.sizeDelta.y / 2));
+        }
+        StartCoroutine(SmoothSwipe(newPos));
+    }
+
+    IEnumerator SmoothSwipe(Vector2 endPos) {
         float t = 0f;
         while(t <= 1) {
             t += Time.deltaTime / .4f;
-            transform.position = Vector3.Lerp(transform.position, endPos, Mathf.SmoothStep(0f, 1f, t));
+            rectTransform.position = Vector2.Lerp(rectTransform.position, endPos, Mathf.SmoothStep(0f, 1f, t));
             yield return null;
         }
+        if (gameMode)
+            panelPos = rectTransform.position;
     }
 
-    IEnumerator ShowAnotherItem(Vector3 newPos) {
+    IEnumerator ShowAnotherItem(Vector2 newPos) {
         yield return new WaitForSeconds(.4f);
-        
-        StopCoroutine(SmoothSwipe(newPos));
         canvasGroup.alpha = 1;
 
         if (showNext) {
-            shop.ShowNextItem();
-            transform.position += new Vector3(Screen.width * 2, 0, 0);
+            if (shop) {
+                shop.ShowNextItem();
+            } else if (gameMode) {
+                gameMode.SelectDifficulty(CrossSceneManager.Instance.difficulty + 1);
+            }
+
+            rectTransform.position = panelPos + new Vector2(Screen.width * 2, 0);
         } else {
-            shop.ShowPrevItem();
-            transform.position += new Vector3(-Screen.width * 2, 0, 0);
+            if (shop) {
+                shop.ShowPrevItem();
+            } else if (gameMode) {
+                gameMode.SelectDifficulty(CrossSceneManager.Instance.difficulty - 1);
+            }
+
+            rectTransform.position = panelPos + new Vector2(-Screen.width * 2, 0);
         }
 
-        StartCoroutine(SmoothSwipe(panelPos));
+        StartCoroutine(SmoothSwipe(startPos));
     }
 }
