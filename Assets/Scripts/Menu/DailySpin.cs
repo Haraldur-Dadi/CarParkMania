@@ -28,7 +28,6 @@ public class DailySpin : MonoBehaviour {
     private int rewardAmount;
     public bool canWinCar;
     private Item winItem;
-    public string[] winCatagories;
     public int[] winID;
 
     public GameObject carToWinBoardImg;
@@ -48,7 +47,7 @@ public class DailySpin : MonoBehaviour {
         DateTime currDate = DateTime.Today;
         DateTime lastSpinDate = DateTime.ParseExact(PlayerPrefs.GetString("LastDateSpun", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
         
-        if (PlayerPrefs.GetInt("DailyCarsWon", 0) < winCatagories.Length) {
+        if (PlayerPrefs.GetInt("DailyCarsWon", 0) < winID.Length) {
             canWinCar = true;
         } else {
             canWinCar = false;
@@ -121,8 +120,8 @@ public class DailySpin : MonoBehaviour {
             case 0:
                 if (canWinCar) {
                     // Give player new car skin
-                    int randomInt = UnityEngine.Random.Range(0, winCatagories.Length);
-                    winItem = itemDb.GetItem(winCatagories[randomInt], winID[randomInt]);
+                    int randomInt = UnityEngine.Random.Range(0, winID.Length);
+                    winItem = itemDb.GetItem(winID[randomInt]);
                     saveManager.SaveIntData("DailyCarsWon", 1);
                 } else {
                     // Add 35 gold
