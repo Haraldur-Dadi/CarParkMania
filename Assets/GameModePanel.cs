@@ -3,23 +3,17 @@ using UnityEngine.UI;
 
 public class GameModePanel : MonoBehaviour {
     public string gameModeName;
-    public int gameModeScene;
     public LevelButton[] levelBtns;
     public Button[] difficultyBtns;
-    public Scrollbar scrollbar;
     private int levelReached;
-
-    public int selectedDifficulty;
 
     private void Start() {
         levelReached = PlayerPrefs.GetInt(gameModeName + "LevelReached", 0);
-        ChangeDifficulty(0);
+        SelectDifficulty(CrossSceneManager.Instance.difficulty);
     }
 
-    public void ChangeDifficulty(int difficulty) {
-        selectedDifficulty = difficulty;
-        if (scrollbar)
-            scrollbar.value = 1;
+    public void SelectDifficulty(int difficulty) {
+        CrossSceneManager.Instance.difficulty = difficulty;
         
         for (int i = 0; i < levelBtns.Length; i++) {
             int iValue = i + (25 * difficulty);
@@ -27,7 +21,7 @@ public class GameModePanel : MonoBehaviour {
             if (iValue > levelReached) {
                 levelBtns[i].Unavailable(iValue);
             } else {
-                levelBtns[i].button.onClick.AddListener(() => SelectLevel(gameModeScene, iValue));
+                levelBtns[i].button.onClick.AddListener(() => SelectLevel(CrossSceneManager.Instance.gameModeNr, iValue));
 
                 if (iValue < levelReached) {
                     levelBtns[i].Finished(iValue);
