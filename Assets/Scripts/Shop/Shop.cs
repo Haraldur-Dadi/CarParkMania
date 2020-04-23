@@ -8,7 +8,6 @@ public class Shop : MonoBehaviour {
     public GoldManager goldManager;
 
     public Item selectedItem;
-    public Button selectedCatagoryBtn;
 
     public TextMeshProUGUI itemNameTxt;
     public Image itemImg;
@@ -28,12 +27,6 @@ public class Shop : MonoBehaviour {
         if (!PlayerPrefs.HasKey("PlayerCar0Unlocked")) {
             PlayerPrefs.SetInt("PlayerCar0Unlocked", 1);
             PlayerPrefs.SetInt("PlayerCarEquipped", 0);
-            
-            PlayerPrefs.SetInt("2LongCar0Unlocked", 1);
-            PlayerPrefs.SetInt("2LongCarEquipped", 0);
-
-            PlayerPrefs.SetInt("3LongCar0Unlocked", 1);
-            PlayerPrefs.SetInt("3LongCarEquipped", 0);
         }
     }
 
@@ -41,8 +34,7 @@ public class Shop : MonoBehaviour {
         saveManager = SaveManager.Instance;
         itemDb = ItemDb.Instance;
         goldManager = GoldManager.Instance;
-        selectedCatagoryBtn.interactable = false;
-        selectedItem = itemDb.GetItem("PlayerCar", 0);
+        selectedItem = itemDb.GetItem(0);
 
         UpdateShopUI();
     }
@@ -52,7 +44,7 @@ public class Shop : MonoBehaviour {
         itemNameTxt.text = selectedItem.name;
         itemImg.sprite = selectedItem.sprite;
 
-        indexTxt.text = (selectedItem.ID + 1) + "/" + itemDb.GetLengthOfCat(selectedItem.catagory);
+        indexTxt.text = (selectedItem.ID + 1) + "/" + itemDb.GetLengthOfCat();
 
         if (PlayerPrefs.GetInt(selectedItem.catagory + selectedItem.ID + "Unlocked", 0) == 1) {
             ShowEquip();
@@ -67,15 +59,11 @@ public class Shop : MonoBehaviour {
 
     public void UpdateNavButtons() {
         // Display button based on what item looking at
-        if (selectedItem.ID == 0 && selectedItem.ID == itemDb.GetLengthOfCat(selectedItem.catagory) - 1) {
-            // First and last item, no prev or next item
-            prevBtn.SetActive(false);
-            nextBtn.SetActive(false);
-        } else if (selectedItem.ID == 0) {
+        if (selectedItem.ID == 0) {
             // First item, no prev item
             prevBtn.SetActive(false);
             nextBtn.SetActive(true);
-        } else if (selectedItem.ID == itemDb.GetLengthOfCat(selectedItem.catagory) - 1) {
+        } else if (selectedItem.ID == itemDb.GetLengthOfCat() - 1) {
             // Last item, no next item
             prevBtn.SetActive(true);
             nextBtn.SetActive(false);
@@ -86,24 +74,15 @@ public class Shop : MonoBehaviour {
         }
     }
 
-    public void SelectCatagory(string cat) {
-        // Switches catagory and automatically selects first item
-        selectedCatagoryBtn.interactable = true;
-        selectedCatagoryBtn = GameObject.Find("Select" + cat).GetComponent<Button>();
-        selectedCatagoryBtn.interactable = false;
-        selectedItem = itemDb.GetItem(cat, 0);
-        UpdateShopUI();
-    }
-
     public void ShowNextItem() {
         // Switches to next item (item with 1 higher ID)
-        selectedItem = itemDb.GetItem(selectedItem.catagory, selectedItem.ID + 1);
+        selectedItem = itemDb.GetItem(selectedItem.ID + 1);
         UpdateShopUI();
     }
 
     public void ShowPrevItem() {
         // Switches to prev item (item with 1 lower ID)
-        selectedItem = itemDb.GetItem(selectedItem.catagory, selectedItem.ID - 1);
+        selectedItem = itemDb.GetItem(selectedItem.ID - 1);
         UpdateShopUI();
     }
 
@@ -148,7 +127,7 @@ public class Shop : MonoBehaviour {
 
     public void EquipItem() {
         // Change equippedCar id 
-        PlayerPrefs.SetInt(selectedItem.catagory + "Equipped", selectedItem.ID);
+        saveManager.SaveIntData(selectedItem.catagory + "Equipped", selectedItem.ID);
         UpdateShopUI();
     }
 }
