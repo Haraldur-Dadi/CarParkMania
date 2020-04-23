@@ -7,17 +7,16 @@ using UnityEngine.Advertisements;
 public class AdManager : MonoBehaviour, IUnityAdsListener {
 
     public static AdManager Instance;
-    public SaveManager saveManager;
     
     #if UNITY_IOS
     string gameID = "3535681";
     #elif UNITY_ANDROID
     string gameID = "3535680";
     #endif
-    string videoID = "video";
+
+    string rewardVideoID = "rewardedVideo";
 
     public GameObject rewardAdsBtn;
-    public int allowAds;
     public Button allowAdsBtn;
     public Button denyAdsBtn;
 
@@ -26,12 +25,9 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
             Instance = this;
             Advertisement.AddListener(this);
             Advertisement.Initialize(gameID, true);
+            AllowAds(PlayerPrefs.GetInt("AllowAds", 1));
             SceneManager.sceneLoaded += OnSceneLoaded;
-        } else {
-            return;
         }
-
-        AllowAds(PlayerPrefs.GetInt("AllowAds", 1));
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
@@ -41,8 +37,6 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     }
 
     public void AllowAds(int allow) {
-        allowAds = allow;
-        
         if (allow == 1) {
             allowAdsBtn.interactable = false;
             denyAdsBtn.interactable = true;
@@ -51,7 +45,7 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
             denyAdsBtn.interactable = false;
         }
         
-        saveManager.SaveIntData("AllowAds", allow);
+        SaveManager.Instance.SaveIntData("AllowAds", allow);
     }
 
     public void ShowVideoAd() {
