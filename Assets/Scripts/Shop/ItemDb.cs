@@ -20,7 +20,7 @@ public class ItemDb : MonoBehaviour {
         return PlayerCars[ID];
     }
 
-    public int GetLengthOfCat(string cat) {
+    public int GetLengthOfCat() {
         return PlayerCars.Count;
     }
 
