@@ -7,15 +7,16 @@ using UnityEngine.Advertisements;
 public class AdManager : MonoBehaviour, IUnityAdsListener {
 
     public static AdManager Instance;
-
     public SaveManager saveManager;
-
+    
+    #if UNITY_IOS
     string gameID = "3535681";
-    string bannerPlacementID = "MainMenu";
-    string rewardVideoID = "rewardedVideo";
+    #elif UNITY_ANDROID
+    string gameID = "3535680";
+    #endif
+    string videoID = "video";
 
     public GameObject rewardAdsBtn;
-
     public int allowAds;
     public Button allowAdsBtn;
     public Button denyAdsBtn;
@@ -29,15 +30,14 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
         } else {
             return;
         }
+
+        AllowAds(PlayerPrefs.GetInt("AllowAds", 1));
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         if (scene.buildIndex == 0) {
             rewardAdsBtn = GameObject.Find("WatchAdForMoney");
         }
-
-        allowAds = PlayerPrefs.GetInt("AllowAds", 1);
-        AllowAds(allowAds);
     }
 
     public void AllowAds(int allow) {
@@ -46,69 +46,41 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
         if (allow == 1) {
             allowAdsBtn.interactable = false;
             denyAdsBtn.interactable = true;
-            
-            if (rewardAdsBtn)
-                rewardAdsBtn.SetActive(true);
-
-            ShowBanner();
         } else {
             allowAdsBtn.interactable = true;
             denyAdsBtn.interactable = false;
-
-            if (rewardAdsBtn)
-                rewardAdsBtn.SetActive(false);
-            
-            HideBanner();
         }
         
         saveManager.SaveIntData("AllowAds", allow);
     }
 
-    public void HideBanner() {
-        Advertisement.Banner.Hide();
-    }
-
-    public void ShowBanner() {
-        if (allowAds == 1)
-            StartCoroutine(ShowBannerWhenReady());
+    public void ShowVideoAd() {
+        Advertisement.Show();
     }
 
     public void ShowRewardVideo() {
-        StartCoroutine(ShowRewardVideoWhenReady());
-    }
-
-    IEnumerator ShowBannerWhenReady() {
-        while (!Advertisement.IsReady(bannerPlacementID)) {
-            yield return new WaitForSeconds(0.5f);
-        }
-
-        Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
-        Advertisement.Banner.Show(bannerPlacementID);
-    }
-
-    IEnumerator ShowRewardVideoWhenReady() {
-        while (!Advertisement.IsReady(rewardVideoID)) {
-            yield return new WaitForSeconds(0.5f);
-        }
-        HideBanner();
         Advertisement.Show(rewardVideoID);
     }
 
     public void OnUnityAdsReady(string placementId) {
+        if (placementId == rewardVideoID) {
+            if (rewardAdsBtn) {
+                rewardAdsBtn.SetActive(true);
+            }
+        }
     }
-
     public void OnUnityAdsDidStart(string placementId) {
     }
-
     public void OnUnityAdsDidError(string message) {
     }
-
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult) {
         // Reward the user for watching the ad if watched to completion.
-        if (showResult == ShowResult.Finished) {
-            GoldManager.Instance.AddGold(25, true);
-        }
+        if (placementId == rewardVideoID) {
+            if (showResult == ShowResult.Finished) {
+                GoldManager.Instance.AddGold(25, true);
+            }
 
-        ShowBanner();
+            rewardAdsBtn.SetActive(false);
+        }
     }
 }

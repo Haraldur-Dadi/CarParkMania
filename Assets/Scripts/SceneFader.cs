@@ -40,7 +40,6 @@ public class SceneFader : MonoBehaviour {
             img.color = new Color(0f, 0f, 0f, a);
             yield return 0;
         }
-        AdManager.Instance.ShowBanner();
     }
 
     public IEnumerator FadeBetweenObjInScene() {
@@ -62,7 +61,6 @@ public class SceneFader : MonoBehaviour {
     }
 
     public IEnumerator FadeOutBuildindex(int buildindex) {
-        AdManager.Instance.HideBanner();
         float t = 0f;
         while (t < 1f) {
             t += Time.deltaTime * 2;
