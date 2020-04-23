@@ -13,6 +13,8 @@ public class Shop : MonoBehaviour {
     public Image itemImg;
 
     public TextMeshProUGUI indexTxt;
+    public bool canShowPrev;
+    public bool canShowNext;
     public GameObject prevBtn;
     public GameObject nextBtn;
 
@@ -34,8 +36,11 @@ public class Shop : MonoBehaviour {
         saveManager = SaveManager.Instance;
         itemDb = ItemDb.Instance;
         goldManager = GoldManager.Instance;
-        selectedItem = itemDb.GetItem(0);
+        ShowFirst();
+    }
 
+    public void ShowFirst() {
+        selectedItem = itemDb.GetItem(0);
         UpdateShopUI();
     }
 
@@ -63,14 +68,20 @@ public class Shop : MonoBehaviour {
             // First item, no prev item
             prevBtn.SetActive(false);
             nextBtn.SetActive(true);
+            canShowPrev = false;
+            canShowNext = true;
         } else if (selectedItem.ID == itemDb.GetLengthOfCat() - 1) {
             // Last item, no next item
             prevBtn.SetActive(true);
             nextBtn.SetActive(false);
+            canShowPrev = true;
+            canShowNext = false;
         } else {
             // Somewhere in middle, prev and next item
             prevBtn.SetActive(true);
             nextBtn.SetActive(true);
+            canShowPrev = true;
+            canShowNext = true;
         }
     }
 
