@@ -12,6 +12,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
 
     public Shop shop;
     public GameModePanel gameMode;
+    public About about;
     public bool showNext;
 
     public CanvasGroup canvasGroup;
@@ -32,13 +33,21 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
         float differenceX = data.pressPosition.x - data.position.x;
 
         if (differenceX > 0) {
-            if (shop)
+            if (shop) {
                 if (!shop.canShowNext)
                     return;
+            } else if (about) {
+                if (!about.nextButton.activeSelf)
+                    return;
+            }
         } else if (differenceX < 0) {
-            if (shop)
+            if (shop) {
                 if (!shop.canShowPrev)
                     return;
+            } else if (about) {
+                if (!about.prevButton.activeSelf)
+                    return;
+            }
         }
         rectTransform.position = panelPos - new Vector2(differenceX, 0);
         
@@ -70,6 +79,9 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
                         ResetPanel(newPos);
                         return;
                     }
+                } else if (about) {
+                    if (!about.nextButton.activeSelf)
+                        return;
                 }
 
                 newPos += new Vector2(-Screen.width, 0);
@@ -83,6 +95,9 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
                         ResetPanel(newPos);
                         return;
                     }
+                } else if (about) {
+                    if (!about.prevButton.activeSelf)
+                        return;
                 }
                 
                 newPos += new Vector2(Screen.width, 0);
@@ -123,6 +138,8 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
                 shop.ShowNextItem();
             } else if (gameMode) {
                 gameMode.SelectDifficulty(CrossSceneManager.Instance.difficulty + 1);
+            } else if (about) {
+                about.ShowNextTutImage();
             }
 
             rectTransform.position = panelPos + new Vector2(Screen.width * 2, 0);
@@ -131,6 +148,8 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
                 shop.ShowPrevItem();
             } else if (gameMode) {
                 gameMode.SelectDifficulty(CrossSceneManager.Instance.difficulty - 1);
+            } else if (about) {
+                about.ShowPrevTutImage();
             }
 
             rectTransform.position = panelPos + new Vector2(-Screen.width * 2, 0);
