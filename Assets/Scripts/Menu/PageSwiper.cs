@@ -22,10 +22,10 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
         canvasGroup = GetComponent<CanvasGroup>();
         startPos = rectTransform.position;
         panelPos = startPos;
-        if (gameMode) {
-            swipeThreshold = 0.25f;
-        } else if (shop) {
+        if (shop) {
             swipeThreshold = 0.1f;
+        } else {
+            swipeThreshold = 0.25f;
         }
     }
 
