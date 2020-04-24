@@ -77,7 +77,8 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     }
 
     public void ShowVideoAd() {
-        Advertisement.Show();
+        if (Advertisement.IsReady())
+            Advertisement.Show();
     }
 
     public void ShowRewardVideo() {

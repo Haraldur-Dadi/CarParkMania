@@ -45,6 +45,10 @@ public class GameManager : MonoBehaviour {
     }
 
     public virtual void LoadLevel() {
+        if (PlayerPrefs.GetInt("LevelsCompleted", 1) % 10 == 0) {
+            AdManager.Instance.ShowVideoAd();
+        }
+        
         CrossSceneManager.Instance.TmpPreventClicks();
         if (level_board != null)
             Destroy(level_board);
@@ -97,6 +101,7 @@ public class GameManager : MonoBehaviour {
             saveManager.IncreaseAchivementProgress(4);
         saveManager.IncreaseAchivementProgress(5);
         saveManager.IncreaseAchivementProgress(6);
+        saveManager.SaveIntData("LevelsCompleted", PlayerPrefs.GetInt("LevelsCompleted", 1) + 1);
 
         levelCompleteUi.SetActive(true);
     }
