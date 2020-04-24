@@ -51,7 +51,7 @@ public class Shop : MonoBehaviour {
 
         indexTxt.text = (selectedItem.ID + 1) + "/" + itemDb.GetLengthOfCat();
 
-        if (PlayerPrefs.GetInt(selectedItem.catagory + selectedItem.ID + "Unlocked", 0) == 1) {
+        if (PlayerPrefs.GetInt("PlayerCar" + selectedItem.ID + "Unlocked", 0) == 1) {
             ShowEquip();
         } else if (selectedItem.needBuy) {
             ShowStandard(true);
@@ -118,7 +118,7 @@ public class Shop : MonoBehaviour {
         buyBtn.gameObject.SetActive(false);
         unlock.SetActive(false);
         equipBtn.gameObject.SetActive(true);
-        if (PlayerPrefs.GetInt(selectedItem.catagory + "Equipped") == selectedItem.ID) {
+        if (PlayerPrefs.GetInt("PlayerCarEquipped") == selectedItem.ID) {
             equipBtn.interactable = false;
             equipTxt.text = "Equipped";
         } else {
@@ -129,7 +129,7 @@ public class Shop : MonoBehaviour {
 
     public void BuyItem() {
         // Change from shop ui to equip ui and save that player has unlocked the item
-        saveManager.SaveIntData(selectedItem.catagory + selectedItem.ID + "Unlocked", 1);
+        saveManager.SaveIntData("PlayerCar" + selectedItem.ID + "Unlocked", 1);
         saveManager.IncreaseAchivementProgress(2);
         goldManager.SubtractGold(selectedItem.cost);
         ShowEquip();
@@ -138,7 +138,7 @@ public class Shop : MonoBehaviour {
 
     public void EquipItem() {
         // Change equippedCar id 
-        saveManager.SaveIntData(selectedItem.catagory + "Equipped", selectedItem.ID);
+        saveManager.SaveIntData("PlayerCar" + "Equipped", selectedItem.ID);
         UpdateShopUI();
     }
 }
