@@ -49,14 +49,23 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
                     return;
             }
         }
-        rectTransform.position = panelPos - new Vector2(differenceX, 0);
         
         if (gameMode) {
             float differenceY = data.pressPosition.y - data.position.y;
-            rectTransform.position = panelPos - new Vector2(0, differenceY);
+            if (CrossSceneManager.Instance.difficulty == 3 && differenceX > 0) {
+                rectTransform.position = panelPos - new Vector2(0, differenceY);
+                return;
+            } else if (CrossSceneManager.Instance.difficulty == 0 && differenceX < 0) {
+                rectTransform.position = panelPos - new Vector2(0, differenceY);
+                return;
+            } else {
+                rectTransform.position = panelPos - new Vector2(differenceX, differenceY);
+            }
+        } else {
+            rectTransform.position = panelPos - new Vector2(differenceX, 0);
         }
 
-        if (Mathf.Abs(differenceX / Screen.width) >= swipeThreshold)
+        if ((Mathf.Abs(differenceX) / Screen.width) >= swipeThreshold)
             canvasGroup.alpha = Mathf.Clamp(1 - (Mathf.Abs(differenceX) / (Screen.width/2)), .05f, 1f);
     }
 
@@ -76,7 +85,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
                         return;
                 } else if (gameMode) {
                     if (CrossSceneManager.Instance.difficulty == 3) {
-                        ResetPanel(newPos);
+                        ResetPanel(new Vector2(startPos.x, newPos.y));
                         return;
                     }
                 } else if (about) {
@@ -92,7 +101,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
                         return;
                 } else if (gameMode) {
                     if (CrossSceneManager.Instance.difficulty == 0) {
-                        ResetPanel(newPos);
+                        ResetPanel(new Vector2(startPos.x, newPos.y));
                         return;
                     }
                 } else if (about) {
@@ -113,7 +122,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
     public void ResetPanel(Vector2 newPos) {
         canvasGroup.alpha = 1;
         if (gameMode) {
-            newPos.y = Mathf.Clamp(newPos.y, startPos.y, startPos.y + (rectTransform.sizeDelta.y / 2));
+            newPos.y = Mathf.Clamp(newPos.y, startPos.y, rectTransform.sizeDelta.y);
         }
         StartCoroutine(SmoothSwipe(newPos));
     }
