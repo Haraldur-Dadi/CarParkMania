@@ -170,7 +170,7 @@ public class DailySpin : MonoBehaviour {
             winCarPanel.SetActive(true);
             winCarName.text = winItem.name;
             winCarImg.sprite = winItem.sprite;
-            saveManager.SaveIntData(winItem.catagory + winItem.ID + "Unlocked", 1);
+            saveManager.SaveIntData("PlayerCar" + winItem.ID + "Unlocked", 1);
             AudioManager.Instance.PlayWinSound();
         }
         closeBtn.interactable = true;
