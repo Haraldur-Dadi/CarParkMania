@@ -26,11 +26,13 @@ public class ItemDb : MonoBehaviour {
 
     void BuildItemDb() {
         PlayerCars = new List<Item>() {
-            new Item("Police Car", "PlayerCar", 0, false, 0),
-            new Item("Fire Truck", "PlayerCar", 1, true, 25),
-            new Item("Ambulance", "PlayerCar", 2, true, 25),
-            new Item("Motorcycle", "PlayerCar", 3, true, 100),
-            new Item("Police Motorcycle", "PlayerCar", 4, false, 0)
+            new Item("Police Car", 0, false, 0),
+            new Item("Fire Truck", 1, true, 25),
+            new Item("Ambulance", 2, true, 25),
+            new Item("Motorcycle", 3, true, 100),
+            new Item("Police Motorcycle", 4, false, 0),
+            new Item("Suv", 5, true, 150),
+            new Item("Formula Car", 6, true, 200)
         };
     }
 }
