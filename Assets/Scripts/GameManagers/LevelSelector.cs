@@ -128,10 +128,12 @@ public class LevelSelector : MonoBehaviour {
     }
 
     public IEnumerator SelectGameModeUI(int gameModeNr) {
-        if (!startUI)
-            yield return new WaitForSeconds(0.5f);
-
         crossSceneManager.gameModeNr = gameModeNr;
+        
+        if (!startUI) {
+            yield return new WaitForSeconds(0.5f);
+            gameModePanel.GetComponent<GameModePanel>().SelectDifficulty(0);
+        }
 
         gameModesParent.SetActive(false);
         gameModePanel.SetActive(true);
