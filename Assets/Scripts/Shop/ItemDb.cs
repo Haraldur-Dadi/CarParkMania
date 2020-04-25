@@ -2,7 +2,6 @@
 using UnityEngine;
 
 public class ItemDb : MonoBehaviour {
-    
     public static ItemDb Instance;
     public List<Item> PlayerCars;
 
