@@ -89,7 +89,8 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
         if (placementId == rewardVideoID) {
             if (rewardAdsBtn.Length > 0) {
                 foreach (GameObject btn in rewardAdsBtn){
-                    btn.SetActive(true);
+                    if (btn)
+                        btn.SetActive(true);
                 }
             }
         }
