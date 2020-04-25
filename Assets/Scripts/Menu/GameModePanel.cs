@@ -8,12 +8,20 @@ public class GameModePanel : MonoBehaviour {
     private int levelReached;
 
     private void Start() {
-        levelReached = PlayerPrefs.GetInt(gameModeName + "LevelReached", 0);
         SelectDifficulty(CrossSceneManager.Instance.difficulty);
     }
 
-    public void SelectDifficulty(int difficulty) {
+    public void SelectDifficulty(int difficulty) {      
+        int gameModeNr = CrossSceneManager.Instance.gameModeNr;
+        if (gameModeNr == 1) {
+            gameModeName = "Casual";
+        } else if (gameModeNr == 2) {
+            gameModeName = "Challenge";
+        }
+
+        levelReached = PlayerPrefs.GetInt(gameModeName + "LevelReached", 0);
         CrossSceneManager.Instance.difficulty = difficulty;
+        Debug.Log(levelReached);
         
         for (int i = 0; i < levelBtns.Length; i++) {
             int iValue = i + (25 * difficulty);
@@ -21,7 +29,7 @@ public class GameModePanel : MonoBehaviour {
             if (iValue > levelReached) {
                 levelBtns[i].Unavailable(iValue);
             } else {
-                levelBtns[i].button.onClick.AddListener(() => SelectLevel(CrossSceneManager.Instance.gameModeNr, iValue));
+                levelBtns[i].button.onClick.AddListener(() => SelectLevel(gameModeNr + 1, iValue));
 
                 if (iValue < levelReached) {
                     levelBtns[i].Finished(iValue);
