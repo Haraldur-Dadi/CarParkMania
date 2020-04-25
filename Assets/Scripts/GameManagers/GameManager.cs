@@ -111,11 +111,9 @@ public class GameManager : MonoBehaviour {
         CrossSceneManager.Instance.TmpPreventClicks();
         sceneFader.FadeToBuildIndex(0);
     }
-
     public void RetryLevel() {
         StartCoroutine(PreLoadLevel());
     }
-
     public void LoadNextLevel() {
         saveManager.SaveIntData("boardToLoad", levelIndex + 1);
         StartCoroutine(PreLoadLevel());
@@ -124,19 +122,16 @@ public class GameManager : MonoBehaviour {
     public void PlayButtonClick() {
         AudioManager.Instance.PlayButtonClick();
     }
-
     public IEnumerator PreLoadLevel() {
         CrossSceneManager.Instance.TmpPreventClicks();
         sceneFader.FadeBetweenObjects();
         yield return new WaitForSeconds(0.5f);
         LoadLevel();
     }
-    
     public IEnumerator DelayedLevelSelector() {
         yield return new WaitForSeconds(2);
         GoToLevelSelector();
     }
-
     public IEnumerator CountdownNextLevel() {
         yield return new WaitForSeconds(2);
         StartCoroutine(PreLoadLevel());
