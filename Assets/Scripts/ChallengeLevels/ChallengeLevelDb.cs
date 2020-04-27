@@ -6,14 +6,14 @@ public class ChallengeLevelDb : MonoBehaviour {
     public List<ChallengeLevel> ChallengeLevels;
 
     private void Start() {
-        BuildLevelDb();
+        BuildChallengeLevelDb();
     }
 
     public ChallengeLevel GetChallengeLevel(int ID) {
         return ChallengeLevels[ID];
     }
 
-    void BuildLevelDb() {
+    void BuildChallengeLevelDb() {
         ChallengeLevels = new List<ChallengeLevel> () {
             new ChallengeLevel(0, 6), // easy
             new ChallengeLevel(1, 5),
@@ -93,28 +93,28 @@ public class ChallengeLevelDb : MonoBehaviour {
             new ChallengeLevel(75, 16), // expert
             new ChallengeLevel(76, 16),
             new ChallengeLevel(77, 16),
-            new ChallengeLevel(78, 0),
-            new ChallengeLevel(79, 0),
-            new ChallengeLevel(80, 0),
-            new ChallengeLevel(81, 0),
-            new ChallengeLevel(82, 0),
-            new ChallengeLevel(83, 0),
-            new ChallengeLevel(84, 0),
-            new ChallengeLevel(85, 0),
-            new ChallengeLevel(86, 0),
-            new ChallengeLevel(87, 0),
-            new ChallengeLevel(88, 0),
-            new ChallengeLevel(89, 0),
-            new ChallengeLevel(90, 0),
-            new ChallengeLevel(91, 0),
+            new ChallengeLevel(78, 17),
+            new ChallengeLevel(79, 16),
+            new ChallengeLevel(80, 18),
+            new ChallengeLevel(81, 17),
+            new ChallengeLevel(82, 18),
+            new ChallengeLevel(83, 16),
+            new ChallengeLevel(84, 17),
+            new ChallengeLevel(85, 19),
+            new ChallengeLevel(86, 20),
+            new ChallengeLevel(87, 20),
+            new ChallengeLevel(88, 18),
+            new ChallengeLevel(89, 19),
+            new ChallengeLevel(90, 18),
+            new ChallengeLevel(91, 20),
             new ChallengeLevel(92, 19),
-            new ChallengeLevel(93, 0),
-            new ChallengeLevel(94, 0),
+            new ChallengeLevel(93, 21),
+            new ChallengeLevel(94, 21),
             new ChallengeLevel(95, 19),
             new ChallengeLevel(96, 22),
             new ChallengeLevel(97, 20),
             new ChallengeLevel(98, 22),
-            new ChallengeLevel(99, 21) // síðasta borðið
+            new ChallengeLevel(99, 21)
         };
     }
 }
