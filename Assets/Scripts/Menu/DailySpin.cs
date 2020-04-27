@@ -43,7 +43,7 @@ public class DailySpin : MonoBehaviour {
         StartCoroutine(Counter());
     }
 
-    private bool canSpin() {
+    public bool canSpin() {
         DateTime currDate = DateTime.Today;
         DateTime lastSpinDate = DateTime.ParseExact(PlayerPrefs.GetString("LastDateSpun", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
         

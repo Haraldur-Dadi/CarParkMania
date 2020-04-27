@@ -32,18 +32,24 @@ public class DailyChallenges : MonoBehaviour {
         NewDayReset();
 
         if (!HasCompleted()) {
-            notification.SetTrigger("Avail");
             claimScreen.SetActive(false);
         } else if (PlayerPrefs.GetInt("HasClaimed", 0) == 1) {
             claimBtn.SetActive(false);
+        }
+        SetNotification();
+    }
+    
+    public void SetNotification() {
+        if (!HasCompleted()) {
+            notification.SetTrigger("Avail");
         }
     }
 
     private void NewDayReset() {
         DateTime currDate = DateTime.Today;
-        DateTime lastSpinDate = DateTime.ParseExact(PlayerPrefs.GetString("LastChallengeCompletedDate", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+        DateTime lastCompleteDate = DateTime.ParseExact(PlayerPrefs.GetString("LastChallengeCompletedDate", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
         
-        if (currDate > lastSpinDate) {
+        if (currDate > lastCompleteDate) {
             saveManager.SaveIntData("HasClaimed", 0);
             saveManager.SaveIntData("DailyChallenge1Completed", 0);
             saveManager.SaveIntData("DailyChallenge2Completed", 0);
