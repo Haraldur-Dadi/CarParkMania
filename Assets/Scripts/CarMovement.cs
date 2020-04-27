@@ -158,12 +158,13 @@ public class CarMovement : MonoBehaviour {
     public void EndMove() {
         // If we have a carToMove, deactivate it and set variable to null
         if (carToMove) {
-            AudioManager.Instance.PlayCarMoved();
-            UndoTuple tuple = new UndoTuple(carToMove, startPosOfCar);
-            undoList.Add(tuple);
-
+            if (posOfCar != startPosOfCar) {
+                gameManager.IncreaseMoves();
+                AudioManager.Instance.PlayCarMoved();
+                undoList.Add(new UndoTuple(carToMove, startPosOfCar));
+                AbleToUndo();
+            }
             carToMove = null;
-            AbleToUndo();
         }
     }
 
@@ -180,6 +181,7 @@ public class CarMovement : MonoBehaviour {
         /* Undo the last move
            "Move carToMove to posToMove" */
             // Tuple (carToMove, posToMove)
+        gameManager.DecreaseMoves();
         int index = undoList.Count - 1;
 
         carToMove = undoList[index].car;
