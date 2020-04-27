@@ -7,7 +7,6 @@ public class LevelSelector : MonoBehaviour {
 
     public CrossSceneManager crossSceneManager;
     public SceneFader sceneFader;
-
     private bool startUI;
 
     public GameObject home;
@@ -15,7 +14,6 @@ public class LevelSelector : MonoBehaviour {
     public GameObject gameModesParent;
     public GameObject casualGameModePanel;
     public GameObject challengeGameModePanel;
-    public GameObject selectDifficulty;
 
     public GameObject homeBtn;
     public GameObject backBtn;
@@ -132,7 +130,6 @@ public class LevelSelector : MonoBehaviour {
         gameModesParent.SetActive(true);
         casualGameModePanel.SetActive(false);
         challengeGameModePanel.SetActive(false);
-        selectDifficulty.SetActive(false);
         homeBtn.SetActive(true);
         backBtn.SetActive(false);
 
@@ -164,7 +161,6 @@ public class LevelSelector : MonoBehaviour {
             selectPanelName.text = "Challenge";
             challengeGameModePanel.SetActive(true);
         }
-        selectDifficulty.SetActive(true);
         homeBtn.SetActive(false);
         backBtn.SetActive(true);
     }

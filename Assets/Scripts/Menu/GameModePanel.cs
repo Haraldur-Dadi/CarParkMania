@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class GameModePanel : MonoBehaviour {
     public string gameModeName;
+    public Scrollbar scrollbar;
     public LevelButton[] levelBtns;
     public Button[] difficultyBtns;
     private int levelReached;
@@ -19,6 +20,7 @@ public class GameModePanel : MonoBehaviour {
     public void SelectDifficulty(int difficulty) {
         levelReached = PlayerPrefs.GetInt(gameModeName + "LevelReached", 0);
         CrossSceneManager.Instance.difficulty = difficulty;
+        scrollbar.value = 1;
         
         for (int i = 0; i < levelBtns.Length; i++) {
             int iValue = i + (25 * difficulty);
