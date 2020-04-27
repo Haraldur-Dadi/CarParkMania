@@ -5,7 +5,7 @@ public class ChallengeLevelDb : MonoBehaviour {
     
     public List<ChallengeLevel> ChallengeLevels;
 
-    private void Start() {
+    private void Awake() {
         BuildChallengeLevelDb();
     }
 
