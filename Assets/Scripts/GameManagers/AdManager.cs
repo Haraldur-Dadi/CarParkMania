@@ -30,7 +30,7 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
         if (Instance == null) {
             Instance = this;
             Advertisement.AddListener(this);
-            Advertisement.Initialize(gameID, true);
+            Advertisement.Initialize(gameID, false);
             AllowAds(PlayerPrefs.GetInt("AllowAds", 1));
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
