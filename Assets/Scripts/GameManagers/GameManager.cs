@@ -93,6 +93,11 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public virtual void IncreaseMoves() {
+    }
+    public virtual void DecreaseMoves() {
+    }
+
     public virtual void LevelComplete() {
         AudioManager.Instance.PlayWinSound();
         finished = true;
