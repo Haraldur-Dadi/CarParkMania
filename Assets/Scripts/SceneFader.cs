@@ -35,7 +35,7 @@ public class SceneFader : MonoBehaviour {
         float t = 1f;
 
         while (t > 0f) {
-            t -= Time.deltaTime * 5;
+            t -= Time.deltaTime * 2;
             float a = curve.Evaluate(t);
             img.color = new Color(0f, 0f, 0f, a);
             yield return null;
@@ -63,7 +63,7 @@ public class SceneFader : MonoBehaviour {
     public IEnumerator FadeOutBuildindex(int buildindex) {
         float t = 0f;
         while (t < 1f) {
-            t += Time.deltaTime * 5;
+            t += Time.deltaTime * 2;
             float a = curve.Evaluate(t);
             img.color = new Color(0f, 0f, 0f, a);
             yield return null;

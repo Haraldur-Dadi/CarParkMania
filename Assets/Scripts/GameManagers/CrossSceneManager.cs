@@ -19,14 +19,13 @@ public class CrossSceneManager : MonoBehaviour {
     private void Awake() {
         if (Instance == null) {
             Instance = this;
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            panelName = "";
+            gameModeNr = -1;
+            difficulty = 0;SceneManager.sceneLoaded += OnSceneLoaded;
             DontDestroyOnLoad(gameObject);
         } else {
             Destroy(gameObject);
         }
-        panelName = "";
-        gameModeNr = -1;
-        difficulty = 0;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
@@ -55,7 +54,7 @@ public class CrossSceneManager : MonoBehaviour {
         foreach (CanvasGroup group in canvasGroups) {
             group.interactable = false;
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         foreach (CanvasGroup group in canvasGroups) {
             group.interactable = true;
         }
