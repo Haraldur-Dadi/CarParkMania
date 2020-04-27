@@ -7,18 +7,16 @@ public class GameModePanel : MonoBehaviour {
     public Button[] difficultyBtns;
     private int levelReached;
 
+    public Sprite blankStar;
+    public Sprite bronzeStar;
+    public Sprite silverStar;
+    public Sprite goldStar;
+
     private void Start() {
         SelectDifficulty(CrossSceneManager.Instance.difficulty);
     }
 
-    public void SelectDifficulty(int difficulty) {      
-        int gameModeNr = CrossSceneManager.Instance.gameModeNr;
-        if (gameModeNr == 1) {
-            gameModeName = "Casual";
-        } else if (gameModeNr == 2) {
-            gameModeName = "Challenge";
-        }
-
+    public void SelectDifficulty(int difficulty) {
         levelReached = PlayerPrefs.GetInt(gameModeName + "LevelReached", 0);
         CrossSceneManager.Instance.difficulty = difficulty;
         
@@ -27,14 +25,32 @@ public class GameModePanel : MonoBehaviour {
             
             if (iValue > levelReached) {
                 levelBtns[i].Unavailable(iValue);
+                if (gameModeName == "Challenge") {
+                    levelBtns[i].star.enabled = false;
+                }
             } else {
-                levelBtns[i].button.onClick.AddListener(() => SelectLevel(gameModeNr + 1, iValue));
-
-                if (iValue < levelReached) {
-                    levelBtns[i].Finished(iValue);
+                levelBtns[i].button.onClick.AddListener(() => SelectLevel(CrossSceneManager.Instance.gameModeNr + 1, iValue));
+                if (gameModeName == "Casual") {
+                    if (iValue < levelReached) {
+                        levelBtns[i].Finished(iValue);
+                    } else {
+                        levelBtns[i].NextLevel(iValue);
+                    }
                 } else {
                     levelBtns[i].NextLevel(iValue);
+                    levelBtns[i].star.enabled = true;
+                    int stars = PlayerPrefs.GetInt("Challenge" + iValue + "Stars", 0);
+                    if (stars == 0) {
+                        levelBtns[i].star.sprite = blankStar;
+                    } else if (stars == 1) {
+                        levelBtns[i].star.sprite = bronzeStar;
+                    } else if (stars == 2) {
+                        levelBtns[i].star.sprite = silverStar;
+                    } else {
+                        levelBtns[i].star.sprite = goldStar;
+                    }
                 }
+
             }
         }
 
