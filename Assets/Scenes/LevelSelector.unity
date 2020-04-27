@@ -24774,7 +24774,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Time remaining:'
+  m_text: 'Next spin in:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -34091,6 +34091,7 @@ GameObject:
   - component: {fileID: 2010750933}
   - component: {fileID: 2010750932}
   - component: {fileID: 2010750931}
+  - component: {fileID: 2010750934}
   m_Layer: 5
   m_Name: Notification
   m_TagString: Untagged
@@ -34254,6 +34255,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010750929}
   m_CullTransparentMesh: 0
+--- !u!114 &2010750934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010750929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5065a591106ddbc40b62395e877b472e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dailySpin: {fileID: 1838942872}
+  dailyChallenges: {fileID: 0}
 --- !u!1 &2016918828
 GameObject:
   m_ObjectHideFlags: 0
@@ -34421,6 +34436,7 @@ GameObject:
   - component: {fileID: 2025465797}
   - component: {fileID: 2025465796}
   - component: {fileID: 2025465795}
+  - component: {fileID: 2025465798}
   m_Layer: 5
   m_Name: Notification
   m_TagString: Untagged
@@ -34584,6 +34600,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025465793}
   m_CullTransparentMesh: 0
+--- !u!114 &2025465798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025465793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5065a591106ddbc40b62395e877b472e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dailySpin: {fileID: 0}
+  dailyChallenges: {fileID: 1838942875}
 --- !u!1001 &2029663624
 PrefabInstance:
   m_ObjectHideFlags: 0
