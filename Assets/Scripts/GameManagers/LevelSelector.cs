@@ -13,7 +13,8 @@ public class LevelSelector : MonoBehaviour {
     public GameObject home;
     public GameObject levelSelector;
     public GameObject gameModesParent;
-    public GameObject gameModePanel;
+    public GameObject casualGameModePanel;
+    public GameObject challengeGameModePanel;
     public GameObject selectDifficulty;
 
     public GameObject homeBtn;
@@ -119,7 +120,8 @@ public class LevelSelector : MonoBehaviour {
         home.SetActive(false);
         levelSelector.SetActive(true);
         gameModesParent.SetActive(true);
-        gameModePanel.SetActive(false);
+        casualGameModePanel.SetActive(false);
+        challengeGameModePanel.SetActive(false);
         selectDifficulty.SetActive(false);
         homeBtn.SetActive(true);
         backBtn.SetActive(false);
@@ -132,11 +134,22 @@ public class LevelSelector : MonoBehaviour {
         
         if (!startUI) {
             yield return new WaitForSeconds(0.5f);
-            gameModePanel.GetComponent<GameModePanel>().SelectDifficulty(0);
+            
+            if (gameModeNr == 1) {
+                casualGameModePanel.GetComponent<GameModePanel>().SelectDifficulty(0);
+            } else {
+                challengeGameModePanel.GetComponent<GameModePanel>().SelectDifficulty(0);
+            }
         }
 
         gameModesParent.SetActive(false);
-        gameModePanel.SetActive(true);
+        if (gameModeNr == 1) {
+            selectPanelName.text = "Casual";
+            casualGameModePanel.SetActive(true);
+        } else {
+            selectPanelName.text = "Challenge";
+            challengeGameModePanel.SetActive(true);
+        }
         selectDifficulty.SetActive(true);
         homeBtn.SetActive(false);
         backBtn.SetActive(true);
