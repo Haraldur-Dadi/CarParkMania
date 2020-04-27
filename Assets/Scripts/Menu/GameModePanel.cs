@@ -21,7 +21,6 @@ public class GameModePanel : MonoBehaviour {
 
         levelReached = PlayerPrefs.GetInt(gameModeName + "LevelReached", 0);
         CrossSceneManager.Instance.difficulty = difficulty;
-        Debug.Log(levelReached);
         
         for (int i = 0; i < levelBtns.Length; i++) {
             int iValue = i + (25 * difficulty);
