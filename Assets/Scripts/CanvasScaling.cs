@@ -25,7 +25,7 @@ public class CanvasScaling : MonoBehaviour {
         }
         else {
             // 4:3
-            Camera.main.orthographicSize = 5.5f;
+            Camera.main.orthographicSize = 6f;
             canvasScaler.matchWidthOrHeight = 1f;
         }
     }
