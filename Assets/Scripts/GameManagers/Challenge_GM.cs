@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Challenge_GM : GameManager {
@@ -8,35 +9,75 @@ public class Challenge_GM : GameManager {
     public TextMeshProUGUI movesNextStarTxt;
     public GameObject nextLvlBtn;
 
-    public GameObject[] stars;
+    public Image[] stars;
     public Sprite blankStar;
     public Sprite goldStar;
     public Sprite silverStar;
     public Sprite bronzeStar;
 
     public int moves;
+    public ChallengeLevel currLevel;
+    public ChallengeLevelDb challengeLevelDb;
 
     public override void LoadLevel() {
         base.LoadLevel();
+        levelTxt.text = "- " + (levelIndex + 1) + " -";
+        currLevel = challengeLevelDb.GetChallengeLevel(levelIndex);
         moves = 0;
         movesTxt.text = "Moves: " + moves;
     }
 
+    public override void IncreaseMoves() {
+        moves += 1;
+        movesTxt.text = "Moves: " + moves;
+    }
+    public override void DecreaseMoves() {
+        moves -= 1;
+        movesTxt.text = "Moves: " + moves;
+    }
+
     public override void LevelComplete() {
-        base.LevelComplete();
-        completedTxt.text = "Level Completed!";
-        completedMovesTxt.text = "Moves: " + moves;
+        finished = true;
+        levelCompleteUi.SetActive(true);
+        saveManager.SaveIntData("LevelsCompleted", PlayerPrefs.GetInt("LevelsCompleted", 1) + 1);
 
-        if (PlayerPrefs.GetInt("ChallengeLevelReached", 0) <= levelIndex) {
-            saveManager.SaveIntData("ChallengeLevelReached", levelIndex + 1);
-        }
-        
-        saveManager.SaveIntData("boardToLoad", levelIndex + 1);
+        if (moves <= currLevel.minMoves + 4) {
+            if (PlayerPrefs.GetInt("ChallengeLevelReached", 0) <= levelIndex)
+                saveManager.SaveIntData("ChallengeLevelReached", levelIndex + 1);
+            
+            completedTxt.text = "Level Completed!";
+            levelCompleteUi.GetComponent<Image>().color = new Color32(30,236,34,245);
+            nextLvlBtn.SetActive(true);
 
-        if (levelIndex + 1 <= 99) {
-            StartCoroutine(CountdownNextLevel());
+            if (moves <= currLevel.minMoves - 1) {
+                foreach (Image s in stars) {
+                    s.sprite = goldStar;
+                }
+                movesNextStarTxt.text = "";
+                saveManager.SaveIntData("Challenge" + levelIndex + "Stars", 3);
+            } else if (moves <= currLevel.minMoves + 1) {
+                stars[0].sprite = silverStar;
+                stars[1].sprite = silverStar;
+                stars[2].sprite = blankStar;
+                movesNextStarTxt.text = "Next star: " + currLevel.minMoves;
+                saveManager.SaveIntData("Challenge" + levelIndex + "Stars", 2);
+            } else {
+                stars[0].sprite = bronzeStar;
+                stars[1].sprite = blankStar;
+                stars[2].sprite = blankStar;
+                movesNextStarTxt.text = "Next star: " + (currLevel.minMoves + 2);
+                saveManager.SaveIntData("Challenge" + levelIndex + "Stars", 1);
+            }
         } else {
-            StartCoroutine(DelayedLevelSelector());
+            completedTxt.text = "You lost!";
+            levelCompleteUi.GetComponent<Image>().color = new Color32(236,51,30,245);
+            foreach (Image s in stars) {
+                s.sprite = blankStar;
+            }
+            movesNextStarTxt.text = "Minimum moves: " + (currLevel.minMoves + 5);
+            nextLvlBtn.SetActive(false);
         }
+
+        completedMovesTxt.text = "Moves: " + (moves + 1);
     }
 }
