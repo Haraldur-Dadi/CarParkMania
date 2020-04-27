@@ -4,7 +4,7 @@ using UnityEngine;
 public class Casual_GM : GameManager {
     public override void LoadLevel() {
         base.LoadLevel();
-        levelTxt.text = (levelIndex + 1).ToString();
+        levelTxt.text = "- " + (levelIndex + 1) + " -";
     }
 
     public override void LevelComplete() {
