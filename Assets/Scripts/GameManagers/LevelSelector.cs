@@ -89,8 +89,13 @@ public class LevelSelector : MonoBehaviour {
     }
 
     public IEnumerator TogglePanels(string panelName) {
-        if (!startUI)
-            yield return new WaitForSeconds(0.5f);
+        if (!startUI) {
+            float t = 0f;
+            while (t < 1f) {
+                t += Time.deltaTime * 3;
+                yield return null;
+            }
+        }
 
         mainScreen.SetActive(!mainScreen.activeSelf);
         panelHeader.SetActive(!panelHeader.activeSelf);
@@ -114,8 +119,13 @@ public class LevelSelector : MonoBehaviour {
     }
 
     public IEnumerator GameModeSelector() {
-        if (!startUI)
-            yield return new WaitForSeconds(0.5f);
+        if (!startUI) {
+            float t = 0f;
+            while (t < 1f) {
+                t += Time.deltaTime * 3;
+                yield return null;
+            }
+        }
 
         home.SetActive(false);
         levelSelector.SetActive(true);
@@ -133,7 +143,11 @@ public class LevelSelector : MonoBehaviour {
         crossSceneManager.gameModeNr = gameModeNr;
         
         if (!startUI) {
-            yield return new WaitForSeconds(0.5f);
+            float t = 0f;
+            while (t < 1f) {
+                t += Time.deltaTime * 3;
+                yield return null;
+            }
             
             if (gameModeNr == 1) {
                 casualGameModePanel.GetComponent<GameModePanel>().SelectDifficulty(0);
@@ -156,7 +170,12 @@ public class LevelSelector : MonoBehaviour {
     }
 
     public IEnumerator HomeScreen() {
-        yield return new WaitForSeconds(0.5f);
+        float t = 0f;
+        while (t < 1f) {
+            t += Time.deltaTime * 3;
+            yield return null;
+        }
+
         crossSceneManager.panelName = "";
         crossSceneManager.gameModeNr = 0;
         crossSceneManager.difficulty = 0;
