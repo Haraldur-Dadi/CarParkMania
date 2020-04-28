@@ -62,3 +62,8 @@ crashlytics-build.properties
 *.DS_Store
 .DS_Store
 Assets/.DS_Store
+*.aab
+Assets/Plugins/Android/mainTemplate.gradle.DISABLED.meta
+Assets/Plugins/Android/mainTemplate.gradle.DISABLED
+Assets/Plugins/Android.meta
+Assets/Plugins.meta
