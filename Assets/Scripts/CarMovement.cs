@@ -19,7 +19,9 @@ public class CarMovement : MonoBehaviour {
 
     private void Start() {
         snapValue = 1.1f;
+    }
 
+    public void Refresh() {
         undoList = new List<UndoTuple>();
         AbleToUndo();
     }

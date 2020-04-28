@@ -49,24 +49,32 @@ public class Challenge_GM : GameManager {
             levelCompleteUi.GetComponent<Image>().color = new Color32(30,236,34,245);
             nextLvlBtn.SetActive(true);
 
-            if (moves <= currLevel.minMoves - 1) {
+            CarMovement carMovement = GetComponent<CarMovement>();
+            if (carMovement.carToMove != carMovement.undoList[carMovement.undoList.Count - 1].car) {
+                moves += 1;
+            }
+
+            completedMovesTxt.text = "Moves: " + (moves);
+            if (moves <= currLevel.minMoves) {
                 foreach (Image s in stars) {
                     s.sprite = goldStar;
                 }
                 movesNextStarTxt.text = "";
                 saveManager.SaveIntData("Challenge" + levelIndex + "Stars", 3);
-            } else if (moves <= currLevel.minMoves + 1) {
+            } else if (moves <= currLevel.minMoves + 2) {
                 stars[0].sprite = silverStar;
                 stars[1].sprite = silverStar;
                 stars[2].sprite = blankStar;
                 movesNextStarTxt.text = "Next star: " + currLevel.minMoves;
-                saveManager.SaveIntData("Challenge" + levelIndex + "Stars", 2);
+                if (PlayerPrefs.GetInt("Challenge" + levelIndex + "Stars") < 2)
+                    saveManager.SaveIntData("Challenge" + levelIndex + "Stars", 2);
             } else {
                 stars[0].sprite = bronzeStar;
                 stars[1].sprite = blankStar;
                 stars[2].sprite = blankStar;
                 movesNextStarTxt.text = "Next star: " + (currLevel.minMoves + 2);
-                saveManager.SaveIntData("Challenge" + levelIndex + "Stars", 1);
+                if (PlayerPrefs.GetInt("Challenge" + levelIndex + "Stars") < 1)
+                    saveManager.SaveIntData("Challenge" + levelIndex + "Stars", 1);
             }
         } else {
             completedTxt.text = "You lost!";
@@ -78,6 +86,5 @@ public class Challenge_GM : GameManager {
             nextLvlBtn.SetActive(false);
         }
 
-        completedMovesTxt.text = "Moves: " + (moves + 1);
     }
 }

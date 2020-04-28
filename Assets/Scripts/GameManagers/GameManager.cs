@@ -48,7 +48,8 @@ public class GameManager : MonoBehaviour {
         if (PlayerPrefs.GetInt("LevelsCompleted", 1) % 10 == 0) {
             AdManager.Instance.ShowVideoAd();
         }
-        
+        GetComponent<CarMovement>().Refresh();
+
         CrossSceneManager.Instance.TmpPreventClicks();
         if (level_board != null)
             Destroy(level_board);
