@@ -45,9 +45,10 @@ public class GameManager : MonoBehaviour {
     }
 
     public virtual void LoadLevel() {
-        if (PlayerPrefs.GetInt("LevelsCompleted", 1) % 10 == 0) {
+        if (PlayerPrefs.GetInt("GamesPlayed", 0) % 10 == 0 && PlayerPrefs.GetInt("AllowAds", 1) == 1)
             AdManager.Instance.ShowVideoAd();
-        }
+        saveManager.SaveIntData("GamesPlayed", PlayerPrefs.GetInt("GamesPlayed", 0) + 1);
+        
         GetComponent<CarMovement>().Refresh();
 
         CrossSceneManager.Instance.TmpPreventClicks();
@@ -107,7 +108,6 @@ public class GameManager : MonoBehaviour {
             saveManager.IncreaseAchivementProgress(4);
         saveManager.IncreaseAchivementProgress(5);
         saveManager.IncreaseAchivementProgress(6);
-        saveManager.SaveIntData("LevelsCompleted", PlayerPrefs.GetInt("LevelsCompleted", 1) + 1);
 
         levelCompleteUi.SetActive(true);
     }
@@ -131,7 +131,11 @@ public class GameManager : MonoBehaviour {
     public IEnumerator PreLoadLevel() {
         CrossSceneManager.Instance.TmpPreventClicks();
         sceneFader.FadeBetweenObjects();
-        yield return new WaitForSeconds(0.5f);
+        float t = 1;
+        while (t > 0f) {
+            t -= Time.deltaTime * 3;
+            yield return null;
+        }
         LoadLevel();
     }
     public IEnumerator DelayedLevelSelector() {
