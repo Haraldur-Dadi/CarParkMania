@@ -16,15 +16,10 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
 
     string rewardVideoID = "rewardedVideo";
 
-    public GameObject firstTimeAllowAdPrompt;
-    public GameObject adsAllowedPrompt;
-    public GameObject normalCanvas;
-
     public GameObject[] rewardAdsBtn;
     public Button allowAdsBtn;
-    public Button allowAdsPromptBtn;
     public Button denyAdsBtn;
-    public Button denyAdsPromptBtn;
+    public GameObject allowAdsPrompt;
 
     private void Awake() {
         if (Instance == null) {
@@ -38,39 +33,22 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         if (scene.buildIndex == 0) {
-            if (!PlayerPrefs.HasKey("FirstTimeAdPrompt")) {
-                normalCanvas = GameObject.Find("NormalCanvas");
-                ToggleFirstTimeAdPrompt(false);
-            } else {
-                firstTimeAllowAdPrompt.SetActive(false);
-            }
-
             rewardAdsBtn = GameObject.FindGameObjectsWithTag("rewardAdBtn");
-        }
-    }
-
-    public void ToggleFirstTimeAdPrompt(bool completed) {
-        firstTimeAllowAdPrompt.SetActive(!completed);
-        normalCanvas.SetActive(completed);
-        
-        if (completed) {
-            SaveManager.Instance.SaveIntData("FirstTimeAdPrompt", 1);
+            foreach (GameObject btn in rewardAdsBtn){
+                btn.SetActive(true);
+            }
         }
     }
 
     public void AllowAds(int allow) {
         if (allow == 1) {
             allowAdsBtn.interactable = false;
-            allowAdsPromptBtn.interactable = false;
             denyAdsBtn.interactable = true;
-            denyAdsPromptBtn.interactable = true;
-            adsAllowedPrompt.SetActive(true);
+            allowAdsPrompt.SetActive(true);
         } else {
             allowAdsBtn.interactable = true;
-            allowAdsPromptBtn.interactable = true;
             denyAdsBtn.interactable = false;
-            denyAdsPromptBtn.interactable = false;
-            adsAllowedPrompt.SetActive(false);
+            allowAdsPrompt.SetActive(false);
         }
         
         SaveManager.Instance.SaveIntData("AllowAds", allow);
