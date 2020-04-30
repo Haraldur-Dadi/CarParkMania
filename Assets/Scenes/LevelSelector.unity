@@ -3478,7 +3478,7 @@ RectTransform:
   - {fileID: 678168630}
   - {fileID: 1283210574}
   m_Father: {fileID: 1884978446}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14124,7 +14124,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1838942871}
+      - m_Target: {fileID: 1838942867}
         m_MethodName: ToggleAdGoldConformation
         m_Mode: 1
         m_Arguments:
@@ -14373,8 +14373,8 @@ RectTransform:
   - {fileID: 1372329158}
   - {fileID: 379042643}
   - {fileID: 1937091032}
-  m_Father: {fileID: 1884978446}
-  m_RootOrder: 1
+  m_Father: {fileID: 1297388865}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -23047,6 +23047,7 @@ RectTransform:
   m_Children:
   - {fileID: 368865591}
   - {fileID: 743470888}
+  - {fileID: 879488369}
   m_Father: {fileID: 1884978446}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -25400,7 +25401,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1838942871}
+      - m_Target: {fileID: 1838942867}
         m_MethodName: ToggleAdGoldConformation
         m_Mode: 1
         m_Arguments:
@@ -27243,10 +27244,10 @@ RectTransform:
   m_Father: {fileID: 767524400}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 375, y: -1262.5}
+  m_SizeDelta: {x: 750, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1617898182
 CanvasRenderer:
@@ -30885,6 +30886,7 @@ MonoBehaviour:
   achivementsPanel: {fileID: 2052578581}
   shopPanel: {fileID: 2074493048}
   aboutPanel: {fileID: 220522243}
+  adForGoldCon: {fileID: 879488368}
   dailySpin: {fileID: 1838942872}
   about: {fileID: 1838942869}
 --- !u!4 &1838942868
@@ -30963,7 +30965,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldTxt: {fileID: 1279379852}
-  adForGoldCon: {fileID: 879488368}
   goldAnim: {fileID: 1286703406}
   goldTxtAnim: {fileID: 1294997436}
   goldTxtAnimTxt: {fileID: 1294997434}
@@ -32248,7 +32249,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1297388865}
-  - {fileID: 879488369}
   - {fileID: 189045173}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -40754,10 +40754,10 @@ RectTransform:
   m_Father: {fileID: 767524400}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 125}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 375, y: -462.5}
+  m_SizeDelta: {x: 750, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4589574949880019253
 GameObject:
@@ -41780,10 +41780,10 @@ RectTransform:
   m_Father: {fileID: 767524400}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 525}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 375, y: -837.5}
+  m_SizeDelta: {x: 750, y: 525}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7272039080941368694
 MonoBehaviour:
@@ -42319,10 +42319,10 @@ RectTransform:
   m_Father: {fileID: 767524400}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 275}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 375, y: -212.5}
+  m_SizeDelta: {x: 750, y: 275}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8275740046279318036
 MonoBehaviour:
