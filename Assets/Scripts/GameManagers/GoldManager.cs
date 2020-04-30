@@ -9,7 +9,6 @@ public class GoldManager : MonoBehaviour {
     private int gold;
     public TextMeshProUGUI goldTxt;
 
-    public GameObject adForGoldCon;
     public Animator goldAnim;
     public Animator goldTxtAnim;
     public TextMeshProUGUI goldTxtAnimTxt;
@@ -27,7 +26,6 @@ public class GoldManager : MonoBehaviour {
 
         gold = PlayerPrefs.GetInt("Gold", 0);
         goldTxt.text = gold.ToString();
-        adForGoldCon.SetActive(false);
     }
 
     public bool CanBuy(int amount) {
@@ -46,7 +44,7 @@ public class GoldManager : MonoBehaviour {
         goldTxtAnimTxt.text = "+" + goldToAdd;
 
         if (ad)
-            ToggleAdGoldConformation();
+            GetComponent<LevelSelector>().ToggleAdGoldConformation();
     }
 
     public void SubtractGold(int goldToSub) {
@@ -57,9 +55,5 @@ public class GoldManager : MonoBehaviour {
         goldAnim.SetTrigger("Buy");
         goldTxtAnim.SetTrigger("Buy");
         goldTxtAnimTxt.text = "-" + goldToSub;
-    }
-
-    public void ToggleAdGoldConformation() {
-        adForGoldCon.SetActive(!adForGoldCon.activeSelf);
     }
 }

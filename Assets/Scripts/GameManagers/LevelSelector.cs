@@ -27,6 +27,7 @@ public class LevelSelector : MonoBehaviour {
     public GameObject achivementsPanel;
     public GameObject shopPanel;
     public GameObject aboutPanel;
+    public GameObject watchAdCon;
 
     public DailySpin dailySpin;
     public About about;
@@ -49,6 +50,7 @@ public class LevelSelector : MonoBehaviour {
         achivementsPanel.SetActive(false);
         shopPanel.SetActive(false);
         aboutPanel.SetActive(false);
+        watchAdCon.SetActive(false);
 
         if (crossSceneManager.panelName != "") {
             ToggleUiPanel(crossSceneManager.panelName);
@@ -63,6 +65,10 @@ public class LevelSelector : MonoBehaviour {
         if (!startUI)
             sceneFader.FadeBetweenObjects();
         StartCoroutine(TogglePanels(panelName));
+    }
+    
+    public void ToggleAdGoldConformation() {
+        watchAdCon.SetActive(!watchAdCon.activeSelf);
     }
 
     public void OpenGameModeSelector() {
@@ -114,6 +120,7 @@ public class LevelSelector : MonoBehaviour {
             aboutPanel.SetActive(!aboutPanel.activeSelf);
             about.ResetTutImage();
         }
+        watchAdCon.SetActive(false);
     }
 
     public IEnumerator GameModeSelector() {
@@ -126,6 +133,7 @@ public class LevelSelector : MonoBehaviour {
         }
 
         home.SetActive(false);
+        watchAdCon.SetActive(false);
         levelSelector.SetActive(true);
         gameModesParent.SetActive(true);
         casualGameModePanel.SetActive(false);
