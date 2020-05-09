@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -7,6 +8,7 @@ public class Shop : MonoBehaviour {
     public ItemDb itemDb;
     public GoldManager goldManager;
 
+    public CanvasGroup canvas;
     public Item selectedItem;
 
     public TextMeshProUGUI itemNameTxt;
@@ -41,25 +43,12 @@ public class Shop : MonoBehaviour {
 
     public void ShowFirst() {
         selectedItem = itemDb.GetItem(0);
-        UpdateShopUI();
+        UpdateShopUI(false);
     }
 
-    public void UpdateShopUI() {
+    public void UpdateShopUI(bool fadeOut) {
         /* Updates name, img and display ui/btns for cars in shop */
-        itemNameTxt.text = selectedItem.name;
-        itemImg.sprite = selectedItem.sprite;
-
-        indexTxt.text = (selectedItem.ID + 1) + "/" + itemDb.GetLengthOfCat();
-
-        if (PlayerPrefs.GetInt("PlayerCar" + selectedItem.ID + "Unlocked", 0) == 1) {
-            ShowEquip();
-        } else if (selectedItem.needBuy) {
-            ShowStandard(true);
-        } else {
-            ShowStandard(false);
-        }
-
-        UpdateNavButtons();
+        StartCoroutine(UpdateShop(fadeOut));
     }
 
     public void UpdateNavButtons() {
@@ -85,16 +74,16 @@ public class Shop : MonoBehaviour {
         }
     }
 
-    public void ShowNextItem() {
+    public void ShowNextItem(bool fadeOut) {
         // Switches to next item (item with 1 higher ID)
         selectedItem = itemDb.GetItem(selectedItem.ID + 1);
-        UpdateShopUI();
+        UpdateShopUI(fadeOut);
     }
 
-    public void ShowPrevItem() {
+    public void ShowPrevItem(bool fadeOut) {
         // Switches to prev item (item with 1 lower ID)
         selectedItem = itemDb.GetItem(selectedItem.ID - 1);
-        UpdateShopUI();
+        UpdateShopUI(fadeOut);
     }
 
     public void ShowStandard(bool buyItem) {
@@ -139,6 +128,39 @@ public class Shop : MonoBehaviour {
     public void EquipItem() {
         // Change equippedCar id 
         saveManager.SaveIntData("PlayerCar" + "Equipped", selectedItem.ID);
-        UpdateShopUI();
+        UpdateShopUI(false);
+    }
+
+    public IEnumerator UpdateShop(bool fadeOut) {
+        if (fadeOut) {
+            float t = 1f;
+            while (t > 0f) {
+                t -= Time.deltaTime * 2;
+                canvas.alpha = t;
+                yield return null;
+            }
+        }
+        itemNameTxt.text = selectedItem.name;
+        itemImg.sprite = selectedItem.sprite;
+
+        indexTxt.text = (selectedItem.ID + 1) + "/" + itemDb.GetLengthOfCat();
+
+        if (PlayerPrefs.GetInt("PlayerCar" + selectedItem.ID + "Unlocked", 0) == 1) {
+            ShowEquip();
+        } else if (selectedItem.needBuy) {
+            ShowStandard(true);
+        } else {
+            ShowStandard(false);
+        }
+
+        UpdateNavButtons();
+        if (fadeOut) {
+            float t = 0;
+            while (t < 1f) {
+                t += Time.deltaTime * 2;
+                canvas.alpha = t;
+                yield return null;
+            }
+        }
     }
 }

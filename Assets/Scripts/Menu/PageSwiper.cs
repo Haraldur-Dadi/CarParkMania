@@ -106,14 +106,14 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
 
         if (showNext) {
             if (shop) {
-                shop.ShowNextItem();
+                shop.ShowNextItem(false);
             } else if (about) {
                 about.ShowNextTutImage();
             }
             rectTransform.position = panelPos + new Vector2(Screen.width * 2, 0);
         } else {
             if (shop) {
-                shop.ShowPrevItem();
+                shop.ShowPrevItem(false);
             } else if (about) {
                 about.ShowPrevTutImage();
             }

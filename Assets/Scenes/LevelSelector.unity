@@ -16464,14 +16464,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1838942870}
         m_MethodName: ShowPrevItem
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1838942867}
         m_MethodName: PlayButtonClick
@@ -27637,7 +27637,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1838942870}
         m_MethodName: ShowNextItem
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -30940,6 +30940,7 @@ MonoBehaviour:
   saveManager: {fileID: 0}
   itemDb: {fileID: 0}
   goldManager: {fileID: 0}
+  canvas: {fileID: 616305511}
   itemNameTxt: {fileID: 29214103}
   itemImg: {fileID: 1735578641}
   indexTxt: {fileID: 384055545}
