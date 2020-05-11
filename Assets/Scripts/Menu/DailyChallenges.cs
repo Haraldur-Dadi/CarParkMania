@@ -10,6 +10,7 @@ public class DailyChallenges : MonoBehaviour {
     public GoldManager goldManager;
 
     public int weekday;
+    public int multiplier;
 
     public Button challenge1Btn;
     public Button challenge2Btn;
@@ -25,6 +26,7 @@ public class DailyChallenges : MonoBehaviour {
         sceneFader = SceneFader.Instance;
         saveManager = SaveManager.Instance;
         weekday = (int) DateTime.Now.DayOfWeek;
+        multiplier = PlayerPrefs.GetInt("DailyMultiplier", 0);
 
         if (!PlayerPrefs.HasKey("LastChallengeCompletedDate"))
             saveManager.SaveStringData("LastChallengeCompletedDate", "1582-09-15");
@@ -38,11 +40,10 @@ public class DailyChallenges : MonoBehaviour {
         }
         SetNotification();
     }
-    
+
     public void SetNotification() {
-        if (!HasCompleted()) {
+        if (!HasCompleted())
             notification.SetTrigger("Avail");
-        }
     }
 
     private void NewDayReset() {
@@ -51,6 +52,8 @@ public class DailyChallenges : MonoBehaviour {
         
         if (currDate > lastCompleteDate) {
             saveManager.SaveIntData("HasClaimed", 0);
+            saveManager.SaveIntData("DailyMultiplier", UnityEngine.Random.Range(0, 2));
+            multiplier = PlayerPrefs.GetInt("DailyMultiplier", 0);
             saveManager.SaveIntData("DailyChallenge1Completed", 0);
             saveManager.SaveIntData("DailyChallenge2Completed", 0);
             saveManager.SaveIntData("DailyChallenge3Completed", 0);
@@ -91,7 +94,7 @@ public class DailyChallenges : MonoBehaviour {
     }
 
     public void LoadChallengeLevel(int difficulty) {
-        saveManager.SaveIntData("boardToLoad", (7 * difficulty + weekday));
+        saveManager.SaveIntData("boardToLoad", weekday * 7 * (multiplier + difficulty));
         sceneFader.FadeToBuildIndex(1);
     }
 
