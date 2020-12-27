@@ -31747,9 +31747,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardAdsBtn: []
-  allowAdsBtn: {fileID: 0}
-  denyAdsBtn: {fileID: 0}
-  allowAdsPrompt: {fileID: 0}
 --- !u!114 &1981764646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33311,8 +33308,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -245}
-  m_SizeDelta: {x: -250, y: -460}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2046961711
 MonoBehaviour:
@@ -33334,7 +33331,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: An ad will play every 10 levels
+  m_text: Ad will play every 10 levels
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -33361,7 +33358,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 38
   m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 1
