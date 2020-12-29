@@ -4,11 +4,10 @@ using TMPro;
 
 public class LevelButton : MonoBehaviour {
     public Button button;
-    public TextMeshProUGUI text;
+    public TextMeshProUGUI levelTxt;
 
     public GameObject locked;
     public Image display;
-    int level;
 
     public Sprite checkMark;
     public Sprite blankStar;
@@ -29,27 +28,21 @@ public class LevelButton : MonoBehaviour {
         HideDisplay(false);
     }
 
-    public void Unavailable(int lvl) {
-        level = lvl;
+    public void Unavailable(int level) {
         button.interactable = false;
         locked.SetActive(true);
         HideDisplay(true);
-        text.text = (level + 1).ToString();
     }
-    public void Finished(int lvl) {
-        level = lvl;
+    public void Finished(int level) {
         button.interactable = true;
         locked.SetActive(false);
         HideDisplay(false);
         display.sprite = checkMark;
-        text.text = (level + 1).ToString();
     }
-    public void NextLevel(int lvl) {
-        level = lvl;
+    public void NextLevel(int level) {
         button.interactable = true;
         locked.SetActive(false);
         HideDisplay(true);
-        text.text = (level + 1).ToString();
     }
 
     void HideDisplay(bool hide) {

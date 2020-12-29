@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 752736627138756925}
-  text: {fileID: 752736626727330901}
+  levelTxt: {fileID: 752736626727330901}
   locked: {fileID: 177693709609659318}
   display: {fileID: 821157696403890361}
   checkMark: {fileID: 21300000, guid: b12741873c2e47a43be9507f59073d34, type: 3}
