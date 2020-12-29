@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class DailyChallenges : MonoBehaviour {
     public SaveManager saveManager;
-    public GoldManager goldManager;
 
     int multiplier;
     public Button challenge1Btn;
@@ -60,7 +59,7 @@ public class DailyChallenges : MonoBehaviour {
     }
 
     public void ClaimReward() {
-        goldManager.AddGold(25, false);
+        GoldManager.Instance.AddGold(25, false);
         saveManager.SaveIntData("HasClaimed", 1);
         saveManager.IncreaseAchivementProgress(7);
         claimBtn.SetActive(false);
