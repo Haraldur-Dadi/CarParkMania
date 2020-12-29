@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DailyChallenges : MonoBehaviour {
-
-    public SceneFader sceneFader;
     public SaveManager saveManager;
     public GoldManager goldManager;
 
-    public int weekday;
-    public int multiplier;
-
+    int multiplier;
     public Button challenge1Btn;
     public Button challenge2Btn;
     public Button challenge3Btn;
@@ -19,41 +14,28 @@ public class DailyChallenges : MonoBehaviour {
 
     public GameObject claimScreen;
     public GameObject claimBtn;
+    public GameObject notification;
 
-    public Animator notification;
-
-    private void Start() {
-        sceneFader = SceneFader.Instance;
+    void Start() {
         saveManager = SaveManager.Instance;
-        weekday = (int) DateTime.Now.DayOfWeek;
         multiplier = PlayerPrefs.GetInt("DailyMultiplier", 0);
 
-        if (!PlayerPrefs.HasKey("LastChallengeCompletedDate"))
-            saveManager.SaveStringData("LastChallengeCompletedDate", "1582-09-15");
-        
+        if (!PlayerPrefs.HasKey("LastChallengeCompletedDate")) { saveManager.SaveStringData("LastChallengeCompletedDate", "1582-09-15"); }
         NewDayReset();
 
-        if (!HasCompleted()) {
-            claimScreen.SetActive(false);
-        } else if (PlayerPrefs.GetInt("HasClaimed", 0) == 1) {
-            claimBtn.SetActive(false);
-        }
-        SetNotification();
+        notification.SetActive(!HasCompleted());
+        claimScreen.SetActive(!notification.activeSelf);
+        claimBtn.SetActive(PlayerPrefs.GetInt("HasClaimed", 0) == 1);
     }
 
-    public void SetNotification() {
-        if (!HasCompleted())
-            notification.SetTrigger("Avail");
-    }
-
-    private void NewDayReset() {
+    void NewDayReset() {
         DateTime currDate = DateTime.Today;
         DateTime lastCompleteDate = DateTime.ParseExact(PlayerPrefs.GetString("LastChallengeCompletedDate", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
         
         if (currDate > lastCompleteDate) {
             saveManager.SaveIntData("HasClaimed", 0);
-            saveManager.SaveIntData("DailyMultiplier", UnityEngine.Random.Range(0, 2));
-            multiplier = PlayerPrefs.GetInt("DailyMultiplier", 0);
+            multiplier = UnityEngine.Random.Range(0, 2);
+            saveManager.SaveIntData("DailyMultiplier", multiplier);
             saveManager.SaveIntData("DailyChallenge1Completed", 0);
             saveManager.SaveIntData("DailyChallenge2Completed", 0);
             saveManager.SaveIntData("DailyChallenge3Completed", 0);
@@ -62,40 +44,19 @@ public class DailyChallenges : MonoBehaviour {
         }
     }
 
-    private bool HasCompleted() {
+    bool HasCompleted() {
         // Check if player has finished all challenges
-        bool completed = true;
-
-        if (PlayerPrefs.GetInt("DailyChallenge1Completed", 0) == 1) {
-            challenge1Btn.interactable = false;
-        } else {
-            completed = false;
-        }
-
-        if (PlayerPrefs.GetInt("DailyChallenge2Completed", 0) == 1) {
-            challenge2Btn.interactable = false;
-        } else {
-            completed = false;
-        }
-
-        if (PlayerPrefs.GetInt("DailyChallenge3Completed", 0) == 1) {
-            challenge3Btn.interactable = false;
-        } else {
-            completed = false;
-        }
-
-        if (PlayerPrefs.GetInt("DailyChallenge4Completed", 0) == 1) {
-            challenge4Btn.interactable = false;
-        } else {
-            completed = false;
-        }
-
-        return completed;
+        Debug.Log(PlayerPrefs.GetInt("DailyChallenge1Completed", 0) == 0);
+        challenge1Btn.interactable = PlayerPrefs.GetInt("DailyChallenge1Completed", 0) == 0;
+        challenge2Btn.interactable = PlayerPrefs.GetInt("DailyChallenge2Completed", 0) == 0;
+        challenge3Btn.interactable = PlayerPrefs.GetInt("DailyChallenge3Completed", 0) == 0;
+        challenge4Btn.interactable = PlayerPrefs.GetInt("DailyChallenge4Completed", 0) == 0;
+        return !(challenge1Btn.interactable || challenge2Btn.interactable || challenge3Btn.interactable || challenge4Btn.interactable);
     }
 
     public void LoadChallengeLevel(int difficulty) {
-        saveManager.SaveIntData("boardToLoad", weekday + 7 * (multiplier + difficulty));
-        sceneFader.FadeToBuildIndex(1);
+        saveManager.SaveIntData("boardToLoad", (int)DateTime.Now.DayOfWeek + 7 * (multiplier + difficulty));
+        SceneFader.Instance.FadeToBuildIndex(1);
     }
 
     public void ClaimReward() {
