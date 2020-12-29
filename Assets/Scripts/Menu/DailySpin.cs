@@ -25,6 +25,7 @@ public class DailySpin : MonoBehaviour {
     public GameObject notification;
 
     void Start() {
+        OpenUI();
         StartCoroutine(Counter());
     }
 
