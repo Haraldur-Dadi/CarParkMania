@@ -8,7 +8,7 @@ public class LevelSelector : MonoBehaviour {
     public GameObject home;
     public GameObject levelSelector;
     public GameObject gameModesParent;
-    public GameObject gameModePanel;
+    public GameModePanel gameModePanel;
 
     public GameObject homeBtn;
     public GameObject backBtn;
@@ -88,7 +88,7 @@ public class LevelSelector : MonoBehaviour {
         watchAdCon.SetActive(false);
         levelSelector.SetActive(true);
         gameModesParent.SetActive(true);
-        gameModePanel.SetActive(false);
+        gameModePanel.Hide();
         homeBtn.SetActive(true);
         backBtn.SetActive(false);
 
@@ -101,7 +101,7 @@ public class LevelSelector : MonoBehaviour {
 
         gameModesParent.SetActive(false);
         selectPanelName.text = (gameModeNr == 1) ? "Casual" : "Challenge";
-        gameModePanel.SetActive(true);
+        gameModePanel.Display();
         homeBtn.SetActive(false);
         backBtn.SetActive(true);
     }
