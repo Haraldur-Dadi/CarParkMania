@@ -1,19 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class LevelSelector : MonoBehaviour {
-
-    public CrossSceneManager crossSceneManager;
-    public SceneFader sceneFader;
-    private bool startUI;
+    bool startUI;
 
     public GameObject home;
     public GameObject levelSelector;
     public GameObject gameModesParent;
-    public GameObject casualGameModePanel;
-    public GameObject challengeGameModePanel;
+    public GameObject gameModePanel;
 
     public GameObject homeBtn;
     public GameObject backBtn;
@@ -29,13 +24,7 @@ public class LevelSelector : MonoBehaviour {
     public GameObject aboutPanel;
     public GameObject watchAdCon;
 
-    public DailySpin dailySpin;
-    public About about;
-
     public void Start() {
-        crossSceneManager = CrossSceneManager.Instance;
-        sceneFader = SceneFader.Instance;
-
         startUI = true;
         UIStartState();
     }
@@ -52,59 +41,30 @@ public class LevelSelector : MonoBehaviour {
         aboutPanel.SetActive(false);
         watchAdCon.SetActive(false);
 
-        if (crossSceneManager.panelName != "") {
-            ToggleUiPanel(crossSceneManager.panelName);
-        } else if (crossSceneManager.gameModeNr > 0) {
+        if (CrossSceneManager.Instance.panelName != "") {
+            ToggleUiPanel(CrossSceneManager.Instance.panelName);
+        } else if (CrossSceneManager.Instance.gameModeNr > 0) {
             StartCoroutine(GameModeSelector());
-            StartCoroutine(SelectGameModeUI(crossSceneManager.gameModeNr));
+            StartCoroutine(SelectGameModeUI(CrossSceneManager.Instance.gameModeNr));
         }
         startUI = false;
     }
 
-    public void ToggleUiPanel(string panelName) {
-        if (!startUI)
-            sceneFader.FadeBetweenObjects();
-        StartCoroutine(TogglePanels(panelName));
-    }
-    
-    public void ToggleAdGoldConformation() {
-        watchAdCon.SetActive(!watchAdCon.activeSelf);
-    }
+    public void ToggleUiPanel(string panelName) { StartCoroutine(TogglePanels(panelName)); }
+    public void OpenGameModeSelector() { StartCoroutine(GameModeSelector()); }
+    public void SelectGameMode(int gameModeNr) { StartCoroutine(SelectGameModeUI(gameModeNr)); }
+    public void BackHome() { StartCoroutine(HomeScreen()); }
 
-    public void OpenGameModeSelector() {
-        if (!startUI)
-            sceneFader.FadeBetweenObjects();
-        StartCoroutine(GameModeSelector());
-    }
+    public void ToggleAdGoldConformation() { watchAdCon.SetActive(!watchAdCon.activeSelf); }
+    public void PlayButtonClick() { AudioManager.Instance.PlayButtonClick(); }
 
-    public void SelectGameMode(int gameModeNr) {
-        if (!startUI)
-            sceneFader.FadeBetweenObjects();
-        StartCoroutine(SelectGameModeUI(gameModeNr));
-    }
-
-    public void BackHome() {
-        sceneFader.FadeBetweenObjects();
-        StartCoroutine(HomeScreen());
-    }
-
-    public void PlayButtonClick() {
-        AudioManager.Instance.PlayButtonClick();
-    }
-
-    public IEnumerator TogglePanels(string panelName) {
-        if (!startUI) {
-            float t = 0f;
-            while (t < 1f) {
-                t += Time.deltaTime * 3;
-                yield return null;
-            }
-        }
+    IEnumerator TogglePanels(string panelName) {
+        yield return WaitTimer();
 
         mainScreen.SetActive(!mainScreen.activeSelf);
         panelHeader.SetActive(!panelHeader.activeSelf);
 
-        crossSceneManager.panelName = panelName;        
+        CrossSceneManager.Instance.panelName = panelName;        
         uiName.text = panelName;
 
         if (panelName == "Achivements") {
@@ -113,76 +73,57 @@ public class LevelSelector : MonoBehaviour {
             dailyChallengePanel.SetActive(!dailyChallengePanel.activeSelf);
         } else if (panelName == "Spin") {
             dailySpinPanel.SetActive(!dailySpinPanel.activeSelf);
-            dailySpin.OpenUI();
         } else if (panelName == "Shop") {
             shopPanel.SetActive(!shopPanel.activeSelf);
         } else if (panelName == "About") {
             aboutPanel.SetActive(!aboutPanel.activeSelf);
-            about.ResetTutImage();
         }
         watchAdCon.SetActive(false);
     }
 
-    public IEnumerator GameModeSelector() {
-        if (!startUI) {
-            float t = 0f;
-            while (t < 1f) {
-                t += Time.deltaTime * 3;
-                yield return null;
-            }
-        }
+    IEnumerator GameModeSelector() {
+        yield return WaitTimer();
 
         home.SetActive(false);
         watchAdCon.SetActive(false);
         levelSelector.SetActive(true);
         gameModesParent.SetActive(true);
-        casualGameModePanel.SetActive(false);
-        challengeGameModePanel.SetActive(false);
+        gameModePanel.SetActive(false);
         homeBtn.SetActive(true);
         backBtn.SetActive(false);
 
         selectPanelName.text = "Modes";
     }
 
-    public IEnumerator SelectGameModeUI(int gameModeNr) {
-        crossSceneManager.gameModeNr = gameModeNr;
-        
+    IEnumerator SelectGameModeUI(int gameModeNr) {
+        CrossSceneManager.Instance.gameModeNr = gameModeNr;        
+        yield return WaitTimer();
+
+        gameModesParent.SetActive(false);
+        selectPanelName.text = (gameModeNr == 1) ? "Casual" : "Challenge";
+        gameModePanel.SetActive(true);
+        homeBtn.SetActive(false);
+        backBtn.SetActive(true);
+    }
+
+    IEnumerator HomeScreen() {
+        yield return WaitTimer();
+
+        CrossSceneManager.Instance.panelName = "";
+        CrossSceneManager.Instance.gameModeNr = 0;
+        CrossSceneManager.Instance.difficulty = 0;
+        UIStartState();
+    }
+    IEnumerator WaitTimer() {
         if (!startUI) {
+            SceneFader.Instance.FadeBetweenObjects();
+
             float t = 0f;
             while (t < 1f) {
                 t += Time.deltaTime * 3;
                 yield return null;
             }
-            
-            if (gameModeNr == 1) {
-                casualGameModePanel.GetComponent<GameModePanel>().SelectDifficulty(0);
-            } else {
-                challengeGameModePanel.GetComponent<GameModePanel>().SelectDifficulty(0);
-            }
         }
-
-        gameModesParent.SetActive(false);
-        if (gameModeNr == 1) {
-            selectPanelName.text = "Casual";
-            casualGameModePanel.SetActive(true);
-        } else {
-            selectPanelName.text = "Challenge";
-            challengeGameModePanel.SetActive(true);
-        }
-        homeBtn.SetActive(false);
-        backBtn.SetActive(true);
-    }
-
-    public IEnumerator HomeScreen() {
-        float t = 0f;
-        while (t < 1f) {
-            t += Time.deltaTime * 3;
-            yield return null;
-        }
-
-        crossSceneManager.panelName = "";
-        crossSceneManager.gameModeNr = 0;
-        crossSceneManager.difficulty = 0;
-        UIStartState();
+        yield return null;
     }
 }
