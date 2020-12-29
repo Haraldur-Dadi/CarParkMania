@@ -45,7 +45,6 @@ public class DailyChallenges : MonoBehaviour {
 
     bool HasCompleted() {
         // Check if player has finished all challenges
-        Debug.Log(PlayerPrefs.GetInt("DailyChallenge1Completed", 0) == 0);
         challenge1Btn.interactable = PlayerPrefs.GetInt("DailyChallenge1Completed", 0) == 0;
         challenge2Btn.interactable = PlayerPrefs.GetInt("DailyChallenge2Completed", 0) == 0;
         challenge3Btn.interactable = PlayerPrefs.GetInt("DailyChallenge3Completed", 0) == 0;
