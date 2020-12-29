@@ -5,11 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 public class DailySpin : MonoBehaviour {
-    SaveManager saveManager;
-    GoldManager goldManager;
-    ItemDb itemDb;
-
-    public GameObject wheel;
+    public Transform wheel;
     public GameObject unableToSpinPanel;
     public TextMeshProUGUI countdown;
     public GameObject winPanel;
@@ -18,162 +14,101 @@ public class DailySpin : MonoBehaviour {
     public GameObject winCarPanel;
     public TextMeshProUGUI winCarName;
     public Image winCarImg;
-    public Button spinBtn;
-    public Button closeBtn;
+    public GameObject spinBtn;
+    public GameObject closeBtn;
 
-    private int randomValue;
-    private float timeInterval;
-    private int finalAngle;
-
-    private int rewardAmount;
-    public bool canWinCar;
-    private Item winItem;
+    bool canWinCar;
     public int[] winID;
 
     public GameObject carToWinBoardImg;
     public GameObject goldToWinBoardImg;
-
-    public Animator notification;
+    public GameObject notification;
 
     void Start() {
-        saveManager = SaveManager.Instance;
-        goldManager = GoldManager.Instance;
-        itemDb = ItemDb.Instance;
-        
         StartCoroutine(Counter());
     }
 
-    public bool canSpin() {
-        DateTime currDate = DateTime.Today;
-        DateTime lastSpinDate = DateTime.ParseExact(PlayerPrefs.GetString("LastDateSpun", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
-        
-        if (PlayerPrefs.GetInt("DailyCarsWon", 0) < winID.Length) {
-            canWinCar = true;
-        } else {
-            canWinCar = false;
-        }
-
-        if (currDate > lastSpinDate) {
-            notification.SetTrigger("Avail");
-            return true;
-        }
-        return false;
+    bool canSpin() {
+        canWinCar = PlayerPrefs.GetInt("DailyCarsWon", 0) < winID.Length;
+        return DateTime.Today > DateTime.ParseExact(PlayerPrefs.GetString("LastDateSpun", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
     }
 
     public void OpenUI() {
-        if (canSpin()) {
-            spinBtn.gameObject.SetActive(true);
-            unableToSpinPanel.SetActive(false);
-        } else {
-            spinBtn.gameObject.SetActive(false);
-            unableToSpinPanel.SetActive(true);
-        }
-
+        notification.SetActive(canSpin());
+        spinBtn.SetActive(notification.activeSelf);
+        unableToSpinPanel.SetActive(!notification.activeSelf);
         carToWinBoardImg.SetActive(canWinCar);
         goldToWinBoardImg.SetActive(!canWinCar);
         winPanel.SetActive(false);
     }
 
     public void SpinWheel() {
-        spinBtn.interactable = false;
+        spinBtn.SetActive(false);
         DateTime currDate = DateTime.Now;
-        saveManager.SaveStringData("LastDateSpun", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));
-        saveManager.IncreaseAchivementProgress(3);
+        SaveManager.Instance.SaveStringData("LastDateSpun", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));
+        SaveManager.Instance.IncreaseAchivementProgress(3);
         StartCoroutine(Spin());
-        StartCoroutine(Counter());
     }
 
     IEnumerator Spin() {
-        closeBtn.interactable = false;
-
-        randomValue = UnityEngine.Random.Range(25, 35);
-        timeInterval = 0.1f;
+        closeBtn.SetActive(false);
+        int randomValue = UnityEngine.Random.Range(25, 35);
+        float timeInterval = 0.1f;
+        int rewardAmount = 0;
 
         AudioManager.Instance.PlayWheelSpinning();
         for (int i = 0; i < randomValue; i++) {
-            wheel.transform.Rotate(0, 0, 11.25f);
+            wheel.Rotate(0, 0, 11.25f);
             if (i > Mathf.RoundToInt(randomValue * 0.65f)) {
                 timeInterval = 0.2f;
             } else if (i > Mathf.RoundToInt(randomValue * 0.85f)) {
                 timeInterval = 0.35f;
             }
             yield return new WaitForSeconds(timeInterval/2);
-            wheel.transform.Rotate(0, 0, 11.25f);
+            wheel.Rotate(0, 0, 11.25f);
             yield return new WaitForSeconds(timeInterval/2);
         }
 
-        if (Mathf.RoundToInt(wheel.transform.eulerAngles.z) % 45 == 0) {
-            wheel.transform.Rotate(0, 0, 11.25f);
+        if (Mathf.RoundToInt(wheel.eulerAngles.z) % 45 == 0) {
+            wheel.Rotate(0, 0, 11.25f);
         }
         AudioManager.Instance.StopWheelSpinning();
 
         yield return new WaitForSeconds(1);
-
-        while (Mathf.RoundToInt(wheel.transform.eulerAngles.z) % 45 != 0) {
-            wheel.transform.Rotate(0, 0, -11.25f);
+        while (Mathf.RoundToInt(wheel.eulerAngles.z) % 45 != 0) {
+            wheel.Rotate(0, 0, -11.25f);
         }
 
-        finalAngle = Mathf.RoundToInt(wheel.transform.eulerAngles.z);
-        spinBtn.gameObject.SetActive(false);
-
-        switch (finalAngle) {
-            case 0:
-                if (canWinCar) {
-                    // Give player new car skin
-                    int randomInt = UnityEngine.Random.Range(0, winID.Length);
-                    winItem = itemDb.GetItem(winID[randomInt]);
-                    saveManager.SaveIntData("DailyCarsWon", 1);
-                } else {
-                    // Add 35 gold
-                    rewardAmount = 35;
-                }
-                break;
-            case 45:
-                // Add 10 gold
-                rewardAmount = 10;
-                break;
-            case 90:
-                // Add 75 gold
-                rewardAmount = 75;
-                break;
-            case 135:
-                // Add 25 gold
-                rewardAmount = 25;
-                break;
-            case 180:
-                // Add 10 gold
-                rewardAmount = 10;
-                break;
-            case 225:
-                // Add 25 gold
-                rewardAmount = 25;
-                break;
-            case 270:
-                // Add 99 gold
-                rewardAmount = 99;
-                break;
-            case 315:
-                // Add 10 gold
-                rewardAmount = 10;
-                break;
-        }
-        winPanel.SetActive(true);
-
-        if (rewardAmount > 0) {
-            goldManager.AddGold(rewardAmount, false);
-            wonGoldAmountTxt.text = rewardAmount.ToString();
-            winGoldPanel.SetActive(true);
-            winCarPanel.SetActive(false);
-            AudioManager.Instance.PlayBuySound();
-        } else {
-            winGoldPanel.SetActive(false);
-            winCarPanel.SetActive(true);
+        int finalAngle = Mathf.RoundToInt(wheel.eulerAngles.z);
+        if (finalAngle == 45 || finalAngle == 180 || finalAngle == 315) {
+            rewardAmount = 10;
+        } else if (finalAngle == 135 || finalAngle == 225) {
+            rewardAmount = 25;
+        } else if (finalAngle == 90) {
+            rewardAmount = 75;
+        } else if (finalAngle == 270) {
+            rewardAmount = 99;
+        } else if (canWinCar) {
+            AudioManager.Instance.PlayWinSound();
+            Item winItem = ItemDb.Instance.GetItem(winID[UnityEngine.Random.Range(0, winID.Length)]);
             winCarName.text = winItem.name;
             winCarImg.sprite = winItem.sprite;
-            saveManager.SaveIntData("PlayerCar" + winItem.ID + "Unlocked", 1);
-            AudioManager.Instance.PlayWinSound();
+            SaveManager.Instance.SaveIntData("DailyCarsWon", 1);
+            SaveManager.Instance.SaveIntData("PlayerCar" + winItem.ID + "Unlocked", 1);
+            winGoldPanel.SetActive(false);
+        } else {
+            rewardAmount = 35;
         }
-        closeBtn.interactable = true;
+
+        if (rewardAmount > 0) {
+            winCarPanel.SetActive(false);
+            GoldManager.Instance.AddGold(rewardAmount, false);
+            wonGoldAmountTxt.text = rewardAmount.ToString();
+            AudioManager.Instance.PlayBuySound();
+        } 
+        closeBtn.SetActive(true);
+        winPanel.SetActive(true);
+        StartCoroutine(Counter());
     }
 
     IEnumerator Counter() {
