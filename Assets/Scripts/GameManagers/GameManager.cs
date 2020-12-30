@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour {
 
     public int levelIndex;
     public int boardLength;
-    
 
     public GameObject gameBoard;
     public GameObject level_board;
@@ -24,15 +23,11 @@ public class GameManager : MonoBehaviour {
     void Awake() {
         if (Instance == null) {
             Instance = this;
+            boardLength = level_boards_easy.Length;
+            LoadLevel();
         } else {
             Destroy(this);
         }
-    }
-
-    public virtual void Start() {
-        level_board = null;
-        boardLength = level_boards_easy.Length;
-        LoadLevel();
     }
 
     public virtual void LoadLevel() {
@@ -85,11 +80,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public virtual void IncreaseMoves() {
-    }
-    public virtual void DecreaseMoves() {
-    }
-
+    public virtual void ChangeMoves(bool increase) {}
     public virtual void LevelComplete() {
         AudioManager.Instance.PlayWinSound();
 
@@ -106,9 +97,7 @@ public class GameManager : MonoBehaviour {
         CrossSceneManager.Instance.TmpPreventClicks();
         SceneFader.Instance.FadeToBuildIndex(0);
     }
-    public void RetryLevel() {
-        StartCoroutine(PreLoadLevel());
-    }
+    public void RetryLevel() { StartCoroutine(PreLoadLevel()); }
     public void LoadNextLevel() {
         SaveManager.Instance.SaveIntData("boardToLoad", levelIndex + 1);
         StartCoroutine(PreLoadLevel());
