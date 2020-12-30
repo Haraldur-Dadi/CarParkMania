@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Casual_GM : GameManager {
     public override void LoadLevel() {
@@ -15,8 +14,7 @@ public class Casual_GM : GameManager {
         
         SaveManager.Instance.IncreaseAchivementProgress(0);
         SaveManager.Instance.IncreaseAchivementProgress(1);
-        SaveManager.Instance.SaveIntData("boardToLoad", levelIndex + 1);
-        if (levelIndex + 1 <= 99) {
+        if (levelIndex < 99) {
             StartCoroutine(CountdownNextLevel());
         } else {
             StartCoroutine(DelayedLevelSelector());
