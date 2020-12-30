@@ -14,7 +14,7 @@ public class CrossSceneManager : MonoBehaviour {
     public int gameModeNr;
     public int difficulty;
 
-    private void Awake() {
+    void Awake() {
         if (Instance == null) {
             Instance = this;
             panelName = "";
@@ -27,7 +27,7 @@ public class CrossSceneManager : MonoBehaviour {
         }
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         canvasGroups = GameObject.FindObjectsOfType<CanvasGroup>();
         settingsBtn = GameObject.Find("SettingsBtn").GetComponent<Button>();
         settingsBtn.onClick.AddListener(delegate { ToggleSettings(); });
@@ -39,7 +39,9 @@ public class CrossSceneManager : MonoBehaviour {
     public void TmpPreventClicks() { StartCoroutine(PreventClicks()); }
     IEnumerator PreventClicks() {
         foreach (CanvasGroup group in canvasGroups) {
-            group.interactable = false;
+            if (group) {
+                group.interactable = false;
+            }
         }
         yield return new WaitForSeconds(0.4f);
         foreach (CanvasGroup group in canvasGroups) {

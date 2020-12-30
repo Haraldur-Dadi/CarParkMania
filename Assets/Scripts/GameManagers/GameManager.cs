@@ -103,9 +103,7 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(PreLoadLevel());
     }
 
-    public void PlayButtonClick() {
-        AudioManager.Instance.PlayButtonClick();
-    }
+    public void PlayButtonClick() { AudioManager.Instance.PlayButtonClick(); }
     public IEnumerator PreLoadLevel() {
         CrossSceneManager.Instance.TmpPreventClicks();
         SceneFader.Instance.FadeBetweenObjects();
