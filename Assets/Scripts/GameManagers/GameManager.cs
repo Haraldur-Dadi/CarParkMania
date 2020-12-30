@@ -4,16 +4,11 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour {
-
     public static GameManager Instance;
-    public SceneFader sceneFader;
-    public SaveManager saveManager;
-    public ItemDb itemDb;
 
     public int levelIndex;
     public int boardLength;
     
-    public bool finished;
 
     public GameObject gameBoard;
     public GameObject level_board;
@@ -26,7 +21,7 @@ public class GameManager : MonoBehaviour {
     public TextMeshProUGUI levelTxt;
     public TextMeshProUGUI difficultyTxt;
 
-    private void Awake() {
+    void Awake() {
         if (Instance == null) {
             Instance = this;
         } else {
@@ -35,19 +30,15 @@ public class GameManager : MonoBehaviour {
     }
 
     public virtual void Start() {
-        sceneFader = SceneFader.Instance;
-        saveManager = SaveManager.Instance;
-        itemDb = ItemDb.Instance;
-
         level_board = null;
         boardLength = level_boards_easy.Length;
         LoadLevel();
     }
 
     public virtual void LoadLevel() {
-        if (PlayerPrefs.GetInt("GamesPlayed", 0) % 10 == 0 && PlayerPrefs.GetInt("AllowAds", 1) == 1)
+        if (PlayerPrefs.GetInt("GamesPlayed", 0) % 10 == 0)
             AdManager.Instance.ShowVideoAd();
-        saveManager.SaveIntData("GamesPlayed", PlayerPrefs.GetInt("GamesPlayed", 0) + 1);
+        SaveManager.Instance.SaveIntData("GamesPlayed", PlayerPrefs.GetInt("GamesPlayed", 0) + 1);
         
         GetComponent<CarMovement>().Refresh();
 
@@ -55,7 +46,6 @@ public class GameManager : MonoBehaviour {
         if (level_board != null)
             Destroy(level_board);
 
-        finished = false;
         levelCompleteUi.SetActive(false);
 
         levelIndex = PlayerPrefs.GetInt("boardToLoad", 0);
@@ -90,7 +80,7 @@ public class GameManager : MonoBehaviour {
             Car carObj = car.GetComponent<Car>();
 
             if (carObj.length == 0) {
-                carObj.carImg.sprite = itemDb.GetItem(PlayerPrefs.GetInt("PlayerCarEquipped", 0)).sprite;
+                carObj.carImg.sprite = ItemDb.Instance.GetItem(PlayerPrefs.GetInt("PlayerCarEquipped", 0)).sprite;
             }
         }
     }
@@ -102,12 +92,11 @@ public class GameManager : MonoBehaviour {
 
     public virtual void LevelComplete() {
         AudioManager.Instance.PlayWinSound();
-        finished = true;
 
         if (levelIndex < level_boards_easy.Length)
-            saveManager.IncreaseAchivementProgress(4);
-        saveManager.IncreaseAchivementProgress(5);
-        saveManager.IncreaseAchivementProgress(6);
+            SaveManager.Instance.IncreaseAchivementProgress(4);
+        SaveManager.Instance.IncreaseAchivementProgress(5);
+        SaveManager.Instance.IncreaseAchivementProgress(6);
 
         levelCompleteUi.SetActive(true);
     }
@@ -115,13 +104,13 @@ public class GameManager : MonoBehaviour {
     public void GoToLevelSelector() {
         /* Sends player to home screen */
         CrossSceneManager.Instance.TmpPreventClicks();
-        sceneFader.FadeToBuildIndex(0);
+        SceneFader.Instance.FadeToBuildIndex(0);
     }
     public void RetryLevel() {
         StartCoroutine(PreLoadLevel());
     }
     public void LoadNextLevel() {
-        saveManager.SaveIntData("boardToLoad", levelIndex + 1);
+        SaveManager.Instance.SaveIntData("boardToLoad", levelIndex + 1);
         StartCoroutine(PreLoadLevel());
     }
 
@@ -130,7 +119,7 @@ public class GameManager : MonoBehaviour {
     }
     public IEnumerator PreLoadLevel() {
         CrossSceneManager.Instance.TmpPreventClicks();
-        sceneFader.FadeBetweenObjects();
+        SceneFader.Instance.FadeBetweenObjects();
         float t = 1;
         while (t > 0f) {
             t -= Time.deltaTime * 3;

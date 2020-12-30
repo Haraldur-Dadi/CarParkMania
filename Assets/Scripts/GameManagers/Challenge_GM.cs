@@ -37,13 +37,12 @@ public class Challenge_GM : GameManager {
     }
 
     public override void LevelComplete() {
-        finished = true;
         levelCompleteUi.SetActive(true);
-        saveManager.SaveIntData("LevelsCompleted", PlayerPrefs.GetInt("LevelsCompleted", 1) + 1);
+        SaveManager.Instance.SaveIntData("LevelsCompleted", PlayerPrefs.GetInt("LevelsCompleted", 1) + 1);
 
         if (moves <= currLevel.minMoves + 4) {
             if (PlayerPrefs.GetInt("ChallengeLevelReached", 0) <= levelIndex)
-                saveManager.SaveIntData("ChallengeLevelReached", levelIndex + 1);
+                SaveManager.Instance.SaveIntData("ChallengeLevelReached", levelIndex + 1);
             
             completedTxt.text = "Level Completed!";
             levelCompleteUi.GetComponent<Image>().color = new Color32(30,236,34,245);
@@ -60,21 +59,21 @@ public class Challenge_GM : GameManager {
                     s.sprite = goldStar;
                 }
                 movesNextStarTxt.text = "";
-                saveManager.SaveIntData("Challenge" + levelIndex + "Stars", 3);
+                SaveManager.Instance.SaveIntData("Challenge" + levelIndex + "Stars", 3);
             } else if (moves <= currLevel.minMoves + 2) {
                 stars[0].sprite = silverStar;
                 stars[1].sprite = silverStar;
                 stars[2].sprite = blankStar;
                 movesNextStarTxt.text = "Next star: " + currLevel.minMoves;
                 if (PlayerPrefs.GetInt("Challenge" + levelIndex + "Stars") < 2)
-                    saveManager.SaveIntData("Challenge" + levelIndex + "Stars", 2);
+                    SaveManager.Instance.SaveIntData("Challenge" + levelIndex + "Stars", 2);
             } else {
                 stars[0].sprite = bronzeStar;
                 stars[1].sprite = blankStar;
                 stars[2].sprite = blankStar;
                 movesNextStarTxt.text = "Next star: " + (currLevel.minMoves + 2);
                 if (PlayerPrefs.GetInt("Challenge" + levelIndex + "Stars") < 1)
-                    saveManager.SaveIntData("Challenge" + levelIndex + "Stars", 1);
+                    SaveManager.Instance.SaveIntData("Challenge" + levelIndex + "Stars", 1);
             }
         } else {
             completedTxt.text = "You lost!";
@@ -85,6 +84,5 @@ public class Challenge_GM : GameManager {
             movesNextStarTxt.text = "Minimum moves: " + (currLevel.minMoves + 5);
             nextLvlBtn.SetActive(false);
         }
-
     }
 }
