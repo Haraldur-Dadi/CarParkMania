@@ -4,10 +4,6 @@ using UnityEngine.UI;
 using TMPro;
 
 public class Shop : MonoBehaviour {
-    public SaveManager saveManager;
-    public ItemDb itemDb;
-    public GoldManager goldManager;
-
     public CanvasGroup canvas;
     public Item selectedItem;
 
@@ -15,8 +11,6 @@ public class Shop : MonoBehaviour {
     public Image itemImg;
 
     public TextMeshProUGUI indexTxt;
-    public bool canShowPrev;
-    public bool canShowNext;
     public GameObject prevBtn;
     public GameObject nextBtn;
 
@@ -26,23 +20,17 @@ public class Shop : MonoBehaviour {
     public TextMeshProUGUI equipTxt;
     public GameObject unlock;
 
-    private void Awake() {
+    void Start() {
         // Set data for first time load
         if (!PlayerPrefs.HasKey("PlayerCar0Unlocked")) {
             PlayerPrefs.SetInt("PlayerCar0Unlocked", 1);
             PlayerPrefs.SetInt("PlayerCarEquipped", 0);
         }
-    }
-
-    private void Start() {
-        saveManager = SaveManager.Instance;
-        itemDb = ItemDb.Instance;
-        goldManager = GoldManager.Instance;
         ShowFirst();
     }
 
     public void ShowFirst() {
-        selectedItem = itemDb.GetItem(0);
+        selectedItem = ItemDb.Instance.GetItem(0);
         UpdateShopUI(false);
     }
 
@@ -53,53 +41,27 @@ public class Shop : MonoBehaviour {
 
     public void UpdateNavButtons() {
         // Display button based on what item looking at
-        if (selectedItem.ID == 0) {
-            // First item, no prev item
-            prevBtn.SetActive(false);
-            nextBtn.SetActive(true);
-            canShowPrev = false;
-            canShowNext = true;
-        } else if (selectedItem.ID == itemDb.GetLengthOfCat() - 1) {
-            // Last item, no next item
-            prevBtn.SetActive(true);
-            nextBtn.SetActive(false);
-            canShowPrev = true;
-            canShowNext = false;
-        } else {
-            // Somewhere in middle, prev and next item
-            prevBtn.SetActive(true);
-            nextBtn.SetActive(true);
-            canShowPrev = true;
-            canShowNext = true;
-        }
+        prevBtn.SetActive(selectedItem.ID > 0);
+        nextBtn.SetActive(selectedItem.ID < ItemDb.Instance.GetLengthOfCat() - 1);
     }
 
     public void ShowNextItem(bool fadeOut) {
-        // Switches to next item (item with 1 higher ID)
-        selectedItem = itemDb.GetItem(selectedItem.ID + 1);
+        // Switches to next item
+        selectedItem = ItemDb.Instance.GetItem(selectedItem.ID + 1);
         UpdateShopUI(fadeOut);
     }
 
     public void ShowPrevItem(bool fadeOut) {
-        // Switches to prev item (item with 1 lower ID)
-        selectedItem = itemDb.GetItem(selectedItem.ID - 1);
+        // Switches to prev item
+        selectedItem = ItemDb.Instance.GetItem(selectedItem.ID - 1);
         UpdateShopUI(fadeOut);
     }
 
     public void ShowStandard(bool buyItem) {
-        if (buyItem) {
-            buyBtn.gameObject.SetActive(true);
-            if (goldManager.CanBuy(selectedItem.cost)) {
-                buyBtn.interactable = true;
-            } else {
-                buyBtn.interactable = false;
-            }
-            buyAmountTxt.text = selectedItem.cost.ToString();
-            unlock.SetActive(false);
-        } else {
-            buyBtn.gameObject.SetActive(false);
-            unlock.SetActive(true);
-        }
+        buyBtn.gameObject.SetActive(buyItem);
+        buyBtn.interactable = GoldManager.Instance.CanBuy(selectedItem.cost);
+        buyAmountTxt.text = selectedItem.cost.ToString();
+        unlock.SetActive(!buyItem);
         equipBtn.gameObject.SetActive(false);
     }
 
@@ -118,16 +80,16 @@ public class Shop : MonoBehaviour {
 
     public void BuyItem() {
         // Change from shop ui to equip ui and save that player has unlocked the item
-        saveManager.SaveIntData("PlayerCar" + selectedItem.ID + "Unlocked", 1);
-        saveManager.IncreaseAchivementProgress(2);
-        goldManager.SubtractGold(selectedItem.cost);
+        SaveManager.Instance.SaveIntData("PlayerCar" + selectedItem.ID + "Unlocked", 1);
+        SaveManager.Instance.IncreaseAchivementProgress(2);
+        GoldManager.Instance.SubtractGold(selectedItem.cost);
         ShowEquip();
         AudioManager.Instance.PlayBuySound();
     }
 
     public void EquipItem() {
         // Change equippedCar id 
-        saveManager.SaveIntData("PlayerCar" + "Equipped", selectedItem.ID);
+        SaveManager.Instance.SaveIntData("PlayerCar" + "Equipped", selectedItem.ID);
         UpdateShopUI(false);
     }
 
@@ -142,15 +104,12 @@ public class Shop : MonoBehaviour {
         }
         itemNameTxt.text = selectedItem.name;
         itemImg.sprite = selectedItem.sprite;
-
-        indexTxt.text = (selectedItem.ID + 1) + "/" + itemDb.GetLengthOfCat();
+        indexTxt.text = (selectedItem.ID + 1) + "/" + ItemDb.Instance.GetLengthOfCat();
 
         if (PlayerPrefs.GetInt("PlayerCar" + selectedItem.ID + "Unlocked", 0) == 1) {
             ShowEquip();
-        } else if (selectedItem.needBuy) {
-            ShowStandard(true);
         } else {
-            ShowStandard(false);
+            ShowStandard(selectedItem.needBuy);
         }
 
         UpdateNavButtons();

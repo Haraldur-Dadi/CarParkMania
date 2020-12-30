@@ -31,12 +31,12 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
         Vector2 newPos = panelPos;
         float xThreshold = (data.pressPosition.x - data.position.x) / Screen.width;
         if (xThreshold >= swipeThreshold) {
-            if (shop && shop.canShowNext || about && about.nextButton.activeSelf) {
+            if (shop && shop.nextBtn.activeSelf || about && about.nextButton.activeSelf) {
                 newPos += new Vector2(-Screen.width, 0);
                 StartCoroutine(ShowAnotherItem(true));
             }
         } else if (xThreshold <= -swipeThreshold) {
-            if (shop && shop.canShowPrev || about && about.prevButton.activeSelf) {
+            if (shop && shop.prevBtn.activeSelf || about && about.prevButton.activeSelf) {
                 newPos += new Vector2(Screen.width, 0);
                 StartCoroutine(ShowAnotherItem(false));
             }
