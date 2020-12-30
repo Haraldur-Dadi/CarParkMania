@@ -1,12 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DailyChallenge_GM : GameManager {
-
-    public override void LoadLevel() {
-        base.LoadLevel();
-    }
-
     public override void LevelComplete() {
         base.LevelComplete();
         if (levelIndex < boardLength) {
