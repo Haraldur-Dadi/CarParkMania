@@ -27,12 +27,8 @@ public class Challenge_GM : GameManager {
         movesTxt.text = "Moves: " + moves;
     }
 
-    public override void IncreaseMoves() {
-        moves += 1;
-        movesTxt.text = "Moves: " + moves;
-    }
-    public override void DecreaseMoves() {
-        moves -= 1;
+    public override void ChangeMoves(bool increase) {
+        moves += increase ? 1 : -1;
         movesTxt.text = "Moves: " + moves;
     }
 
@@ -44,9 +40,7 @@ public class Challenge_GM : GameManager {
             if (PlayerPrefs.GetInt("ChallengeLevelReached", 0) <= levelIndex)
                 SaveManager.Instance.SaveIntData("ChallengeLevelReached", levelIndex + 1);
             
-            completedTxt.text = "Level Completed!";
             levelCompleteUi.GetComponent<Image>().color = new Color32(30,236,34,245);
-            nextLvlBtn.SetActive(true);
 
             CarMovement carMovement = GetComponent<CarMovement>();
             if (carMovement.carToMove != carMovement.undoList[carMovement.undoList.Count - 1].car) {
@@ -76,13 +70,13 @@ public class Challenge_GM : GameManager {
                     SaveManager.Instance.SaveIntData("Challenge" + levelIndex + "Stars", 1);
             }
         } else {
-            completedTxt.text = "You lost!";
             levelCompleteUi.GetComponent<Image>().color = new Color32(236,51,30,245);
             foreach (Image s in stars) {
                 s.sprite = blankStar;
             }
             movesNextStarTxt.text = "Minimum moves: " + (currLevel.minMoves + 5);
-            nextLvlBtn.SetActive(false);
         }
+        completedTxt.text = (moves <= currLevel.minMoves + 4) ? "Level Completed!" : "You lost!";
+        nextLvlBtn.SetActive(moves <= currLevel.minMoves + 4);
     }
 }
