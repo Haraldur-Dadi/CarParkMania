@@ -6,9 +6,7 @@ public class GameModePanel : MonoBehaviour {
     public LevelButton[] levelBtns;
     public Button[] difficultyBtns;
 
-    public void Hide() {
-        gameObject.SetActive(false);
-    }
+    public void Hide() { gameObject.SetActive(false); }
     public void Display() {
         gameObject.SetActive(true);
         SelectDifficulty(CrossSceneManager.Instance.difficulty);
@@ -24,13 +22,13 @@ public class GameModePanel : MonoBehaviour {
             int iValue = i + (25 * difficulty);
             
             if (iValue > levelReached) {
-                levelBtns[i].Unavailable(iValue);
+                levelBtns[i].Unavailable();
             } else {
                 levelBtns[i].button.onClick.AddListener(() => SelectLevel(iValue));
                 if (gameModeName == "Casual" && iValue < levelReached) {
-                    levelBtns[i].Finished(iValue);
+                    levelBtns[i].Finished();
                 } else {
-                    levelBtns[i].NextLevel(iValue);
+                    levelBtns[i].NextLevel();
                 }
                 if (gameModeName == "Challenge") {
                     levelBtns[i].SetStar(PlayerPrefs.GetInt("Challenge" + iValue + "Stars", 0));

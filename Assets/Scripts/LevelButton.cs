@@ -28,18 +28,18 @@ public class LevelButton : MonoBehaviour {
         HideDisplay(false);
     }
 
-    public void Unavailable(int level) {
+    public void Unavailable() {
         button.interactable = false;
         locked.SetActive(true);
         HideDisplay(true);
     }
-    public void Finished(int level) {
+    public void Finished() {
         button.interactable = true;
         locked.SetActive(false);
         HideDisplay(false);
         display.sprite = checkMark;
     }
-    public void NextLevel(int level) {
+    public void NextLevel() {
         button.interactable = true;
         locked.SetActive(false);
         HideDisplay(true);
