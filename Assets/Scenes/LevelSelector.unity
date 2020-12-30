@@ -3858,7 +3858,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -16232,7 +16232,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -18586,7 +18586,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -23760,15 +23760,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9936aa69a27a1e84fabc9ac9bd701f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveManager: {fileID: 0}
-  itemDb: {fileID: 0}
-  goldManager: {fileID: 0}
   canvas: {fileID: 616305511}
   itemNameTxt: {fileID: 29214103}
   itemImg: {fileID: 1735578641}
   indexTxt: {fileID: 384055545}
-  canShowPrev: 0
-  canShowNext: 0
   prevBtn: {fileID: 1000718084}
   nextBtn: {fileID: 1640389242}
   buyBtn: {fileID: 1641415675}
@@ -26035,7 +26030,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e350b38e652132246b1b4cf871176995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
   canvasGroups: []
   settingsUI: {fileID: 1282515125}
   settingsBtn: {fileID: 0}
