@@ -68,6 +68,7 @@ public class LevelSelector : MonoBehaviour {
 
         if (panelName == "Achivements") {
             achivementsPanel.SetActive(!achivementsPanel.activeSelf);
+            AchivementManager.Instance.UpdateAchivementsUI();
         } else if (panelName == "Challenge") {
             dailyChallengePanel.SetActive(!dailyChallengePanel.activeSelf);
         } else if (panelName == "Spin") {
