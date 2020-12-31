@@ -129,9 +129,9 @@ public class CarMovement : MonoBehaviour {
         carToMove = null;
     }
 
-    // UNDO features
     public void AbleToUndo() { undoBtn.interactable = undoList.Count > 0; }
     public void UndoMove() {
+        AudioManager.Instance.PlayButtonClick();
         GameManager.Instance.ChangeMoves(false);
         int index = undoList.Count - 1;
         undoList[index].car.transform.position = undoList[index].movePos;

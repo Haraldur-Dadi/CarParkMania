@@ -8,7 +8,6 @@ public class CrossSceneManager : MonoBehaviour {
 
     public CanvasGroup[] canvasGroups;
     public GameObject settingsUI;
-
     public Image img;
     public AnimationCurve curve;
 
@@ -34,7 +33,10 @@ public class CrossSceneManager : MonoBehaviour {
         settingsUI.SetActive(false);
         StartCoroutine(FadeIn(2));
     }
-    public void ToggleSettings() { settingsUI.SetActive(!settingsUI.activeSelf); }
+    public void ToggleSettings() { 
+        AudioManager.Instance.PlayButtonClick();
+        settingsUI.SetActive(!settingsUI.activeSelf);
+    }
 
     public void FadeBetweenObjects() { StartCoroutine(FadeBetweenObjInScene()); }
     IEnumerator FadeBetweenObjInScene() {
@@ -46,7 +48,6 @@ public class CrossSceneManager : MonoBehaviour {
         yield return FadeOut(2);
         SceneManager.LoadScene(buildindex);
     }
-
     public IEnumerator FadeIn(int multiplier) {
         StartCoroutine(PreventClicks());
         float t = 1f;

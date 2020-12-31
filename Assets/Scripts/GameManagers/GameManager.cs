@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour {
         
         GetComponent<CarMovement>().Refresh();
 
-        CrossSceneManager.Instance.TmpPreventClicks();
         if (level_board != null)
             Destroy(level_board);
 
@@ -94,22 +93,21 @@ public class GameManager : MonoBehaviour {
 
     public void GoToLevelSelector() {
         /* Sends player to home screen */
+        AudioManager.Instance.PlayButtonClick();
         CrossSceneManager.Instance.FadeToBuildIndex(0);
     }
-    public void RetryLevel() { StartCoroutine(PreLoadLevel()); }
+    public void RetryLevel() { 
+        AudioManager.Instance.PlayButtonClick();
+        StartCoroutine(PreLoadLevel());
+    }
     public void LoadNextLevel() {
         SaveManager.Instance.SaveIntData("boardToLoad", levelIndex + 1);
         StartCoroutine(PreLoadLevel());
     }
 
-    public void PlayButtonClick() { AudioManager.Instance.PlayButtonClick(); }
     public IEnumerator PreLoadLevel() {
         CrossSceneManager.Instance.FadeBetweenObjects();
-        float t = 1;
-        while (t > 0f) {
-            t -= Time.deltaTime * 3;
-            yield return null;
-        }
+        yield return new WaitForSeconds(0.33f);
         LoadLevel();
     }
     public IEnumerator DelayedLevelSelector() {
