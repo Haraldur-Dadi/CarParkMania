@@ -6,8 +6,6 @@ using TMPro;
 public class AudioManager : MonoBehaviour {
     public static AudioManager Instance;
 
-    public SaveManager saveManager;
-
     public AudioSource musicAudioSource;
     public AudioSource sfxAudioSource;
     public AudioClip buttonClick;
@@ -58,7 +56,7 @@ public class AudioManager : MonoBehaviour {
         musicVolTxt.text = (int) (musicVol * 100) + "%";
         musicAudioSource.volume = musicVol;
 
-        saveManager.SaveFloatData("MusicVol", musicVol);
+        PlayerPrefs.SetFloat("MusicVol", musicVol);
     }
     
     public void ChangePitch(int pitch_in) {
@@ -86,7 +84,7 @@ public class AudioManager : MonoBehaviour {
             lastPitch = pitch4;
         }
 
-        saveManager.SaveIntData("Pitch", pitch);
+        PlayerPrefs.SetInt("Pitch", pitch);
     }
 
     public void ChangeSfxVol(float vol) {
@@ -94,7 +92,7 @@ public class AudioManager : MonoBehaviour {
         sfxVolTxt.text = (int)(sfxVol * 100) + "%";
         sfxAudioSource.volume = sfxVol;
 
-        saveManager.SaveFloatData("SfxVol", sfxVol);
+        PlayerPrefs.SetFloat("SfxVol", sfxVol);
     }
 
     public void PlayButtonClick() {

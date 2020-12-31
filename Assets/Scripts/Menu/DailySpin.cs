@@ -46,8 +46,8 @@ public class DailySpin : MonoBehaviour {
     public void SpinWheel() {
         spinBtn.SetActive(false);
         DateTime currDate = DateTime.Now;
-        SaveManager.Instance.SaveStringData("LastDateSpun", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));
-        SaveManager.Instance.IncreaseAchivementProgress(3);
+        PlayerPrefs.SetString("LastDateSpun", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));
+        AchivementManager.Instance.IncreaseAchivementProgress(3);
         StartCoroutine(Spin());
     }
 
@@ -94,8 +94,8 @@ public class DailySpin : MonoBehaviour {
             Item winItem = ItemDb.Instance.GetItem(winID[UnityEngine.Random.Range(0, winID.Length)]);
             winCarName.text = winItem.name;
             winCarImg.sprite = winItem.sprite;
-            SaveManager.Instance.SaveIntData("DailyCarsWon", 1);
-            SaveManager.Instance.SaveIntData("PlayerCar" + winItem.ID + "Unlocked", 1);
+            PlayerPrefs.SetInt("DailyCarsWon", 1);
+            PlayerPrefs.SetInt("PlayerCar" + winItem.ID + "Unlocked", 1);
             winGoldPanel.SetActive(false);
         } else {
             rewardAmount = 35;

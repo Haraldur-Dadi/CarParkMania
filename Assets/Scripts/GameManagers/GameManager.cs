@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour {
     public virtual void LoadLevel() {
         if (PlayerPrefs.GetInt("GamesPlayed", 0) % 10 == 0)
             AdManager.Instance.ShowVideoAd();
-        SaveManager.Instance.SaveIntData("GamesPlayed", PlayerPrefs.GetInt("GamesPlayed", 0) + 1);
+        PlayerPrefs.SetInt("GamesPlayed", PlayerPrefs.GetInt("GamesPlayed", 0) + 1);
         
         GetComponent<CarMovement>().Refresh();
 
@@ -84,9 +84,9 @@ public class GameManager : MonoBehaviour {
         AudioManager.Instance.PlayWinSound();
 
         if (levelIndex < level_boards_easy.Length)
-            SaveManager.Instance.IncreaseAchivementProgress(4);
-        SaveManager.Instance.IncreaseAchivementProgress(5);
-        SaveManager.Instance.IncreaseAchivementProgress(6);
+            AchivementManager.Instance.IncreaseAchivementProgress(4);
+        AchivementManager.Instance.IncreaseAchivementProgress(5);
+        AchivementManager.Instance.IncreaseAchivementProgress(6);
 
         levelCompleteUi.SetActive(true);
     }
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(PreLoadLevel());
     }
     public void LoadNextLevel() {
-        SaveManager.Instance.SaveIntData("boardToLoad", levelIndex + 1);
+        PlayerPrefs.SetInt("boardToLoad", levelIndex + 1);
         StartCoroutine(PreLoadLevel());
     }
 

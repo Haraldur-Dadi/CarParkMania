@@ -80,8 +80,8 @@ public class Shop : MonoBehaviour {
 
     public void BuyItem() {
         // Change from shop ui to equip ui and save that player has unlocked the item
-        SaveManager.Instance.SaveIntData("PlayerCar" + selectedItem.ID + "Unlocked", 1);
-        SaveManager.Instance.IncreaseAchivementProgress(2);
+        PlayerPrefs.SetInt("PlayerCar" + selectedItem.ID + "Unlocked", 1);
+        AchivementManager.Instance.IncreaseAchivementProgress(2);
         GoldManager.Instance.SubtractGold(selectedItem.cost);
         ShowEquip();
         AudioManager.Instance.PlayBuySound();
@@ -89,7 +89,7 @@ public class Shop : MonoBehaviour {
 
     public void EquipItem() {
         // Change equippedCar id 
-        SaveManager.Instance.SaveIntData("PlayerCar" + "Equipped", selectedItem.ID);
+        PlayerPrefs.SetInt("PlayerCar" + "Equipped", selectedItem.ID);
         UpdateShopUI(false);
     }
 

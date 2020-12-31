@@ -3,8 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DailyChallenges : MonoBehaviour {
-    public SaveManager saveManager;
-
     int multiplier;
     public Button challenge1Btn;
     public Button challenge2Btn;
@@ -16,10 +14,9 @@ public class DailyChallenges : MonoBehaviour {
     public GameObject notification;
 
     void Start() {
-        saveManager = SaveManager.Instance;
         multiplier = PlayerPrefs.GetInt("DailyMultiplier", 0);
 
-        if (!PlayerPrefs.HasKey("LastChallengeCompletedDate")) { saveManager.SaveStringData("LastChallengeCompletedDate", "1582-09-15"); }
+        if (!PlayerPrefs.HasKey("LastChallengeCompletedDate")) { PlayerPrefs.SetString("LastChallengeCompletedDate", "1582-09-15"); }
         NewDayReset();
 
         notification.SetActive(!HasCompleted());
@@ -32,14 +29,14 @@ public class DailyChallenges : MonoBehaviour {
         DateTime lastCompleteDate = DateTime.ParseExact(PlayerPrefs.GetString("LastChallengeCompletedDate", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
         
         if (currDate > lastCompleteDate) {
-            saveManager.SaveIntData("HasClaimed", 0);
+            PlayerPrefs.SetInt("HasClaimed", 0);
             multiplier = UnityEngine.Random.Range(0, 2);
-            saveManager.SaveIntData("DailyMultiplier", multiplier);
-            saveManager.SaveIntData("DailyChallenge1Completed", 0);
-            saveManager.SaveIntData("DailyChallenge2Completed", 0);
-            saveManager.SaveIntData("DailyChallenge3Completed", 0);
-            saveManager.SaveIntData("DailyChallenge4Completed", 0);
-            saveManager.SaveStringData("LastChallengeCompletedDate", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));
+            PlayerPrefs.SetInt("DailyMultiplier", multiplier);
+            PlayerPrefs.SetInt("DailyChallenge1Completed", 0);
+            PlayerPrefs.SetInt("DailyChallenge2Completed", 0);
+            PlayerPrefs.SetInt("DailyChallenge3Completed", 0);
+            PlayerPrefs.SetInt("DailyChallenge4Completed", 0);
+            PlayerPrefs.SetString("LastChallengeCompletedDate", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));
         }
     }
 
@@ -53,14 +50,14 @@ public class DailyChallenges : MonoBehaviour {
     }
 
     public void LoadChallengeLevel(int difficulty) {
-        saveManager.SaveIntData("boardToLoad", (int)DateTime.Now.DayOfWeek + 7 * (multiplier + difficulty));
+        PlayerPrefs.SetInt("boardToLoad", (int)DateTime.Now.DayOfWeek + 7 * (multiplier + difficulty));
         CrossSceneManager.Instance.FadeToBuildIndex(1);
     }
 
     public void ClaimReward() {
         GoldManager.Instance.AddGold(25, false);
-        saveManager.SaveIntData("HasClaimed", 1);
-        saveManager.IncreaseAchivementProgress(7);
+        PlayerPrefs.SetInt("HasClaimed", 1);
+        AchivementManager.Instance.IncreaseAchivementProgress(7);
         claimBtn.SetActive(false);
     }
 }

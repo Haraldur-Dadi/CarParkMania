@@ -2,18 +2,16 @@
 using TMPro;
 
 public class GoldManager : MonoBehaviour {
-
     public static GoldManager Instance;
-    private SaveManager saveManager;
 
-    private int gold;
+    int gold;
     public TextMeshProUGUI goldTxt;
 
     public Animator goldAnim;
     public Animator goldTxtAnim;
     public TextMeshProUGUI goldTxtAnimTxt;
 
-    private void Awake () {
+    void Awake () {
         if (Instance == null) {
             Instance = this;
         } else {
@@ -22,8 +20,6 @@ public class GoldManager : MonoBehaviour {
     }
 
     private void Start() {
-        saveManager = SaveManager.Instance;
-
         gold = PlayerPrefs.GetInt("Gold", 0);
         goldTxt.text = gold.ToString();
     }
@@ -37,7 +33,7 @@ public class GoldManager : MonoBehaviour {
 
     public void AddGold(int goldToAdd, bool ad) {
         gold += goldToAdd;
-        saveManager.SaveIntData("Gold", gold);
+        PlayerPrefs.SetInt("Gold", gold);
 
         goldTxt.text = gold.ToString();
         goldTxtAnim.SetTrigger("Receive");
@@ -49,7 +45,7 @@ public class GoldManager : MonoBehaviour {
 
     public void SubtractGold(int goldToSub) {
         gold -= goldToSub;
-        saveManager.SaveIntData("Gold", gold);
+        PlayerPrefs.SetInt("Gold", gold);
 
         goldTxt.text = gold.ToString();
         goldAnim.SetTrigger("Buy");
