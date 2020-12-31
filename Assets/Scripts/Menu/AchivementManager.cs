@@ -18,16 +18,11 @@ public class AchivementManager : MonoBehaviour {
         float currAmount = PlayerPrefs.GetFloat("Achivement" + achivementID, 0);
         PlayerPrefs.SetFloat("Achivement" + achivementID, currAmount + 1);
     }
-
     public void UpdateAchivementsUI() {
         AchivementPanel[] achivements = GameObject.FindObjectsOfType<AchivementPanel>();
         foreach (AchivementPanel achivement in achivements) {
             achivement.UpdateUI();
         }
-    }
-    public void CollectAchivementReward(int achivementID) {
-        PlayerPrefs.SetInt("Achivement" + achivementID + "Collected", 1);
-        GoldManager.Instance.AddGold(25, false);
     }
 
     public void ResetProgressPrompt() { resetProgressWindow.SetActive(!resetProgressWindow.activeSelf); }
