@@ -8,7 +8,6 @@ public class CrossSceneManager : MonoBehaviour {
 
     public CanvasGroup[] canvasGroups;
     public GameObject settingsUI;
-    public Button settingsBtn;
 
     public Image img;
     public AnimationCurve curve;
@@ -29,75 +28,52 @@ public class CrossSceneManager : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         canvasGroups = GameObject.FindObjectsOfType<CanvasGroup>();
-        settingsBtn = GameObject.Find("SettingsBtn").GetComponent<Button>();
-        settingsBtn.onClick.AddListener(delegate { ToggleSettings(); });
+        GameObject.Find("SettingsBtn").GetComponent<Button>().onClick.AddListener(delegate { ToggleSettings(); });
         settingsUI.SetActive(false);
-        TmpPreventClicks();
-        StartCoroutine(FadeIn());
+        StartCoroutine(FadeIn(2));
+    }
+    public void ToggleSettings() { settingsUI.SetActive(!settingsUI.activeSelf); }
+
+    public void FadeBetweenObjects() { StartCoroutine(FadeBetweenObjInScene()); }
+    IEnumerator FadeBetweenObjInScene() {
+        yield return FadeOut(3);
+        yield return FadeIn(3);
+    }
+    public void FadeToBuildIndex(int buildIndex) { StartCoroutine(FadeOutBuildindex(buildIndex)); }
+    IEnumerator FadeOutBuildindex(int buildindex) {
+        yield return FadeOut(2);
+        SceneManager.LoadScene(buildindex);
     }
 
-    public void ToggleSettings() { settingsUI.SetActive(!settingsUI.activeSelf); }
-    public void TmpPreventClicks() { StartCoroutine(PreventClicks()); }
+    public IEnumerator FadeIn(int multiplier) {
+        StartCoroutine(PreventClicks());
+        float t = 1f;
+        while (t > 0f) {
+            t -= Time.deltaTime * multiplier;
+            float a = curve.Evaluate(t);
+            img.color = new Color(0f, 0f, 0f, a);
+            yield return null;
+        }
+    }
+    public IEnumerator FadeOut(int multiplier) {
+        StartCoroutine(PreventClicks());
+        float t = 0f;
+        while (t < 1f) {
+            t += Time.deltaTime * multiplier;
+            float a = curve.Evaluate(t);
+            img.color = new Color(0f, 0f, 0f, a);
+            yield return null;
+        }
+    }
     IEnumerator PreventClicks() {
         foreach (CanvasGroup group in canvasGroups) {
-            if (group) {
-                group.interactable = false;
-            }
+            if (group) { group.interactable = false; }
         }
         yield return new WaitForSeconds(0.4f);
         foreach (CanvasGroup group in canvasGroups) {
-            group.interactable = true;
+            if (group) { group.interactable = true; }
         }
-    }
-
-    IEnumerator FadeIn() {
-        float t = 1f;
-
-        while (t > 0f) {
-            t -= Time.deltaTime * 2;
-            float a = curve.Evaluate(t);
-            img.color = new Color(0f, 0f, 0f, a);
-            yield return null;
-        }
-    }
-
-    public void FadeBetweenObjects() {
-        CrossSceneManager.Instance.TmpPreventClicks();
-        StartCoroutine(FadeBetweenObjInScene());
-    }
-    IEnumerator FadeBetweenObjInScene() {
-        float t = 0f;
-        while (t < 1f) {
-            t += Time.deltaTime * 3;
-            float a = curve.Evaluate(t);
-            img.color = new Color(0f, 0f, 0f, a);
-            yield return null;
-        }
-
-        t = 1f;
-        while (t > 0f) {
-            t -= Time.deltaTime * 3;
-            float a = curve.Evaluate(t);
-            img.color = new Color(0f, 0f, 0f, a);
-            yield return null;
-        }
-    }
-    public void FadeToBuildIndex(int buildIndex) {
-        TmpPreventClicks();
-        StartCoroutine(FadeOutBuildindex(buildIndex));
-    }
-    IEnumerator FadeOutBuildindex(int buildindex) {
-        float t = 0f;
-        while (t < 1f) {
-            t += Time.deltaTime * 2;
-            float a = curve.Evaluate(t);
-            img.color = new Color(0f, 0f, 0f, a);
-            yield return null;
-        }
-
-        SceneManager.LoadScene(buildindex);
     }
 }
