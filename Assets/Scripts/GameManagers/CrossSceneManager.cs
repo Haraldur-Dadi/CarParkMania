@@ -10,6 +10,9 @@ public class CrossSceneManager : MonoBehaviour {
     public GameObject settingsUI;
     public Button settingsBtn;
 
+    public Image img;
+    public AnimationCurve curve;
+
     public string panelName;
     public int gameModeNr;
     public int difficulty;
@@ -33,6 +36,7 @@ public class CrossSceneManager : MonoBehaviour {
         settingsBtn.onClick.AddListener(delegate { ToggleSettings(); });
         settingsUI.SetActive(false);
         TmpPreventClicks();
+        StartCoroutine(FadeIn());
     }
 
     public void ToggleSettings() { settingsUI.SetActive(!settingsUI.activeSelf); }
@@ -47,5 +51,53 @@ public class CrossSceneManager : MonoBehaviour {
         foreach (CanvasGroup group in canvasGroups) {
             group.interactable = true;
         }
+    }
+
+    IEnumerator FadeIn() {
+        float t = 1f;
+
+        while (t > 0f) {
+            t -= Time.deltaTime * 2;
+            float a = curve.Evaluate(t);
+            img.color = new Color(0f, 0f, 0f, a);
+            yield return null;
+        }
+    }
+
+    public void FadeBetweenObjects() {
+        CrossSceneManager.Instance.TmpPreventClicks();
+        StartCoroutine(FadeBetweenObjInScene());
+    }
+    IEnumerator FadeBetweenObjInScene() {
+        float t = 0f;
+        while (t < 1f) {
+            t += Time.deltaTime * 3;
+            float a = curve.Evaluate(t);
+            img.color = new Color(0f, 0f, 0f, a);
+            yield return null;
+        }
+
+        t = 1f;
+        while (t > 0f) {
+            t -= Time.deltaTime * 3;
+            float a = curve.Evaluate(t);
+            img.color = new Color(0f, 0f, 0f, a);
+            yield return null;
+        }
+    }
+    public void FadeToBuildIndex(int buildIndex) {
+        TmpPreventClicks();
+        StartCoroutine(FadeOutBuildindex(buildIndex));
+    }
+    IEnumerator FadeOutBuildindex(int buildindex) {
+        float t = 0f;
+        while (t < 1f) {
+            t += Time.deltaTime * 2;
+            float a = curve.Evaluate(t);
+            img.color = new Color(0f, 0f, 0f, a);
+            yield return null;
+        }
+
+        SceneManager.LoadScene(buildindex);
     }
 }
