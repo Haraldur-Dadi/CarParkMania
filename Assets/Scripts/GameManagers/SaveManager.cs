@@ -2,10 +2,7 @@
 using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour {
-
     public static SaveManager Instance;
-    public AchivementManager achivementManager;
-
     public GameObject resetProgressWindow;
 
     private void Awake() {
@@ -18,19 +15,16 @@ public class SaveManager : MonoBehaviour {
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         if (scene.buildIndex == 0) {
             resetProgressWindow.SetActive(false);
-            achivementManager = AchivementManager.Instance;
-            achivementManager.UpdateAchivements();
+            AchivementManager.Instance.UpdateAchivements();
         }
     }
 
     public void SaveIntData(string varName, int value) {
         PlayerPrefs.SetInt(varName, value);
     }
-
     public void SaveFloatData(string varName, float value) {
         PlayerPrefs.SetFloat(varName, value);
     }
-
     public void SaveStringData(string varName, string value) {
         PlayerPrefs.SetString(varName, value);
     }
@@ -39,16 +33,14 @@ public class SaveManager : MonoBehaviour {
         float currAmount = PlayerPrefs.GetFloat("Achivement" + achivementID, 0);
         SaveFloatData("Achivement" + achivementID, currAmount + 1);
 
-        if (achivementManager)
-            achivementManager.UpdateAchivements();
+        if (AchivementManager.Instance)
+            AchivementManager.Instance.UpdateAchivements();
     }
 
-    public void ResetProgressPrompt() {
-        resetProgressWindow.SetActive(!resetProgressWindow.activeSelf);
-    }
+    public void ResetProgressPrompt() { resetProgressWindow.SetActive(!resetProgressWindow.activeSelf); }
 
     public void ResetProgress() {
         PlayerPrefs.DeleteAll();
-        SceneFader.Instance.FadeToBuildIndex(0);
+        CrossSceneManager.Instance.FadeToBuildIndex(0);
     }
 }

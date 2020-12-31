@@ -94,8 +94,7 @@ public class GameManager : MonoBehaviour {
 
     public void GoToLevelSelector() {
         /* Sends player to home screen */
-        CrossSceneManager.Instance.TmpPreventClicks();
-        SceneFader.Instance.FadeToBuildIndex(0);
+        CrossSceneManager.Instance.FadeToBuildIndex(0);
     }
     public void RetryLevel() { StartCoroutine(PreLoadLevel()); }
     public void LoadNextLevel() {
@@ -105,8 +104,7 @@ public class GameManager : MonoBehaviour {
 
     public void PlayButtonClick() { AudioManager.Instance.PlayButtonClick(); }
     public IEnumerator PreLoadLevel() {
-        CrossSceneManager.Instance.TmpPreventClicks();
-        SceneFader.Instance.FadeBetweenObjects();
+        CrossSceneManager.Instance.FadeBetweenObjects();
         float t = 1;
         while (t > 0f) {
             t -= Time.deltaTime * 3;

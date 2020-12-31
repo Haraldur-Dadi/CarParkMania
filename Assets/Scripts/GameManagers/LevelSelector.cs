@@ -63,7 +63,6 @@ public class LevelSelector : MonoBehaviour {
 
         mainScreen.SetActive(!mainScreen.activeSelf);
         panelHeader.SetActive(!panelHeader.activeSelf);
-
         CrossSceneManager.Instance.panelName = panelName;        
         uiName.text = panelName;
 
@@ -116,7 +115,7 @@ public class LevelSelector : MonoBehaviour {
     }
     IEnumerator WaitTimer() {
         if (!startUI) {
-            SceneFader.Instance.FadeBetweenObjects();
+            CrossSceneManager.Instance.FadeBetweenObjects();
 
             float t = 0f;
             while (t < 1f) {

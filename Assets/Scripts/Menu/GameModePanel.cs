@@ -38,18 +38,13 @@ public class GameModePanel : MonoBehaviour {
         }
 
         for (int i = 0; i < difficultyBtns.Length; i++) {
-            if (i == difficulty) {
-                difficultyBtns[i].interactable = false;
-            } else {
-                difficultyBtns[i].interactable = true;
-            }
+            difficultyBtns[i].interactable = (i != difficulty);
         }
     }
 
     public void SelectLevel(int level) {
         AudioManager.Instance.PlayButtonClick();
-        CrossSceneManager.Instance.TmpPreventClicks();
         SaveManager.Instance.SaveIntData("boardToLoad", level);
-        SceneFader.Instance.FadeToBuildIndex(CrossSceneManager.Instance.gameModeNr + 1);
+        CrossSceneManager.Instance.FadeToBuildIndex(CrossSceneManager.Instance.gameModeNr + 1);
     }
 }

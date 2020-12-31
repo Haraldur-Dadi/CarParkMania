@@ -54,7 +54,7 @@ public class DailyChallenges : MonoBehaviour {
 
     public void LoadChallengeLevel(int difficulty) {
         saveManager.SaveIntData("boardToLoad", (int)DateTime.Now.DayOfWeek + 7 * (multiplier + difficulty));
-        SceneFader.Instance.FadeToBuildIndex(1);
+        CrossSceneManager.Instance.FadeToBuildIndex(1);
     }
 
     public void ClaimReward() {
