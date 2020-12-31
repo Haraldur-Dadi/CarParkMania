@@ -34,9 +34,7 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
     }
 
     public void ShowVideoAd() {
-        if (Advertisement.IsReady()) {
-            Advertisement.Show();
-        }
+        if (Advertisement.IsReady()) { Advertisement.Show(); }
     }
 
     public void ShowRewardVideo() {
@@ -45,7 +43,7 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
 
     public void OnUnityAdsReady(string placementId) {
         if (placementId == rewardVideoID) {
-            foreach (GameObject btn in rewardAdsBtn){
+            foreach (GameObject btn in rewardAdsBtn) {
                 if (btn) { btn.SetActive(true); }
             }
         }
@@ -57,7 +55,7 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
             if (showResult == ShowResult.Finished) { GoldManager.Instance.AddGold(25, true); }
 
             foreach (GameObject btn in rewardAdsBtn){
-                btn.SetActive(false);
+                if (btn) { btn.SetActive(false); }
             }
         }
     }
