@@ -11913,8 +11913,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1838942871}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1838942867}
+        m_TargetAssemblyTypeName: LevelSelector, Assembly-CSharp
         m_MethodName: ToggleAdGoldConformation
         m_Mode: 1
         m_Arguments:
