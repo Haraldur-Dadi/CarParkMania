@@ -61,13 +61,13 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler {
             if (shop) {
                 shop.ShowNextItem(false);
             } else {
-                about.ShowNextTutImage();
+                about.ChangeTutImage(true);
             }
         } else {
             if (shop) {
                 shop.ShowPrevItem(false);
             } else {
-                about.ShowPrevTutImage();
+                about.ChangeTutImage(false);
             }
         }
 

@@ -3995,9 +3995,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1838942869}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ShowNextTutImage
-        m_Mode: 1
+        m_TargetAssemblyTypeName: About, Assembly-CSharp
+        m_MethodName: ChangeTutImage
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5855,9 +5855,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1838942869}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ShowPrevTutImage
-        m_Mode: 1
+        m_TargetAssemblyTypeName: About, Assembly-CSharp
+        m_MethodName: ChangeTutImage
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -26015,18 +26015,15 @@ MonoBehaviour:
   wheelSpinning: {fileID: 8300000, guid: e43c611f1204433478ae98ee1e2b1583, type: 3}
   carMoved: {fileID: 8300000, guid: 6edf21fca00711f42bb5c5c9f8f8d94c, type: 3}
   winSound: {fileID: 8300000, guid: d59829145b0f78045a55152fb8ae3cb9, type: 3}
-  musicVol: 0
-  sfxVol: 0
-  pitch: 0
   musicVolSlider: {fileID: 5344691065165519816}
   musicVolTxt: {fileID: 8275740046279318036}
+  sfxVolSlider: {fileID: 6516531456643379374}
+  sfxVolTxt: {fileID: 8663587707096983106}
   pitch1: {fileID: 3142670718798052539}
   pitch2: {fileID: 4375902708773136640}
   pitch3: {fileID: 3967806211773457695}
   pitch4: {fileID: 6395778571000883416}
   lastPitch: {fileID: 0}
-  sfxVolSlider: {fileID: 6516531456643379374}
-  sfxVolTxt: {fileID: 8663587707096983106}
 --- !u!82 &1981764644
 AudioSource:
   m_ObjectHideFlags: 0

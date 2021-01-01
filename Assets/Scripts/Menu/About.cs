@@ -10,27 +10,18 @@ public class About : MonoBehaviour {
     public TextMeshProUGUI indexTxt;
 
     void Start() {
-        for (int i = 0; i < tutorialImages.Length; i++) {
+        for (int i = 1; i < tutorialImages.Length; i++) {
             tutorialImages[i].SetActive(false);
         }
         tutorialImages[tutImgIndex].SetActive(true);
         ToggleButtons();
     }
-
-    public void ShowNextTutImage() {
+    public void ChangeTutImage(bool next) {
         tutorialImages[tutImgIndex].SetActive(false);
-        tutImgIndex++;
+        tutImgIndex += (next) ? 1 : -1;
         tutorialImages[tutImgIndex].SetActive(true);
         ToggleButtons();
     }
-
-    public void ShowPrevTutImage() {
-        tutorialImages[tutImgIndex].SetActive(false);
-        tutImgIndex--;
-        tutorialImages[tutImgIndex].SetActive(true);
-        ToggleButtons();
-    }
-
     public void ToggleButtons() {
         indexTxt.text = (tutImgIndex + 1) + "/" + tutorialImages.Length;
         prevButton.SetActive(tutImgIndex != 0);
