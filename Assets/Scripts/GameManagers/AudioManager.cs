@@ -14,12 +14,10 @@ public class AudioManager : MonoBehaviour {
     public AudioClip carMoved;
     public AudioClip winSound;
 
-    public float musicVol;
-    public float sfxVol;
-    public int pitch;
-
     public Slider musicVolSlider;
     public TextMeshProUGUI musicVolTxt;
+    public Slider sfxVolSlider;
+    public TextMeshProUGUI sfxVolTxt;
 
     public Button pitch1;
     public Button pitch2;
@@ -27,14 +25,11 @@ public class AudioManager : MonoBehaviour {
     public Button pitch4;
     public Button lastPitch;
 
-    public Slider sfxVolSlider;
-    public TextMeshProUGUI sfxVolTxt;
-
     private void Awake() {
         if (Instance == null) {
             Instance = this;
         } else {
-            return;
+            Destroy(this);
         }
     }
 
@@ -44,77 +39,58 @@ public class AudioManager : MonoBehaviour {
         ChangePitch(PlayerPrefs.GetInt("Pitch", 1));
         musicAudioSource.Play();
 
-        musicVolSlider.value = musicVol;
-        sfxVolSlider.value = sfxVol;
+        musicVolSlider.value = musicAudioSource.volume;
+        sfxVolSlider.value = sfxAudioSource.volume;
 
         musicVolSlider.onValueChanged.AddListener(delegate { ChangeMusicVol(musicVolSlider.value); });
         sfxVolSlider.onValueChanged.AddListener(delegate { ChangeSfxVol(sfxVolSlider.value); });
     }
 
     public void ChangeMusicVol(float vol) {
-        musicVol = Mathf.Round(vol * 100) / 100;
-        musicVolTxt.text = (int) (musicVol * 100) + "%";
-        musicAudioSource.volume = musicVol;
-
-        PlayerPrefs.SetFloat("MusicVol", musicVol);
+        musicAudioSource.volume = Mathf.Round(vol * 100) / 100;
+        musicVolTxt.text = (int) (musicAudioSource.volume * 100) + "%";
+        PlayerPrefs.SetFloat("MusicVol", musicAudioSource.volume);
     }
-    
+    public void ChangeSfxVol(float vol) {
+        sfxAudioSource.volume = Mathf.Round(vol * 100) / 100;
+        sfxVolTxt.text = (int)(sfxAudioSource.volume * 100) + "%";
+        PlayerPrefs.SetFloat("SfxVol", sfxAudioSource.volume);
+    }
     public void ChangePitch(int pitch_in) {
-        pitch = pitch_in;
         if (lastPitch) {
             lastPitch.interactable = true;
             PlayButtonClick();
         }
 
-        if (pitch == 1) {
+        if (pitch_in == 1) {
             musicAudioSource.pitch = 1f;
             pitch1.interactable = false;
             lastPitch = pitch1;
-        } else if (pitch == 2) {
+        } else if (pitch_in == 2) {
             musicAudioSource.pitch = 1.5f;
             pitch2.interactable = false;
             lastPitch = pitch2;
-        } else if (pitch == 3) {
+        } else if (pitch_in == 3) {
             musicAudioSource.pitch = 1.25f;
             pitch3.interactable = false;
             lastPitch = pitch3;
-        } else if (pitch == 4) {
+        } else if (pitch_in == 4) {
             musicAudioSource.pitch = -1f;
             pitch4.interactable = false;
             lastPitch = pitch4;
         }
 
-        PlayerPrefs.SetInt("Pitch", pitch);
+        PlayerPrefs.SetInt("Pitch", pitch_in);
     }
 
-    public void ChangeSfxVol(float vol) {
-        sfxVol = Mathf.Round(vol * 100) / 100;
-        sfxVolTxt.text = (int)(sfxVol * 100) + "%";
-        sfxAudioSource.volume = sfxVol;
-
-        PlayerPrefs.SetFloat("SfxVol", sfxVol);
-    }
-
-    public void PlayButtonClick() {
-        sfxAudioSource.PlayOneShot(buttonClick);
-    }
-    
-    public void PlayBuySound() {
-        sfxAudioSource.PlayOneShot(buySound);
-    }
-
+    public void PlayButtonClick() { sfxAudioSource.PlayOneShot(buttonClick); }
+    public void PlayBuySound() { sfxAudioSource.PlayOneShot(buySound); }
     public void PlayWheelSpinning() {
         sfxAudioSource.clip = wheelSpinning;
         sfxAudioSource.Play();
     }
-    public void StopWheelSpinning() {
-        sfxAudioSource.Stop();
-    }
-
-    public void PlayCarMoved() {
-        sfxAudioSource.PlayOneShot(carMoved);
-    }
-
+    public void StopWheelSpinning() { sfxAudioSource.Stop(); }
+    public void PlayCarMoved() { sfxAudioSource.PlayOneShot(carMoved); }
     public void PlayWinSound() {
         sfxAudioSource.PlayOneShot(winSound);
         StartCoroutine("FadeOutSfx");
@@ -133,6 +109,6 @@ public class AudioManager : MonoBehaviour {
 
         sfxAudioSource.Stop();
         sfxAudioSource.clip = null;
-        sfxAudioSource.volume = sfxVol;
+        sfxAudioSource.volume = PlayerPrefs.GetFloat("SfxVol", 1f);
     }
 }
