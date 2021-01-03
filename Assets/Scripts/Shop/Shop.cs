@@ -56,7 +56,7 @@ public class Shop : MonoBehaviour {
         equipBtn.gameObject.SetActive(true);
         bool equipped = PlayerPrefs.GetInt("PlayerCarEquipped") == selectedItem.ID;
         equipBtn.interactable = (equipped) ? false : true;
-        equipTxt = (equipped) ? "Equipped" : "Equip";
+        equipTxt.text = (equipped) ? "Equipped" : "Equip";
     }
 
     public void BuyItem() {
