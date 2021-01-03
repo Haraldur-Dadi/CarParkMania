@@ -8,20 +8,14 @@ public class ItemDb : MonoBehaviour {
     private void Awake() {
         if (Instance == null) {
             Instance = this;
+            BuildItemDb();
         } else {
             Destroy(this);
         }
-
-        BuildItemDb();
     }
 
-    public Item GetItem(int ID) {
-        return PlayerCars[ID];
-    }
-
-    public int GetLengthOfCat() {
-        return PlayerCars.Count;
-    }
+    public Item GetItem(int ID) { return PlayerCars[ID]; }
+    public int GetLengthOfCat() { return PlayerCars.Count; }
 
     void BuildItemDb() {
         PlayerCars = new List<Item>() {

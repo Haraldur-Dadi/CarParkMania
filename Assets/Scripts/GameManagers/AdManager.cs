@@ -27,12 +27,8 @@ public class AdManager : MonoBehaviour, IUnityAdsListener {
         if (!Advertisement.IsReady()) { ToggleAdBtns(false); }
     }
 
-    public void ShowVideoAd() {
-        if (Advertisement.IsReady()) { Advertisement.Show(); }
-    }
-    public void ShowRewardVideo() {
-        if (Advertisement.IsReady()) { Advertisement.Show(rewardVideoID); }
-    }
+    public void ShowVideoAd() { if (Advertisement.IsReady()) { Advertisement.Show(); } }
+    public void ShowRewardVideo() { Advertisement.Show(rewardVideoID); }
 
     public void OnUnityAdsReady(string placementId) {
         if (placementId == rewardVideoID) { ToggleAdBtns(true); }

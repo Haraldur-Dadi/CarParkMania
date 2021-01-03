@@ -24,7 +24,7 @@ public class LevelSelector : MonoBehaviour {
     public GameObject aboutPanel;
     public GameObject watchAdCon;
 
-    public void Start() {
+    void Start() {
         startUI = true;
         UIStartState();
     }
@@ -54,7 +54,6 @@ public class LevelSelector : MonoBehaviour {
     public void OpenGameModeSelector() { StartCoroutine(GameModeSelector()); }
     public void SelectGameMode(int gameModeNr) { StartCoroutine(SelectGameModeUI(gameModeNr)); }
     public void BackHome() { StartCoroutine(HomeScreen()); }
-
     public void ToggleAdGoldConformation() { watchAdCon.SetActive(!watchAdCon.activeSelf); }
     public void PlayButtonClick() { AudioManager.Instance.PlayButtonClick(); }
 

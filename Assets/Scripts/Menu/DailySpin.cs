@@ -70,15 +70,10 @@ public class DailySpin : MonoBehaviour {
             yield return new WaitForSeconds(timeInterval/2);
         }
 
-        if (Mathf.RoundToInt(wheel.eulerAngles.z) % 45 == 0) {
-            wheel.Rotate(0, 0, 11.25f);
-        }
+        if (Mathf.RoundToInt(wheel.eulerAngles.z) % 45 == 0) { wheel.Rotate(0, 0, 11.25f); }
         AudioManager.Instance.StopWheelSpinning();
-
         yield return new WaitForSeconds(1);
-        while (Mathf.RoundToInt(wheel.eulerAngles.z) % 45 != 0) {
-            wheel.Rotate(0, 0, -11.25f);
-        }
+        while (Mathf.RoundToInt(wheel.eulerAngles.z) % 45 != 0) { wheel.Rotate(0, 0, -11.25f); }
 
         int finalAngle = Mathf.RoundToInt(wheel.eulerAngles.z);
         if (finalAngle == 45 || finalAngle == 180 || finalAngle == 315) {

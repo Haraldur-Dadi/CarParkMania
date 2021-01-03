@@ -15,7 +15,6 @@ public class DailyChallenges : MonoBehaviour {
 
     void Start() {
         multiplier = PlayerPrefs.GetInt("DailyMultiplier", 0);
-
         if (!PlayerPrefs.HasKey("LastChallengeCompletedDate")) { PlayerPrefs.SetString("LastChallengeCompletedDate", "1582-09-15"); }
         NewDayReset();
 

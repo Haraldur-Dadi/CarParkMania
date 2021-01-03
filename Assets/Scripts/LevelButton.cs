@@ -27,7 +27,6 @@ public class LevelButton : MonoBehaviour {
         }
         HideDisplay(false);
     }
-
     public void Unavailable() {
         button.interactable = false;
         locked.SetActive(true);

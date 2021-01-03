@@ -67,7 +67,6 @@ public class Shop : MonoBehaviour {
         AudioManager.Instance.PlayBuySound();
         ShowEquip();
     }
-
     public void EquipItem() {
         // Change equippedCar id 
         PlayerPrefs.SetInt("PlayerCar" + "Equipped", selectedItem.ID);

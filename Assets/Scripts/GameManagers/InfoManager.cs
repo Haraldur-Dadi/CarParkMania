@@ -2,15 +2,13 @@
 using TMPro;
 
 public class InfoManager : MonoBehaviour {
+    int standardTotalLevels = 100;
 
-    private int standardTotalLevels = 100;
-
-    // Level Selector
     public TextMeshProUGUI totalCompleted;
     public TextMeshProUGUI[] casualCompleted;
     public TextMeshProUGUI[] challengeCompleted;
 
-    private void Start() {
+    void Start() {
         int casualReached = PlayerPrefs.GetInt("CasualLevelReached", 0);
         int challengeReached = PlayerPrefs.GetInt("ChallengeLevelReached", 0);
 
