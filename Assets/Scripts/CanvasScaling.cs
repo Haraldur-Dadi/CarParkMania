@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 
 public class CanvasScaling : MonoBehaviour {
-
     public CanvasScaler canvasScaler;
 
     void Awake () {
