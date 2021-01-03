@@ -31,32 +31,18 @@ public class Shop : MonoBehaviour {
 
     public void ShowFirst() {
         selectedItem = ItemDb.Instance.GetItem(0);
-        UpdateShopUI(false);
+        StartCoroutine(UpdateShop(false));
     }
-
-    public void UpdateShopUI(bool fadeOut) {
-        /* Updates name, img and display ui/btns for cars in shop */
-        StartCoroutine(UpdateShop(fadeOut));
-    }
-
-    public void UpdateNavButtons() {
-        // Display button based on what item looking at
-        prevBtn.SetActive(selectedItem.ID > 0);
-        nextBtn.SetActive(selectedItem.ID < ItemDb.Instance.GetLengthOfCat() - 1);
-    }
-
     public void ShowNextItem(bool fadeOut) {
         // Switches to next item
         selectedItem = ItemDb.Instance.GetItem(selectedItem.ID + 1);
-        UpdateShopUI(fadeOut);
+        StartCoroutine(UpdateShop(fadeOut));
     }
-
     public void ShowPrevItem(bool fadeOut) {
         // Switches to prev item
         selectedItem = ItemDb.Instance.GetItem(selectedItem.ID - 1);
-        UpdateShopUI(fadeOut);
+        StartCoroutine(UpdateShop(fadeOut));
     }
-
     public void ShowStandard(bool buyItem) {
         buyBtn.gameObject.SetActive(buyItem);
         buyBtn.interactable = GoldManager.Instance.CanBuy(selectedItem.cost);
@@ -64,18 +50,13 @@ public class Shop : MonoBehaviour {
         unlock.SetActive(!buyItem);
         equipBtn.gameObject.SetActive(false);
     }
-
     public void ShowEquip() {
         buyBtn.gameObject.SetActive(false);
         unlock.SetActive(false);
         equipBtn.gameObject.SetActive(true);
-        if (PlayerPrefs.GetInt("PlayerCarEquipped") == selectedItem.ID) {
-            equipBtn.interactable = false;
-            equipTxt.text = "Equipped";
-        } else {
-            equipBtn.interactable = true;
-            equipTxt.text = "Equip";
-        }
+        bool equipped = PlayerPrefs.GetInt("PlayerCarEquipped") == selectedItem.ID;
+        equipBtn.interactable = (equipped) ? false : true;
+        equipTxt = (equipped) ? "Equipped" : "Equip";
     }
 
     public void BuyItem() {
@@ -83,17 +64,18 @@ public class Shop : MonoBehaviour {
         PlayerPrefs.SetInt("PlayerCar" + selectedItem.ID + "Unlocked", 1);
         AchivementManager.Instance.IncreaseAchivementProgress(2);
         GoldManager.Instance.SubtractGold(selectedItem.cost);
-        ShowEquip();
         AudioManager.Instance.PlayBuySound();
+        ShowEquip();
     }
 
     public void EquipItem() {
         // Change equippedCar id 
         PlayerPrefs.SetInt("PlayerCar" + "Equipped", selectedItem.ID);
-        UpdateShopUI(false);
+        StartCoroutine(UpdateShop(false));
     }
 
     public IEnumerator UpdateShop(bool fadeOut) {
+        /* Updates name, img and display ui/btns for cars in shop */
         if (fadeOut) {
             float t = 1f;
             while (t > 0f) {
@@ -112,7 +94,9 @@ public class Shop : MonoBehaviour {
             ShowStandard(selectedItem.needBuy);
         }
 
-        UpdateNavButtons();
+        // Display button based on what item looking at
+        prevBtn.SetActive(selectedItem.ID > 0);
+        nextBtn.SetActive(selectedItem.ID < ItemDb.Instance.GetLengthOfCat() - 1);
         if (fadeOut) {
             float t = 0;
             while (t < 1f) {
