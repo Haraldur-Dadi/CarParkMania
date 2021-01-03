@@ -31,15 +31,9 @@ public class GameManager : MonoBehaviour {
     }
 
     public virtual void LoadLevel() {
-        if (PlayerPrefs.GetInt("GamesPlayed", 0) % 10 == 0)
-            AdManager.Instance.ShowVideoAd();
-        PlayerPrefs.SetInt("GamesPlayed", PlayerPrefs.GetInt("GamesPlayed", 0) + 1);
-        
         GetComponent<CarMovement>().Refresh();
-
         if (level_board != null)
             Destroy(level_board);
-
         levelCompleteUi.SetActive(false);
 
         levelIndex = PlayerPrefs.GetInt("boardToLoad", 0);
@@ -106,6 +100,10 @@ public class GameManager : MonoBehaviour {
     }
 
     public IEnumerator PreLoadLevel() {
+        if (PlayerPrefs.GetInt("GamesPlayed", 0) % 10 == 0)
+            AdManager.Instance.ShowVideoAd();
+        PlayerPrefs.SetInt("GamesPlayed", PlayerPrefs.GetInt("GamesPlayed", 0) + 1);
+        
         CrossSceneManager.Instance.FadeBetweenObjects();
         yield return new WaitForSeconds(0.33f);
         LoadLevel();
