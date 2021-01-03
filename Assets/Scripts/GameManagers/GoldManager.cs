@@ -3,6 +3,7 @@ using TMPro;
 
 public class GoldManager : MonoBehaviour {
     public static GoldManager Instance;
+    Shop shop;
 
     int gold;
     public TextMeshProUGUI goldTxt;
@@ -14,39 +15,30 @@ public class GoldManager : MonoBehaviour {
     void Awake () {
         if (Instance == null) {
             Instance = this;
+            shop = GetComponent<Shop>();
+            gold = PlayerPrefs.GetInt("Gold", 0);
+            goldTxt.text = gold.ToString();
         } else {
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
 
-    private void Start() {
-        gold = PlayerPrefs.GetInt("Gold", 0);
-        goldTxt.text = gold.ToString();
-    }
-
-    public bool CanBuy(int amount) {
-        if (amount <= gold) {
-            return true;
-        }
-        return false;
-    }
-
+    public bool CanBuy(int amount) { return amount <= gold; }
     public void AddGold(int goldToAdd, bool ad) {
         gold += goldToAdd;
         PlayerPrefs.SetInt("Gold", gold);
-
         goldTxt.text = gold.ToString();
         goldTxtAnim.SetTrigger("Receive");
         goldTxtAnimTxt.text = "+" + goldToAdd;
 
-        if (ad)
+        if (ad) {
             GetComponent<LevelSelector>().ToggleAdGoldConformation();
+            StartCoroutine(shop.UpdateShop(false));
+        }
     }
-
     public void SubtractGold(int goldToSub) {
         gold -= goldToSub;
         PlayerPrefs.SetInt("Gold", gold);
-
         goldTxt.text = gold.ToString();
         goldAnim.SetTrigger("Buy");
         goldTxtAnim.SetTrigger("Buy");
