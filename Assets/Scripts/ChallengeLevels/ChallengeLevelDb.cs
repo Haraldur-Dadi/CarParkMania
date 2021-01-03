@@ -2,16 +2,10 @@
 using UnityEngine;
 
 public class ChallengeLevelDb : MonoBehaviour {
-    
     public List<ChallengeLevel> ChallengeLevels;
 
-    private void Awake() {
-        BuildChallengeLevelDb();
-    }
-
-    public ChallengeLevel GetChallengeLevel(int ID) {
-        return ChallengeLevels[ID];
-    }
+    void Awake() { BuildChallengeLevelDb(); }
+    public ChallengeLevel GetChallengeLevel(int ID) { return ChallengeLevels[ID]; }
 
     void BuildChallengeLevelDb() {
         ChallengeLevels = new List<ChallengeLevel> () {

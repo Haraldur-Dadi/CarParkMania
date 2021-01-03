@@ -23,11 +23,13 @@ public class GameManager : MonoBehaviour {
     void Awake() {
         if (Instance == null) {
             Instance = this;
-            boardLength = level_boards_easy.Length;
-            LoadLevel();
         } else {
             Destroy(this);
         }
+    }
+    void Start() {
+        boardLength = level_boards_easy.Length;
+        LoadLevel();
     }
 
     public virtual void LoadLevel() {
@@ -100,7 +102,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public IEnumerator PreLoadLevel() {
-        if (PlayerPrefs.GetInt("GamesPlayed", 0) % 10 == 0)
+        if (PlayerPrefs.GetInt("GamesPlayed", 0) % 7 == 0)
             AdManager.Instance.ShowVideoAd();
         PlayerPrefs.SetInt("GamesPlayed", PlayerPrefs.GetInt("GamesPlayed", 0) + 1);
         
