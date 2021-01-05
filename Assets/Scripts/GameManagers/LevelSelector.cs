@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -26,9 +27,15 @@ public class LevelSelector : MonoBehaviour {
 
     void Start() {
         if (PlayerPrefs.HasKey("LastDateSpun")) {
-            // Open up daily spin if available
             startUI = true;
             UIStartState();
+            if (DateTime.Today > DateTime.Parse(PlayerPrefs.GetString("LastOpened", "1582-09-15"))) {
+                // Open up daily spin if available
+                startUI = true;
+                PlayerPrefs.SetString("LastOpened", DateTime.Today.ToString("yyyy-MM-dd"));
+                ToggleUiPanel("Spin");
+                startUI = false;
+            }
         } else {
             home.SetActive(false);
             levelSelector.SetActive(false);
@@ -96,13 +103,12 @@ public class LevelSelector : MonoBehaviour {
         watchAdCon.SetActive(false);
         levelSelector.SetActive(true);
         gameModesParent.SetActive(true);
-        gameModePanel.Hide();
+        gameModePanel.gameObject.SetActive(false);
         homeBtn.SetActive(true);
         backBtn.SetActive(false);
 
         selectPanelName.text = "Modes";
     }
-
     IEnumerator SelectGameModeUI(int gameModeNr) {
         CrossSceneManager.Instance.gameModeNr = gameModeNr;        
         yield return WaitTimer();
@@ -113,7 +119,6 @@ public class LevelSelector : MonoBehaviour {
         homeBtn.SetActive(false);
         backBtn.SetActive(true);
     }
-
     IEnumerator HomeScreen() {
         yield return WaitTimer();
 
@@ -125,12 +130,7 @@ public class LevelSelector : MonoBehaviour {
     IEnumerator WaitTimer() {
         if (!startUI) {
             CrossSceneManager.Instance.FadeBetweenObjects();
-
-            float t = 0f;
-            while (t < 1f) {
-                t += Time.deltaTime * 3;
-                yield return null;
-            }
+            yield return new WaitForSeconds(0.33f);
         }
         yield return null;
     }

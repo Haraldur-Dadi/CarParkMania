@@ -6,7 +6,6 @@ public class GameModePanel : MonoBehaviour {
     public LevelButton[] levelBtns;
     public Button[] difficultyBtns;
 
-    public void Hide() { gameObject.SetActive(false); }
     public void Display() {
         gameObject.SetActive(true);
         SelectDifficulty(CrossSceneManager.Instance.difficulty);
