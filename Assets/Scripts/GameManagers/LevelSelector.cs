@@ -25,8 +25,17 @@ public class LevelSelector : MonoBehaviour {
     public GameObject watchAdCon;
 
     void Start() {
-        startUI = true;
-        UIStartState();
+        if (PlayerPrefs.HasKey("LastDateSpun")) {
+            // Open up daily spin if available
+            startUI = true;
+            UIStartState();
+        } else {
+            home.SetActive(false);
+            levelSelector.SetActive(false);
+            PlayerPrefs.SetString("LastDateSpun", "1582-09-15");
+            PlayerPrefs.SetInt("boardToLoad", 0);
+            CrossSceneManager.Instance.FadeToBuildIndex(2);
+        }
     }
 
     public void UIStartState() {
