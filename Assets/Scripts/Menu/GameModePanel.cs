@@ -5,14 +5,15 @@ public class GameModePanel : MonoBehaviour {
     public Scrollbar scrollbar;
     public LevelButton[] levelBtns;
     public Button[] difficultyBtns;
+    string gameModeName;
 
-    public void Display() {
+    public void Display(string gameMode) {
+        gameModeName = gameMode;
         gameObject.SetActive(true);
         SelectDifficulty(CrossSceneManager.Instance.difficulty);
     }
 
     public void SelectDifficulty(int difficulty) {
-        string gameModeName = (CrossSceneManager.Instance.gameModeNr == 1) ? "Casual" : "Challenge";
         int levelReached = PlayerPrefs.GetInt(gameModeName + "LevelReached", 0);
         CrossSceneManager.Instance.difficulty = difficulty;
         scrollbar.value = 1;

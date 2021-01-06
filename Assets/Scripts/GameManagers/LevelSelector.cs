@@ -118,8 +118,14 @@ public class LevelSelector : MonoBehaviour {
         yield return WaitTimer();
 
         gameModesParent.SetActive(false);
-        selectPanelName.text = (gameModeNr == 1) ? "Casual" : "Challenge";
-        gameModePanel.Display();
+        if (gameModeNr == 1) {
+            selectPanelName.text = "Casual";
+        } else if (gameModeNr == 2) {
+            selectPanelName.text = "Challenge";
+        } else if (gameModeNr == 3) {
+            selectPanelName.text = "8x8";
+        }
+        gameModePanel.Display(selectPanelName.text);
         homeBtn.SetActive(false);
         backBtn.SetActive(true);
     }
