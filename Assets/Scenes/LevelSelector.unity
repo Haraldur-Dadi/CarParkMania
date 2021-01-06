@@ -23064,6 +23064,7 @@ MonoBehaviour:
   mainScreen: {fileID: 368865590}
   dailyChallengePanel: {fileID: 1506320789}
   dailySpinPanel: {fileID: 382567666}
+  dailySpin: {fileID: 0}
   achivementsPanel: {fileID: 1544000960}
   shopPanel: {fileID: 2074493048}
   aboutPanel: {fileID: 220522243}
