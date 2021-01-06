@@ -23165,7 +23165,7 @@ MonoBehaviour:
   winCarImg: {fileID: 664773550}
   spinBtn: {fileID: 828185187}
   closeBtn: {fileID: 1593203579}
-  winID: 0400000009000000
+  winID: 0400000008000000
   carToWinBoardImg: {fileID: 1278306712}
   goldToWinBoardImg: {fileID: 1768588617}
   notification: {fileID: 2010750929}

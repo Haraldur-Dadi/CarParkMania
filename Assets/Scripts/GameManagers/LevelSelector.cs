@@ -20,13 +20,16 @@ public class LevelSelector : MonoBehaviour {
     public GameObject mainScreen;
     public GameObject dailyChallengePanel;
     public GameObject dailySpinPanel;
+    public DailySpin dailySpin;
     public GameObject achivementsPanel;
     public GameObject shopPanel;
     public GameObject aboutPanel;
     public GameObject watchAdCon;
 
     void Start() {
-        if (PlayerPrefs.HasKey("LastDateSpun")) {
+        dailySpin = GetComponent<DailySpin>();
+        dailySpin.OpenDailySpin();
+        if (PlayerPrefs.HasKey("LastOpened")) {
             startUI = true;
             UIStartState();
             if (DateTime.Today > DateTime.Parse(PlayerPrefs.GetString("LastOpened", "1582-09-15"))) {
@@ -39,7 +42,7 @@ public class LevelSelector : MonoBehaviour {
         } else {
             home.SetActive(false);
             levelSelector.SetActive(false);
-            PlayerPrefs.SetString("LastDateSpun", "1582-09-15");
+            PlayerPrefs.SetString("LastOpened", "1582-09-15");
             PlayerPrefs.SetInt("boardToLoad", 0);
             CrossSceneManager.Instance.FadeToBuildIndex(2);
         }
@@ -88,6 +91,7 @@ public class LevelSelector : MonoBehaviour {
             dailyChallengePanel.SetActive(!dailyChallengePanel.activeSelf);
         } else if (panelName == "Spin") {
             dailySpinPanel.SetActive(!dailySpinPanel.activeSelf);
+            dailySpin.OpenDailySpin();
         } else if (panelName == "Shop") {
             shopPanel.SetActive(!shopPanel.activeSelf);
         } else if (panelName == "About") {
@@ -110,7 +114,7 @@ public class LevelSelector : MonoBehaviour {
         selectPanelName.text = "Modes";
     }
     IEnumerator SelectGameModeUI(int gameModeNr) {
-        CrossSceneManager.Instance.gameModeNr = gameModeNr;        
+        CrossSceneManager.Instance.gameModeNr = gameModeNr;
         yield return WaitTimer();
 
         gameModesParent.SetActive(false);

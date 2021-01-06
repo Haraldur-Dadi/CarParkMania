@@ -24,14 +24,14 @@ public class DailySpin : MonoBehaviour {
     public GameObject goldToWinBoardImg;
     public GameObject notification;
 
-    void Start() {
+    public void OpenDailySpin() {
         OpenUI();
         StartCoroutine(Counter());
     }
 
     bool canSpin() {
         canWinCar = PlayerPrefs.GetInt("DailyCarsWon", 0) < winID.Length;
-        return DateTime.Today > DateTime.ParseExact(PlayerPrefs.GetString("LastDateSpun", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+        return DateTime.Today > DateTime.Parse(PlayerPrefs.GetString("LastDateSpun", "1582-09-15"));
     }
 
     public void OpenUI() {
@@ -45,8 +45,7 @@ public class DailySpin : MonoBehaviour {
 
     public void SpinWheel() {
         spinBtn.SetActive(false);
-        DateTime currDate = DateTime.Now;
-        PlayerPrefs.SetString("LastDateSpun", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));
+        PlayerPrefs.SetString("LastDateSpun", DateTime.Now.ToString());
         AchivementManager.Instance.IncreaseAchivementProgress(3);
         StartCoroutine(Spin());
     }
@@ -86,10 +85,12 @@ public class DailySpin : MonoBehaviour {
             rewardAmount = 99;
         } else if (canWinCar) {
             AudioManager.Instance.PlayWinSound();
-            Item winItem = ItemDb.Instance.GetItem(winID[UnityEngine.Random.Range(0, winID.Length)]);
+            int id = 0;
+            while (PlayerPrefs.GetInt("PlayerCar" + winID[id] + "Unlocked", 0) == 1) { id++; }
+            Item winItem = ItemDb.Instance.GetItem(winID[id]);
             winCarName.text = winItem.name;
             winCarImg.sprite = winItem.sprite;
-            PlayerPrefs.SetInt("DailyCarsWon", 1);
+            PlayerPrefs.SetInt("DailyCarsWon", PlayerPrefs.GetInt("DailyCarsWon", 0) + 1);
             PlayerPrefs.SetInt("PlayerCar" + winItem.ID + "Unlocked", 1);
             winGoldPanel.SetActive(false);
         } else {
