@@ -243,21 +243,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1636565534}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1794684405}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: RetryLevel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1636565534}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: PlayButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -777,20 +765,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1636565534}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: PlayButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1636565534}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1794684405}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: GoToLevelSelector
         m_Mode: 1
         m_Arguments:
@@ -935,134 +911,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363051860}
   m_CullTransparentMesh: 0
---- !u!1 &1636565533
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1636565536}
-  - component: {fileID: 1636565534}
-  - component: {fileID: 1636565535}
-  m_Layer: 0
-  m_Name: Standard_GM
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1636565534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1636565533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b4ab93a76de124c9de33b3646d5879, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelIndex: 0
-  boardLength: 0
-  gameBoard: {fileID: 1794684401}
-  level_board: {fileID: 0}
-  level_boards_easy:
-  - {fileID: 2366886275109442923, guid: 7ec412b28ca8c8e459990a873360f6e3, type: 3}
-  - {fileID: 3772805422488720704, guid: 84807a000573ee347bb8b51dbb828591, type: 3}
-  - {fileID: 5438141040966793558, guid: b423f512296a5a94d9675ec583210766, type: 3}
-  - {fileID: 8140123087924736806, guid: 22da9cf77241fa047a3b31ec5dfa4e56, type: 3}
-  - {fileID: 2293020104992513137, guid: 8b14f7ce7226b1646bf5bdb3f2b9f5bd, type: 3}
-  - {fileID: 1233351382340549367, guid: fb5c8488f1294874bb49a5d2533cf4aa, type: 3}
-  - {fileID: 3192628227949119613, guid: 520c6e77bbc00aa4cbb1942af546722b, type: 3}
-  - {fileID: 7724544404023752678, guid: a039a07ca25f44635bcdd7823a05ca79, type: 3}
-  - {fileID: 7952579822790020582, guid: 4fa444092bf0c432d80ccc23700df1f8, type: 3}
-  - {fileID: 3410263901285926337, guid: fec4459fd769b458f93d1ba33540c8f5, type: 3}
-  - {fileID: 4233546007849470565, guid: 7e8c83af97304464687612cdbeb17091, type: 3}
-  - {fileID: 3414146803108380863, guid: 3b430983357f44277a5e3616dac010ee, type: 3}
-  - {fileID: 871433144476658042, guid: c2631c689845f422db5346acb7c38704, type: 3}
-  - {fileID: 8311757117095779637, guid: 13a4974d7b0864ad5bc742a61c7b3e9f, type: 3}
-  level_boards_medium:
-  - {fileID: 5463825544580164429, guid: 3fc7dc46fdee72c4f88251ae1ccb6253, type: 3}
-  - {fileID: 7116999707258372065, guid: 29fdf6df91b1364489b205580bd0d2ed, type: 3}
-  - {fileID: 5429018851508108943, guid: a65d9b39a2609b146b7f94d495a4f624, type: 3}
-  - {fileID: 2148312684364404529, guid: 6d7599f3de1e0b34782266b051c0eb15, type: 3}
-  - {fileID: 1375235872816152628, guid: 26ac49fdef2ba174c8cdc6930212ef9a, type: 3}
-  - {fileID: 2619466126578180270, guid: ef69d4bde809f4e4abc86abc9a4920a3, type: 3}
-  - {fileID: 7856358635066403118, guid: bdfdedde46bf6a6409b2e3d70e29de0d, type: 3}
-  - {fileID: 3005536358239807139, guid: 2c8c9382bc0764899a468fd6675d5a5a, type: 3}
-  - {fileID: 7295661957972762855, guid: c0c6ddd745c86448997568be3ae02e44, type: 3}
-  - {fileID: 344745294239909534, guid: a093853419cd244be99156e67874a9e4, type: 3}
-  - {fileID: 9207293609846473774, guid: 244221a30ce9a40ba8437f32c5458746, type: 3}
-  - {fileID: 5227614110858281340, guid: 1a0ad740a178d46ee818936cc6333e68, type: 3}
-  - {fileID: 8987440957495582641, guid: 840c91cb96ae04b92b7a6e4b75f7928b, type: 3}
-  - {fileID: 4524594404703715830, guid: 7e0a03f15484041aab850e984b543730, type: 3}
-  level_boards_hard:
-  - {fileID: 6764887438464340938, guid: 2b0d3fdd441bad64c89526a41561b048, type: 3}
-  - {fileID: 965467199144529347, guid: 521956c5bdaec7d4fbaf85ee8ad09d81, type: 3}
-  - {fileID: 4708300436955175051, guid: bf2111b1e4d45e34bb8ff06f9a26a657, type: 3}
-  - {fileID: 2352588462761250961, guid: a702ed6357f478b46857729c22699fda, type: 3}
-  - {fileID: 8370080289432131441, guid: a501cb9d9d1d5614c9b40261bc1806d0, type: 3}
-  - {fileID: 8733760490872957364, guid: 5844ef177dda23248a1016a06c74b891, type: 3}
-  - {fileID: 9087457284671582410, guid: 4b28c985ce5d1e941a55c56acd807ab2, type: 3}
-  - {fileID: 6291773326314354321, guid: 666a3b4a309861b4686b407ee2c865f4, type: 3}
-  - {fileID: 7423531019403514233, guid: 6196a23e11d892b43b02d5dbd0c061e7, type: 3}
-  - {fileID: 7581784475749287704, guid: 2651ba826ab24204a954e2960b13ea9f, type: 3}
-  - {fileID: 1924879587947964238, guid: 45cf4f5012348594b8dda77ee6189d94, type: 3}
-  - {fileID: 8153434628921927451, guid: fd91a0365c868614ea0b8fc2b128bf37, type: 3}
-  - {fileID: 1857420430157288939, guid: 396ff46f4a4782d429f3e7edf7176fda, type: 3}
-  - {fileID: 4158826181921896808, guid: d528d96c1a93c5f4b91a88109fe3b165, type: 3}
-  level_boards_expert:
-  - {fileID: 1968494453171752989, guid: 06b0d990fffa30449a72eb2c04cc1dc6, type: 3}
-  - {fileID: 2165335020673598263, guid: 05e05107983e97e4db5f009d4a969396, type: 3}
-  - {fileID: 8455401100332283532, guid: 68a45916eb4bba743852c84798650a89, type: 3}
-  - {fileID: 2067488432499917745, guid: 3dff270873bad174c817b1009995313d, type: 3}
-  - {fileID: 2163378151276228340, guid: f30945f4c56cb3f4eafabed01ba8c991, type: 3}
-  - {fileID: 3019995969228698399, guid: 924136ea9bcea3542a0b86193de9ef76, type: 3}
-  - {fileID: 7744616282062199524, guid: 1ab3a16300b835844a24e2eb0ed25f7c, type: 3}
-  - {fileID: 721084506526941726, guid: c0cb3be985dbbc44998c3f8808f9a65d, type: 3}
-  - {fileID: 1068180328663866628, guid: 8ee8bf436909e9749a7e010767645b49, type: 3}
-  - {fileID: 6729935358235466192, guid: 1a94b411d0ff8394c841cf0d62418f6b, type: 3}
-  - {fileID: 2745142892043192846, guid: 995801593d98b414dbed1a09f260b001, type: 3}
-  - {fileID: 3044111154230188058, guid: ba037a3bc1dccf84cb79a42ec38a5dda, type: 3}
-  - {fileID: 657705887162623865, guid: faeb6c9b12dfed342b7519acf3753933, type: 3}
-  - {fileID: 5524963228238374353, guid: fb9562bd08ebced4ab7ec4a3f13fdb52, type: 3}
-  levelCompleteUi: {fileID: 1013449595}
-  levelTxt: {fileID: 0}
-  difficultyTxt: {fileID: 1149049117}
---- !u!114 &1636565535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1636565533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 380384dec38d78442b39039fa65c47e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPosOfCar: {x: 0, y: 0}
-  posOfCar: {x: 0, y: 0}
-  posToMoveCar: {x: 0, y: 0}
-  carToMove: {fileID: 0}
-  undoBtn: {fileID: 2068892922}
---- !u!4 &1636565536
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1636565533}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1688234137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,19 +991,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1688234140}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1636565534}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: PlayButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1688234140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1385,6 +1221,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1794684402}
   - component: {fileID: 1794684403}
+  - component: {fileID: 1794684405}
+  - component: {fileID: 1794684404}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -1405,7 +1243,7 @@ Transform:
   m_Children:
   - {fileID: 2073190708}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1794684403
 SpriteRenderer:
@@ -1458,6 +1296,102 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1794684404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794684401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 380384dec38d78442b39039fa65c47e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPosOfCar: {x: 0, y: 0}
+  posOfCar: {x: 0, y: 0}
+  posToMoveCar: {x: 0, y: 0}
+  carToMove: {fileID: 0}
+  undoBtn: {fileID: 2068892922}
+--- !u!114 &1794684405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794684401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b4ab93a76de124c9de33b3646d5879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelIndex: 0
+  boardLength: 0
+  gameBoard: {fileID: 1794684401}
+  level_board: {fileID: 0}
+  level_boards_easy:
+  - {fileID: 2366886275109442923, guid: 7ec412b28ca8c8e459990a873360f6e3, type: 3}
+  - {fileID: 3772805422488720704, guid: 84807a000573ee347bb8b51dbb828591, type: 3}
+  - {fileID: 5438141040966793558, guid: b423f512296a5a94d9675ec583210766, type: 3}
+  - {fileID: 8140123087924736806, guid: 22da9cf77241fa047a3b31ec5dfa4e56, type: 3}
+  - {fileID: 2293020104992513137, guid: 8b14f7ce7226b1646bf5bdb3f2b9f5bd, type: 3}
+  - {fileID: 1233351382340549367, guid: fb5c8488f1294874bb49a5d2533cf4aa, type: 3}
+  - {fileID: 3192628227949119613, guid: 520c6e77bbc00aa4cbb1942af546722b, type: 3}
+  - {fileID: 7724544404023752678, guid: a039a07ca25f44635bcdd7823a05ca79, type: 3}
+  - {fileID: 7952579822790020582, guid: 4fa444092bf0c432d80ccc23700df1f8, type: 3}
+  - {fileID: 3410263901285926337, guid: fec4459fd769b458f93d1ba33540c8f5, type: 3}
+  - {fileID: 4233546007849470565, guid: 7e8c83af97304464687612cdbeb17091, type: 3}
+  - {fileID: 3414146803108380863, guid: 3b430983357f44277a5e3616dac010ee, type: 3}
+  - {fileID: 871433144476658042, guid: c2631c689845f422db5346acb7c38704, type: 3}
+  - {fileID: 8311757117095779637, guid: 13a4974d7b0864ad5bc742a61c7b3e9f, type: 3}
+  level_boards_medium:
+  - {fileID: 5463825544580164429, guid: 3fc7dc46fdee72c4f88251ae1ccb6253, type: 3}
+  - {fileID: 7116999707258372065, guid: 29fdf6df91b1364489b205580bd0d2ed, type: 3}
+  - {fileID: 5429018851508108943, guid: a65d9b39a2609b146b7f94d495a4f624, type: 3}
+  - {fileID: 2148312684364404529, guid: 6d7599f3de1e0b34782266b051c0eb15, type: 3}
+  - {fileID: 1375235872816152628, guid: 26ac49fdef2ba174c8cdc6930212ef9a, type: 3}
+  - {fileID: 2619466126578180270, guid: ef69d4bde809f4e4abc86abc9a4920a3, type: 3}
+  - {fileID: 7856358635066403118, guid: bdfdedde46bf6a6409b2e3d70e29de0d, type: 3}
+  - {fileID: 3005536358239807139, guid: 2c8c9382bc0764899a468fd6675d5a5a, type: 3}
+  - {fileID: 7295661957972762855, guid: c0c6ddd745c86448997568be3ae02e44, type: 3}
+  - {fileID: 344745294239909534, guid: a093853419cd244be99156e67874a9e4, type: 3}
+  - {fileID: 9207293609846473774, guid: 244221a30ce9a40ba8437f32c5458746, type: 3}
+  - {fileID: 5227614110858281340, guid: 1a0ad740a178d46ee818936cc6333e68, type: 3}
+  - {fileID: 8987440957495582641, guid: 840c91cb96ae04b92b7a6e4b75f7928b, type: 3}
+  - {fileID: 4524594404703715830, guid: 7e0a03f15484041aab850e984b543730, type: 3}
+  level_boards_hard:
+  - {fileID: 6764887438464340938, guid: 2b0d3fdd441bad64c89526a41561b048, type: 3}
+  - {fileID: 965467199144529347, guid: 521956c5bdaec7d4fbaf85ee8ad09d81, type: 3}
+  - {fileID: 4708300436955175051, guid: bf2111b1e4d45e34bb8ff06f9a26a657, type: 3}
+  - {fileID: 2352588462761250961, guid: a702ed6357f478b46857729c22699fda, type: 3}
+  - {fileID: 8370080289432131441, guid: a501cb9d9d1d5614c9b40261bc1806d0, type: 3}
+  - {fileID: 8733760490872957364, guid: 5844ef177dda23248a1016a06c74b891, type: 3}
+  - {fileID: 9087457284671582410, guid: 4b28c985ce5d1e941a55c56acd807ab2, type: 3}
+  - {fileID: 6291773326314354321, guid: 666a3b4a309861b4686b407ee2c865f4, type: 3}
+  - {fileID: 7423531019403514233, guid: 6196a23e11d892b43b02d5dbd0c061e7, type: 3}
+  - {fileID: 7581784475749287704, guid: 2651ba826ab24204a954e2960b13ea9f, type: 3}
+  - {fileID: 1924879587947964238, guid: 45cf4f5012348594b8dda77ee6189d94, type: 3}
+  - {fileID: 8153434628921927451, guid: fd91a0365c868614ea0b8fc2b128bf37, type: 3}
+  - {fileID: 1857420430157288939, guid: 396ff46f4a4782d429f3e7edf7176fda, type: 3}
+  - {fileID: 4158826181921896808, guid: d528d96c1a93c5f4b91a88109fe3b165, type: 3}
+  level_boards_expert:
+  - {fileID: 1968494453171752989, guid: 06b0d990fffa30449a72eb2c04cc1dc6, type: 3}
+  - {fileID: 2165335020673598263, guid: 05e05107983e97e4db5f009d4a969396, type: 3}
+  - {fileID: 8455401100332283532, guid: 68a45916eb4bba743852c84798650a89, type: 3}
+  - {fileID: 2067488432499917745, guid: 3dff270873bad174c817b1009995313d, type: 3}
+  - {fileID: 2163378151276228340, guid: f30945f4c56cb3f4eafabed01ba8c991, type: 3}
+  - {fileID: 3019995969228698399, guid: 924136ea9bcea3542a0b86193de9ef76, type: 3}
+  - {fileID: 7744616282062199524, guid: 1ab3a16300b835844a24e2eb0ed25f7c, type: 3}
+  - {fileID: 721084506526941726, guid: c0cb3be985dbbc44998c3f8808f9a65d, type: 3}
+  - {fileID: 1068180328663866628, guid: 8ee8bf436909e9749a7e010767645b49, type: 3}
+  - {fileID: 6729935358235466192, guid: 1a94b411d0ff8394c841cf0d62418f6b, type: 3}
+  - {fileID: 2745142892043192846, guid: 995801593d98b414dbed1a09f260b001, type: 3}
+  - {fileID: 3044111154230188058, guid: ba037a3bc1dccf84cb79a42ec38a5dda, type: 3}
+  - {fileID: 657705887162623865, guid: faeb6c9b12dfed342b7519acf3753933, type: 3}
+  - {fileID: 5524963228238374353, guid: fb9562bd08ebced4ab7ec4a3f13fdb52, type: 3}
+  levelCompleteUi: {fileID: 1013449595}
+  levelTxt: {fileID: 0}
+  difficultyTxt: {fileID: 1149049117}
 --- !u!1 &1840341556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,7 +1428,7 @@ RectTransform:
   - {fileID: 389401972}
   - {fileID: 1013449596}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1572,7 +1506,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 99
   m_TargetDisplay: 0
 --- !u!225 &1840341562
 CanvasGroup:
@@ -1667,21 +1601,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1636565535}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1794684404}
+        m_TargetAssemblyTypeName: CarMovement, Assembly-CSharp
         m_MethodName: UndoMove
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1636565534}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: PlayButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1740,7 +1662,7 @@ PrefabInstance:
         type: 3}
       propertyPath: gameManager
       value: 
-      objectReference: {fileID: 1636565534}
+      objectReference: {fileID: 0}
     - target: {fileID: 317862555192456571, guid: c9f6610ab6d688041a45838bcd6737d4,
         type: 3}
       propertyPath: m_RootOrder
