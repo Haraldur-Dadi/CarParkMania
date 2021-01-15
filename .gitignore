@@ -67,3 +67,6 @@ Assets/Plugins/Android/mainTemplate.gradle.DISABLED.meta
 Assets/Plugins/Android/mainTemplate.gradle.DISABLED
 Assets/Plugins/Android.meta
 Assets/Plugins.meta
+
+.fake
+.ionide

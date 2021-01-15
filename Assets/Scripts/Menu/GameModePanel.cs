@@ -30,8 +30,8 @@ public class GameModePanel : MonoBehaviour {
                 } else {
                     levelBtns[i].NextLevel();
                 }
-                if (gameModeName == "Challenge") {
-                    levelBtns[i].SetStar(PlayerPrefs.GetInt("Challenge" + iValue + "Stars", 0));
+                if (gameModeName == "Challenge" || gameModeName == "8x8 Challenge") {
+                    levelBtns[i].SetStar(PlayerPrefs.GetInt(gameModeName + iValue + "Stars", 0));
                 }
             }
             levelBtns[i].levelTxt.text = (iValue + 1).ToString();

@@ -124,6 +124,8 @@ public class LevelSelector : MonoBehaviour {
             selectPanelName.text = "Challenge";
         } else if (gameModeNr == 3) {
             selectPanelName.text = "8x8";
+        } else if (gameModeNr == 4) {
+            selectPanelName.text = "8x8 Challenge";
         }
         gameModePanel.Display(selectPanelName.text);
         homeBtn.SetActive(false);
