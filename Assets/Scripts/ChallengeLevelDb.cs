@@ -112,3 +112,13 @@ public class ChallengeLevelDb : MonoBehaviour {
         };
     }
 }
+
+public class ChallengeLevel {
+    public int ID;
+    public int minMoves;
+
+    public ChallengeLevel (int _id, int _minMoves) {
+        ID = _id;
+        minMoves = _minMoves;
+    }
+}
