@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour {
         }
     }
     void Start() {
+        if (CrossSceneManager.Instance.gameModeNr > 1) {
+            Camera.main.orthographicSize += 1.9f;
+        }
         boardLength = level_boards_easy.Length;
         LoadLevel();
     }
