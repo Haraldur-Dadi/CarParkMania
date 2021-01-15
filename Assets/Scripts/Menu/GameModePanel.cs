@@ -7,6 +7,8 @@ public class GameModePanel : MonoBehaviour {
     public Button[] difficultyBtns;
     string gameModeName;
 
+    int avail_8x8_levels = 20;
+
     public void Display(string gameMode) {
         gameModeName = gameMode;
         gameObject.SetActive(true);
@@ -21,9 +23,13 @@ public class GameModePanel : MonoBehaviour {
         for (int i = 0; i < levelBtns.Length; i++) {
             int iValue = i + (25 * difficulty);
             
-            if (iValue > levelReached) {
+            if (gameModeName.Contains("8x8") && iValue >= avail_8x8_levels) {
+                levelBtns[i].gameObject.SetActive(false);
+            } else if (iValue > levelReached) {
+                levelBtns[i].gameObject.SetActive(true);
                 levelBtns[i].Unavailable();
             } else {
+                levelBtns[i].gameObject.SetActive(true);
                 levelBtns[i].button.onClick.AddListener(() => SelectLevel(iValue));
                 if (gameModeName == "Casual" && iValue < levelReached) {
                     levelBtns[i].Finished();
@@ -38,7 +44,7 @@ public class GameModePanel : MonoBehaviour {
         }
 
         for (int i = 0; i < difficultyBtns.Length; i++) {
-            difficultyBtns[i].interactable = (i != difficulty);
+            difficultyBtns[i].interactable = (gameModeName.Contains("8x8")) ? false : (i != difficulty);
         }
     }
 
