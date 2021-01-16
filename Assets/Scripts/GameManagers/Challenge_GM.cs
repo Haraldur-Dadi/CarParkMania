@@ -9,7 +9,7 @@ public class Challenge_GM : GameManager {
     public TextMeshProUGUI movesNextStarTxt;
     public GameObject nextLvlBtn;
 
-    public Image[] stars;
+    public Image star;
     public Sprite blankStar;
     public Sprite goldStar;
     public Sprite silverStar;
@@ -49,31 +49,23 @@ public class Challenge_GM : GameManager {
 
             completedMovesTxt.text = "Moves: " + (moves);
             if (moves <= currLevel.minMoves) {
-                foreach (Image s in stars) {
-                    s.sprite = goldStar;
-                }
+                star.sprite = goldStar;
                 movesNextStarTxt.text = "";
                 PlayerPrefs.SetInt("Challenge" + levelIndex + "Stars", 3);
             } else if (moves <= currLevel.minMoves + 2) {
-                stars[0].sprite = silverStar;
-                stars[1].sprite = silverStar;
-                stars[2].sprite = blankStar;
+                star.sprite = silverStar;
                 movesNextStarTxt.text = "Next star: " + currLevel.minMoves;
                 if (PlayerPrefs.GetInt("Challenge" + levelIndex + "Stars") < 2)
                     PlayerPrefs.SetInt("Challenge" + levelIndex + "Stars", 2);
             } else {
-                stars[0].sprite = bronzeStar;
-                stars[1].sprite = blankStar;
-                stars[2].sprite = blankStar;
+                star.sprite = bronzeStar;
                 movesNextStarTxt.text = "Next star: " + (currLevel.minMoves + 2);
                 if (PlayerPrefs.GetInt("Challenge" + levelIndex + "Stars") < 1)
                     PlayerPrefs.SetInt("Challenge" + levelIndex + "Stars", 1);
             }
         } else {
             levelCompleteUi.GetComponent<Image>().color = new Color32(236,51,30,245);
-            foreach (Image s in stars) {
-                s.sprite = blankStar;
-            }
+            star.sprite = blankStar;
             movesNextStarTxt.text = "Minimum moves: " + (currLevel.minMoves + 6);
         }
         completedTxt.text = (moves <= currLevel.minMoves + 5) ? "Level Completed!" : "You lost!";
