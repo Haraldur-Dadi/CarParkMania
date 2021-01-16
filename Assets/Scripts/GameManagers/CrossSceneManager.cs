@@ -32,6 +32,14 @@ public class CrossSceneManager : MonoBehaviour {
         GameObject.Find("SettingsBtn").GetComponent<Button>().onClick.AddListener(delegate { ToggleSettings(); });
         settingsUI.SetActive(false);
         StartCoroutine(FadeIn(2));
+        if (scene.buildIndex > 3) {
+            GameObject manager = GameObject.FindWithTag("GameController");
+            if (gameModeNr == 3) {
+                manager.GetComponent<Casual_GM>().enabled = true;
+            } else {
+                manager.GetComponent<Challenge_GM>().enabled = true;
+            }
+        }
     }
     public void ToggleSettings() { 
         AudioManager.Instance.PlayButtonClick();

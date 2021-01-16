@@ -83,10 +83,10 @@ public class GameManager : MonoBehaviour {
         if (PlayerPrefs.GetInt("GamesPlayed", 0) % 7 == 0)
             AdManager.Instance.ShowVideoAd();
         PlayerPrefs.SetInt("GamesPlayed", PlayerPrefs.GetInt("GamesPlayed", 0) + 1);
-        
+
         CrossSceneManager.Instance.FadeBetweenObjects();
-        yield return new WaitForSeconds(0.33f);
         Destroy(level_board);
+        yield return new WaitForSeconds(0.33f);
         LoadLevel();
     }
     public IEnumerator DelayedLevelSelector() {
