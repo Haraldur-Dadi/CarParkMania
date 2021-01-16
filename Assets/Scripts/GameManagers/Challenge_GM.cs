@@ -36,7 +36,7 @@ public class Challenge_GM : GameManager {
         levelCompleteUi.SetActive(true);
         PlayerPrefs.SetInt("LevelsCompleted", PlayerPrefs.GetInt("LevelsCompleted", 1) + 1);
 
-        if (moves <= currLevel.minMoves + 4) {
+        if (moves < currLevel.minMoves + 6) {
             if (PlayerPrefs.GetInt("ChallengeLevelReached", 0) <= levelIndex)
                 PlayerPrefs.SetInt("ChallengeLevelReached", levelIndex + 1);
             
@@ -74,9 +74,9 @@ public class Challenge_GM : GameManager {
             foreach (Image s in stars) {
                 s.sprite = blankStar;
             }
-            movesNextStarTxt.text = "Minimum moves: " + (currLevel.minMoves + 5);
+            movesNextStarTxt.text = "Minimum moves: " + (currLevel.minMoves + 6);
         }
-        completedTxt.text = (moves <= currLevel.minMoves + 4) ? "Level Completed!" : "You lost!";
-        nextLvlBtn.SetActive(moves <= currLevel.minMoves + 4);
+        completedTxt.text = (moves <= currLevel.minMoves + 5) ? "Level Completed!" : "You lost!";
+        nextLvlBtn.SetActive(moves <= currLevel.minMoves + 5);
     }
 }
