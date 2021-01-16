@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5927686651352923457}
   - component: {fileID: 5927686651352923456}
   - component: {fileID: 2051663132952647739}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Car3Long
   m_TagString: Car
   m_Icon: {fileID: 0}
@@ -49,6 +49,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

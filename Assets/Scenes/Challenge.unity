@@ -638,6 +638,9 @@ MonoBehaviour:
   posOfCar: {x: 0, y: 0}
   posToMoveCar: {x: 0, y: 0}
   carToMove: {fileID: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
   undoBtn: {fileID: 1240945567}
 --- !u!1 &325828115
 GameObject:
