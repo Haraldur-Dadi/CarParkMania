@@ -7,7 +7,7 @@ public class ChallengeLevelDb : MonoBehaviour {
 
     void Awake() { BuildChallengeLevelDb(); }
     public ChallengeLevel GetChallengeLevel(int ID) { 
-        if (CrossSceneManager.Instance.gameModeNr > 1) {
+        if (CrossSceneManager.Instance.gameModeNr > 2) {
             return Challenge8x8Levels[ID];
         } else {
             return ChallengeLevels[ID];

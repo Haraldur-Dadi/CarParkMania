@@ -599,13 +599,13 @@ MonoBehaviour:
   completedMovesTxt: {fileID: 2140454606}
   movesNextStarTxt: {fileID: 722252080}
   nextLvlBtn: {fileID: 1178140752}
-  star: {fileID: 0}
+  star: {fileID: 678239363}
   blankStar: {fileID: 21300000, guid: f345d9eeb6260954580701552f7526b4, type: 3}
   goldStar: {fileID: 21300000, guid: af0e277263c41e8479ef1d378d347278, type: 3}
   silverStar: {fileID: 21300000, guid: f50a33e71e3c3684b9afb81ffaa959b3, type: 3}
   bronzeStar: {fileID: 21300000, guid: 7a92194150e6a574e917b4604a2a7888, type: 3}
   moves: 0
-  challengeLevelDb: {fileID: 0}
+  challengeLevelDb: {fileID: 270945629}
 --- !u!114 &270945629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,7 +636,7 @@ MonoBehaviour:
   carToMove: {fileID: 0}
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   undoBtn: {fileID: 1240945567}
 --- !u!1 &325828115
 GameObject:

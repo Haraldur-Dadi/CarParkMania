@@ -16,13 +16,11 @@ public class Challenge_GM : GameManager {
     public Sprite bronzeStar;
 
     public int moves;
-    public ChallengeLevel currLevel;
     public ChallengeLevelDb challengeLevelDb;
 
     public override void LoadLevel() {
         base.LoadLevel();
         levelTxt.text = "- " + (levelIndex + 1) + " -";
-        currLevel = challengeLevelDb.GetChallengeLevel(levelIndex);
         moves = 0;
         movesTxt.text = "Moves: " + moves;
     }
@@ -36,6 +34,7 @@ public class Challenge_GM : GameManager {
         levelCompleteUi.SetActive(true);
         PlayerPrefs.SetInt("LevelsCompleted", PlayerPrefs.GetInt("LevelsCompleted", 1) + 1);
 
+        ChallengeLevel currLevel = challengeLevelDb.GetChallengeLevel(levelIndex);
         if (moves < currLevel.minMoves + 6) {
             if (PlayerPrefs.GetInt("ChallengeLevelReached", 0) <= levelIndex)
                 PlayerPrefs.SetInt("ChallengeLevelReached", levelIndex + 1);

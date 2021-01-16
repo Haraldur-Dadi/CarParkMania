@@ -72,7 +72,7 @@ public class CarMovement : MonoBehaviour {
 
     public Vector2 SnapPosToGrid(Vector2 snapPos, float maxValAxis) {
         /* Create grid like movement on board by rounding and clamping to within the boards border */
-        maxValAxis += CrossSceneManager.Instance.gameModeNr > 1 ? 1.1f : 0f; 
+        maxValAxis += CrossSceneManager.Instance.gameModeNr > 2 ? 1.1f : 0f; 
 
         if (carToMove.transform.eulerAngles.z == 0 || carToMove.transform.eulerAngles.z == 180) {
             // Car is facing up/down and is moving on y-axis
