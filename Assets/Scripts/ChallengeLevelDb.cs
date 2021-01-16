@@ -138,7 +138,7 @@ public class ChallengeLevelDb : MonoBehaviour {
             new ChallengeLevel(17, 10),
             new ChallengeLevel(18, 10),
             new ChallengeLevel(19, 9)
-        }
+        };
     }
 }
 
