@@ -3,9 +3,16 @@ using UnityEngine;
 
 public class ChallengeLevelDb : MonoBehaviour {
     public List<ChallengeLevel> ChallengeLevels;
+    public List<ChallengeLevel> Challenge8x8Levels;
 
     void Awake() { BuildChallengeLevelDb(); }
-    public ChallengeLevel GetChallengeLevel(int ID) { return ChallengeLevels[ID]; }
+    public ChallengeLevel GetChallengeLevel(int ID) { 
+        if (CrossSceneManager.Instance.gameModeNr > 1) {
+            return Challenge8x8Levels[ID];
+        } else {
+            return ChallengeLevels[ID];
+        }
+    }
 
     void BuildChallengeLevelDb() {
         ChallengeLevels = new List<ChallengeLevel> () {
@@ -110,6 +117,28 @@ public class ChallengeLevelDb : MonoBehaviour {
             new ChallengeLevel(98, 22),
             new ChallengeLevel(99, 21)
         };
+        Challenge8x8Levels = new List<ChallengeLevel> () {
+            new ChallengeLevel(0, 8), // easy
+            new ChallengeLevel(1, 5),
+            new ChallengeLevel(2, 6),
+            new ChallengeLevel(3, 6),
+            new ChallengeLevel(4, 5),
+            new ChallengeLevel(5, 6),
+            new ChallengeLevel(6, 6),
+            new ChallengeLevel(7, 8),
+            new ChallengeLevel(8, 8),
+            new ChallengeLevel(9, 5),
+            new ChallengeLevel(10, 7),
+            new ChallengeLevel(11, 9),
+            new ChallengeLevel(12, 9),
+            new ChallengeLevel(13, 8),
+            new ChallengeLevel(14, 10),
+            new ChallengeLevel(15, 10),
+            new ChallengeLevel(16, 9),
+            new ChallengeLevel(17, 10),
+            new ChallengeLevel(18, 10),
+            new ChallengeLevel(19, 9)
+        }
     }
 }
 
