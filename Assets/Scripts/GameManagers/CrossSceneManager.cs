@@ -28,9 +28,17 @@ public class CrossSceneManager : MonoBehaviour {
         }
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        settingsUI.SetActive(false);
+        if (scene.buildIndex == 0 && !PlayerPrefs.HasKey("LastOpened")) {
+            img.color = new Color(0f, 0f, 0f, 1f);
+            PlayerPrefs.SetString("LastOpened", "1582-09-15");
+            PlayerPrefs.SetInt("boardToLoad", 0);
+            gameModeNr = 1;
+            SceneManager.LoadScene(1);
+            return;
+        }
         canvasGroups = GameObject.FindObjectsOfType<CanvasGroup>();
         GameObject.Find("SettingsBtn").GetComponent<Button>().onClick.AddListener(delegate { ToggleSettings(); });
-        settingsUI.SetActive(false);
         StartCoroutine(FadeIn(2));
     }
     public void ToggleSettings() { 

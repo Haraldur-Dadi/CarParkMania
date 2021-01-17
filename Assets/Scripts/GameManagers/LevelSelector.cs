@@ -20,7 +20,7 @@ public class LevelSelector : MonoBehaviour {
     public GameObject mainScreen;
     public GameObject dailyChallengePanel;
     public GameObject dailySpinPanel;
-    public DailySpin dailySpin;
+    DailySpin dailySpin;
     public GameObject achivementsPanel;
     public GameObject shopPanel;
     public GameObject aboutPanel;
@@ -29,23 +29,16 @@ public class LevelSelector : MonoBehaviour {
     void Start() {
         dailySpin = GetComponent<DailySpin>();
         dailySpin.OpenDailySpin();
+        startUI = true;
+        UIStartState();
         if (PlayerPrefs.HasKey("LastOpened")) {
-            startUI = true;
-            UIStartState();
-            if (DateTime.Today > DateTime.Parse(PlayerPrefs.GetString("LastOpened", "1582-09-15"))) {
-                // Open up daily spin if available
+            // Open up daily spin if available
+            if (DateTime.Today > DateTime.Parse(PlayerPrefs.GetString("LastOpened"))) {
                 startUI = true;
                 PlayerPrefs.SetString("LastOpened", DateTime.Today.ToString("yyyy-MM-dd"));
                 ToggleUiPanel("Spin");
                 startUI = false;
             }
-        } else {
-            home.SetActive(false);
-            levelSelector.SetActive(false);
-            PlayerPrefs.SetString("LastOpened", "1582-09-15");
-            PlayerPrefs.SetInt("boardToLoad", 0);
-            CrossSceneManager.Instance.gameModeNr = 1;
-            CrossSceneManager.Instance.FadeToBuildIndex(1);
         }
     }
 
