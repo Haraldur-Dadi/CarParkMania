@@ -1491,6 +1491,11 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 317862555192456569, guid: c9f6610ab6d688041a45838bcd6737d4,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 317862555192456571, guid: c9f6610ab6d688041a45838bcd6737d4,
         type: 3}
       propertyPath: m_RootOrder
@@ -1499,7 +1504,7 @@ PrefabInstance:
     - target: {fileID: 317862555192456571, guid: c9f6610ab6d688041a45838bcd6737d4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.62
+      value: 3.525
       objectReference: {fileID: 0}
     - target: {fileID: 317862555192456571, guid: c9f6610ab6d688041a45838bcd6737d4,
         type: 3}
@@ -2886,7 +2891,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board_8x8: {fileID: 21300000, guid: 51c6851d7fad249b5be124569d244f19, type: 3}
+  finishLine: {fileID: 1194410810}
   levelIndex: 0
+  difficultySize: 0
   level_board: {fileID: 0}
   levels_6x6:
   - {fileID: 4571049737941145950, guid: 320a393c7d168264ba6df00c5fd9a583, type: 3}
@@ -3114,7 +3121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board_8x8: {fileID: 21300000, guid: 51c6851d7fad249b5be124569d244f19, type: 3}
+  finishLine: {fileID: 1194410810}
   levelIndex: 0
+  difficultySize: 0
   level_board: {fileID: 0}
   levels_6x6:
   - {fileID: 6974967754221438174, guid: 0e49112bd80a1ad4e9146543b05a75d8, type: 3}
@@ -3280,7 +3289,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board_8x8: {fileID: 21300000, guid: 51c6851d7fad249b5be124569d244f19, type: 3}
+  finishLine: {fileID: 1194410810}
   levelIndex: 0
+  difficultySize: 0
   level_board: {fileID: 0}
   levels_6x6:
   - {fileID: 2366886275109442923, guid: 7ec412b28ca8c8e459990a873360f6e3, type: 3}

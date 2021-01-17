@@ -6,6 +6,7 @@ using TMPro;
 public class GameManager : MonoBehaviour {
     public static GameManager Instance;
     public Sprite board_8x8;
+    public Transform finishLine;
 
     public int levelIndex;
     public int difficultySize;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour {
         Instance = this;
         if (CrossSceneManager.Instance.gameModeNr > 2) {
             GetComponent<SpriteRenderer>().sprite = board_8x8;
+            finishLine.position += new Vector3(1.1f, 0f, 0f);
             Camera.main.orthographicSize += 1.9f;
         }
         difficultySize = (CrossSceneManager.Instance.gameModeNr > 0) ? 25 : 14;
