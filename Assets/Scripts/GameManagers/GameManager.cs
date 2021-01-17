@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour {
     public virtual void LevelComplete() {
         AudioManager.Instance.PlayWinSound();
 
-        if (levelIndex < 25)
+        if (levelIndex < difficultySize)
             AchivementManager.Instance.IncreaseAchivementProgress(4);
         AchivementManager.Instance.IncreaseAchivementProgress(5);
         AchivementManager.Instance.IncreaseAchivementProgress(6);

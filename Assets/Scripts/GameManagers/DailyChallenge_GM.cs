@@ -16,11 +16,11 @@ public class DailyChallenge_GM : GameManager {
 
     public override void LevelComplete() {
         base.LevelComplete();
-        if (levelIndex < 14) {
+        if (levelIndex < difficultySize) {
             PlayerPrefs.SetInt("DailyChallenge1Completed", 1);
-        } else if (levelIndex < 28) {
+        } else if (levelIndex < (difficultySize*2)) {
             PlayerPrefs.SetInt("DailyChallenge2Completed", 1);
-        } else if (levelIndex < 42) {
+        } else if (levelIndex < (difficultySize*3)) {
             PlayerPrefs.SetInt("DailyChallenge3Completed", 1);
         } else {
             PlayerPrefs.SetInt("DailyChallenge4Completed", 1);
