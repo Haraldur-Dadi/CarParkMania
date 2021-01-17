@@ -49,6 +49,7 @@ public class DailyChallenges : MonoBehaviour {
 
     public void LoadChallengeLevel(int difficulty) {
         PlayerPrefs.SetInt("boardToLoad", (int)DateTime.Now.DayOfWeek + 7 * (multiplier + difficulty));
+        CrossSceneManager.Instance.gameModeNr = 0;
         CrossSceneManager.Instance.FadeToBuildIndex(1);
     }
 

@@ -18,9 +18,16 @@ public class Challenge_GM : GameManager {
     public int moves;
     public ChallengeLevelDb challengeLevelDb;
 
+    public override void Awake() {
+        if (CrossSceneManager.Instance.gameModeNr == 2 || CrossSceneManager.Instance.gameModeNr == 4) {
+            base.Awake();
+        } else {
+            Destroy(this);
+        }
+    }
+
     public override void LoadLevel() {
         base.LoadLevel();
-        levelTxt.text = "- " + (levelIndex + 1) + " -";
         moves = 0;
         movesTxt.text = "Moves: " + moves;
     }

@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 
 public class Casual_GM : GameManager {
-    public override void LoadLevel() {
-        base.LoadLevel();
-        levelTxt.text = "- " + (levelIndex + 1) + " -";
+    public override void Awake() {
+        if (CrossSceneManager.Instance.gameModeNr == 1 || CrossSceneManager.Instance.gameModeNr == 3) {
+            base.Awake();
+        } else {
+            Destroy(this);
+        }
     }
 
     public override void LevelComplete() {
@@ -14,11 +17,6 @@ public class Casual_GM : GameManager {
         
         AchivementManager.Instance.IncreaseAchivementProgress(0);
         AchivementManager.Instance.IncreaseAchivementProgress(1);
-        if (levelIndex < (level_boards_easy.Length + level_boards_medium.Length + level_boards_hard.Length + level_boards_expert.Length) - 1) {
-            PlayerPrefs.SetInt("boardToLoad", levelIndex + 1);
-            StartCoroutine(CountdownNextLevel());
-        } else {
-            StartCoroutine(DelayedLevelSelector());
-        }
+        LoadNextLevel();
     }
 }

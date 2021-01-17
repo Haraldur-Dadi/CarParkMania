@@ -203,19 +203,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 60257694}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2126118999}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GoToLevelSelector
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &60257694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2180,19 +2168,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1663321872}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2126118999}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RetryLevel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1663321872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3034,6 +3010,8 @@ MonoBehaviour:
   - {fileID: 3332656305815914554, guid: 3f4a0ec599d3766448df1c20a971aa7c, type: 3}
   - {fileID: 3293486908917048926, guid: 86f5156b0d88ccb41a95bef974a4d43e, type: 3}
   - {fileID: 2925918574075290850, guid: cd5431129e4810d458abd55697c86ba8, type: 3}
+  homeBtn: {fileID: 60257693}
+  retryBtn: {fileID: 1663321871}
   levelCompleteUi: {fileID: 1489747232}
   levelTxt: {fileID: 1058738674}
   difficultyTxt: {fileID: 1583038266}
@@ -3260,6 +3238,8 @@ MonoBehaviour:
   - {fileID: 3332656305815914554, guid: 3f4a0ec599d3766448df1c20a971aa7c, type: 3}
   - {fileID: 3293486908917048926, guid: 86f5156b0d88ccb41a95bef974a4d43e, type: 3}
   - {fileID: 2925918574075290850, guid: cd5431129e4810d458abd55697c86ba8, type: 3}
+  homeBtn: {fileID: 60257693}
+  retryBtn: {fileID: 1663321871}
   levelCompleteUi: {fileID: 485923995}
   levelTxt: {fileID: 1058738674}
   difficultyTxt: {fileID: 1583038266}
@@ -3360,6 +3340,8 @@ MonoBehaviour:
   - {fileID: 657705887162623865, guid: faeb6c9b12dfed342b7519acf3753933, type: 3}
   - {fileID: 5524963228238374353, guid: fb9562bd08ebced4ab7ec4a3f13fdb52, type: 3}
   levels_8x8: []
+  homeBtn: {fileID: 60257693}
+  retryBtn: {fileID: 1663321871}
   levelCompleteUi: {fileID: 1489747232}
   levelTxt: {fileID: 1058738674}
   difficultyTxt: {fileID: 1583038266}
