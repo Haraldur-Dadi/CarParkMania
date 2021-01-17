@@ -51,6 +51,6 @@ public class GameModePanel : MonoBehaviour {
     public void SelectLevel(int level) {
         AudioManager.Instance.PlayButtonClick();
         PlayerPrefs.SetInt("boardToLoad", level);
-        CrossSceneManager.Instance.FadeToBuildIndex(CrossSceneManager.Instance.gameModeNr + 1);
+        CrossSceneManager.Instance.FadeToBuildIndex(1);
     }
 }

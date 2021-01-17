@@ -44,7 +44,8 @@ public class LevelSelector : MonoBehaviour {
             levelSelector.SetActive(false);
             PlayerPrefs.SetString("LastOpened", "1582-09-15");
             PlayerPrefs.SetInt("boardToLoad", 0);
-            CrossSceneManager.Instance.FadeToBuildIndex(2);
+            CrossSceneManager.Instance.gameModeNr = 1;
+            CrossSceneManager.Instance.FadeToBuildIndex(1);
         }
     }
 

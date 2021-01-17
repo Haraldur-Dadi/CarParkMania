@@ -9,15 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelector.unity
     guid: 6f7cad625bca4154cb536951a44bc8a8
   - enabled: 1
-    path: Assets/Scenes/DailyChallenge.unity
-    guid: 1a9e6b434c60d0149b37912b40190ddc
-  - enabled: 1
-    path: Assets/Scenes/Casual.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/Challenge.unity
-    guid: e06e11dfb132ba44398974442af7fdd0
-  - enabled: 1
-    path: Assets/Scenes/8x8.unity
+    path: Assets/Scenes/Level.unity
     guid: 240ad23a7cb7b4ebb915c8cc2e4e4e9e
   m_configObjects: {}
