@@ -14,27 +14,23 @@ public class DailyChallenges : MonoBehaviour {
     public GameObject notification;
 
     void Start() {
-        multiplier = PlayerPrefs.GetInt("DailyMultiplier", 0);
         NewDayReset();
+        multiplier = PlayerPrefs.GetInt("DailyMultiplier", 0);
 
         notification.SetActive(!HasCompleted());
         claimScreen.SetActive(!notification.activeSelf);
-        claimBtn.SetActive(PlayerPrefs.GetInt("HasClaimed", 0) == 1);
+        claimBtn.SetActive(PlayerPrefs.GetInt("HasClaimed") != 1);
     }
 
     void NewDayReset() {
-        DateTime currDate = DateTime.Today;
-        DateTime lastCompleteDate = DateTime.ParseExact(PlayerPrefs.GetString("LastChallengeCompletedDate", "1582-09-15"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
-        
-        if (currDate > lastCompleteDate) {
+        if (DateTime.Today > DateTime.Parse(PlayerPrefs.GetString("LastChallengeCompletedDate", "1582-09-15"))) {
             PlayerPrefs.SetInt("HasClaimed", 0);
-            multiplier = UnityEngine.Random.Range(0, 2);
-            PlayerPrefs.SetInt("DailyMultiplier", multiplier);
+            PlayerPrefs.SetInt("DailyMultiplier", UnityEngine.Random.Range(0, 2));
             PlayerPrefs.SetInt("DailyChallenge1Completed", 0);
             PlayerPrefs.SetInt("DailyChallenge2Completed", 0);
             PlayerPrefs.SetInt("DailyChallenge3Completed", 0);
             PlayerPrefs.SetInt("DailyChallenge4Completed", 0);
-            PlayerPrefs.SetString("LastChallengeCompletedDate", currDate.Year + "-" + currDate.Month.ToString().PadLeft(2, '0') + "-" + currDate.Day.ToString().PadLeft(2, '0'));
+            PlayerPrefs.SetString("LastChallengeCompletedDate", DateTime.Today.ToString("yyyy-MM-dd"));
         }
     }
 

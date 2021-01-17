@@ -43,9 +43,9 @@ public class Challenge_GM : GameManager {
 
         ChallengeLevel currLevel = challengeLevelDb.GetChallengeLevel(levelIndex);
         if (moves < currLevel.minMoves + 6) {
-            string mode = (CrossSceneManager.Instance.gameModeNr == 2) ? "ChallengeLevelReached" : "8x8ChallengeLevelReached";
-            if (PlayerPrefs.GetInt(mode, 0) <= levelIndex) {
-                PlayerPrefs.SetInt(mode, levelIndex + 1);
+            string mode = (CrossSceneManager.Instance.gameModeNr == 2) ? "Challenge" : "8x8 Challenge";
+            if (PlayerPrefs.GetInt(mode + "LevelReached", 0) <= levelIndex) {
+                PlayerPrefs.SetInt(mode + "LevelReached", levelIndex + 1);
             }
             
             levelCompleteUi.GetComponent<Image>().color = new Color32(30,236,34,245);

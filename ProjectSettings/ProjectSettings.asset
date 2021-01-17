@@ -176,7 +176,7 @@ PlayerSettings:
     iPhone: com.HaraldurDadiThorvaldsson.CarParkMania
   buildNumber:
     Standalone: 1
-    iPhone: 2
+    iPhone: 4
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0

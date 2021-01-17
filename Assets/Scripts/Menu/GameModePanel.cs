@@ -31,7 +31,7 @@ public class GameModePanel : MonoBehaviour {
             } else {
                 levelBtns[i].gameObject.SetActive(true);
                 levelBtns[i].button.onClick.AddListener(() => SelectLevel(iValue));
-                if (gameModeName == "Casual" && iValue < levelReached) {
+                if ((gameModeName == "Casual" || gameModeName == "8x8") && iValue < levelReached) {
                     levelBtns[i].Finished();
                 } else {
                     levelBtns[i].NextLevel();
