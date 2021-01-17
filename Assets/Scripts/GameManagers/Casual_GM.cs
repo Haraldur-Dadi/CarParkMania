@@ -11,8 +11,9 @@ public class Casual_GM : GameManager {
 
     public override void LevelComplete() {
         base.LevelComplete();
-        if (PlayerPrefs.GetInt("CasualLevelReached", 0) <= levelIndex) {
-            PlayerPrefs.SetInt("CasualLevelReached", levelIndex + 1);
+        string mode = (CrossSceneManager.Instance.gameModeNr == 1) ? "CasualLevelReached" : "8x8LevelReached";
+        if (PlayerPrefs.GetInt(mode, 0) <= levelIndex) {
+            PlayerPrefs.SetInt(mode, levelIndex + 1);
         }
         
         AchivementManager.Instance.IncreaseAchivementProgress(0);

@@ -43,8 +43,10 @@ public class Challenge_GM : GameManager {
 
         ChallengeLevel currLevel = challengeLevelDb.GetChallengeLevel(levelIndex);
         if (moves < currLevel.minMoves + 6) {
-            if (PlayerPrefs.GetInt("ChallengeLevelReached", 0) <= levelIndex)
-                PlayerPrefs.SetInt("ChallengeLevelReached", levelIndex + 1);
+            string mode = (CrossSceneManager.Instance.gameModeNr == 2) ? "ChallengeLevelReached" : "8x8ChallengeLevelReached";
+            if (PlayerPrefs.GetInt(mode, 0) <= levelIndex) {
+                PlayerPrefs.SetInt(mode, levelIndex + 1);
+            }
             
             levelCompleteUi.GetComponent<Image>().color = new Color32(30,236,34,245);
 
@@ -57,17 +59,17 @@ public class Challenge_GM : GameManager {
             if (moves <= currLevel.minMoves) {
                 star.sprite = goldStar;
                 movesNextStarTxt.text = "";
-                PlayerPrefs.SetInt("Challenge" + levelIndex + "Stars", 3);
+                PlayerPrefs.SetInt(mode + levelIndex + "Stars", 3);
             } else if (moves <= currLevel.minMoves + 2) {
                 star.sprite = silverStar;
                 movesNextStarTxt.text = "Next star: " + currLevel.minMoves;
-                if (PlayerPrefs.GetInt("Challenge" + levelIndex + "Stars") < 2)
-                    PlayerPrefs.SetInt("Challenge" + levelIndex + "Stars", 2);
+                if (PlayerPrefs.GetInt(mode + levelIndex + "Stars") < 2)
+                    PlayerPrefs.SetInt(mode + levelIndex + "Stars", 2);
             } else {
                 star.sprite = bronzeStar;
                 movesNextStarTxt.text = "Next star: " + (currLevel.minMoves + 2);
-                if (PlayerPrefs.GetInt("Challenge" + levelIndex + "Stars") < 1)
-                    PlayerPrefs.SetInt("Challenge" + levelIndex + "Stars", 1);
+                if (PlayerPrefs.GetInt(mode + levelIndex + "Stars") < 1)
+                    PlayerPrefs.SetInt(mode + levelIndex + "Stars", 1);
             }
         } else {
             levelCompleteUi.GetComponent<Image>().color = new Color32(236,51,30,245);
