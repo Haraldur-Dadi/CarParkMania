@@ -137,7 +137,13 @@ public class ChallengeLevelDb : MonoBehaviour {
             new ChallengeLevel(16, 9),
             new ChallengeLevel(17, 10),
             new ChallengeLevel(18, 9),
-            new ChallengeLevel(19, 9)
+            new ChallengeLevel(19, 9),
+            new ChallengeLevel(20, 10),
+            new ChallengeLevel(21, 10),
+            new ChallengeLevel(22, 10),
+            new ChallengeLevel(23, 11),
+            new ChallengeLevel(24, 13)
+            new ChallengeLevel(25, 0), // medium
         };
     }
 }
