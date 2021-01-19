@@ -14,9 +14,9 @@ public class InfoManager : MonoBehaviour {
         int casualReached = PlayerPrefs.GetInt("CasualLevelReached", 0);
         int challengeReached = PlayerPrefs.GetInt("ChallengeLevelReached", 0);
         int _8x8Reached = PlayerPrefs.GetInt("8x8LevelReached", 0);
-        int _8x8ChallengeReached = PlayerPrefs.GetInt("8x8ChallengeLevelReached", 0);
+        int _8x8ChallengeReached = PlayerPrefs.GetInt("8x8 ChallengeLevelReached", 0);
 
-        totalCompleted.text = "Total: " + (casualReached + challengeReached + _8x8Reached) + "/" + (standardTotalLevels*2 + 40);
+        totalCompleted.text = "Total: " + (casualReached + challengeReached + _8x8Reached + _8x8ChallengeReached) + "/" + (standardTotalLevels*2 + 40);
         casualCompleted[0].text = ((float) casualReached / standardTotalLevels) * 100 + "%";
         casualCompleted[1].text = casualReached + "/" + standardTotalLevels;
         challengeCompleted[0].text = ((float) challengeReached / standardTotalLevels) * 100 + "%";
