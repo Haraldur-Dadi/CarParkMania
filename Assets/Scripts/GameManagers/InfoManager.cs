@@ -16,14 +16,14 @@ public class InfoManager : MonoBehaviour {
         int _8x8Reached = PlayerPrefs.GetInt("8x8LevelReached", 0);
         int _8x8ChallengeReached = PlayerPrefs.GetInt("8x8 ChallengeLevelReached", 0);
 
-        totalCompleted.text = "Total: " + (casualReached + challengeReached + _8x8Reached + _8x8ChallengeReached) + "/" + (standardTotalLevels*2 + 40);
+        totalCompleted.text = "Total: " + (casualReached + challengeReached + _8x8Reached + _8x8ChallengeReached) + "/" + (standardTotalLevels*2 + 80);
         casualCompleted[0].text = ((float) casualReached / standardTotalLevels) * 100 + "%";
         casualCompleted[1].text = casualReached + "/" + standardTotalLevels;
         challengeCompleted[0].text = ((float) challengeReached / standardTotalLevels) * 100 + "%";
         challengeCompleted[1].text = challengeReached + "/" + standardTotalLevels;
-        _8x8Completed[0].text = ((float) _8x8Reached / 20) * 100 + "%";
-        _8x8Completed[1].text = _8x8Reached + "/" + 20;
-        _8x8ChallengeCompleted[0].text = ((float) _8x8ChallengeReached / 20) * 100 + "%";
-        _8x8ChallengeCompleted[1].text = _8x8ChallengeReached + "/" + 20;
+        _8x8Completed[0].text = ((float) _8x8Reached / 40) * 100 + "%";
+        _8x8Completed[1].text = _8x8Reached + "/" + 40;
+        _8x8ChallengeCompleted[0].text = ((float) _8x8ChallengeReached / 40) * 100 + "%";
+        _8x8ChallengeCompleted[1].text = _8x8ChallengeReached + "/" + 40;
     }
 }
