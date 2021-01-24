@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour {
         }
         PlayerPrefs.SetInt("GamesPlayed", PlayerPrefs.GetInt("GamesPlayed", 0) + 1);
 
-        CrossSceneManager.Instance.FadeBetweenObjects(1f);
+        CrossSceneManager.Instance.FadeBetweenObjects(1.25f);
         Destroy(level_board);
         yield return new WaitForSeconds(1f);
         LoadLevel();

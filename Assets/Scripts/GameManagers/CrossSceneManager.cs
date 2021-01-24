@@ -56,23 +56,21 @@ public class CrossSceneManager : MonoBehaviour {
         yield return FadeOut();
         SceneManager.LoadScene(buildindex);
     }
-    public IEnumerator FadeIn(float multiplier = 1.5f) {
+    public IEnumerator FadeIn(float multiplier = 2f) {
         StartCoroutine(PreventClicks(multiplier));
         float t = 1f;
         while (t > 0f) {
             t -= Time.deltaTime * multiplier;
-            float a = curve.Evaluate(t);
-            img.color = new Color(0f, 0f, 0f, a);
+            img.color = new Color(0f, 0f, 0f, curve.Evaluate(t));
             yield return null;
         }
     }
-    public IEnumerator FadeOut(float multiplier = 1.5f) {
+    public IEnumerator FadeOut(float multiplier = 2f) {
         StartCoroutine(PreventClicks(multiplier));
         float t = 0f;
         while (t < 1f) {
             t += Time.deltaTime * multiplier;
-            float a = curve.Evaluate(t);
-            img.color = new Color(0f, 0f, 0f, a);
+            img.color = new Color(0f, 0f, 0f, curve.Evaluate(t));
             yield return null;
         }
     }
