@@ -5,6 +5,7 @@ using TMPro;
 
 public class LevelSelector : MonoBehaviour {
     bool startUI;
+    string currVersion = "1.1.1";
 
     public GameObject home;
     public GameObject levelSelector;
@@ -25,20 +26,21 @@ public class LevelSelector : MonoBehaviour {
     public GameObject shopPanel;
     public GameObject aboutPanel;
     public GameObject watchAdCon;
+    public GameObject whatsNewPanel;
 
     void Start() {
         dailySpin = GetComponent<DailySpin>();
         dailySpin.OpenDailySpin();
         startUI = true;
         UIStartState();
-        if (PlayerPrefs.HasKey("LastOpened")) {
-            // Open up daily spin if available
-            if (DateTime.Today > DateTime.Parse(PlayerPrefs.GetString("LastOpened"))) {
-                startUI = true;
-                PlayerPrefs.SetString("LastOpened", DateTime.Today.ToString("yyyy-MM-dd"));
-                ToggleUiPanel("Spin");
-                startUI = false;
-            }
+        // Open up daily spin if available
+        if (DateTime.Today > DateTime.Parse(PlayerPrefs.GetString("LastOpened"))) {
+            startUI = true;
+            PlayerPrefs.SetString("LastOpened", DateTime.Today.ToString("yyyy-MM-dd"));
+            ToggleUiPanel("Spin");
+            startUI = false;
+        } else if (PlayerPrefs.GetString("version") != currVersion) {
+            whatsNewPanel.SetActive(true);
         }
     }
 
@@ -68,6 +70,10 @@ public class LevelSelector : MonoBehaviour {
     public void SelectGameMode(int gameModeNr) { StartCoroutine(SelectGameModeUI(gameModeNr)); }
     public void BackHome() { StartCoroutine(HomeScreen()); }
     public void ToggleAdGoldConformation() { watchAdCon.SetActive(!watchAdCon.activeSelf); }
+    public void CloseWathsNewPanel() { 
+        whatsNewPanel.SetActive(false);
+        PlayerPrefs.SetString("version", currVersion);
+    }
     public void PlayButtonClick() { AudioManager.Instance.PlayButtonClick(); }
 
     IEnumerator TogglePanels(string panelName) {
