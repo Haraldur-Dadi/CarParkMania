@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public IEnumerator PreLoadLevel() {
-        if (CrossSceneManager.Instance.gameModeNr < 3 && levelIndex == levels_6x6.Length || CrossSceneManager.Instance.gameModeNr > 2 && levelIndex == levels_8x8.Length) {
+        if (CrossSceneManager.Instance.gameModeNr < 3 && levelIndex == levels_6x6.Length || CrossSceneManager.Instance.gameModeNr > 2 && levelIndex == (levels_8x8.Length-1)) {
             GoToLevelSelector();
         }
         if (PlayerPrefs.GetInt("GamesPlayed", 0) % 7 == 0) {
@@ -100,9 +100,9 @@ public class GameManager : MonoBehaviour {
         }
         PlayerPrefs.SetInt("GamesPlayed", PlayerPrefs.GetInt("GamesPlayed", 0) + 1);
 
-        CrossSceneManager.Instance.FadeBetweenObjects();
+        CrossSceneManager.Instance.FadeBetweenObjects(1f);
         Destroy(level_board);
-        yield return new WaitForSeconds(0.33f);
+        yield return new WaitForSeconds(1f);
         LoadLevel();
     }
     public IEnumerator DelayedLevelSelector() {

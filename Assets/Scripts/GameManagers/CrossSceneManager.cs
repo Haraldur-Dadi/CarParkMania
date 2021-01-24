@@ -39,25 +39,25 @@ public class CrossSceneManager : MonoBehaviour {
         }
         canvasGroups = GameObject.FindObjectsOfType<CanvasGroup>();
         GameObject.Find("SettingsBtn").GetComponent<Button>().onClick.AddListener(delegate { ToggleSettings(); });
-        StartCoroutine(FadeIn(2));
+        StartCoroutine(FadeIn());
     }
     public void ToggleSettings() { 
         AudioManager.Instance.PlayButtonClick();
         settingsUI.SetActive(!settingsUI.activeSelf);
     }
 
-    public void FadeBetweenObjects() { StartCoroutine(FadeBetweenObjInScene()); }
-    IEnumerator FadeBetweenObjInScene() {
-        yield return FadeOut(3);
-        yield return FadeIn(3);
+    public void FadeBetweenObjects(float multiplier) { StartCoroutine(FadeBetweenObjInScene(multiplier)); }
+    IEnumerator FadeBetweenObjInScene(float multiplier) {
+        yield return FadeOut(multiplier);
+        yield return FadeIn(multiplier);
     }
     public void FadeToBuildIndex(int buildIndex) { StartCoroutine(FadeOutBuildindex(buildIndex)); }
     IEnumerator FadeOutBuildindex(int buildindex) {
-        yield return FadeOut(2);
+        yield return FadeOut();
         SceneManager.LoadScene(buildindex);
     }
-    public IEnumerator FadeIn(int multiplier) {
-        StartCoroutine(PreventClicks());
+    public IEnumerator FadeIn(float multiplier = 1.5f) {
+        StartCoroutine(PreventClicks(multiplier));
         float t = 1f;
         while (t > 0f) {
             t -= Time.deltaTime * multiplier;
@@ -66,8 +66,8 @@ public class CrossSceneManager : MonoBehaviour {
             yield return null;
         }
     }
-    public IEnumerator FadeOut(int multiplier) {
-        StartCoroutine(PreventClicks());
+    public IEnumerator FadeOut(float multiplier = 1.5f) {
+        StartCoroutine(PreventClicks(multiplier));
         float t = 0f;
         while (t < 1f) {
             t += Time.deltaTime * multiplier;
@@ -76,11 +76,11 @@ public class CrossSceneManager : MonoBehaviour {
             yield return null;
         }
     }
-    IEnumerator PreventClicks() {
+    IEnumerator PreventClicks(float multiplier) {
         foreach (CanvasGroup group in canvasGroups) {
             if (group) { group.interactable = false; }
         }
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(1f/multiplier);
         foreach (CanvasGroup group in canvasGroups) {
             if (group) { group.interactable = true; }
         }

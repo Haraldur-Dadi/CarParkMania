@@ -135,8 +135,8 @@ public class LevelSelector : MonoBehaviour {
     }
     IEnumerator WaitTimer() {
         if (!startUI) {
-            CrossSceneManager.Instance.FadeBetweenObjects();
-            yield return new WaitForSeconds(0.33f);
+            CrossSceneManager.Instance.FadeBetweenObjects(3f);
+            yield return new WaitForSeconds(.33f);
         }
         yield return null;
     }
