@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public IEnumerator PreLoadLevel() {
-        if (CrossSceneManager.Instance.gameModeNr < 3 && levelIndex == levels_6x6.Length || CrossSceneManager.Instance.gameModeNr > 2 && levelIndex == (levels_8x8.Length-1)) {
+        if (CrossSceneManager.Instance.gameModeNr < 3 && levelIndex == (levels_6x6.Length-1) || CrossSceneManager.Instance.gameModeNr > 2 && levelIndex == (levels_8x8.Length-1)) {
             GoToLevelSelector();
         }
         if (PlayerPrefs.GetInt("GamesPlayed", 0) % 7 == 0) {
