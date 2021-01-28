@@ -105,6 +105,7 @@ public class DailySpin : MonoBehaviour {
         } 
         closeBtn.SetActive(true);
         winPanel.SetActive(true);
+        notification.SetActive(false);
         StartCoroutine(Counter());
     }
 
