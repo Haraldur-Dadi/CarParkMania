@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1141599783937794003}
   m_Layer: 0
-  m_Name: Board_8x8_SExp_01
+  m_Name: Board_8x8_SH_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
