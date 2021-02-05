@@ -7,7 +7,7 @@ public class GameModePanel : MonoBehaviour {
     public Button[] difficultyBtns;
     string gameModeName;
 
-    int avail_8x8_levels = 60;
+    int avail_8x8_levels = 80;
 
     public void Display(string gameMode) {
         gameModeName = gameMode;
@@ -44,7 +44,7 @@ public class GameModePanel : MonoBehaviour {
         }
 
         for (int i = 0; i < difficultyBtns.Length; i++) {
-            difficultyBtns[i].interactable = (gameModeName.Contains("8x8") && i == 3) ? false : (i != difficulty);
+            difficultyBtns[i].interactable = (i != difficulty);
         }
     }
 
