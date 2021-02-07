@@ -4,9 +4,9 @@ using TMPro;
 
 public class Challenge_GM : GameManager {
     public TextMeshProUGUI movesTxt;
-    public TextMeshProUGUI completedTxt;
     public TextMeshProUGUI completedMovesTxt;
     public TextMeshProUGUI movesNextStarTxt;
+    public string[] looseMessages;
     public GameObject nextLvlBtn;
 
     public Image star;
@@ -43,6 +43,7 @@ public class Challenge_GM : GameManager {
 
         ChallengeLevel currLevel = challengeLevelDb.GetChallengeLevel(levelIndex);
         if (moves < currLevel.minMoves + 6) {
+            completedTxt.text = winMessages[Random.Range(0, winMessages.Length)];
             string mode = (CrossSceneManager.Instance.gameModeNr == 2) ? "Challenge" : "8x8 Challenge";
             if (PlayerPrefs.GetInt(mode + "LevelReached", 0) <= levelIndex) {
                 PlayerPrefs.SetInt(mode + "LevelReached", levelIndex + 1);
@@ -72,11 +73,11 @@ public class Challenge_GM : GameManager {
                     PlayerPrefs.SetInt(mode + levelIndex + "Stars", 1);
             }
         } else {
+            completedTxt.text = looseMessages[Random.Range(0, looseMessages.Length)];
             levelCompleteUi.GetComponent<Image>().color = new Color32(236,51,30,245);
             star.sprite = blankStar;
             movesNextStarTxt.text = "Minimum moves: " + (currLevel.minMoves + 6);
         }
-        completedTxt.text = (moves <= currLevel.minMoves + 5) ? "Level Completed!" : "You lost!";
-        nextLvlBtn.SetActive(moves <= currLevel.minMoves + 5);
+        nextLvlBtn.SetActive(moves < currLevel.minMoves + 6);
     }
 }

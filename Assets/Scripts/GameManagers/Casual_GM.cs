@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Casual_GM : GameManager {
     public override void Awake() {
@@ -11,6 +12,7 @@ public class Casual_GM : GameManager {
 
     public override void LevelComplete() {
         base.LevelComplete();
+        completedTxt.text = winMessages[Random.Range(0, winMessages.Length)];
         string mode = (CrossSceneManager.Instance.gameModeNr == 1) ? "CasualLevelReached" : "8x8LevelReached";
         if (PlayerPrefs.GetInt(mode, 0) <= levelIndex) {
             PlayerPrefs.SetInt(mode, levelIndex + 1);
@@ -18,6 +20,10 @@ public class Casual_GM : GameManager {
         
         AchivementManager.Instance.IncreaseAchivementProgress(0);
         AchivementManager.Instance.IncreaseAchivementProgress(1);
+        StartCoroutine(CountdownNextLevel());
+    }
+    public IEnumerator CountdownNextLevel() {
+        yield return new WaitForSeconds(2);
         LoadNextLevel();
     }
 }

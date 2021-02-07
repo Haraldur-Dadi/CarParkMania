@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour {
     public GameObject levelCompleteUi;
     public TextMeshProUGUI levelTxt;
     public TextMeshProUGUI difficultyTxt;
+    public TextMeshProUGUI completedTxt;
+    public string[] winMessages;
 
     public virtual void Awake() {
         Instance = this;
@@ -108,9 +110,5 @@ public class GameManager : MonoBehaviour {
     public IEnumerator DelayedLevelSelector() {
         yield return new WaitForSeconds(2);
         GoToLevelSelector();
-    }
-    public IEnumerator CountdownNextLevel() {
-        yield return new WaitForSeconds(2);
-        StartCoroutine(PreLoadLevel());
     }
 }
