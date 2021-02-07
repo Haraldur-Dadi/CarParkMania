@@ -177,7 +177,27 @@ public class ChallengeLevelDb : MonoBehaviour {
             new ChallengeLevel(56, 17),
             new ChallengeLevel(57, 18),
             new ChallengeLevel(58, 19),
-            new ChallengeLevel(59, 18)
+            new ChallengeLevel(59, 18),
+            new ChallengeLevel(60, 19),
+            new ChallengeLevel(61, 19),
+            new ChallengeLevel(62, 18),
+            new ChallengeLevel(63, 18),
+            new ChallengeLevel(64, 20),
+            new ChallengeLevel(65, 19),
+            new ChallengeLevel(66, 19),
+            new ChallengeLevel(67, 18),
+            new ChallengeLevel(68, 21),
+            new ChallengeLevel(69, 19),
+            new ChallengeLevel(70, 20),
+            new ChallengeLevel(71, 21),
+            new ChallengeLevel(72, 21),
+            new ChallengeLevel(73, 22),
+            new ChallengeLevel(74, 22),
+            new ChallengeLevel(75, 20), // expert
+            new ChallengeLevel(76, 21),
+            new ChallengeLevel(77, 21),
+            new ChallengeLevel(78, 22),
+            new ChallengeLevel(79, 22)
         };
     }
 }
