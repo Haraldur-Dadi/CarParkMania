@@ -114,6 +114,7 @@ public class LevelSelector : MonoBehaviour {
         selectPanelName.text = "Modes";
     }
     IEnumerator SelectGameModeUI(int gameModeNr) {
+        if (!startUI) { CrossSceneManager.Instance.difficulty = 0; }
         CrossSceneManager.Instance.gameModeNr = gameModeNr;
         yield return WaitTimer();
 
