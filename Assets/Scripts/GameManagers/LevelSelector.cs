@@ -5,7 +5,7 @@ using TMPro;
 
 public class LevelSelector : MonoBehaviour {
     bool startUI;
-    string currVersion = "1.1.2";
+    string currVersion = "1.1.4";
 
     public GameObject home;
     public GameObject levelSelector;

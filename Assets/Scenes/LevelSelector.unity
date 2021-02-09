@@ -5004,8 +5004,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "20 new 8x8 levels\n     \u2022 10 medium\n     \u2022 10 hard\n2 new cars\n    
-    \u2022 School bus\n     \u2022 Race car"
+  m_text: "20 new 8x8 levels\n     \u2022 20 expert\n2 new cars\n     \u2022 Pickup
+    Truck\n     \u2022 Taxi"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
