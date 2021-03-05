@@ -29,7 +29,9 @@ public class ItemDb : MonoBehaviour {
             new Item("Smart Car", 7, true, 150),
             new Item("Muscle Car", 8, false, 150),
             new Item("School Bus", 9, true, 150),
-            new Item("Race Car", 10, true, 250)
+            new Item("Race Car", 10, true, 250),
+            new Item("Taxi", 11, true, 150),
+            new Item("Pickup Truck", 12, true, 200)
         };
     }
 }
