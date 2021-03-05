@@ -2,232 +2,24 @@
 using UnityEngine;
 
 public class ChallengeLevelDb : MonoBehaviour {
-    public List<ChallengeLevel> ChallengeLevels;
-    public List<ChallengeLevel> Challenge8x8Levels;
+    public List<int> ChallengeLevels = new List<int> () {
+            6, 5, 7, 7, 5, 6, 6, 7, 5, 7, 7, 6, 5, 6, 8, 7, 8, 6, 8, 8, 8, 8, 8, 8, 8, // easy
+            11, 12, 11, 9, 9, 12, 10, 10, 11, 10, 11, 12, 12, 11, 11, 11, 12, 12, 11, 12, 11, 11, 12, 12, 11, // medium
+            15, 13, 15, 14, 16, 15, 16, 15, 14, 16, 15, 13, 13, 14, 15, 16, 14, 15, 15, 15, 16, 15, 15, 16, 16, // hard
+            16, 16, 16, 17, 16, 18, 17, 18, 16, 17, 19, 20, 20, 18, 19, 18, 20, 19, 21, 21, 19, 22, 20, 22, 21 // expert
+        };
+    public List<int> Challenge8x8Levels = new List<int> () {
+            8, 5, 6, 6, 5, 6, 6, 8, 8, 5, 7, 9, 9, 8, 9, 10, 9, 10, 9, 9, 10, 10, 10, 10, 11, // easy
+            10, 10, 10, 11, 10, 13, 11, 11, 14, 11, 14, 14, 11, 14, 15, 13, 14, 14, 15, 16, 15, 15, 16, 16, 16, // medium
+            16, 16, 17, 16, 17, 17, 17, 18, 19, 18, 19, 19, 18, 18, 20, 19, 19, 18, 21, 19, 20, 21, 21, 22, 22, // hard
+            20, 21, 21, 22, 22, 22, 20, 21, 22, 21, 20, 22, 23, 23, 21, 23, 22, 24, 24, 25, 27, 26, 28, 27, 31 // expert
+        };
 
-    void Awake() { BuildChallengeLevelDb(); }
-    public ChallengeLevel GetChallengeLevel(int ID) { 
+    public int GetChallengeLevel (int ID) { 
         if (CrossSceneManager.Instance.gameModeNr > 2) {
             return Challenge8x8Levels[ID];
         } else {
             return ChallengeLevels[ID];
         }
-    }
-
-    void BuildChallengeLevelDb() {
-        ChallengeLevels = new List<ChallengeLevel> () {
-            new ChallengeLevel(0, 6), // easy
-            new ChallengeLevel(1, 5),
-            new ChallengeLevel(2, 7),
-            new ChallengeLevel(3, 7),
-            new ChallengeLevel(4, 5),
-            new ChallengeLevel(5, 6),
-            new ChallengeLevel(6, 6),
-            new ChallengeLevel(7, 7),
-            new ChallengeLevel(8, 5),
-            new ChallengeLevel(9, 7),
-            new ChallengeLevel(10, 7),
-            new ChallengeLevel(11, 6),
-            new ChallengeLevel(12, 5),
-            new ChallengeLevel(13, 6),
-            new ChallengeLevel(14, 8),
-            new ChallengeLevel(15, 7),
-            new ChallengeLevel(16, 8),
-            new ChallengeLevel(17, 6),
-            new ChallengeLevel(18, 8),
-            new ChallengeLevel(19, 8),
-            new ChallengeLevel(20, 8),
-            new ChallengeLevel(21, 8),
-            new ChallengeLevel(22, 8),
-            new ChallengeLevel(23, 8),
-            new ChallengeLevel(24, 8),
-            new ChallengeLevel(25, 11), // medium
-            new ChallengeLevel(26, 12),
-            new ChallengeLevel(27, 11),
-            new ChallengeLevel(28, 9),
-            new ChallengeLevel(29, 9),
-            new ChallengeLevel(30, 12),
-            new ChallengeLevel(31, 10),
-            new ChallengeLevel(32, 10),
-            new ChallengeLevel(33, 11),
-            new ChallengeLevel(34, 10),
-            new ChallengeLevel(35, 11),
-            new ChallengeLevel(36, 12),
-            new ChallengeLevel(37, 12),
-            new ChallengeLevel(38, 11),
-            new ChallengeLevel(39, 11),
-            new ChallengeLevel(40, 11),
-            new ChallengeLevel(41, 12),
-            new ChallengeLevel(42, 12),
-            new ChallengeLevel(43, 11),
-            new ChallengeLevel(44, 12),
-            new ChallengeLevel(45, 11),
-            new ChallengeLevel(46, 11),
-            new ChallengeLevel(47, 12),
-            new ChallengeLevel(48, 12),
-            new ChallengeLevel(49, 11),
-            new ChallengeLevel(50, 15), // hard
-            new ChallengeLevel(51, 13),
-            new ChallengeLevel(52, 15),
-            new ChallengeLevel(53, 14),
-            new ChallengeLevel(54, 16),
-            new ChallengeLevel(55, 15),
-            new ChallengeLevel(56, 16),
-            new ChallengeLevel(57, 15),
-            new ChallengeLevel(58, 14),
-            new ChallengeLevel(59, 16),
-            new ChallengeLevel(60, 15),
-            new ChallengeLevel(61, 13),
-            new ChallengeLevel(62, 13),
-            new ChallengeLevel(63, 14),
-            new ChallengeLevel(64, 15),
-            new ChallengeLevel(65, 16),
-            new ChallengeLevel(66, 14),
-            new ChallengeLevel(67, 15),
-            new ChallengeLevel(68, 15),
-            new ChallengeLevel(69, 15),
-            new ChallengeLevel(70, 16),
-            new ChallengeLevel(71, 15),
-            new ChallengeLevel(72, 15),
-            new ChallengeLevel(73, 16),
-            new ChallengeLevel(74, 16),
-            new ChallengeLevel(75, 16), // expert
-            new ChallengeLevel(76, 16),
-            new ChallengeLevel(77, 16),
-            new ChallengeLevel(78, 17),
-            new ChallengeLevel(79, 16),
-            new ChallengeLevel(80, 18),
-            new ChallengeLevel(81, 17),
-            new ChallengeLevel(82, 18),
-            new ChallengeLevel(83, 16),
-            new ChallengeLevel(84, 17),
-            new ChallengeLevel(85, 19),
-            new ChallengeLevel(86, 20),
-            new ChallengeLevel(87, 20),
-            new ChallengeLevel(88, 18),
-            new ChallengeLevel(89, 19),
-            new ChallengeLevel(90, 18),
-            new ChallengeLevel(91, 20),
-            new ChallengeLevel(92, 19),
-            new ChallengeLevel(93, 21),
-            new ChallengeLevel(94, 21),
-            new ChallengeLevel(95, 19),
-            new ChallengeLevel(96, 22),
-            new ChallengeLevel(97, 20),
-            new ChallengeLevel(98, 22),
-            new ChallengeLevel(99, 21)
-        };
-        Challenge8x8Levels = new List<ChallengeLevel> () {
-            new ChallengeLevel(0, 8), // easy
-            new ChallengeLevel(1, 5),
-            new ChallengeLevel(2, 6),
-            new ChallengeLevel(3, 6),
-            new ChallengeLevel(4, 5),
-            new ChallengeLevel(5, 6),
-            new ChallengeLevel(6, 6),
-            new ChallengeLevel(7, 8),
-            new ChallengeLevel(8, 8),
-            new ChallengeLevel(9, 5),
-            new ChallengeLevel(10, 7),
-            new ChallengeLevel(11, 9),
-            new ChallengeLevel(12, 9),
-            new ChallengeLevel(13, 8),
-            new ChallengeLevel(14, 9),
-            new ChallengeLevel(15, 10),
-            new ChallengeLevel(16, 9),
-            new ChallengeLevel(17, 10),
-            new ChallengeLevel(18, 9),
-            new ChallengeLevel(19, 9),
-            new ChallengeLevel(20, 10),
-            new ChallengeLevel(21, 10),
-            new ChallengeLevel(22, 10),
-            new ChallengeLevel(23, 10),
-            new ChallengeLevel(24, 11),
-            new ChallengeLevel(25, 10), // medium
-            new ChallengeLevel(26, 10),
-            new ChallengeLevel(27, 10),
-            new ChallengeLevel(28, 11),
-            new ChallengeLevel(29, 10),
-            new ChallengeLevel(30, 13),
-            new ChallengeLevel(31, 11),
-            new ChallengeLevel(32, 11),
-            new ChallengeLevel(33, 14),
-            new ChallengeLevel(34, 11),
-            new ChallengeLevel(35, 14),
-            new ChallengeLevel(36, 14),
-            new ChallengeLevel(37, 11),
-            new ChallengeLevel(38, 14),
-            new ChallengeLevel(39, 15),
-            new ChallengeLevel(40, 13),
-            new ChallengeLevel(41, 14),
-            new ChallengeLevel(42, 14),
-            new ChallengeLevel(43, 15),
-            new ChallengeLevel(44, 16),
-            new ChallengeLevel(45, 15),
-            new ChallengeLevel(46, 15),
-            new ChallengeLevel(47, 16),
-            new ChallengeLevel(48, 16),
-            new ChallengeLevel(49, 16),
-            new ChallengeLevel(50, 16), // hard
-            new ChallengeLevel(51, 16),
-            new ChallengeLevel(52, 17),
-            new ChallengeLevel(53, 16),
-            new ChallengeLevel(54, 17),
-            new ChallengeLevel(55, 17),
-            new ChallengeLevel(56, 17),
-            new ChallengeLevel(57, 18),
-            new ChallengeLevel(58, 19),
-            new ChallengeLevel(59, 18),
-            new ChallengeLevel(60, 19),
-            new ChallengeLevel(61, 19),
-            new ChallengeLevel(62, 18),
-            new ChallengeLevel(63, 18),
-            new ChallengeLevel(64, 20),
-            new ChallengeLevel(65, 19),
-            new ChallengeLevel(66, 19),
-            new ChallengeLevel(67, 18),
-            new ChallengeLevel(68, 21),
-            new ChallengeLevel(69, 19),
-            new ChallengeLevel(70, 20),
-            new ChallengeLevel(71, 21),
-            new ChallengeLevel(72, 21),
-            new ChallengeLevel(73, 22),
-            new ChallengeLevel(74, 22),
-            new ChallengeLevel(75, 20), // expert
-            new ChallengeLevel(76, 21),
-            new ChallengeLevel(77, 21),
-            new ChallengeLevel(78, 22),
-            new ChallengeLevel(79, 22),
-            new ChallengeLevel(80, 22),
-            new ChallengeLevel(81, 20),
-            new ChallengeLevel(82, 21),
-            new ChallengeLevel(83, 22),
-            new ChallengeLevel(84, 21),
-            new ChallengeLevel(85, 20),
-            new ChallengeLevel(86, 22),
-            new ChallengeLevel(87, 23),
-            new ChallengeLevel(88, 23),
-            new ChallengeLevel(89, 21),
-            new ChallengeLevel(90, 23),
-            new ChallengeLevel(91, 22),
-            new ChallengeLevel(92, 24),
-            new ChallengeLevel(93, 24),
-            new ChallengeLevel(94, 25),
-            new ChallengeLevel(95, 27),
-            new ChallengeLevel(96, 26),
-            new ChallengeLevel(97, 28),
-            new ChallengeLevel(98, 27),
-            new ChallengeLevel(99, 31)
-        };
-    }
-}
-
-public class ChallengeLevel {
-    public int ID;
-    public int minMoves;
-
-    public ChallengeLevel (int _id, int _minMoves) {
-        ID = _id;
-        minMoves = _minMoves;
     }
 }
